@@ -1,0 +1,198 @@
+/* Fonts */
+@import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900);
+
+/* Fonts */
+:root {
+    --primary-color: #54B9A2;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: #5a5a5a;
+}
+
+img {
+    cursor: pointer;
+}
+
+.flex-div {
+    display: flex;
+    align-items: center;
+}
+
+nav {
+    background-color: white;
+    height: 74px;
+    padding: 10px 3% 10px 2%;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.nav-right .dropdown-container {
+    margin-right: 105px;
+}
+
+.nav-right .user-icon {
+    width: 35px;
+    margin-right: 0;
+}
+
+.nav-left .menu-icon {
+    width: 30px;
+}
+
+.menu-icon-background {
+    width: 45px;
+    height: 45px;
+    justify-content: center;
+    margin-right: 12px;
+}
+
+.nav-left .menu-icon-background:hover {
+    background-color: #5a5a5a36;
+    border-radius: 50%;
+}
+
+.nav-left .logo {
+    width: 164px;
+}
+
+/* ==========LANGUAGE DROPDOWN============ */
+.dropdown-container {
+    width: 75px;
+    background: transparent;
+    text-align: center;
+    position: relative;
+}
+
+.dropdown-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.dropdown-container label {
+    position: relative;
+    display: block;
+    width: 100%;
+    background-color: transparent;
+    line-height: 28px;
+    cursor: pointer;
+    color: #202B32;
+    border-radius: 2px;
+    user-select: none;
+    padding-right: 10px;
+}
+
+.dropdown-container label:after {
+    content: "▾";
+    position: absolute;
+    width: 40px;
+    font-size: 18px;
+    right: 0;
+    padding-left: 0px;
+    top: 0;
+    bottom: 0;
+}
+
+.dropdown-container .languages-dropdown {
+    height: 0;
+    max-height: 0px;
+    margin: 0;
+    text-align: left;
+    overflow: hidden;
+    transition: 0.3s linear;
+    position: absolute;
+    background: #F4F4F4;
+    border-radius: 17px;
+}
+
+.dropdown-container .languages-dropdown li {
+    padding: 10px;
+}
+
+.dropdown-container #drop {
+    display: none;
+}
+
+.dropdown-container #drop:checked~.languages-dropdown {
+    height: auto;
+    width: 115%;
+    max-height: 900px;
+    transition: max-height 0.3s ease-out;
+    overflow: hidden;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* ==========LANGUAGE DROPDOWN============ */
+
+
+/* ==========SIDEBAR========== */
+.sidebar-line {
+    width: 80%;
+    height: 1px;
+    background-color: white;
+    margin-bottom: 24px;
+}
+
+.sidebar {
+    height: 100vh;
+    width: 18%;
+    background-color: var(--primary-color);
+    position: fixed;
+    top: 0;
+    padding-left: 2%;
+    padding-top: calc(74px + 23px);
+}
+
+.shortcut-links a img {
+    width: 30px;
+    margin-right: 29px;
+}
+
+.shortcut-links a {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+    width: fit-content;
+    flex-wrap: wrap;
+}
+
+.shortcut-links a p {
+    color: white;
+}
+
+.subsciption-logo {
+    width: 45px !important;
+    margin-right: 14px !important;
+    border-radius: 50%;
+}
+
+.sidebar hr {
+    width: 85%;
+    height: 1px;
+    color: #FFFFFF;
+    margin-bottom: 24px;
+}
+
+.show-more {
+    width: 30%;
+    height: 32px;
+    background-color: #D9D9D9B5;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    transform: translateX(88%);
+}
+
+/* ==========SIDEBAR========== */

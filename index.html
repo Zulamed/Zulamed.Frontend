@@ -2,17 +2,93 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <title>ZulaMed</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zulamed</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
 <body>
-    <button class="mdc-button mdc-button--raised">  <span class="mdc-button__ripple"></span> Hello</button>
+
+
+    <nav class="flex-div">
+        <div class="nav-left flex-div">
+            <div class="menu-icon-background flex-div">
+                <img class="menu-icon" src="./img/icons/menu.svg" alt="">
+            </div>
+            <img class="logo" src="./img/logo-white-theme.png" alt="">
+        </div>
+        <div class="nav-right flex-div">
+            <!-- <div class="lang">
+                
+                <img src="./img/icons/dropdown.svg" alt="">
+            </div> -->
+            <div class="dropdown-container">
+                <input type="checkbox" id="drop" />
+                <label for="drop">EN</label>
+                <ul class="languages-dropdown">
+                    <a href="#">
+                        <li>AZ</li>
+                    </a>
+                    <a href="#">
+                        <li>RU</li>
+                    </a>
+                </ul>
+            </div>
+
+            <img class="user-icon" src="./img/icons/user-icon.png" alt="">
+        </div>
+    </nav>
+    <!-- ------------sidebar------------ -->
+    <div class="sidebar">
+        <div class="shortcut-links">
+            <a href="#"><img src="./img//icons/Home_fill.svg" alt="">
+                <p>Home</p>
+            </a>
+            <a href="#"><img src="./img//icons/Video_fill.svg" alt="">
+                <p>Subsciptions</p>
+            </a>
+
+            <hr>
+            <a href="#"><img src="./img//icons/history_white_24dp.svg" alt="">
+                <p>History</p>
+            </a>
+            <a href="#"><img src="./img//icons/play_arrow_white_48dp(2).svg" alt="">
+                <p>Your videos</p>
+            </a>
+            <a href="#"><img src="./img//icons/liked.svg" alt="">
+                <p>Liked videos</p>
+            </a>
+            <hr>
+            <a href="#">
+                <p>SUBSCRIPTIONS</p>
+            </a>
+            <a href="#"><img class="subsciption-logo" src="./img//icons/subscriptions.jpg" alt="">
+                <p>Lorem Ipsum</p>
+            </a>
+            <a href="#"><img class="subsciption-logo" src="./img//icons/subscriptions.jpg" alt="">
+                <p>Lorem Ipsum</p>
+            </a>
+            <a href="#"><img class="subsciption-logo" src="./img//icons/subscriptions.jpg" alt="">
+                <p>Lorem Ipsum</p>
+            </a>
+            <a href="#"><img class="subsciption-logo" src="./img//icons/subscriptions.jpg" alt="">
+                <p>Lorem Ipsum</p>
+            </a>
+
+            <div class="show-more">
+                <img src="./img/icons/expand_more_white_36dp.svg" alt="">
+            </div>
+
+            <hr>
+
+
+        </div>
+    </div>
+
 </body>
-<script src="assets/js/script.js"></script>
 
 </html>

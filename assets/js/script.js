@@ -8,11 +8,94 @@ menuIcon.onclick = function () {
 }
 
 
+
+var isOpen = false;
+document.getElementById("search-mobile-form").onsubmit = function (e) {
+    if (!isOpen) {
+        e.preventDefault();
+        isOpen = true;
+    }
+}
+
+
+document.getElementById("search-mobile").onclick = function () {
+
+    var logo = document.querySelector(".logo");
+    var langIcon = document.querySelector(".lang-icon");
+    var searchbarMobile = document.querySelector(".searchbar-mobile");
+
+    logo.style.display = "none";
+    langIcon.style.display = "none";
+    searchbarMobile.style.width = "230px";
+    searchbarMobile.style.paddingLeft = "10px";
+    searchbarMobile.style.paddingRight = "10px";
+
+
+    document.getElementById("search-mobile").setAttribute("type", "submit");
+
+}
+
+function mobileSearchbarClose() {
+    var logo = document.querySelector(".logo");
+    var langIcon = document.querySelector(".lang-icon");
+    var searchbarMobile = document.querySelector(".searchbar-mobile");
+
+    logo.style.display = "flex";
+    langIcon.style.display = "flex";
+    searchbarMobile.style.width = "0px";
+    searchbarMobile.style.paddingLeft = "0";
+    searchbarMobile.style.paddingRight = "0";
+    document.getElementById("search-mobile").setAttribute("type", "button");
+    isOpen = false;
+
+}
+
+
+function mobileSidebarOpen(e) {
+    var menuIconMobile = document.querySelector(".menu-icon-background-small");
+    var sidebarMobile = document.querySelector(".sidebar-mobile");
+    var overlay = document.querySelector(".overlay");
+
+    sidebarMobile.style.left = "0";
+    overlay.style.opacity = "0.75";
+    overlay.style.zIndex = "3";
+}
+
+
+function mobileSidebarClose() {
+    var sidebarMobile = document.querySelector(".sidebar-mobile");
+    var overlay = document.querySelector(".overlay");
+
+    sidebarMobile.style.left = "-100%"
+    overlay.style.opacity = "0";
+    overlay.style.zIndex = "-1";
+}
+
+
 function toggleProfileContainer() {
     var container = document.getElementById("profile-container");
     container.style.display = (container.style.display === "none") ? "block" : "none";
 }
+// function profileContainerClose() {
 
+
+// }
+
+function toggleLanguageContainer() {
+    var langContainer = document.getElementById("language-container");
+    langContainer.style.display = (langContainer.style.display === "none") ? "flex" : "none";
+}
+function languageContainerClose() {
+    var closeIcon = document.getElementById("close-icon");
+    var langContainer = document.getElementById("language-container");
+
+    langContainer.style.display = "none";
+}
+function profileContainerClose() {
+    var container = document.getElementById("profile-container");
+
+    container.style.display = "none";
+}
 
 // ==================
 

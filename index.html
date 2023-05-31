@@ -15,43 +15,68 @@
 </head>
 
 <body>
-
+    <div onclick="mobileSidebarClose(); profileContainerClose()" class="overlay"></div>
 
     <nav class="flex-div">
         <div class="nav-left flex-div">
+            <div onclick="mobileSidebarOpen()" class="menu-icon-background-small flex-div">
+                <img class="menu-icon" src="./img/icons/menu.svg" alt="">
+            </div>
             <div class="menu-icon-background flex-div">
                 <img class="menu-icon" src="./img/icons/menu.svg" alt="">
             </div>
             <img class="logo" src="./img/logo-white-theme.png" alt="">
         </div>
         <div class="nav-right flex-div">
-            <!-- <div class="lang">
-                
-                <img src="./img/icons/dropdown.svg" alt="">
-            </div> -->
-            <div class="dropdown-container">
-                <input type="checkbox" id="drop" />
-                <label for="drop">EN</label>
-                <ul class="languages-dropdown">
-                    <a href="#">
-                        <li>AZ</li>
-                    </a>
-                    <a href="#">
-                        <li>RU</li>
-                    </a>
-                </ul>
+
+            <div onclick="toggleLanguageContainer()" class="flex-div lang-icon">
+                <img src="./img/icons/language_black_24dp.svg" alt="">
+                <img width="20px" src="./img/icons/dropdown.svg" alt="">
             </div>
+            <form action="" class="flex-div" id="search-mobile-form">
+                <div class="searchbar-mobile flex-div">
+                    <input name="" type="text">
+                </div>
+                <button id="search-mobile" type="button" class="search-mobile flex-div">
+                    <img src="./img/icons/Search_light.svg" alt="">
+                </button>
+            </form>
+
+
+            <div class="language-container" id="language-container">
+                <div style="padding-left: 8px; height: 40px;" class="flex-div">
+                    <h5>Choose your language</h5> &nbsp;&nbsp;&nbsp;
+                    <img onclick="languageContainerClose()" id="lang-close-icon" width="18px"
+                        src="./img/icons/close_black_24dp.svg" alt="">
+                </div>
+                <hr>
+                <a class="lang-link" href="#">
+                    <p>English (UK)</p>
+                </a>
+                <a class="lang-link active" href="#">
+                    <p>Azərbaycan</p>
+                </a>
+                <a class="lang-link" href="#">
+                    <p>Deutsch</p>
+                </a>
+                <a class="lang-link" href="#">
+                    <p>Russian</p>
+                </a>
+            </div>
+
+
 
             <img onclick="toggleProfileContainer()" class="user-icon" src="./img/icons/user-icon.png" alt="">
             <div class="profile-container" id="profile-container">
                 <div class="popup-profile flex-div">
-                    <img src="./img/icons/user.png" alt="">
+                    <a href="#"><img src="./img/icons/user.png" alt=""></a>
                     <div>
-                        <h3>Username</h3>
+                        <a href="#">Username</a>
                         <p class="email">@username</p>
                         <a href="#" class="account-manage">Manage your Account</a>
                     </div>
                 </div>
+
                 <!-- Другие элементы контейнера -->
                 <a class="profile-link" href="#"><img src="./img//profileContainerIcons/account_box_black_24dp.svg"
                         alt="">
@@ -154,9 +179,91 @@
         </div>
     </div>
     <!-- ------------sidebar------------ -->
-    <!-- ------------main--------------- -->
+    <!-- ------------sidebar-small------------ -->
 
-    <div class="container">
+
+    <div class="sidebar-mobile">
+        <div class="shortcut-links">
+            <a id="shortcut-link" class="active-shortcut" href="#"><img src="./img//icons/Home_fill.svg" alt="">
+                <p>Home</p>
+            </a>
+            <a id="shortcut-link" href="#"><img src="./img//icons/Video_fill.svg" alt="">
+                <p>Subsciptions</p>
+            </a>
+
+            <hr>
+            <a id="shortcut-link" href="#"><img src="./img//icons/history_white_24dp.svg" alt="">
+                <p>History</p>
+            </a>
+            <a id="shortcut-link" href="#"><img src="./img//icons/play_arrow_white_48dp(2).svg" alt="">
+                <p>Your videos</p>
+            </a>
+            <a id="shortcut-link" href="#"><img src="./img//icons/liked.svg" alt="">
+                <p>Liked videos</p>
+            </a>
+            <hr>
+            <p class="sidebar-title">SUBSCRIPTIONS</p>
+            <a href="#"><img class="subsciption-logo" src="./img//icons/user.png" alt="">
+                <p>Lorem Ipsum</p>
+            </a>
+            <a href="#"><img class="subsciption-logo" src="./img//icons/user.png" alt="">
+                <p>Lorem Ipsum</p>
+            </a>
+            <a href="#"><img class="subsciption-logo" src="./img//icons/user.png" alt="">
+                <p>Lorem Ipsum</p>
+            </a>
+            <a href="#"><img class="subsciption-logo" src="./img//icons/user.png" alt="">
+                <p>Lorem Ipsum</p>
+            </a>
+
+            <div class="show-more">
+                <img src="./img/icons/expand_more_white_36dp.svg" alt="">
+            </div>
+
+            <hr>
+            <a id="shortcut-link" href="#"><img src="./img//icons/settings_white_24dp.svg" alt="">
+                <p>Settings</p>
+            </a>
+            <a id="shortcut-link" href="#"><img src="./img//icons/flag_white_24dp.svg" alt="">
+                <p>Report History</p>
+            </a>
+            <a id="shortcut-link" href="#"><img src="./img//icons/help_outline_white_24dp.svg" alt="">
+                <p>Help</p>
+            </a>
+            <a id="shortcut-link" href="#"><img src="./img//icons/info_white_24dp.svg" alt="">
+                <p>Send Feedback</p>
+            </a>
+
+        </div>
+        <div class="about-container">
+            <a class="about-logo" href="#">
+                <img src="./img/logo-green-theme.png" alt="">
+            </a>
+            <p>At vero eos et accusamus et iusto
+                odio dignissimos ducimus qui bland
+                itiis praesentium voluptatum <br>
+                deleniti atque corrupti quos
+            </p>
+            <a class="about-link" href="#">
+                Our channels
+            </a>
+            <a class="about-link" href="#">
+                Twitter
+            </a>
+            <a class="about-link" href="#">
+                Connect
+            </a>
+            <a class="about-link" href="#">
+                About &nbsp;<span style="font-weight: 700;">ZULA</span>MED
+            </a>
+        </div>
+    </div>
+
+
+    <!-- ------------sidebar-small------------ -->
+    <!-- ------------main--------------- -->
+    <div onclick="profileContainerClose(); mobileSearchbarClose()" class="container">
+
         <div class="banner">
             <!-- <div class="searchbar flex-div"> -->
             <form class="searchbar flex-div" action="">
@@ -167,44 +274,23 @@
                     <option value="Lorem">Lorem</option>
                 </select> -->
 
-                <div class="select_mate" data-mate-select="active">
-                    <select name="" onchange="" onclick="return false;" id="">
-                        <option value="">Choose specialty</option>
-                        <option value="AUFFF">Select option 1</option>
-                        <option value="2">Select option 2</option>
-                        <option value="3">Select option 3</option>
-                    </select>
-                    <p class="selecionado_opcion" onclick="open_select(this)"></p>
-                    <span onclick="open_select(this)" class="icon_select_mate">
-                        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z" />
-                            <path d="M0-.75h24v24H0z" fill="none" />
-                        </svg>
-                    </span>
-                    <div class="cont_list_select_mate">
-                        <ul class="cont_select_int"> </ul>
-                    </div>
-                </div>
-
-
                 <div class="searchbox">
                     <input type="text" placeholder="Search...">
                 </div>
-                <button type="button"><img src="./img/icons/search_white_24dp.svg" alt=""></button>
+                <button class="search-button" type="button"><img src="./img/icons/search_white_24dp.svg"
+                        alt=""></button>
             </form>
             <!-- </div> -->
         </div>
-
         <div class="list-container">
 
 
             <div class="vid-list">
-                <a href=""><img src="./img/videoPreviews/1.png" class="thumbnail" alt=""></a>
+                <a href="#"><img src="./img/videoPreviews/video-skeleton.png" class="thumbnail" alt=""></a>
                 <div class="flex-div">
                     <img src="./img/icons/user.png" alt="">
                     <div class="vid-info">
-                        <a href="">LOREM IPSUM-Lorem ipsum</a>
+                        <a href="#">LOREM IPSUM-Lorem ipsum</a>
                         <p>Lorem ipsum</p>
                         <p class="vid-views">1k views</p>
 
@@ -215,11 +301,11 @@
 
 
             <div class="vid-list">
-                <a href=""><img src="./img/videoPreviews/2.png" class="thumbnail" alt=""></a>
+                <a href="#"><img src="./img/videoPreviews/video-skeleton.png" class="thumbnail" alt=""></a>
                 <div class="flex-div">
                     <img src="./img/icons/user.png" alt="">
                     <div class="vid-info">
-                        <a href="">LOREM IPSUM-Lorem ipsum</a>
+                        <a href="#">LOREM IPSUM-Lorem ipsum</a>
                         <p>Lorem ipsum</p>
                         <p class="vid-views">1k views</p>
 
@@ -231,11 +317,11 @@
 
 
             <div class="vid-list">
-                <a href=""><img src="./img/videoPreviews/3.png" class="thumbnail" alt=""></a>
+                <a href="#"><img src="./img/videoPreviews/video-skeleton.png" class="thumbnail" alt=""></a>
                 <div class="flex-div">
                     <img src="./img/icons/user.png" alt="">
                     <div class="vid-info">
-                        <a href="">LOREM IPSUM-Lorem ipsum</a>
+                        <a href="#">LOREM IPSUM-Lorem ipsum</a>
                         <p>Lorem ipsum</p>
                         <p class="vid-views">1k views</p>
 
@@ -245,11 +331,11 @@
 
 
             <div class="vid-list">
-                <a href=""><img src="./img/videoPreviews/4.png" class="thumbnail" alt=""></a>
+                <a href="#"><img src="./img/videoPreviews/video-skeleton.png" class="thumbnail" alt=""></a>
                 <div class="flex-div">
                     <img src="./img/icons/user.png" alt="">
                     <div class="vid-info">
-                        <a href="">LOREM IPSUM-Lorem ipsum</a>
+                        <a href="#">LOREM IPSUM-Lorem ipsum</a>
                         <p>Lorem ipsum</p>
                         <p class="vid-views">1k views</p>
 
@@ -259,11 +345,11 @@
 
 
             <div class="vid-list">
-                <a href=""><img src="./img/videoPreviews/5.png" class="thumbnail" alt=""></a>
+                <a href="#"><img src="./img/videoPreviews/video-skeleton.png" class="thumbnail" alt=""></a>
                 <div class="flex-div">
                     <img src="./img/icons/user.png" alt="">
                     <div class="vid-info">
-                        <a href="">LOREM IPSUM-Lorem ipsum</a>
+                        <a href="#">LOREM IPSUM-Lorem ipsum</a>
                         <p>Lorem ipsum</p>
                         <p class="vid-views">1k views</p>
 
@@ -273,7 +359,7 @@
 
 
             <div class="vid-list">
-                <a href=""><img src="./img/videoPreviews/6.png" class="thumbnail" alt=""></a>
+                <a href="#"><img src="./img/videoPreviews/video-skeleton.png" class="thumbnail" alt=""></a>
                 <div class="flex-div">
                     <img src="./img/icons/user.png" alt="">
                     <div class="vid-info">
@@ -285,10 +371,62 @@
                 </div>
             </div>
         </div>
+        <div class="livelist-container m-b-84px">
+
+
+            <div class="live-list">
+                <a class="preview" href="#">
+                    <img src="./img/videoPreviews/live-skeleton.png" class="thumbnail" alt="">
+                    <img class="live-icon" src="./img/icons/live.png" alt="">
+                </a>
+                <div class="flex-div">
+                    <img src="./img/icons/user.png" alt="">
+                    <div class="vid-info">
+                        <a href="#">LOREM IPSUM - Lorem ipsum</a>
+                        <p>Lorem ipsum</p>
+                        <p class="vid-views">1k watching</p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="live-list">
+                <a class="preview" href="#">
+                    <img src="./img/videoPreviews/live-skeleton.png" class="thumbnail" alt="">
+                    <img class="live-icon" src="./img/icons/live.png" alt="">
+                </a>
+                <div class="flex-div">
+                    <img src="./img/icons/user.png" alt="">
+                    <div class="vid-info">
+                        <a href="#">LOREM IPSUM - Lorem ipsum</a>
+                        <p>Lorem ipsum</p>
+                        <p class="vid-views">1k watching</p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="live-list">
+                <a class="preview" href="#">
+                    <img src="./img/videoPreviews/live-skeleton.png" class="thumbnail" alt="">
+                    <img class="live-icon" src="./img/icons/live.png" alt="">
+                </a>
+                <div class="flex-div">
+                    <img src="./img/icons/user.png" alt="">
+                    <div class="vid-info">
+                        <a href="#">LOREM IPSUM - Lorem ipsum</a>
+                        <p>Lorem ipsum</p>
+                        <p class="vid-views">1k watching</p>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
 
 
     </div>
-
     <!-- ------------main--------------- -->
 
 

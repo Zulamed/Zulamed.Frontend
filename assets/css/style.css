@@ -694,6 +694,8 @@ input::-moz-focus-inner {
 .vid-list .thumbnail {
     width: 100%;
     border-radius: 16px;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
 }
 
 .vid-list .flex-div {
@@ -710,6 +712,7 @@ input::-moz-focus-inner {
 .live-list {
     margin-top: 65px;
     position: relative;
+
 }
 
 .preview {
@@ -738,6 +741,8 @@ input::-moz-focus-inner {
     border-radius: 27px;
     /* -webkit-filter: blur(3px);
     filter: blur(3px); */
+    aspect-ratio: 16 / 12;
+    object-fit: cover;
 }
 
 .live-list .flex-div {

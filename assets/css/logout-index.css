@@ -34,12 +34,34 @@ nav {
     justify-content: space-between;
     position: sticky;
     top: 0;
-    z-index: 3;
+    z-index: 10;
 }
 
-.nav-right .user-icon {
-    width: 35px;
+.navbar-btn {
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 10px;
+    text-align: center;
+    border-radius: 5px;
+    white-space: nowrap;
 }
+
+.navbar-btn.register-btn {
+    color: #A50000;
+    background-color: transparent;
+    border: 1px solid #A50000;
+    padding: 6px 25px;
+}
+
+.navbar-btn.login-btn {
+    color: #FFFFFF;
+    background: #00D6BA;
+    border: 1px solid #00D6BA;
+    padding: 6px 12px;
+    margin-left: 4px;
+}
+
 
 .nav-left .menu-icon {
     width: 30px;
@@ -76,8 +98,21 @@ nav {
 
 .searchbar-mobile {
     display: none;
+    width: 230px;
+    height: 26px;
+    background-color: #D1F3EC;
+    border-radius: 5px;
+    margin-right: 1px;
+    justify-content: center;
+    padding: 0 10px;
 }
 
+.searchbar-mobile input {
+    background-color: black;
+    border: none;
+    outline: none;
+    width: inherit;
+}
 
 .search-mobile {
     display: none;
@@ -425,10 +460,6 @@ nav {
     margin-top: 100px;
 }
 
-.about-logo img {
-    width: 220px !important;
-}
-
 .about-link {
     margin-top: 29px;
     font-weight: 300 !important;
@@ -678,7 +709,7 @@ input::-moz-focus-inner {
 
 .livelist-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(430px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     grid-column-gap: 20px;
     padding: 0 68px;
 }
@@ -717,7 +748,6 @@ input::-moz-focus-inner {
     width: 100%;
     height: auto;
     position: relative;
-    overflow: hidden;
 }
 
 .live-icon {
@@ -891,10 +921,6 @@ input::-moz-focus-inner {
         padding: 0 104px 0 134px;
     }
 
-    .livelist-container {
-        padding: 0 104px 0 134px;
-    }
-
     .sidebar {
         width: 27%;
     }
@@ -911,52 +937,27 @@ input::-moz-focus-inner {
     .about-container a img {
         width: 164px;
     }
-
-    .about-link img {
-        width: 24px !important;
-    }
 }
 
 @media (max-width: 900px) {
 
-    nav {
-        background-color: white;
-        height: 74px;
-        padding: 10px 3% 10px 2%;
-        justify-content: space-between;
-        position: sticky;
-        top: 0;
-        z-index: 2;
-    }
 
     .searchbar-mobile {
         display: flex;
+        width: 0px;
+        height: 26px;
+        background-color: #D1F3EC;
+        border-radius: 5px;
+        margin-right: 1px;
         justify-content: center;
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 72px;
-        background-color: #FFFFFF;
-        border-radius: 0;
-        margin-right: 0;
         padding: 0;
-        transition: linear .2s top;
     }
 
     .searchbar-mobile input {
         background-color: transparent;
         border: none;
         outline: none;
-        height: inherit;
-        width: 85%;
-        font-size: 20px;
-        text-align: center;
-    }
-
-    .searchbar-mobile input:focus::placeholder {
-        color: transparent;
+        width: inherit;
     }
 
     .search-mobile {
@@ -983,10 +984,8 @@ input::-moz-focus-inner {
         margin-right: 0;
     }
 
-    #navigation {
+    nav {
         z-index: 1;
-        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.25);
-        transition: box-shadow 0.2s linear;
     }
 
     .overlay {
@@ -1039,38 +1038,6 @@ input::-moz-focus-inner {
     .searchbar {
         display: none;
     }
-
-    /* .searchbox {
-        display: none;
-    }
-
-    .searchbar .search-button {
-        display: none;
-    }
-
-    .icon_select_mate {
-        position: absolute;
-        top: 16px;
-        right: 19px;
-        font-size: 16px;
-        height: 22px;
-        transition: all 275ms;
-    }
-
-    .select_mate {
-        min-width: 164px;
-        width: 164px;
-        min-height: 48px;
-        font-size: 11px;
-    }
-
-    .selecionado_opcion {
-        padding: 20px 11px;
-        width: 100%;
-        display: block;
-        margin: 0px;
-        cursor: pointer;
-    } */
 
     .list-container {
         display: grid;

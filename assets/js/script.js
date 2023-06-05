@@ -71,12 +71,13 @@ function mobileSidebarClose() {
 
 function toggleProfileContainer() {
     var container = document.getElementById("profile-container");
-    container.style.display = (container.style.display === "none") ? "block" : "none";
+    var display = window.getComputedStyle(container).getPropertyValue('display')
+    if (display == 'none') {
+        container.style.display = "block";
+    } else {
+        container.style.display = "none";
+    }
 }
-// function profileContainerClose() {
-
-
-// }
 
 function toggleLanguageContainer() {
     var langContainer = document.getElementById("language-container");

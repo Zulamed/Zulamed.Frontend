@@ -284,9 +284,9 @@
     <!-- ============MAIN============ -->
 
     <div onclick="profileContainerClose(); mobileSearchbarClose()" class="container">
-        <div class="row">
-            <div class="play-video">
-                <video controls autoplay>
+        <div id="row" class="row">
+            <div id="play-video" class="play-video">
+                <video controls autoplay poster="./img/videoPreviews/2.png">
                     <source src="./videoTest/Desktop 2022.10.24 - 20.19.04.01.mp4" type="video/mp4">
                 </video>
 
@@ -329,7 +329,8 @@
                         <span>#cardio #operation</span>
                     </div>
 
-                    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia quasi odio placeat distinctio
+                    <p class="description-text"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia
+                        quasi odio placeat distinctio
                         magni. Culpa quos iusto, vel magni similique quae exercitationem minima id eveniet optio
                         molestias
                         blanditiis ea consectetur.
@@ -355,6 +356,23 @@
 
                 <div id="play-video-comments" class="play-video-comments">
                     <p style="margin-bottom: 69px;">2k comments</p>
+
+
+
+                    <div class="write-comment">
+                        <img src="./img/icons/channel-logo.jpg" alt="">
+                        <form class="write-comment-input">
+                            <input onclick="showBtns()" placeholder="Add comment" type="text" class="comment-input">
+                            <div class="write-comment-buttons">
+                                <button type="button" onclick="hideBtns()"
+                                    class="comment-btn cancel-btn">cancel</button>
+                                <button type="submit" disabled class="comment-btn comment">comment</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+
 
                     <div class="comment-container">
                         <img src="./img/icons/channel-logo.jpg" alt="">
@@ -398,15 +416,25 @@
                             </p>
                         </div>
                     </div>
+                    <div class="comment-container">
+                        <img src="./img/icons/channel-logo.jpg" alt="">
+                        <div class="user-comment">
+                            <a>Lorelai Gilbert <span>1 day ago</span></a>
+                            <p>While the anaesthetic team continue to look after you, the surgical team carry out your
+                                operation. The surgeon will have
+                                at least one assistant
+                            </p>
+                        </div>
+                    </div>
 
                 </div>
-
-                <div onclick="toggleComments()" class="more-comments flex-div">
+                <div class="more-comments flex-div" id="more-comments">
                     <img id="more-comments-icon" width="30px" src="./img/icons/expand_more_black_24dp.svg" alt="">
                 </div>
+
             </div>
 
-            <div class="right-videolist">
+            <div id="right-videolist" class="right-videolist">
 
 
                 <div class="scroll-chips">
@@ -521,6 +549,7 @@
                     </div>
                 </div>
 
+                <button id="showMoreButton">show more</button>
 
 
 

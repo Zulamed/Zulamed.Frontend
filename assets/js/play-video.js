@@ -157,35 +157,169 @@ document.querySelector(".container").addEventListener("touchmove", function () {
 
 // ========DESCRIPTION==========
 
-
+var descriptionText = document.querySelector(".description-text");
+var originalText = descriptionText.textContent;
+var description = document.querySelector('#play-video-description');
+var text = descriptionText.innerHTML;
+var trimmedText = text.substring(0, 30) + '... Read more';
+descriptionText.textContent = trimmedText;
 function toggleDescription() {
-    var description = document.querySelector('#play-video-description');
+
     var height = window.getComputedStyle(description).getPropertyValue('height');
-    if (height == '125px') {
+    if (height == '64px') {
         description.style.height = 'auto';
+        descriptionText.textContent = originalText
 
     } else {
-        description.style.height = '125px';
+        description.style.height = '64px';
+        descriptionText.textContent = trimmedText;
     }
 }
+
 // ========DESCRIPTION==========
 // ========COMMENTS==========
-function toggleComments() {
-    var comments = document.querySelector('#play-video-comments');
-    var height = window.getComputedStyle(comments).getPropertyValue('height');
-    var moreCommentsIcon = document.querySelector('#more-comments-icon');
-    if (height == '350px') {
-        comments.style.height = 'auto';
-        $('#play-video-comments').css('mask-image', "none");
-        moreCommentsIcon.style.transform = "rotate(180deg)"
 
 
+
+// linear-gradient(180deg, rgba(0, 0, 0, 1), transparent 150%)
+
+
+
+
+var contains = false;
+
+function foo(x) {
+    if (x.matches) {
+        var comments = document.getElementById("play-video-comments");
+        var videoContainer = document.getElementById("play-video");
+        var moreComments = document.getElementById("more-comments");
+        var row = document.getElementById("row");
+
+        videoContainer.removeChild(comments);
+        videoContainer.removeChild(moreComments);
+        row.insertAdjacentElement("beforeend", comments);
+        row.insertAdjacentElement("beforeend", moreComments);
+        contains = true;
     } else {
-        comments.style.height = '350px';
-        $('#play-video-comments').css('mask-image', "linear-gradient(180deg, rgba(0, 0, 0, 1), transparent 100%)")
-        moreCommentsIcon.style.transform = "rotate(0deg)"
+        var comments = document.getElementById("play-video-comments");
+        var videoContainer = document.getElementById("play-video");
+        var moreComments = document.getElementById("more-comments");
+        var row = document.getElementById("row");
+        if (contains) {
+            row.removeChild(comments);
+            row.removeChild(moreComments);
+            videoContainer.insertAdjacentElement("beforeend", comments);
+            videoContainer.insertAdjacentElement("beforeend", moreComments);
+            contains = false;
+        }
 
     }
 }
-// ========COMMENTS==========
 
+var media = window.matchMedia("(max-width:1027px)");
+foo(media);
+media.addEventListener("change", foo);
+
+
+// ================VIDEO SHOW MORE MOBILE ==================
+
+
+var container = document.getElementById('right-videolist');
+var showMoreButton = document.getElementById('showMoreButton');
+var itemsToShow = container.getElementsByClassName('side-video-list');
+
+function screenWidthVideos() {
+    if (window.innerWidth <= 600) {
+        for (var i = 1; i < itemsToShow.length; i++) {
+            itemsToShow[i].style.display = 'none';
+            showMoreButton.style.display = 'block';
+
+        }
+
+        showMoreButton.addEventListener('click', function () {
+            for (var i = 1; i < itemsToShow.length; i++) {
+                itemsToShow[i].style.display = 'block';
+            }
+
+            showMoreButton.style.display = 'none';
+        });
+    } else {
+        for (var i = 0; i < itemsToShow.length; i++) {
+            itemsToShow[i].style.display = 'flex';
+        }
+        showMoreButton.style.display = 'none';
+    }
+}
+
+screenWidthVideos();
+window.addEventListener('resize', screenWidthVideos);
+
+// ================VIDEO SHOW MORE MOBILE ==================
+
+
+// ================COMMENTS SHOW MORE ==================
+
+var commentsContainer = document.getElementById('play-video-comments');
+var showMoreComments = document.getElementById('more-comments');
+var commentsToShow = commentsContainer.getElementsByClassName('comment-container');
+
+function screenWidthComments() {
+    if (window.innerWidth > 600) {
+        for (var i = 2; i < commentsToShow.length; i++) {
+            commentsToShow[i].style.display = 'none';
+            showMoreComments.style.display = 'flex';
+            commentsContainer.style.maskImage = "linear-gradient(180deg, rgba(0, 0, 0, 1), transparent 150%)"
+        }
+
+        showMoreComments.addEventListener('click', function () {
+            for (var i = 1; i < commentsToShow.length; i++) {
+                commentsToShow[i].style.display = 'flex';
+                commentsContainer.style.maskImage = "none"
+            }
+            showMoreComments.style.display = 'none';
+        });
+    } else {
+        for (var i = 0; i < commentsToShow.length; i++) {
+            commentsToShow[i].style.display = 'flex';
+        }
+        showMoreComments.style.display = 'none';
+    }
+}
+
+screenWidthComments();
+window.addEventListener('resize', screenWidthComments);
+// ================COMMENTS SHOW MORE ==================
+
+
+// =============COMMENT INPUT===============
+
+
+function showBtns() {
+    var btns = document.querySelector(".write-comment-buttons");
+    btns.style.display = "flex"
+}
+
+function hideBtns() {
+    var btns = document.querySelector(".write-comment-buttons");
+    btns.style.display = "none"
+}
+
+
+
+var inputComment = document.querySelector('.comment-input');
+var commentButton = document.querySelector('.comment');
+
+inputComment.addEventListener('input', function () {
+    if (inputComment.value.length > 0) {
+        commentButton.style.color = '#54B9A2';
+        commentButton.style.border = '1px solid #54B9A2';
+        commentButton.style.cursor = 'pointer';
+        commentButton.disabled = false
+    } else {
+        commentButton.style.color = '#616163';
+        commentButton.style.border = '1px solid #616163';
+        commentButton.style.cursor = 'default';
+        commentButton.disabled = true
+    }
+});
+// =============COMMENT INPUT===============

@@ -181,7 +181,6 @@ function toggleDescription() {
 
 
 
-// linear-gradient(180deg, rgba(0, 0, 0, 1), transparent 150%)
 
 
 
@@ -323,3 +322,28 @@ inputComment.addEventListener('input', function () {
     }
 });
 // =============COMMENT INPUT===============
+
+// =============LIKE/DISLIKE BUTTONS===============
+
+
+function likeVideo() {
+    var dislikeBtn = document.getElementById("dislike-btn");
+    var likeBtn = document.getElementById("like-btn");
+
+    dislikeBtn.classList.remove('active');
+    likeBtn.classList.toggle("active")
+}
+
+function dislikeVideo() {
+    var dislikeBtn = document.getElementById("dislike-btn");
+    var likeBtn = document.getElementById("like-btn");
+
+    likeBtn.classList.remove('active');
+    dislikeBtn.classList.toggle("active")
+}
+
+
+// =============LIKE/DISLIKE BUTTONS===============
+
+
+

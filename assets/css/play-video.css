@@ -773,6 +773,9 @@ nav {
 }
 
 /* ============DESCRIPTION============ */
+.close-description {
+    display: none;
+}
 
 .play-video-description {
     min-height: 64px;

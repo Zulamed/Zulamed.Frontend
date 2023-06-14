@@ -10,6 +10,8 @@
     --text-color: 0, 77, 97;
     /* text-color: #004d61 */
     --gray-light: 224, 224, 224;
+
+    --plyr-color-main: #49a08c;
 }
 
 * {
@@ -640,6 +642,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 
@@ -1453,3 +1456,13 @@ nav {
 }
 
 /* ============MEDIAQUERY END============ */
+
+
+.plyr--video{
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+

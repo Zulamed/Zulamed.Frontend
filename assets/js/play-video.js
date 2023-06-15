@@ -1,6 +1,6 @@
 // ========CHIPS==========
-$(function () {
-    $('.chips__choice .chip').on("click", function () {
+$(function() {
+    $('.chips__choice .chip').on("click", function() {
         $('.chips__choice .chip').removeClass('chip--active');
         $(this).addClass("chip--active");
     });
@@ -47,7 +47,7 @@ function chipsScrollMax() {
 // ========CHIPS END==========
 // =====================SEARCH IN MOBILE DEVICES=====================
 var isOpen = false;
-document.getElementById("search-mobile-form").onsubmit = function (e) {
+document.getElementById("search-mobile-form").onsubmit = function(e) {
     if (!isOpen) {
         e.preventDefault();
         isOpen = true;
@@ -56,7 +56,7 @@ document.getElementById("search-mobile-form").onsubmit = function (e) {
 
 
 
-document.getElementById("search-mobile").onclick = function () {
+document.getElementById("search-mobile").onclick = function() {
     var searchbarMobile = document.querySelector(".searchbar-mobile");
     var navigation = document.getElementById("navigation")
 
@@ -144,7 +144,7 @@ function languageContainerClose() {
     langContainer.style.display = "none";
 }
 
-document.querySelector(".container").addEventListener("touchmove", function () {
+document.querySelector(".container").addEventListener("touchmove", function() {
     var profileContainer = document.getElementById("profile-container");
     var langContainer = document.getElementById("language-container");
 
@@ -233,7 +233,7 @@ function screenWidthVideos() {
 
         }
 
-        showMoreButton.addEventListener('click', function () {
+        showMoreButton.addEventListener('click', function() {
             for (var i = 1; i < itemsToShow.length; i++) {
                 itemsToShow[i].style.display = 'block';
             }
@@ -268,7 +268,7 @@ function screenWidthComments() {
             commentsContainer.style.maskImage = "linear-gradient(180deg, rgba(0, 0, 0, 1), transparent 150%)"
         }
 
-        showMoreComments.addEventListener('click', function () {
+        showMoreComments.addEventListener('click', function() {
             for (var i = 1; i < commentsToShow.length; i++) {
                 commentsToShow[i].style.display = 'flex';
                 commentsContainer.style.maskImage = "none"
@@ -306,7 +306,7 @@ function hideBtns() {
 var inputComment = document.querySelector('.comment-input');
 var commentButton = document.querySelector('.comment');
 
-inputComment.addEventListener('input', function () {
+inputComment.addEventListener('input', function() {
     if (inputComment.value.length > 0) {
         commentButton.style.color = '#54B9A2';
         commentButton.style.border = '1px solid #54B9A2';
@@ -359,6 +359,32 @@ function followToggle() {
 
 
 // =============VOLUME SESSION STORAGE===============
+
+var player = document.querySelector('media-player');
+
+
+let loaded = false;
+
+player.addEventListener('attached', function(e) {
+    let volumeStorage = sessionStorage.getItem('playerVolume');
+    let tempVolume;
+    if (!volumeStorage) {
+        tempVolume = 0.5;
+    }else {
+        tempVolume = volumeStorage;
+    }
+    player.volume = tempVolume;
+    unsubscribe = player.subscribe(({volume}) => {
+        if (loaded){
+            sessionStorage.setItem('playerVolume', volume);
+        }
+    })
+    loaded = true;
+})
+
+window.addEventListener('beforeunload', function(e) {
+    unsubscribe();
+});
 
 
 

@@ -1,7 +1,7 @@
 <script lang="js">
 	import { onMount } from 'svelte';
-	import { scripts } from '../assets/js/script';
-	import '../assets/css/style.css';
+	import { scripts } from './script';
+	import './style.css';
 	onMount(scripts);
 </script>
 
@@ -43,16 +43,16 @@
 				<img id="lang-close-icon" width="18px" src="./img/icons/close_black_24dp.svg" alt="" />
 			</div>
 			<hr />
-			<a class="lang-link" href="#">
+			<a class="lang-link" href=".">
 				<p>English (UK)</p>
 			</a>
-			<a class="lang-link active" href="#">
+			<a class="lang-link active" href=".">
 				<p>Azərbaycan</p>
 			</a>
-			<a class="lang-link" href="#">
+			<a class="lang-link" href=".">
 				<p>Deutsch</p>
 			</a>
-			<a class="lang-link" href="#">
+			<a class="lang-link" href=".">
 				<p>Russian</p>
 			</a>
 		</div>
@@ -60,36 +60,36 @@
 		<img class="user-icon" src="./img/icons/User_circle.png" alt="" />
 		<div class="profile-container" id="profile-container">
 			<div class="popup-profile flex-div">
-				<a href="#"><img src="./img/icons/user.png" alt="" /></a>
+				<a href="."><img src="./img/icons/user.png" alt="" /></a>
 				<div>
-					<a href="#">Username</a>
+					<a href=".">Username</a>
 					<p class="email">@username</p>
-					<a href="#" class="account-manage">Manage your Account</a>
+					<a href="." class="account-manage">Manage your Account</a>
 				</div>
 			</div>
 
 			<!-- Другие элементы контейнера -->
-			<a class="profile-link" href="#"
+			<a class="profile-link" href="."
 				><img src="./img/profileContainerIcons/account_box_black_24dp.svg" alt="" />
 				<p>Your channel</p>
 			</a>
-			<a class="profile-link" href="#"
+			<a class="profile-link" href="."
 				><img src="./img/profileContainerIcons/groups_black_24dp.svg" alt="" />
 				<p>Switch account</p>
 			</a>
-			<a class="profile-link" href="#"
+			<a class="profile-link" href="."
 				><img src="./img/profileContainerIcons/wallet_black_24dp.svg" alt="" />
 				<p>Purchases and membership</p>
 			</a>
-			<a class="profile-link" href="#"
+			<a class="profile-link" href="."
 				><img src="./img/profileContainerIcons/translate_black_24dp.svg" alt="" />
 				<p>Language: English</p>
 			</a>
-			<a class="profile-link" href="#"
+			<a class="profile-link" href="."
 				><img src="./img/profileContainerIcons/settings_black_24dp.svg" alt="" />
 				<p>Settings</p>
 			</a>
-			<a class="profile-link" href="#"
+			<a class="profile-link" href="."
 				><img src="./img/profileContainerIcons/logout_black_24dp.svg" alt="" />
 				<p>Sign out</p>
 			</a>
@@ -99,43 +99,43 @@
 <!-- ------------sidebar------------ -->
 <div class="sidebar">
 	<div class="shortcut-links">
-		<a id="shortcut-link" class="active-shortcut" href="#"
+		<a id="shortcut-link" class="active-shortcut" href="."
 			><img src="./img/icons/Home_fill.svg" alt="" />
 			<p>Home</p>
 		</a>
-		<a id="shortcut-link" href="#"
+		<a id="shortcut-link" href="."
 			><img src="./img/icons/Video_fill.svg" alt="" />
 			<p>Subsciptions</p>
 		</a>
 
 		<hr />
-		<a id="shortcut-link" href="#"
+		<a id="shortcut-link" href="."
 			><img src="./img/icons/history_white_24dp.svg" alt="" />
 			<p>History</p>
 		</a>
-		<a id="shortcut-link" href="#"
+		<a id="shortcut-link" href="."
 			><img src="./img/icons/play_arrow_white_48dp(2).svg" alt="" />
 			<p>Your videos</p>
 		</a>
-		<a id="shortcut-link" href="#"
+		<a id="shortcut-link" href="."
 			><img src="./img/icons/liked.svg" alt="" />
 			<p>Liked videos</p>
 		</a>
 		<hr />
 		<p class="sidebar-title">SUBSCRIPTIONS</p>
-		<a href="#"
+		<a href="."
 			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
-		<a href="#"
+		<a href="."
 			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
-		<a href="#"
+		<a href="."
 			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
-		<a href="#"
+		<a href="."
 			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
@@ -145,25 +145,25 @@
 		</div>
 
 		<hr />
-		<a id="shortcut-link" href="#"
+		<a id="shortcut-link" href="."
 			><img src="./img/icons/settings_white_24dp.svg" alt="" />
 			<p>Settings</p>
 		</a>
-		<a id="shortcut-link" href="#"
+		<a id="shortcut-link" href="."
 			><img src="./img/icons/flag_white_24dp.svg" alt="" />
 			<p>Report History</p>
 		</a>
-		<a id="shortcut-link" href="#"
+		<a id="shortcut-link" href="."
 			><img src="./img/icons/help_outline_white_24dp.svg" alt="" />
 			<p>Help</p>
 		</a>
-		<a id="shortcut-link" href="#"
+		<a id="shortcut-link" href="."
 			><img src="./img/icons/info_white_24dp.svg" alt="" />
 			<p>Send Feedback</p>
 		</a>
 	</div>
 	<div class="about-container">
-		<a class="about-logo" href="#">
+		<a class="about-logo" href=".">
 			<img src="./img/logo-green-theme.png" alt="" />
 		</a>
 		<p>
@@ -171,13 +171,13 @@
 			voluptatum <br />
 			deleniti atque corrupti quos
 		</p>
-		<a class="about-link" href="#"> Our channels </a>
-		<a class="about-link" href="#"> Twitter </a>
-		<a class="about-link" href="#">
+		<a class="about-link" href="."> Our channels </a>
+		<a class="about-link" href="."> Twitter </a>
+		<a class="about-link" href=".">
 			Connect &nbsp;<img src="./img/icons/insta_fill.svg" alt="" />
 			<img src="./img/icons/comment_fill.svg" alt="" />
 		</a>
-		<a class="about-link" href="#">
+		<a class="about-link" href=".">
 			About &nbsp;<span style="font-weight: 700">ZULA</span>MED
 		</a>
 	</div>
@@ -187,43 +187,43 @@
 
 <div class="sidebar-mobile">
 	<div class="shortcut-links">
-		<a id="shortcut-link" class="active-shortcut" href="#"
+		<a id="shortcut-link" class="active-shortcut" href="."
 			><img src="./img/icons/Home_fill.svg" alt="" />
 			<p>Home</p>
 		</a>
-		<a id="shortcut-link" href="#"
+		<a id="shortcut-link" href="."
 			><img src="./img/icons/Video_fill.svg" alt="" />
 			<p>Subsciptions</p>
 		</a>
 
 		<hr />
-		<a id="shortcut-link" href="#"
+		<a id="shortcut-link" href="."
 			><img src="./img/icons/history_white_24dp.svg" alt="" />
 			<p>History</p>
 		</a>
-		<a id="shortcut-link" href="#"
+		<a id="shortcut-link" href="."
 			><img src="./img/icons/play_arrow_white_48dp(2).svg" alt="" />
 			<p>Your videos</p>
 		</a>
-		<a id="shortcut-link" href="#"
+		<a id="shortcut-link" href="."
 			><img src="./img/icons/liked.svg" alt="" />
 			<p>Liked videos</p>
 		</a>
 		<hr />
 		<p class="sidebar-title">SUBSCRIPTIONS</p>
-		<a href="#"
+		<a href="."
 			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
-		<a href="#"
+		<a href="."
 			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
-		<a href="#"
+		<a href="."
 			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
-		<a href="#"
+		<a href="."
 			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
@@ -233,25 +233,25 @@
 		</div>
 
 		<hr />
-		<a id="shortcut-link" href="#"
+		<a id="shortcut-link" href="."
 			><img src="./img/icons/settings_white_24dp.svg" alt="" />
 			<p>Settings</p>
 		</a>
-		<a id="shortcut-link" href="#"
+		<a id="shortcut-link" href="."
 			><img src="./img/icons/flag_white_24dp.svg" alt="" />
 			<p>Report History</p>
 		</a>
-		<a id="shortcut-link" href="#"
+		<a id="shortcut-link" href="."
 			><img src="./img/icons/help_outline_white_24dp.svg" alt="" />
 			<p>Help</p>
 		</a>
-		<a id="shortcut-link" href="#"
+		<a id="shortcut-link" href="."
 			><img src="./img/icons/info_white_24dp.svg" alt="" />
 			<p>Send Feedback</p>
 		</a>
 	</div>
 	<div class="about-container">
-		<a class="about-logo" href="#">
+		<a class="about-logo" href=".">
 			<img src="./img/logo-green-theme.png" alt="" />
 		</a>
 		<p>
@@ -259,10 +259,10 @@
 			voluptatum <br />
 			deleniti atque corrupti quos
 		</p>
-		<a class="about-link" href="#"> Our channels </a>
-		<a class="about-link" href="#"> Twitter </a>
-		<a class="about-link" href="#"> Connect </a>
-		<a class="about-link" href="#">
+		<a class="about-link" href="."> Our channels </a>
+		<a class="about-link" href="."> Twitter </a>
+		<a class="about-link" href="."> Connect </a>
+		<a class="about-link" href=".">
 			About &nbsp;<span style="font-weight: 700">ZULA</span>MED
 		</a>
 	</div>
@@ -285,13 +285,13 @@
 	</div>
 	<div class="list-container">
 		<div class="vid-list">
-			<a class="preview" href="#"
+			<a class="preview" href="."
 				><img src="./img/videoPreviews/video-skeleton.png" class="thumbnail" alt="" /></a
 			>
 			<div class="flex-div">
 				<img src="./img/icons/user.png" alt="" />
 				<div class="vid-info">
-					<a href="#">LOREM IPSUM-Lorem ipsum</a>
+					<a href=".">LOREM IPSUM-Lorem ipsum</a>
 					<p>Lorem ipsum</p>
 					<p class="vid-views">1k views</p>
 				</div>
@@ -299,13 +299,13 @@
 		</div>
 
 		<div class="vid-list">
-			<a class="preview" href="#"
+			<a class="preview" href="."
 				><img src="./img/videoPreviews/video-skeleton.png" class="thumbnail" alt="" /></a
 			>
 			<div class="flex-div">
 				<img src="./img/icons/user.png" alt="" />
 				<div class="vid-info">
-					<a href="#">LOREM IPSUM-Lorem ipsum</a>
+					<a href=".">LOREM IPSUM-Lorem ipsum</a>
 					<p>Lorem ipsum</p>
 					<p class="vid-views">1k views</p>
 				</div>
@@ -313,13 +313,13 @@
 		</div>
 
 		<div class="vid-list">
-			<a class="preview" href="#"
+			<a class="preview" href="."
 				><img src="./img/videoPreviews/video-skeleton.png" class="thumbnail" alt="" /></a
 			>
 			<div class="flex-div">
 				<img src="./img/icons/user.png" alt="" />
 				<div class="vid-info">
-					<a href="#">LOREM IPSUM-Lorem ipsum</a>
+					<a href=".">LOREM IPSUM-Lorem ipsum</a>
 					<p>Lorem ipsum</p>
 					<p class="vid-views">1k views</p>
 				</div>
@@ -327,13 +327,13 @@
 		</div>
 
 		<div class="vid-list">
-			<a class="preview" href="#"
+			<a class="preview" href="."
 				><img src="./img/videoPreviews/video-skeleton.png" class="thumbnail" alt="" /></a
 			>
 			<div class="flex-div">
 				<img src="./img/icons/user.png" alt="" />
 				<div class="vid-info">
-					<a href="#">LOREM IPSUM-Lorem ipsum</a>
+					<a href=".">LOREM IPSUM-Lorem ipsum</a>
 					<p>Lorem ipsum</p>
 					<p class="vid-views">1k views</p>
 				</div>
@@ -341,13 +341,13 @@
 		</div>
 
 		<div class="vid-list">
-			<a class="preview" href="#"
+			<a class="preview" href="."
 				><img src="./img/videoPreviews/video-skeleton.png" class="thumbnail" alt="" /></a
 			>
 			<div class="flex-div">
 				<img src="./img/icons/user.png" alt="" />
 				<div class="vid-info">
-					<a href="#">LOREM IPSUM-Lorem ipsum</a>
+					<a href=".">LOREM IPSUM-Lorem ipsum</a>
 					<p>Lorem ipsum</p>
 					<p class="vid-views">1k views</p>
 				</div>
@@ -355,13 +355,13 @@
 		</div>
 
 		<div class="vid-list">
-			<a class="preview" href="#"
+			<a class="preview" href="."
 				><img src="./img/videoPreviews/video-skeleton.png" class="thumbnail" alt="" /></a
 			>
 			<div class="flex-div">
 				<img src="./img/icons/user.png" alt="" />
 				<div class="vid-info">
-					<a href="#">LOREM IPSUM - Lorem ipsum</a>
+					<a href=".">LOREM IPSUM - Lorem ipsum</a>
 					<p>Lorem ipsum</p>
 					<p class="vid-views">1k views</p>
 				</div>
@@ -370,14 +370,14 @@
 	</div>
 	<div class="livelist-container m-b-84px">
 		<div class="live-list">
-			<a class="preview" href="#">
+			<a class="preview" href=".">
 				<img src="./img/videoPreviews/live-skeleton.png" class="thumbnail" alt="" />
 				<img class="live-icon" src="./img/icons/live.png" alt="" />
 			</a>
 			<div class="flex-div">
 				<img src="./img/icons/user.png" alt="" />
 				<div class="vid-info">
-					<a href="#">LOREM IPSUM - Lorem ipsum</a>
+					<a href=".">LOREM IPSUM - Lorem ipsum</a>
 					<p>Lorem ipsum</p>
 					<p class="vid-views">1k watching</p>
 				</div>
@@ -385,14 +385,14 @@
 		</div>
 
 		<div class="live-list">
-			<a class="preview" href="#">
+			<a class="preview" href=".">
 				<img src="./img/videoPreviews/live-skeleton.png" class="thumbnail" alt="" />
 				<img class="live-icon" src="./img/icons/live.png" alt="" />
 			</a>
 			<div class="flex-div">
 				<img src="./img/icons/user.png" alt="" />
 				<div class="vid-info">
-					<a href="#">LOREM IPSUM - Lorem ipsum</a>
+					<a href=".">LOREM IPSUM - Lorem ipsum</a>
 					<p>Lorem ipsum</p>
 					<p class="vid-views">1k watching</p>
 				</div>
@@ -400,14 +400,14 @@
 		</div>
 
 		<div class="live-list">
-			<a class="preview" href="#">
+			<a class="preview" href=".">
 				<img src="./img/videoPreviews/live-skeleton.png" class="thumbnail" alt="" />
 				<img class="live-icon" src="./img/icons/live.png" alt="" />
 			</a>
 			<div class="flex-div">
 				<img src="./img/icons/user.png" alt="" />
 				<div class="vid-info">
-					<a href="#">LOREM IPSUM - Lorem ipsum</a>
+					<a href=".">LOREM IPSUM - Lorem ipsum</a>
 					<p>Lorem ipsum</p>
 					<p class="vid-views">1k watching</p>
 				</div>
@@ -415,14 +415,14 @@
 		</div>
 
 		<div class="live-list">
-			<a class="preview" href="#">
+			<a class="preview" href=".">
 				<img src="./img/videoPreviews/live-skeleton.png" class="thumbnail" alt="" />
 				<img class="live-icon" src="./img/icons/live.png" alt="" />
 			</a>
 			<div class="flex-div">
 				<img src="./img/icons/user.png" alt="" />
 				<div class="vid-info">
-					<a href="#">LOREM IPSUM - Lorem ipsum</a>
+					<a href=".">LOREM IPSUM - Lorem ipsum</a>
 					<p>Lorem ipsum</p>
 					<p class="vid-views">1k watching</p>
 				</div>
@@ -430,14 +430,14 @@
 		</div>
 
 		<div class="live-list">
-			<a class="preview" href="#">
+			<a class="preview" href=".">
 				<img src="./img/videoPreviews/live-skeleton.png" class="thumbnail" alt="" />
 				<img class="live-icon" src="./img/icons/live.png" alt="" />
 			</a>
 			<div class="flex-div">
 				<img src="./img/icons/user.png" alt="" />
 				<div class="vid-info">
-					<a href="#">LOREM IPSUM - Lorem ipsum</a>
+					<a href=".">LOREM IPSUM - Lorem ipsum</a>
 					<p>Lorem ipsum</p>
 					<p class="vid-views">1k watching</p>
 				</div>
@@ -445,14 +445,14 @@
 		</div>
 
 		<div class="live-list">
-			<a class="preview" href="#">
+			<a class="preview" href=".">
 				<img src="./img/videoPreviews/live-skeleton.png" class="thumbnail" alt="" />
 				<img class="live-icon" src="./img/icons/live.png" alt="" />
 			</a>
 			<div class="flex-div">
 				<img src="./img/icons/user.png" alt="" />
 				<div class="vid-info">
-					<a href="#">LOREM IPSUM - Lorem ipsum</a>
+					<a href=".">LOREM IPSUM - Lorem ipsum</a>
 					<p>Lorem ipsum</p>
 					<p class="vid-views">1k watching</p>
 				</div>

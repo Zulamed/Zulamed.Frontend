@@ -4,16 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Player</title>
-    <link href="https://vjs.zencdn.net/8.3.0/video-js.css" rel="stylesheet" />
-    <link rel="icon" type="image" href="./img/favicon.png">
+    <link rel="icon" type="image" href="img/favicon.png">
     <link rel="stylesheet" href="./assets/css/play-video.css">
-
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"
         integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vidstack/styles/defaults.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vidstack/styles/community-skin/video.min.css" />
+    <script type="module" src="https://cdn.jsdelivr.net/npm/vidstack/dist/cdn/prod.js"></script>
 </head>
 
 <body>
@@ -40,7 +41,7 @@
                 <div class="searchbox">
                     <input type="text" placeholder="Search...">
                 </div>
-                <button class="search-button" type="button"><img src="./img/icons/search_white_24dp.svg"
+                <button class="search-button" type="submit"><img src="./img/icons/search_white_24dp.svg"
                         alt=""></button>
             </form>
         </div>
@@ -287,9 +288,16 @@
             <div id="play-video" class="play-video">
 
                 <div class="video-container">
-                    <video poster="./img/videoPreviews/2.png" id="my-video" class="video-js vjs-fill" controls>
-                        <source src="./videoTest/testvideo.mp4" type='video/mp4' />
-                    </video>
+                    <!-- <video poster="./img/videoPreviews/2.png" id="my-video" -->
+                    <!--     controls> -->
+                    <!-- </video> -->
+                    <media-player id="video"
+                        src="https://d2tldik98s0wn6.cloudfront.net/ba41d730-5c82-40d2-81ef-24aed5270420/master.m3u8"
+                        poster="img/videoPreviews/2.png" aspect-ratio="16/9">
+                        <media-outlet></media-outlet>
+                        <media-community-skin></media-community-skin>
+                        <media-poster alt="Preview."></media-poster>
+                    </media-player>
                 </div>
 
                 <h3>What does an Operating Department Practitioner do?</h3>
@@ -308,7 +316,8 @@
                             </div>
                         </div>
 
-                        <button type="button" class="interaction-btn follow-btn active">FOLLOWED</button>
+                        <button onclick="followToggle()" type="button" id="follow-btn"
+                            class="interaction-btn follow-btn">FOLLOW</button>
                     </div>
                     <div class="play-video-info-right">
 
@@ -563,18 +572,9 @@
 
     <!-- ============MAIN END============ -->
 
-
-
-
-    <script src="https://vjs.zencdn.net/8.3.0/video.min.js"></script>
     <script src="./assets/js/play-video.js"></script>
-    <script>
-        videojs('my-video', {}, function () {
-            var player = this;
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
 
-            player.controlBar.addChild('QualitySelector');
-        });
-    </script>
 </body>
 
 </html>

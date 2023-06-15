@@ -53,8 +53,7 @@ function mobileSidebarOpen(e) {
     var overlay = document.querySelector(".overlay");
 
     sidebarMobile.style.left = "0";
-    overlay.style.opacity = "0.75";
-    overlay.style.zIndex = "3";
+    overlay.style.left = "0";
 }
 
 
@@ -63,8 +62,7 @@ function mobileSidebarClose() {
     var overlay = document.querySelector(".overlay");
 
     sidebarMobile.style.left = "-100%"
-    overlay.style.opacity = "0";
-    overlay.style.zIndex = "-1";
+    overlay.style.left = "-100%";
 }
 
 // =====================SIDEBAR IN MOBILE DEVICES=====================

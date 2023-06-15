@@ -10,8 +10,44 @@
     --text-color: 0, 77, 97;
     /* text-color: #004d61 */
     --gray-light: 224, 224, 224;
+    --video-scrim-bg: 0;
+    --media-menu-bg: #54B9A2;
+    --media-menu-top-bar-bg: #54B9A2;
+    --media-menu-item-info-color: #f0f0f0;
+    --media-menu-hint-color: #f0f0f0;
+    --media-button-hover-bg: #54b9a186;
+    --media-tooltip-bg-color: #54b9a186;
+    --media-tooltip-color: hsl(0, 0%, 100%);
+    --media-slider-value-bg: #54b9a186;
+    --media-menu-box-shadow: none;
 }
 
+/* ============PLAYER SETTINGS============ */
+:where(media-menu:not([data-submenu]) > [data-media-menu-items][aria-hidden="false"]) {
+    overflow: hidden !important;
+}
+
+:where(media-player[data-view-type='video']:not([data-fullscreen])) {
+    border-radius: 0 !important;
+    border: none !important;
+}
+
+:where(media-player[data-view-type='video']) {
+    --media-focus-ring: none !important;
+    border-radius: none !important;
+    background-color: transparent !important;
+}
+
+:where(media-player[data-view-type='video']:not([data-fullscreen])) :where(media-outlet, video, media-poster, div[part='scrim']) {
+    border-radius: 0 !important;
+}
+
+:where(media-outlet) {
+    background-color: transparent !important;
+}
+
+
+/* ============PLAYER SETTINGS============ */
 * {
     margin: 0;
     padding: 0;
@@ -146,6 +182,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .search-button img {
@@ -640,6 +677,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 
@@ -902,9 +940,6 @@ nav {
     height: auto;
     border-radius: 0;
     padding: 8px 19px;
-    /* -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1), transparent 150%);
-    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1), transparent 150%); */
-
 }
 
 .play-video-comments p {
@@ -1287,14 +1322,13 @@ nav {
     /* =============NAVIGATION============ */
     .overlay {
         top: 0;
-        left: 0;
+        left: -100%;
         position: fixed;
         width: 100%;
         height: 100%;
         background-color: #000;
-        opacity: 0;
-        transition: linear .2s opacity;
-        z-index: -1;
+        opacity: 0.75;
+        z-index: 3;
     }
 
     .menu-icon-background-small {
@@ -1316,6 +1350,7 @@ nav {
     }
 
     .scroll-chips-overlay {
+        -webkit-mask-image: none;
         mask-image: none;
     }
 
@@ -1453,3 +1488,12 @@ nav {
 }
 
 /* ============MEDIAQUERY END============ */
+
+
+.plyr--video {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}

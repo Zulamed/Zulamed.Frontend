@@ -90,8 +90,7 @@ function mobileSidebarOpen(e) {
     var overlay = document.querySelector(".overlay");
 
     sidebarMobile.style.left = "0";
-    overlay.style.opacity = "0.75";
-    overlay.style.zIndex = "3";
+    overlay.style.left = "0";
 }
 
 
@@ -100,8 +99,7 @@ function mobileSidebarClose() {
     var overlay = document.querySelector(".overlay");
 
     sidebarMobile.style.left = "-100%"
-    overlay.style.opacity = "0";
-    overlay.style.zIndex = "-1";
+    overlay.style.left = "-100%";
 }
 
 // =====================SIDEBAR IN MOBILE DEVICES=====================
@@ -323,7 +321,7 @@ inputComment.addEventListener('input', function () {
 });
 // =============COMMENT INPUT===============
 
-// =============LIKE/DISLIKE BUTTONS===============
+// =============LIKE/DISLIKE & FOLLOW BUTTONS===============
 
 
 function likeVideo() {
@@ -341,9 +339,30 @@ function dislikeVideo() {
     likeBtn.classList.remove('active');
     dislikeBtn.classList.toggle("active")
 }
+function followToggle() {
+    var followBtn = document.getElementById("follow-btn");
+    var unfollowedText = followBtn.textContent
+
+
+
+    followBtn.classList.toggle("active")
+    if (followBtn.classList.contains('active')) {
+        followBtn.textContent = "FOLLOWED";
+    } else {
+        followBtn.textContent = "FOLLOW";
+    }
+
+}
 
 
 // =============LIKE/DISLIKE BUTTONS===============
+
+
+// =============VOLUME SESSION STORAGE===============
+
+
+
+// =============VOLUME SESSION STORAGE===============
 
 
 

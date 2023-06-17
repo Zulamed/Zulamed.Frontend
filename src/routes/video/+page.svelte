@@ -1,7 +1,42 @@
 <script lang="ts">
-	import { onMount } from 'svelte/internal';
+	import 'vidstack/styles/defaults.css';
+	import 'vidstack/styles/community-skin/video.css';
+	import { onMount, onDestroy } from 'svelte';
 	import { scripts } from './play-video';
-	onMount(scripts);
+	import Hls from 'hls.js';
+	import { defineCustomElements } from 'vidstack/elements';
+	import type { HLSProvider, MediaPlayerElement, MediaProviderChangeEvent } from 'vidstack';
+	import { playerVolume } from '../../stores/video-sound-store';
+
+	let player: MediaPlayerElement;
+
+	let initPlayer = async () => {
+		await defineCustomElements();
+
+		player.addEventListener('provider-change', (event: MediaProviderChangeEvent) => {
+			const provider = event.detail;
+			if (provider?.type === 'hls') {
+				(provider as HLSProvider).library = Hls;
+			}
+		});
+	};
+
+	let loaded = false;
+
+	function playerAttached(e: Event) {
+		player.subscribe(({ volume }) => {
+			if (loaded) {
+				$playerVolume = volume;
+			}
+		});
+		loaded = true;
+	}
+
+	onMount(async () => {
+		scripts();
+		await initPlayer();
+		player.volume = $playerVolume as number;
+	});
 </script>
 
 <!-- ============MAIN============ -->
@@ -13,10 +48,13 @@
 				<!--     controls> -->
 				<!-- </video> -->
 				<media-player
+					bind:this={player}
 					id="video"
 					src="https://d2tldik98s0wn6.cloudfront.net/ba41d730-5c82-40d2-81ef-24aed5270420/master.m3u8"
 					poster="img/videoPreviews/2.png"
 					aspect-ratio="16/9"
+					crossorigin
+					on:attached|once={playerAttached}
 				>
 					<media-outlet />
 					<media-community-skin />

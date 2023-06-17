@@ -244,26 +244,26 @@ export function scripts() {
 
 	let loaded = false;
 
-	player.addEventListener('attached', function (e) {
-		let volumeStorage = sessionStorage.getItem('playerVolume');
-		let tempVolume;
-		if (!volumeStorage) {
-			tempVolume = 0.5;
-		} else {
-			tempVolume = volumeStorage;
-		}
-		player.volume = tempVolume;
-		unsubscribe = player.subscribe(({ volume }) => {
-			if (loaded) {
-				sessionStorage.setItem('playerVolume', volume);
-			}
-		});
-		loaded = true;
-	});
-
-	window.addEventListener('beforeunload', function (e) {
-		unsubscribe();
-	});
+	// player.addEventListener('attached', function (e) {
+	// 	let volumeStorage = sessionStorage.getItem('playerVolume');
+	// 	let tempVolume;
+	// 	if (!volumeStorage) {
+	// 		tempVolume = 0.5;
+	// 	} else {
+	// 		tempVolume = volumeStorage;
+	// 	}
+	// 	player.volume = tempVolume;
+	// 	unsubscribe = player.subscribe(({ volume }) => {
+	// 		if (loaded) {
+	// 			sessionStorage.setItem('playerVolume', volume);
+	// 		}
+	// 	});
+	// 	loaded = true;
+	// });
+	//
+	// window.addEventListener('beforeunload', function (e) {
+	// 	unsubscribe();
+	// });
 
 	// =============VOLUME SESSION STORAGE===============
 }

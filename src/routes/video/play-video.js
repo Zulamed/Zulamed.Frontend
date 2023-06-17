@@ -49,104 +49,7 @@ export function scripts() {
 	}
 
 	// ========CHIPS END==========
-	// =====================SEARCH IN MOBILE DEVICES=====================
-	var isOpen = false;
-	document.getElementById('search-mobile-form').onsubmit = function (e) {
-		if (!isOpen) {
-			e.preventDefault();
-			isOpen = true;
-		}
-	};
 
-	document.getElementById('search-mobile').onclick = function () {
-		var searchbarMobile = document.querySelector('.searchbar-mobile');
-		var navigation = document.getElementById('navigation');
-
-		searchbarMobile.style.top = '74px';
-		navigation.style.boxShadow = '0px 4px 4px #00000040';
-
-		document.getElementById('search-mobile').setAttribute('type', 'submit');
-	};
-
-	function mobileSearchbarClose() {
-		var searchbarMobile = document.querySelector('.searchbar-mobile');
-		var navigation = document.getElementById('navigation');
-
-		searchbarMobile.style.top = '0';
-		navigation.style.boxShadow = '0px 0px 0px #00000040';
-
-		document.getElementById('search-mobile').setAttribute('type', 'button');
-		isOpen = false;
-	}
-	// =====================SEARCH IN MOBILE DEVICES=====================
-	// =====================SIDEBAR IN MOBILE DEVICES=====================
-
-	function mobileSidebarOpen(e) {
-		var menuIconMobile = document.querySelector('.menu-icon-background-small');
-		var sidebarMobile = document.querySelector('.sidebar-mobile');
-		var overlay = document.querySelector('.overlay');
-
-		sidebarMobile.style.left = '0';
-		overlay.style.left = '0';
-	}
-
-	function mobileSidebarClose() {
-		var sidebarMobile = document.querySelector('.sidebar-mobile');
-		var overlay = document.querySelector('.overlay');
-
-		sidebarMobile.style.left = '-100%';
-		overlay.style.left = '-100%';
-	}
-
-	// =====================SIDEBAR IN MOBILE DEVICES=====================
-
-	function sidebarOpen() {
-		sidebar = document.querySelector('.sidebar');
-
-		sidebar.classList.toggle('open');
-	}
-
-	// ===========Profile Container===========
-	function toggleProfileContainer() {
-		var container = document.getElementById('profile-container');
-		var display = window.getComputedStyle(container).getPropertyValue('display');
-		if (display == 'none') {
-			container.style.display = 'block';
-		} else {
-			container.style.display = 'none';
-		}
-	}
-	function profileContainerClose() {
-		var container = document.getElementById('profile-container');
-		container.style.display = 'none';
-	}
-	// ===========Profile Container===========
-
-	// ===========Language Container===========
-
-	function toggleLanguageContainer() {
-		var langContainer = document.getElementById('language-container');
-		var display = window.getComputedStyle(langContainer).getPropertyValue('display');
-		if (display == 'none') {
-			langContainer.style.display = 'block';
-		} else {
-			langContainer.style.display = 'none';
-		}
-	}
-	function languageContainerClose() {
-		var langContainer = document.getElementById('language-container');
-
-		langContainer.style.display = 'none';
-	}
-
-	document.querySelector('.container').addEventListener('touchmove', function () {
-		var profileContainer = document.getElementById('profile-container');
-		var langContainer = document.getElementById('language-container');
-
-		langContainer.style.display = 'none';
-		profileContainer.style.display = 'none';
-	});
-	// ===========Language Container===========
 
 	// ========DESCRIPTION==========
 
@@ -166,6 +69,7 @@ export function scripts() {
 			descriptionText.textContent = trimmedText;
 		}
 	}
+	document.querySelector('.play-video-description')?.addEventListener('click', toggleDescription)
 
 	// ========DESCRIPTION==========
 	// ========COMMENTS==========
@@ -276,11 +180,13 @@ export function scripts() {
 		var btns = document.querySelector('.write-comment-buttons');
 		btns.style.display = 'flex';
 	}
+	document.querySelector('.comment-input')?.addEventListener('click', showBtns)
 
 	function hideBtns() {
 		var btns = document.querySelector('.write-comment-buttons');
 		btns.style.display = 'none';
 	}
+	document.querySelector('.cancel-btn')?.addEventListener('click', hideBtns)
 
 	var inputComment = document.querySelector('.comment-input');
 	var commentButton = document.querySelector('.comment');
@@ -305,18 +211,18 @@ export function scripts() {
 	function likeVideo() {
 		var dislikeBtn = document.getElementById('dislike-btn');
 		var likeBtn = document.getElementById('like-btn');
-
 		dislikeBtn.classList.remove('active');
 		likeBtn.classList.toggle('active');
 	}
+	document.querySelector('#like-btn')?.addEventListener('click', likeVideo)
 
 	function dislikeVideo() {
 		var dislikeBtn = document.getElementById('dislike-btn');
 		var likeBtn = document.getElementById('like-btn');
-
 		likeBtn.classList.remove('active');
 		dislikeBtn.classList.toggle('active');
 	}
+	document.querySelector('#dislike-btn')?.addEventListener('click', dislikeVideo)
 	function followToggle() {
 		var followBtn = document.getElementById('follow-btn');
 		var unfollowedText = followBtn.textContent;
@@ -328,6 +234,7 @@ export function scripts() {
 			followBtn.textContent = 'FOLLOW';
 		}
 	}
+	document.querySelector('#follow-btn')?.addEventListener('click', followToggle)
 
 	// =============LIKE/DISLIKE BUTTONS===============
 

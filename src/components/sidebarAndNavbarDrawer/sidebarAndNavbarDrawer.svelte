@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { scripts } from './script.js';
-	import './SidebarAndNavbar.css';
+	import { scripts } from './play-videoDrawer';
+	import './play-videoDrawer.css';
 	onMount(scripts);
 </script>
 
+<!-- ============NAVIGATION============ -->
 <div class="overlay" />
 <form action="" class="flex-div" id="search-mobile-form">
 	<div class="searchbar-mobile flex-div">
@@ -19,7 +20,19 @@
 		<div class="menu-icon-background flex-div">
 			<img class="menu-icon" src="./img/icons/menu.svg" alt="" />
 		</div>
-		<img class="logo" src="./img/logo-white-theme.png" alt="" />
+		<a class="flex-div" href="index.html"
+			><img class="logo" src="./img/logo-white-theme.png" alt="" /></a
+		>
+	</div>
+	<div class="nav-center flex-div">
+		<form class="searchbar flex-div" action="">
+			<div class="searchbox">
+				<input type="text" placeholder="Search..." />
+			</div>
+			<button class="search-button" type="submit"
+				><img src="./img/icons/search_white_24dp.svg" alt="" /></button
+			>
+		</form>
 	</div>
 	<div class="nav-right flex-div">
 		<div class="flex-div lang-icon">
@@ -37,7 +50,7 @@
 		</button>
 
 		<div class="language-container" id="language-container">
-			<div style="padding-left: 8px; height: 40px" class="flex-div">
+			<div style="padding-left: 8px; height: 40px;" class="flex-div">
 				<h5>Choose your language</h5>
 				&nbsp;&nbsp;&nbsp;
 				<img id="lang-close-icon" width="18px" src="./img/icons/close_black_24dp.svg" alt="" />
@@ -70,73 +83,76 @@
 
 			<!-- Другие элементы контейнера -->
 			<a class="profile-link" href="."
-				><img src="./img/profileContainerIcons/account_box_black_24dp.svg" alt="" />
+				><img src="./img//profileContainerIcons/account_box_black_24dp.svg" alt="" />
 				<p>Your channel</p>
 			</a>
 			<a class="profile-link" href="."
-				><img src="./img/profileContainerIcons/groups_black_24dp.svg" alt="" />
+				><img src="./img//profileContainerIcons/groups_black_24dp.svg" alt="" />
 				<p>Switch account</p>
 			</a>
 			<a class="profile-link" href="."
-				><img src="./img/profileContainerIcons/wallet_black_24dp.svg" alt="" />
+				><img src="./img//profileContainerIcons/wallet_black_24dp.svg" alt="" />
 				<p>Purchases and membership</p>
 			</a>
 			<a class="profile-link" href="."
-				><img src="./img/profileContainerIcons/translate_black_24dp.svg" alt="" />
+				><img src="./img//profileContainerIcons/translate_black_24dp.svg" alt="" />
 				<p>Language: English</p>
 			</a>
 			<a class="profile-link" href="."
-				><img src="./img/profileContainerIcons/settings_black_24dp.svg" alt="" />
+				><img src="./img//profileContainerIcons/settings_black_24dp.svg" alt="" />
 				<p>Settings</p>
 			</a>
 			<a class="profile-link" href="."
-				><img src="./img/profileContainerIcons/logout_black_24dp.svg" alt="" />
+				><img src="./img//profileContainerIcons/logout_black_24dp.svg" alt="" />
 				<p>Sign out</p>
 			</a>
 		</div>
 	</div>
 </nav>
-<!-- ------------sidebar------------ -->
+
+<!-- ============NAVIGATION END============ -->
+<!-- ============SIDEBAR============ -->
+
 <div class="sidebar">
 	<div class="shortcut-links">
 		<a id="shortcut-link" class="active-shortcut" href="."
-			><img src="./img/icons/Home_fill.svg" alt="" />
+			><img src="./img//icons/Home_fill.svg" alt="" />
 			<p>Home</p>
 		</a>
 		<a id="shortcut-link" href="."
-			><img src="./img/icons/Video_fill.svg" alt="" />
+			><img src="./img//icons/Video_fill.svg" alt="" />
 			<p>Subsciptions</p>
 		</a>
 
 		<hr />
 		<a id="shortcut-link" href="."
-			><img src="./img/icons/history_white_24dp.svg" alt="" />
+			><img src="./img//icons/history_white_24dp.svg" alt="" />
 			<p>History</p>
 		</a>
 		<a id="shortcut-link" href="."
-			><img src="./img/icons/play_arrow_white_48dp(2).svg" alt="" />
+			><img src="./img//icons/play_arrow_white_48dp(2).svg" alt="" />
 			<p>Your videos</p>
 		</a>
 		<a id="shortcut-link" href="."
-			><img src="./img/icons/liked.svg" alt="" />
+			><img src="./img//icons/liked.svg" alt="" />
 			<p>Liked videos</p>
 		</a>
 		<hr />
 		<p class="sidebar-title">SUBSCRIPTIONS</p>
 		<a href="."
-			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
+			><img class="subsciption-logo" src="./img//icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
 		<a href="."
-			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
+			><img class="subsciption-logo" src="./img//icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
 		<a href="."
-			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
+			><img class="subsciption-logo" src="./img//icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
 		<a href="."
-			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
+			><img class="subsciption-logo" src="./img//icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
 
@@ -146,19 +162,19 @@
 
 		<hr />
 		<a id="shortcut-link" href="."
-			><img src="./img/icons/settings_white_24dp.svg" alt="" />
+			><img src="./img//icons/settings_white_24dp.svg" alt="" />
 			<p>Settings</p>
 		</a>
 		<a id="shortcut-link" href="."
-			><img src="./img/icons/flag_white_24dp.svg" alt="" />
+			><img src="./img//icons/flag_white_24dp.svg" alt="" />
 			<p>Report History</p>
 		</a>
 		<a id="shortcut-link" href="."
-			><img src="./img/icons/help_outline_white_24dp.svg" alt="" />
+			><img src="./img//icons/help_outline_white_24dp.svg" alt="" />
 			<p>Help</p>
 		</a>
 		<a id="shortcut-link" href="."
-			><img src="./img/icons/info_white_24dp.svg" alt="" />
+			><img src="./img//icons/info_white_24dp.svg" alt="" />
 			<p>Send Feedback</p>
 		</a>
 	</div>
@@ -178,53 +194,54 @@
 			<img src="./img/icons/comment_fill.svg" alt="" />
 		</a>
 		<a class="about-link" href=".">
-			About &nbsp;<span style="font-weight: 700">ZULA</span>MED
+			About &nbsp;<span style="font-weight: 700;">ZULA</span>MED
 		</a>
 	</div>
 </div>
-<!-- ------------sidebar------------ -->
+
+<!-- ============SIDEBAR END============ -->
 <!-- ------------sidebar-small------------ -->
 
 <div class="sidebar-mobile">
 	<div class="shortcut-links">
 		<a id="shortcut-link" class="active-shortcut" href="."
-			><img src="./img/icons/Home_fill.svg" alt="" />
+			><img src="./img//icons/Home_fill.svg" alt="" />
 			<p>Home</p>
 		</a>
 		<a id="shortcut-link" href="."
-			><img src="./img/icons/Video_fill.svg" alt="" />
+			><img src="./img//icons/Video_fill.svg" alt="" />
 			<p>Subsciptions</p>
 		</a>
 
 		<hr />
 		<a id="shortcut-link" href="."
-			><img src="./img/icons/history_white_24dp.svg" alt="" />
+			><img src="./img//icons/history_white_24dp.svg" alt="" />
 			<p>History</p>
 		</a>
 		<a id="shortcut-link" href="."
-			><img src="./img/icons/play_arrow_white_48dp(2).svg" alt="" />
+			><img src="./img//icons/play_arrow_white_48dp(2).svg" alt="" />
 			<p>Your videos</p>
 		</a>
 		<a id="shortcut-link" href="."
-			><img src="./img/icons/liked.svg" alt="" />
+			><img src="./img//icons/liked.svg" alt="" />
 			<p>Liked videos</p>
 		</a>
 		<hr />
 		<p class="sidebar-title">SUBSCRIPTIONS</p>
 		<a href="."
-			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
+			><img class="subsciption-logo" src="./img//icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
 		<a href="."
-			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
+			><img class="subsciption-logo" src="./img//icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
 		<a href="."
-			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
+			><img class="subsciption-logo" src="./img//icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
 		<a href="."
-			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
+			><img class="subsciption-logo" src="./img//icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
 
@@ -234,19 +251,19 @@
 
 		<hr />
 		<a id="shortcut-link" href="."
-			><img src="./img/icons/settings_white_24dp.svg" alt="" />
+			><img src="./img//icons/settings_white_24dp.svg" alt="" />
 			<p>Settings</p>
 		</a>
 		<a id="shortcut-link" href="."
-			><img src="./img/icons/flag_white_24dp.svg" alt="" />
+			><img src="./img//icons/flag_white_24dp.svg" alt="" />
 			<p>Report History</p>
 		</a>
 		<a id="shortcut-link" href="."
-			><img src="./img/icons/help_outline_white_24dp.svg" alt="" />
+			><img src="./img//icons/help_outline_white_24dp.svg" alt="" />
 			<p>Help</p>
 		</a>
 		<a id="shortcut-link" href="."
-			><img src="./img/icons/info_white_24dp.svg" alt="" />
+			><img src="./img//icons/info_white_24dp.svg" alt="" />
 			<p>Send Feedback</p>
 		</a>
 	</div>
@@ -263,7 +280,9 @@
 		<a class="about-link" href="."> Twitter </a>
 		<a class="about-link" href="."> Connect </a>
 		<a class="about-link" href=".">
-			About &nbsp;<span style="font-weight: 700">ZULA</span>MED
+			About &nbsp;<span style="font-weight: 700;">ZULA</span>MED
 		</a>
 	</div>
 </div>
+
+<!-- ------------sidebar-small------------ -->

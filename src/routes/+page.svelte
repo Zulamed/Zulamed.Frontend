@@ -3,7 +3,7 @@
 	import SidebarAndNavbar from '../components/sidebarAndNavbar/sidebarAndNavbar.svelte';
 </script>
 
-<SidebarAndNavbar/>
+<SidebarAndNavbar />
 <!-- ------------main--------------- -->
 <div class="container">
 	<div class="banner">

@@ -6,6 +6,13 @@ export function scripts() {
 	menuIcon.onclick = function () {
 		sidebar.classList.toggle('small-sidebar');
 		container.classList.toggle('large-container');
+
+		if (sidebar?.classList.contains('small-sidebar')) {
+			document.querySelector('.shortcut-links').style.display = "flex";
+		} else {
+			document.querySelector('.shortcut-links').style.display = "block";
+
+		}
 	};
 
 	// =====================SEARCH IN MOBILE DEVICES=====================
@@ -107,4 +114,7 @@ export function scripts() {
 	});
 
 	// ==================
+
+
+
 }

@@ -254,8 +254,12 @@ nav {
 }
 
 .small-sidebar {
-    width: 7%;
-    padding-left: 2%;
+    width: 4%;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 0;
 }
 
 .small-sidebar a p {
@@ -291,12 +295,18 @@ nav {
     margin-right: 29px;
 }
 
+.shortcut-links {
+    display: block;
+    flex-direction: column;
+    align-items: center;
+}
+
 .shortcut-links a {
     display: flex;
     align-items: center;
     width: 88%;
     flex-wrap: wrap;
-    padding: 12px 15px 11px 7px;
+    padding: 12px 0 11px 0;
     border-radius: 11px;
 }
 
@@ -333,15 +343,16 @@ nav {
 }
 
 .small-sidebar hr {
-    width: 50%;
+    width: 100%;
 }
 
 .small-sidebar .shortcut-links a {
-    width: auto;
+    width: fit-content;
 }
 
 .small-sidebar .subsciption-logo {
     width: 30px !important;
+    margin-right: 0 !important;
 }
 
 .show-more {
@@ -450,15 +461,6 @@ nav {
     margin-right: 29px;
 }
 
-.shortcut-links a {
-    display: flex;
-    align-items: center;
-    width: 88%;
-    flex-wrap: wrap;
-    padding: 12px 15px 11px 7px;
-    border-radius: 11px;
-}
-
 .shortcut-links a:hover {
     background-color: #d9d9d95b;
 }
@@ -491,13 +493,6 @@ nav {
     margin-top: 24px;
 }
 
-.small-sidebar hr {
-    width: 50%;
-}
-
-.small-sidebar .shortcut-links a {
-    width: auto;
-}
 
 .small-sidebar .subsciption-logo {
     width: 30px !important;
@@ -564,8 +559,8 @@ nav {
     }
 
     .small-sidebar {
-        width: 10%;
-        padding-left: 2%;
+        width: 6%;
+        padding-left: 0;
     }
 
 }
@@ -578,8 +573,8 @@ nav {
     }
 
     .small-sidebar {
-        width: 10%;
-        padding-left: 2%;
+        width: 8%;
+        padding-left: 0;
     }
 
     .about-container p {

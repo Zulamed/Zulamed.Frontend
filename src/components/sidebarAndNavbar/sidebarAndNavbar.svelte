@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { scripts } from './script.js';
-	import './SidebarAndNavbar.css';
 	onMount(scripts);
 </script>
 

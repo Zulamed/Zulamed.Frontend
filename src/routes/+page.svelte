@@ -1,9 +1,7 @@
 <script lang="ts">
-	import './style.css';
-	import SidebarAndNavbar from '../components/sidebarAndNavbar/sidebarAndNavbar.svelte';
+	// import './style.css';
 </script>
 
-<SidebarAndNavbar />
 <!-- ------------main--------------- -->
 <div class="container">
 	<div class="banner">

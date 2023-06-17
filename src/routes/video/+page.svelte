@@ -1,13 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte/internal';
 	import { scripts } from './play-video';
-	import './play-video.css';
-	import SidebarAndNavbarDrawer from '../../components/sidebarAndNavbarDrawer/sidebarAndNavbarDrawer.svelte';
 	onMount(scripts);
 </script>
 
 <!-- ============MAIN============ -->
-<SidebarAndNavbarDrawer />
 <div class="container">
 	<div id="row" class="row">
 		<div id="play-video" class="play-video">

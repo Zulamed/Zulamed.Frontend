@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { scripts } from './play-videoDrawer';
-	import './play-videoDrawer.css';
 	onMount(scripts);
 </script>
 

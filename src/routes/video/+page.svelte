@@ -1,41 +1,9 @@
 <script lang="ts">
-	import 'vidstack/styles/defaults.css';
-	import 'vidstack/styles/community-skin/video.css';
-	import { onMount, onDestroy } from 'svelte';
-	import { scripts } from './play-video';
-	import Hls from 'hls.js';
-	import { defineCustomElements } from 'vidstack/elements';
-	import type { HLSProvider, MediaPlayerElement, MediaProviderChangeEvent } from 'vidstack';
-	import { playerVolume } from '../../stores/video-sound-store';
-
-	let player: MediaPlayerElement;
-
-	let initPlayer = async () => {
-		await defineCustomElements();
-
-		player.addEventListener('provider-change', (event: MediaProviderChangeEvent) => {
-			const provider = event.detail;
-			if (provider?.type === 'hls') {
-				(provider as HLSProvider).library = Hls;
-			}
-		});
-	};
-
-	let loaded = false;
-
-	function playerAttached(e: Event) {
-		player.subscribe(({ volume }) => {
-			if (loaded) {
-				$playerVolume = volume;
-			}
-		});
-		loaded = true;
-	}
-
+	import { onMount } from "svelte";
+	import { scripts } from "./play-video";
+	import VideoPlayer from "../../components/videoPlayer/videoPlayer.svelte";
 	onMount(async () => {
 		scripts();
-		await initPlayer();
-		player.volume = $playerVolume as number;
 	});
 </script>
 
@@ -44,22 +12,7 @@
 	<div id="row" class="row">
 		<div id="play-video" class="play-video">
 			<div class="video-container">
-				<!-- <video poster="./img/videoPreviews/2.png" id="my-video" -->
-				<!--     controls> -->
-				<!-- </video> -->
-				<media-player
-					bind:this={player}
-					id="video"
-					src="https://d2tldik98s0wn6.cloudfront.net/ba41d730-5c82-40d2-81ef-24aed5270420/master.m3u8"
-					poster="img/videoPreviews/2.png"
-					aspect-ratio="16/9"
-					crossorigin
-					on:attached|once={playerAttached}
-				>
-					<media-outlet />
-					<media-community-skin />
-					<media-poster alt="Preview." />
-				</media-player>
+                <VideoPlayer/>
 			</div>
 
 			<h3>What does an Operating Department Practitioner do?</h3>

@@ -60,6 +60,7 @@
 	poster="img/videoPreviews/2.png"
 	aspect-ratio="16/9"
 	crossorigin
+	user-idle-delay="1000"
 	on:attached|once={playerAttached}
 >
 	<media-outlet />

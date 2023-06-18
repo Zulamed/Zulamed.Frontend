@@ -12,7 +12,7 @@
 	<div id="row" class="row">
 		<div id="play-video" class="play-video">
 			<div class="video-container">
-                <VideoPlayer/>
+        <VideoPlayer/>
 			</div>
 
 			<h3>What does an Operating Department Practitioner do?</h3>
@@ -163,9 +163,7 @@
 			</div>
 
 			<div class="side-video-list">
-				<a href="." class="small-thumbnail"
-					><img src="./img/videoPreviews/video-skeleton.png" alt="" /></a
-				>
+				<a href="." class="small-thumbnail"><img src="./img/videoPreviews/1.png" alt="" /></a>
 				<div class="vid-info">
 					<a href=".">What happens during surgery?</a>
 					<p>Lorem Ipsum</p>
@@ -173,9 +171,7 @@
 				</div>
 			</div>
 			<div class="side-video-list">
-				<a href="." class="small-thumbnail"
-					><img src="./img/videoPreviews/video-skeleton.png" alt="" /></a
-				>
+				<a href="." class="small-thumbnail"><img src="./img/videoPreviews/2.png" alt="" /></a>
 				<div class="vid-info">
 					<a href=".">What happens during surgery?</a>
 					<p>Lorem Ipsum</p>
@@ -183,9 +179,7 @@
 				</div>
 			</div>
 			<div class="side-video-list">
-				<a href="." class="small-thumbnail"
-					><img src="./img/videoPreviews/video-skeleton.png" alt="" /></a
-				>
+				<a href="." class="small-thumbnail"><img src="./img/videoPreviews/3.png" alt="" /></a>
 				<div class="vid-info">
 					<a href=".">What happens during surgery?</a>
 					<p>Lorem Ipsum</p>
@@ -193,9 +187,7 @@
 				</div>
 			</div>
 			<div class="side-video-list">
-				<a href="." class="small-thumbnail"
-					><img src="./img/videoPreviews/video-skeleton.png" alt="" /></a
-				>
+				<a href="." class="small-thumbnail"><img src="./img/videoPreviews/4.png" alt="" /></a>
 				<div class="vid-info">
 					<a href=".">What happens during surgery?</a>
 					<p>Lorem Ipsum</p>
@@ -203,9 +195,7 @@
 				</div>
 			</div>
 			<div class="side-video-list">
-				<a href="." class="small-thumbnail"
-					><img src="./img/videoPreviews/video-skeleton.png" alt="" /></a
-				>
+				<a href="." class="small-thumbnail"><img src="./img/videoPreviews/5.png" alt="" /></a>
 				<div class="vid-info">
 					<a href=".">What happens during surgery?</a>
 					<p>Lorem Ipsum</p>
@@ -214,9 +204,7 @@
 			</div>
 
 			<div class="side-video-list">
-				<a href="." class="small-thumbnail"
-					><img src="./img/videoPreviews/video-skeleton.png" alt="" /></a
-				>
+				<a href="." class="small-thumbnail"><img src="./img/videoPreviews/6.png" alt="" /></a>
 				<div class="vid-info">
 					<a href=".">What happens during surgery?</a>
 					<p>Lorem Ipsum</p>
@@ -225,9 +213,7 @@
 			</div>
 
 			<div class="side-video-list">
-				<a href="." class="small-thumbnail"
-					><img src="./img/videoPreviews/video-skeleton.png" alt="" /></a
-				>
+				<a href="." class="small-thumbnail"><img src="./img/videoPreviews/1.png" alt="" /></a>
 				<div class="vid-info">
 					<a href=".">What happens during surgery?</a>
 					<p>Lorem Ipsum</p>
@@ -236,9 +222,7 @@
 			</div>
 
 			<div class="side-video-list">
-				<a href="." class="small-thumbnail"
-					><img src="./img/videoPreviews/video-skeleton.png" alt="" /></a
-				>
+				<a href="." class="small-thumbnail"><img src="./img/videoPreviews/2.png" alt="" /></a>
 				<div class="vid-info">
 					<a href=".">What happens during surgery?</a>
 					<p>Lorem Ipsum</p>
@@ -247,9 +231,7 @@
 			</div>
 
 			<div class="side-video-list">
-				<a href="." class="small-thumbnail"
-					><img src="./img/videoPreviews/video-skeleton.png" alt="" /></a
-				>
+				<a href="." class="small-thumbnail"><img src="./img/videoPreviews/3.png" alt="" /></a>
 				<div class="vid-info">
 					<a href=".">What happens during surgery?</a>
 					<p>Lorem Ipsum</p>
@@ -258,9 +240,7 @@
 			</div>
 
 			<div class="side-video-list">
-				<a href="." class="small-thumbnail"
-					><img src="./img/videoPreviews/video-skeleton.png" alt="" /></a
-				>
+				<a href="." class="small-thumbnail"><img src="./img/videoPreviews/4.png" alt="" /></a>
 				<div class="vid-info">
 					<a href=".">What happens during surgery?</a>
 					<p>Lorem Ipsum</p>
@@ -269,9 +249,7 @@
 			</div>
 
 			<div class="side-video-list">
-				<a href="." class="small-thumbnail"
-					><img src="./img/videoPreviews/video-skeleton.png" alt="" /></a
-				>
+				<a href="." class="small-thumbnail"><img src="./img/videoPreviews/5.png" alt="" /></a>
 				<div class="vid-info">
 					<a href=".">What happens during surgery?</a>
 					<p>Lorem Ipsum</p>

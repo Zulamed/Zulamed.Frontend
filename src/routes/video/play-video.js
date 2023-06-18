@@ -1,3 +1,4 @@
+//@ts-nocheck
 // ========CHIPS==========
 import $ from 'jquery';
 
@@ -14,7 +15,7 @@ export function scripts() {
 		chipsScrollMin();
 	};
 	document.getElementById('chips-next').onclick = () => {
-		document.getElementById('chips__choise').style.transform = 'translateX(-290px)';
+		document.getElementById('chips__choise').style.transform = 'translateX(-368px)';
 		chipsScrollMax();
 	};
 
@@ -22,7 +23,7 @@ export function scripts() {
 		var chipsChoise = document.getElementById('chips__choise');
 		var chipsPrev = document.getElementById('chips-prev');
 		var chipsNext = document.getElementById('chips-next');
-		if ((chipsChoise.style.transform = 'translateX(0px)')) {
+		if ((chipsChoise.style.transform == 'translateX(0px)')) {
 			chipsNext.style.display = 'flex';
 			chipsPrev.style.display = 'none';
 			$('#scroll-chips-overlay').css(
@@ -37,7 +38,7 @@ export function scripts() {
 		var chipsPrev = document.getElementById('chips-prev');
 		var chipsNext = document.getElementById('chips-next');
 
-		if ((chipsChoise.style.transform = 'translateX(-290px)')) {
+		if ((chipsChoise.style.transform == 'translateX(-368px)')) {
 			chipsNext.style.display = 'none';
 			chipsPrev.style.display = 'flex';
 			$('#scroll-chips-overlay').css(

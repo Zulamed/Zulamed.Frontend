@@ -1,7 +1,9 @@
+//@ts-nocheck 
 export function scripts() {
 	var menuIcon = document.querySelector('.menu-icon-background');
 	var sidebar = document.querySelector('.sidebar');
 	var container = document.querySelector('.container');
+	var shortcutLink = document.querySelectorAll(".shortcut-link");
 
 	menuIcon.onclick = function () {
 		sidebar.classList.toggle('small-sidebar');
@@ -9,9 +11,14 @@ export function scripts() {
 
 		if (sidebar?.classList.contains('small-sidebar')) {
 			document.querySelector('.shortcut-links').style.display = "flex";
+			for (let i = 0; i < shortcutLink.length; i++) {
+				shortcutLink[i].style.padding = "12px 0 11px 0";
+			}
 		} else {
 			document.querySelector('.shortcut-links').style.display = "block";
-
+			for (let i = 0; i < shortcutLink.length; i++) {
+				shortcutLink[i].style.padding = "12px 0 11px 7px";
+			}
 		}
 	};
 

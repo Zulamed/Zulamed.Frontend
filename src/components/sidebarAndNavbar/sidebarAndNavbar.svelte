@@ -59,10 +59,10 @@
 		<img class="user-icon" src="./img/icons/User_circle.png" alt="" />
 		<div class="profile-container" id="profile-container">
 			<div class="popup-profile flex-div">
-				<a href="."><img src="./img/icons/user.png" alt="" /></a>
+				<a class="shortcut-link" href="."><img src="./img/icons/user.png" alt="" /></a>
 				<div>
 					<a href=".">Username</a>
-					<p class="email">@username</p>
+					<p>@username</p>
 					<a href="." class="account-manage">Manage your Account</a>
 				</div>
 			</div>
@@ -98,43 +98,43 @@
 <!-- ------------sidebar------------ -->
 <div class="sidebar">
 	<div class="shortcut-links">
-		<a id="shortcut-link" class="active-shortcut" href="."
+		<a class="shortcut-link active-shortcut" href="."
 			><img src="./img/icons/Home_fill.svg" alt="" />
 			<p>Home</p>
 		</a>
-		<a id="shortcut-link" href="."
+		<a class="shortcut-link" href="."
 			><img src="./img/icons/Video_fill.svg" alt="" />
 			<p>Subsciptions</p>
 		</a>
 
 		<hr />
-		<a id="shortcut-link" href="."
+		<a class="shortcut-link" href="."
 			><img src="./img/icons/history_white_24dp.svg" alt="" />
 			<p>History</p>
 		</a>
-		<a id="shortcut-link" href="."
+		<a class="shortcut-link" href="."
 			><img src="./img/icons/play_arrow_white_48dp(2).svg" alt="" />
 			<p>Your videos</p>
 		</a>
-		<a id="shortcut-link" href="."
+		<a class="shortcut-link" href="."
 			><img src="./img/icons/liked.svg" alt="" />
 			<p>Liked videos</p>
 		</a>
 		<hr />
 		<p class="sidebar-title">SUBSCRIPTIONS</p>
-		<a href="."
+		<a class="shortcut-link" href="."
 			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
-		<a href="."
+		<a class="shortcut-link" href="."
 			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
-		<a href="."
+		<a class="shortcut-link" href="."
 			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
-		<a href="."
+		<a class="shortcut-link" href="."
 			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
@@ -144,19 +144,19 @@
 		</div>
 
 		<hr />
-		<a id="shortcut-link" href="."
+		<a class="shortcut-link" href="."
 			><img src="./img/icons/settings_white_24dp.svg" alt="" />
 			<p>Settings</p>
 		</a>
-		<a id="shortcut-link" href="."
+		<a class="shortcut-link" href="."
 			><img src="./img/icons/flag_white_24dp.svg" alt="" />
 			<p>Report History</p>
 		</a>
-		<a id="shortcut-link" href="."
+		<a class="shortcut-link" href="."
 			><img src="./img/icons/help_outline_white_24dp.svg" alt="" />
 			<p>Help</p>
 		</a>
-		<a id="shortcut-link" href="."
+		<a class="shortcut-link" href="."
 			><img src="./img/icons/info_white_24dp.svg" alt="" />
 			<p>Send Feedback</p>
 		</a>
@@ -186,43 +186,43 @@
 
 <div class="sidebar-mobile">
 	<div class="shortcut-links">
-		<a id="shortcut-link" class="active-shortcut" href="."
+		<a class="shortcut-link active-shortcut" href="."
 			><img src="./img/icons/Home_fill.svg" alt="" />
 			<p>Home</p>
 		</a>
-		<a id="shortcut-link" href="."
+		<a class="shortcut-link" href="."
 			><img src="./img/icons/Video_fill.svg" alt="" />
 			<p>Subsciptions</p>
 		</a>
 
 		<hr />
-		<a id="shortcut-link" href="."
+		<a class="shortcut-link" href="."
 			><img src="./img/icons/history_white_24dp.svg" alt="" />
 			<p>History</p>
 		</a>
-		<a id="shortcut-link" href="."
+		<a class="shortcut-link" href="."
 			><img src="./img/icons/play_arrow_white_48dp(2).svg" alt="" />
 			<p>Your videos</p>
 		</a>
-		<a id="shortcut-link" href="."
+		<a class="shortcut-link" href="."
 			><img src="./img/icons/liked.svg" alt="" />
 			<p>Liked videos</p>
 		</a>
 		<hr />
 		<p class="sidebar-title">SUBSCRIPTIONS</p>
-		<a href="."
+		<a class="shortcut-link" href="."
 			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
-		<a href="."
+		<a class="shortcut-link" href="."
 			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
-		<a href="."
+		<a class="shortcut-link" href="."
 			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
-		<a href="."
+		<a class="shortcut-link" href="."
 			><img class="subsciption-logo" src="./img/icons/user.png" alt="" />
 			<p>Lorem Ipsum</p>
 		</a>
@@ -232,19 +232,19 @@
 		</div>
 
 		<hr />
-		<a id="shortcut-link" href="."
+		<a class="shortcut-link" href="."
 			><img src="./img/icons/settings_white_24dp.svg" alt="" />
 			<p>Settings</p>
 		</a>
-		<a id="shortcut-link" href="."
+		<a class="shortcut-link" href="."
 			><img src="./img/icons/flag_white_24dp.svg" alt="" />
 			<p>Report History</p>
 		</a>
-		<a id="shortcut-link" href="."
+		<a class="shortcut-link" href="."
 			><img src="./img/icons/help_outline_white_24dp.svg" alt="" />
 			<p>Help</p>
 		</a>
-		<a id="shortcut-link" href="."
+		<a class="shortcut-link" href="."
 			><img src="./img/icons/info_white_24dp.svg" alt="" />
 			<p>Send Feedback</p>
 		</a>

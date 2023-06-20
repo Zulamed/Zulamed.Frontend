@@ -1,6 +1,6 @@
 <script lang="ts">
-	// import 'vidstack/styles/defaults.css';
-	// import 'vidstack/styles/community-skin/video.css';
+	import defaultCss from 'vidstack/styles/defaults.css?url';
+	import communityPlayerCss from 'vidstack/styles/community-skin/video.css?url';
 	import { onMount, onDestroy } from 'svelte';
 	import Hls from 'hls.js';
 	import { defineCustomElements } from 'vidstack/elements';
@@ -22,7 +22,7 @@
 
 	let loaded = false;
 
-    let destroy : Function | undefined;
+	let destroy: Function | undefined;
 
 	function playerAttached(e: Event) {
 		destroy = player.subscribe(({ volume }) => {
@@ -40,17 +40,13 @@
 
 	onDestroy(async () => {
 		player?.destroy();
-        destroy?.()
+		destroy?.();
 	});
 </script>
 
-<!-- this is temporary -->
 <svelte:head>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vidstack/styles/defaults.min.css" />
-	<link
-		rel="stylesheet"
-		href="https://cdn.jsdelivr.net/npm/vidstack/styles/community-skin/video.min.css"
-	/>
+	<link rel="stylesheet" href={defaultCss} />
+	<link rel="stylesheet" href={communityPlayerCss} />
 </svelte:head>
 
 <media-player

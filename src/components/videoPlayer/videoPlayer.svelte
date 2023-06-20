@@ -22,7 +22,7 @@
 
 	let loaded = false;
 
-	let destroy: Function | undefined;
+	let destroy: () => void | undefined;
 
 	function playerAttached(e: Event) {
 		destroy = player.subscribe(({ volume }) => {

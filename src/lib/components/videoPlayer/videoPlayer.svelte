@@ -5,7 +5,11 @@
 	import Hls from 'hls.js';
 	import { defineCustomElements } from 'vidstack/elements';
 	import type { HLSProvider, MediaPlayerElement, MediaProviderChangeEvent } from 'vidstack';
-	import { playerVolume } from '../../stores/video-sound-store';
+	import { playerVolume } from '$lib/stores/video-sound-store';
+
+	export let src: string;
+	export let poster: string = 'img/videoPreviews/2.png';
+
 
 	let player: MediaPlayerElement;
 
@@ -52,8 +56,8 @@
 <media-player
 	bind:this={player}
 	id="video"
-	src="https://d2tldik98s0wn6.cloudfront.net/ba41d730-5c82-40d2-81ef-24aed5270420/master.m3u8"
-	poster="img/videoPreviews/2.png"
+	{src}
+	{poster}
 	aspect-ratio="16/9"
 	crossorigin
 	user-idle-delay="1000"

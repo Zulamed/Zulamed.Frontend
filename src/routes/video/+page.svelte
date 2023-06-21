@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { onMount } from "svelte";
-	import { scripts } from "./play-video";
-	import VideoPlayer from "../../components/videoPlayer/videoPlayer.svelte";
+	import { onMount } from 'svelte';
+	import { scripts } from './play-video';
+    import VideoPlayer from "$lib/components/videoPlayer/videoPlayer.svelte"
 	onMount(async () => {
 		scripts();
 	});
@@ -12,7 +12,9 @@
 	<div id="row" class="row">
 		<div id="play-video" class="play-video">
 			<div class="video-container">
-        <VideoPlayer/>
+				<VideoPlayer
+					src="https://d2tldik98s0wn6.cloudfront.net/ba41d730-5c82-40d2-81ef-24aed5270420/master.m3u8"
+				/>
 			</div>
 
 			<h3>What does an Operating Department Practitioner do?</h3>

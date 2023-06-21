@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { scripts } from './play-video';
-    import VideoPlayer from "$lib/components/videoPlayer/videoPlayer.svelte"
+	import VideoPlayer from '$lib/components/videoPlayer/videoPlayer.svelte';
 	onMount(async () => {
 		scripts();
 	});
@@ -74,9 +74,9 @@
 				<p style="margin-bottom: 69px;">2k comments</p>
 
 				<div class="write-comment">
-					<img src="./img/icons/channel-logo.jpg" alt="" />
+					<img class="user-profile-picture" src="./img/icons/channel-logo.jpg" alt="" />
 					<form class="write-comment-input">
-						<input placeholder="Add comment" type="text" class="comment-input" />
+						<input placeholder="Add comment..." type="text" class="comment-input" />
 						<div class="write-comment-buttons">
 							<button type="button" class="comment-btn cancel-btn">cancel</button>
 							<button type="submit" disabled class="comment-btn comment">comment</button>
@@ -165,7 +165,9 @@
 			</div>
 
 			<div class="side-video-list">
-				<a href="." class="small-thumbnail"><img src="./img/videoPreviews/1.png" alt="" /></a>
+				<a href="." class="small-thumbnail"
+					><img src="./img/videoPreviews/videoPreviewMobile.png" alt="" /></a
+				>
 				<div class="vid-info">
 					<a href=".">What happens during surgery?</a>
 					<p>Lorem Ipsum</p>

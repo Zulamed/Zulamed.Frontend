@@ -212,6 +212,10 @@ img {
     justify-content: end;
 }
 
+.play-video-info-left {
+    align-items: center;
+}
+
 .play-video-info-left,
 .play-video-info-right {
     width: 100%;
@@ -342,6 +346,12 @@ img {
     display: flex;
     align-items: start;
     margin-bottom: 39px;
+}
+
+.user-profile-picture {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
 }
 
 .comment-input,
@@ -533,7 +543,7 @@ img {
     width: 395px;
     display: flex;
     align-items: center;
-    margin-bottom: 22px;
+    margin-bottom: 24px;
     position: relative;
 }
 
@@ -720,7 +730,7 @@ img {
         width: 100%;
         display: flex;
         align-items: center;
-        margin-bottom: 22px;
+        margin-bottom: 24px;
         position: relative;
     }
 
@@ -776,6 +786,36 @@ img {
 }
 
 @media (max-width: 600px) {
+    .side-video-list .small-thumbnail {
+        margin-bottom: 29px;
+    }
+
+    .follow-btn {
+        width: 107px;
+        min-width: 107px;
+    }
+
+    .interaction-btn {
+        height: 34px;
+        font-weight: 500;
+        font-size: 11px;
+        line-height: 13px;
+        color: #FFFFFF;
+    }
+
+    .like-btn {
+        width: 95px;
+    }
+
+    .dislike-btn {
+        width: 45px;
+    }
+
+    .share-btn {
+        width: 107px;
+        margin-left: 21px;
+    }
+
     #showMoreButton {
         width: 100%;
         font-size: 11px;
@@ -811,6 +851,7 @@ img {
         justify-content: start;
     }
 
+
     .comment-container {
         width: 100%;
     }
@@ -830,26 +871,6 @@ img {
         line-height: 16px;
     }
 
-    .interaction-btn {
-        padding: 10px 30px;
-        font-weight: 500;
-        font-size: 11px;
-        line-height: 13px;
-        color: #FFFFFF;
-    }
-
-    .like-btn {
-        padding: 10px 27px 10px 14px !important;
-    }
-
-    .dislike-btn {
-        padding: 10px 17px 10px 7px !important;
-    }
-
-    .share-btn {
-        padding: 10px 25px 10px 21px !important;
-        margin-left: 21px;
-    }
 
     .channel-info div h5 {
         font-weight: 600;
@@ -866,6 +887,7 @@ img {
     .play-video-comments {
         mask-image: none !important;
         -webkit-mask-image: none !important;
+        padding: 0 10px;
     }
 
     .more-comments {
@@ -892,6 +914,7 @@ img {
 
 
 }
+
 
 @media (max-width: 364px) {
 

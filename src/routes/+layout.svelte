@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import SidebarAndNavbar from '../components/sidebarAndNavbar/sidebarAndNavbar.svelte';
-	import SidebarAndNavbarDrawer from '../components/sidebarAndNavbarDrawer/sidebarAndNavbarDrawer.svelte';
+	import SidebarAndNavbar from '$lib/components/sidebarAndNavbar/sidebarAndNavbar.svelte';
+	import SidebarAndNavbarDrawer from '$lib/components/sidebarAndNavbarDrawer/sidebarAndNavbarDrawer.svelte';
 </script>
 
 <svelte:head>

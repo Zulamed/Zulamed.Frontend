@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { scripts } from './play-video';
-	import VideoPlayer from '$lib/components/videoPlayer/videoPlayer.svelte';
+	import VideoPlayer from './components/videoPlayer/videoPlayer.svelte';
 	onMount(async () => {
 		scripts();
 	});

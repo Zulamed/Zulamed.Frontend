@@ -5,7 +5,7 @@
 	import Hls from 'hls.js';
 	import { defineCustomElements } from 'vidstack/elements';
 	import type { HLSProvider, MediaPlayerElement, MediaProviderChangeEvent } from 'vidstack';
-	import { playerVolume } from '$lib/stores/video-sound-store';
+	import { playerVolume } from '../../stores/video-sound-store';
 
 	export let src: string;
 	export let poster = 'img/videoPreviews/2.png';

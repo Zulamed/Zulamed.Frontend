@@ -8,8 +8,7 @@
 	import { playerVolume } from '$lib/stores/video-sound-store';
 
 	export let src: string;
-	export let poster: string = 'img/videoPreviews/2.png';
-
+	export let poster = 'img/videoPreviews/2.png';
 
 	let player: MediaPlayerElement;
 

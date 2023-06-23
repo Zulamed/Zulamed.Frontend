@@ -6,13 +6,13 @@
 
 <svelte:head>
 	{#if $page.url.pathname == '/'}
-		<link rel="stylesheet" href="style.css" />
-		<link rel="stylesheet" href="SidebarAndNavbar.css" />
-	{:else if $page.url.pathname == '/video'}
-		<link rel="stylesheet" href="play-video.css" />
-		<link rel="stylesheet" href="play-videoDrawer.css" />
+		<link rel="stylesheet" href="/style.css" />
+		<link rel="stylesheet" href="/SidebarAndNavbar.css" />
+	{:else if $page.url.pathname.includes('/video')}
+		<link rel="stylesheet" href="/play-video.css" />
+		<link rel="stylesheet" href="/play-videoDrawer.css" />
 	{:else}
-		<link rel="stylesheet" href="play-videoDrawer.css" />
+		<link rel="stylesheet" href="/play-videoDrawer.css" />
 	{/if}
 </svelte:head>
 

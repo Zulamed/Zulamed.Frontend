@@ -2,9 +2,11 @@
 	import { onMount } from 'svelte';
 	import { scripts } from './play-video';
 	import VideoPlayer from './components/videoPlayer/videoPlayer.svelte';
+	import type { PageData } from './$types';
 	onMount(async () => {
 		scripts();
 	});
+	export let data: PageData;
 </script>
 
 <svelte:head>
@@ -22,12 +24,10 @@
 	<div id="row" class="row">
 		<div id="play-video" class="play-video">
 			<div class="video-container">
-				<VideoPlayer
-					src="https://d2tldik98s0wn6.cloudfront.net/ba41d730-5c82-40d2-81ef-24aed5270420/master.m3u8"
-				/>
+				<VideoPlayer src="{data.video.videoUrl}/master.m3u8" />
 			</div>
 
-			<h3>What does an Operating Department Practitioner do?</h3>
+			<h3>{data.video.videoTitle}</h3>
 
 			<div class="play-video-info">
 				<div class="play-video-info-left">
@@ -64,19 +64,7 @@
 				</div>
 
 				<p class="description-text">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia quasi odio placeat
-					distinctio magni. Culpa quos iusto, vel magni similique quae exercitationem minima id
-					eveniet optio molestias blanditiis ea consectetur. Tempore earum quia illum dicta
-					veritatis ad aperiam ipsum sed, at officia voluptates maiores ut atque sequi dolor ea
-					magnam vel, molestias voluptas autem quos unde! Magni nisi quis tenetur? Dicta, facere.
-					Iure consequuntur molestiae nam id nesciunt facere atque fugiat optio. Velit consectetur
-					cum repellat animi totam impedit facere, eum, ea asperiores placeat quae corrupti! Ipsa
-					accusantium error ab. Magnam soluta nulla consequuntur explicabo reiciendis corporis
-					commodi quos id error accusantium facere minima tenetur sed tempore enim, officiis nobis
-					ipsa hic quas, molestiae fugit dolorum, quasi dignissimos. Illum, repellendus. Dicta,
-					aperiam nulla. Ipsum rerum exercitationem omnis ipsa, odio, vel quaerat, quae vitae
-					corrupti veniam qui beatae ea asperiores. Et laudantium consequatur, consectetur earum
-					beatae sed aspernatur veniam quibusdam rerum.
+					{data.video.videoDescription}
 				</p>
 			</div>
 

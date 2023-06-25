@@ -8,13 +8,17 @@ export function scripts(): void {
 		});
 	});
 
-	document.getElementById('chips-prev')!.onclick = () => {
+	const chipsPrev = document.getElementById('chips-prev') as HTMLElement;
+
+	chipsPrev.onclick = () => {
 		const chipsChoise = document.getElementById('chips__choise') as HTMLElement;
 		chipsChoise.style.transform = 'translateX(0px)';
 		chipsScrollMin();
 	};
 
-	document.getElementById('chips-next')!.onclick = () => {
+	const chipsNext = document.getElementById('chips-next') as HTMLElement;
+
+	chipsNext.onclick = () => {
 		const chipsChoise = document.getElementById('chips__choise') as HTMLElement;
 		chipsChoise.style.transform = 'translateX(-368px)';
 		chipsScrollMax();

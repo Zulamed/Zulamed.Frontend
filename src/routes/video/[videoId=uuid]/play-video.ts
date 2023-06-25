@@ -1,47 +1,56 @@
+import $ from 'jquery';
 export function scripts(): void {
 	// ========CHIPS==========
-	const tabsBox = document.querySelector('.tabs-box') as HTMLElement;
-	const allTabs = tabsBox.querySelectorAll('.tab');
-	const arrowIcons = document.querySelectorAll('.icon i');
-
-	let isDragging = false;
-
-	const handleIcons = (scrollVal: number): void => {
-		const maxScrollableWidth = tabsBox.scrollWidth - tabsBox.clientWidth;
-		(arrowIcons[0].parentElement as HTMLElement).style.display = scrollVal <= 0 ? 'none' : 'flex';
-		(arrowIcons[1].parentElement as HTMLElement).style.display =
-			maxScrollableWidth - scrollVal <= 1 ? 'none' : 'flex';
-	};
-
-	arrowIcons.forEach((icon) => {
-		icon.addEventListener('click', () => {
-			const scrollWidth = (tabsBox.scrollLeft += icon.id === 'left' ? -340 : 340);
-			handleIcons(scrollWidth);
+	(function () {
+		$('.chips__choice .chip').on('click', function () {
+			$('.chips__choice .chip').removeClass('chip--active');
+			$(this).addClass('chip--active');
 		});
 	});
 
-	allTabs.forEach((tab) => {
-		tab.addEventListener('click', () => {
-			(tabsBox.querySelector('.active') as HTMLElement).classList.remove('active');
-			tab.classList.add('active');
-		});
-	});
-
-	const dragging = (e: MouseEvent): void => {
-		if (!isDragging) return;
-		tabsBox.classList.add('dragging');
-		tabsBox.scrollLeft -= e.movementX;
-		handleIcons(tabsBox.scrollLeft);
+	document.getElementById('chips-prev')!.onclick = () => {
+		const chipsChoise = document.getElementById('chips__choise') as HTMLElement;
+		chipsChoise.style.transform = 'translateX(0px)';
+		chipsScrollMin();
 	};
 
-	const dragStop = (): void => {
-		isDragging = false;
-		tabsBox.classList.remove('dragging');
+	document.getElementById('chips-next')!.onclick = () => {
+		const chipsChoise = document.getElementById('chips__choise') as HTMLElement;
+		chipsChoise.style.transform = 'translateX(-368px)';
+		chipsScrollMax();
 	};
 
-	tabsBox.addEventListener('mousedown', () => (isDragging = true));
-	tabsBox.addEventListener('mousemove', dragging);
-	document.addEventListener('mouseup', dragStop);
+	function chipsScrollMin(): void {
+		const chipsChoise = document.getElementById('chips__choise') as HTMLElement;
+		const chipsPrev = document.getElementById('chips-prev') as HTMLElement;
+		const chipsNext = document.getElementById('chips-next') as HTMLElement;
+
+		if (chipsChoise.style.transform === 'translateX(0px)') {
+			chipsNext.style.display = 'flex';
+			chipsPrev.style.display = 'none';
+			$('#scroll-chips-overlay').css(
+				'mask-image',
+				'linear-gradient(to left,transparent 0,transparent 51px,#000 77px, #000 100%)'
+			);
+			return;
+		}
+	}
+
+	function chipsScrollMax(): void {
+		const chipsChoise = document.getElementById('chips__choise') as HTMLElement;
+		const chipsPrev = document.getElementById('chips-prev') as HTMLElement;
+		const chipsNext = document.getElementById('chips-next') as HTMLElement;
+
+		if (chipsChoise.style.transform === 'translateX(-368px)') {
+			chipsNext.style.display = 'none';
+			chipsPrev.style.display = 'flex';
+			$('#scroll-chips-overlay').css(
+				'mask-image',
+				'linear-gradient(to right,transparent 0,transparent 51px,#000 77px,#000 100%)'
+			);
+			return;
+		}
+	}
 
 	// ========CHIPS END==========
 

@@ -145,10 +145,10 @@
 					</div>
 				</div>
 				<div id="chips-prev" class="control prev">
-					<img src="./img/icons/arrow_back_ios_black_24dp.svg" alt="" />
+					<img src="/img/icons/arrow_back_ios_black_24dp.svg" alt="" />
 				</div>
 				<div id="chips-next" class="control next">
-					<img src="./img/icons/arrow_forward_ios_black_24dp.svg" alt="" />
+					<img src="/img/icons/arrow_forward_ios_black_24dp.svg" alt="" />
 				</div>
 			</div>
 

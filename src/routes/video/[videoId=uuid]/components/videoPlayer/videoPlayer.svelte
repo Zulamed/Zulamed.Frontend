@@ -5,10 +5,10 @@
 	import Hls from 'hls.js';
 	import { defineCustomElements } from 'vidstack/elements';
 	import type { HLSProvider, MediaPlayerElement, MediaProviderChangeEvent } from 'vidstack';
-	import { playerVolume } from '$lib/stores/video-sound-store';
+	import { playerVolume } from '../../stores/video-sound-store';
 
 	export let src: string;
-	export let poster = 'img/videoPreviews/2.png';
+	export let poster = '/img/videoPreviews/2.png';
 
 	let player: MediaPlayerElement;
 
@@ -27,7 +27,7 @@
 
 	let destroy: () => void | undefined;
 
-	function playerAttached(e: Event) {
+	function playerAttached() {
 		destroy = player.subscribe(({ volume }) => {
 			if (loaded) {
 				$playerVolume = volume;

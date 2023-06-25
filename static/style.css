@@ -27,7 +27,6 @@ img {
 	align-items: center;
 }
 
-
 /* ==========MAIN========== */
 
 .container {
@@ -40,7 +39,7 @@ img {
 }
 
 .banner {
-	background-image: url(./img/main-background.png);
+	background-image: url(/img/main-background.png);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
@@ -312,7 +311,6 @@ input::-moz-focus-inner {
 } */
 
 @media (max-width: 1395px) {
-
 	.searchbar .searchbox input {
 		font-size: 17px;
 		max-width: 800px;
@@ -483,7 +481,7 @@ input::-moz-focus-inner {
 
 	.banner {
 		height: 181px;
-		background-image: url(../../img/main-background-mobile.png);
+		background-image: url(/img/main-background-mobile.png);
 	}
 
 	.searchbar {

@@ -20,9 +20,13 @@
 	--media-tooltip-color: hsl(0, 0%, 100%);
 	--media-slider-value-bg: #54b9a186;
 	--media-menu-box-shadow: none;
+	--video-border-radius-reset: 0;
 }
 
 /* ============PLAYER SETTINGS============ */
+:where(media-player[data-view-type="video"]:not([data-fullscreen])) :where(media-outlet, video, media-poster, div[part="scrim"]) {
+	border-radius: var(--video-border-radius-reset) !important;
+}
 :where(media-player [data-media-slider] [part~='track-fill']) {
 	z-index: 2;
 	background-color: var(--primary-color) !important;

@@ -9,16 +9,6 @@
 	export let data: PageData;
 </script>
 
-<svelte:head>
-	<link
-		rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-		integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-		crossorigin="anonymous"
-		referrerpolicy="no-referrer"
-	/>
-</svelte:head>
-
 <!-- ============MAIN============ -->
 <div class="container">
 	<div id="row" class="row">
@@ -144,21 +134,23 @@
 		</div>
 
 		<div id="right-videolist" class="right-videolist">
-			<!-- ======TABS======= -->
-
-			<div class="wrapper">
-				<div class="icon"><i id="left" class="fa-solid fa-angle-left" /></div>
-				<ul class="tabs-box">
-					<button class="tab active">All videos</button>
-					<button class="tab">Autor: Lorem Ipsum</button>
-					<button class="tab">Related content</button>
-					<button class="tab">Recently published</button>
-					<button class="tab">Viewed</button>
-				</ul>
-				<div class="icon"><i id="right" class="fa-solid fa-angle-right" /></div>
+			<div class="scroll-chips">
+				<div id="scroll-chips-overlay" class="scroll-chips-overlay">
+					<div id="chips__choise" class="chips__choice">
+						<button class="chip chip--active">All videos</button>
+						<button class="chip">Author</button>
+						<button class="chip">Related content</button>
+						<button class="chip">Recently published</button>
+						<button class="chip">Viewed</button>
+					</div>
+				</div>
+				<div id="chips-prev" class="control prev">
+					<img src="./img/icons/arrow_back_ios_black_24dp.svg" alt="" />
+				</div>
+				<div id="chips-next" class="control next">
+					<img src="./img/icons/arrow_forward_ios_black_24dp.svg" alt="" />
+				</div>
 			</div>
-
-			<!-- ======TABS======= -->
 
 			<div class="side-video-list">
 				<a href="." class="small-thumbnail"

@@ -3,48 +3,51 @@
 import $ from 'jquery';
 
 export function scripts() {
-	const tabsBox = document.querySelector(".tabs-box"),
-		allTabs = tabsBox.querySelectorAll(".tab"),
-		arrowIcons = document.querySelectorAll(".icon i");
-
-	let isDragging = false;
-
-	const handleIcons = (scrollVal) => {
-		let maxScrollableWidth = tabsBox.scrollWidth - tabsBox.clientWidth;
-		arrowIcons[0].parentElement.style.display = scrollVal <= 0 ? "none" : "flex";
-		arrowIcons[1].parentElement.style.display = maxScrollableWidth - scrollVal <= 1 ? "none" : "flex";
-	}
-
-	arrowIcons.forEach(icon => {
-		icon.addEventListener("click", () => {
-			// if clicked icon is left, reduce 350 from tabsBox scrollLeft else add
-			let scrollWidth = tabsBox.scrollLeft += icon.id === "left" ? -340 : 340;
-			handleIcons(scrollWidth);
+	$(function () {
+		$('.chips__choice .chip').on('click', function () {
+			$('.chips__choice .chip').removeClass('chip--active');
+			$(this).addClass('chip--active');
 		});
 	});
 
-	allTabs.forEach(tab => {
-		tab.addEventListener("click", () => {
-			tabsBox.querySelector(".active").classList.remove("active");
-			tab.classList.add("active");
-		});
-	});
+	document.getElementById('chips-prev').onclick = () => {
+		document.getElementById('chips__choise').style.transform = 'translateX(0px)';
+		chipsScrollMin();
+	};
+	document.getElementById('chips-next').onclick = () => {
+		document.getElementById('chips__choise').style.transform = 'translateX(-368px)';
+		chipsScrollMax();
+	};
 
-	const dragging = (e) => {
-		if (!isDragging) return;
-		tabsBox.classList.add("dragging");
-		tabsBox.scrollLeft -= e.movementX;
-		handleIcons(tabsBox.scrollLeft)
+	function chipsScrollMin() {
+		var chipsChoise = document.getElementById('chips__choise');
+		var chipsPrev = document.getElementById('chips-prev');
+		var chipsNext = document.getElementById('chips-next');
+		if ((chipsChoise.style.transform == 'translateX(0px)')) {
+			chipsNext.style.display = 'flex';
+			chipsPrev.style.display = 'none';
+			$('#scroll-chips-overlay').css(
+				'mask-image',
+				'linear-gradient(to left,transparent 0,transparent 51px,#000 77px, #000 100%)'
+			);
+			return;
+		}
 	}
+	function chipsScrollMax() {
+		var chipsChoise = document.getElementById('chips__choise');
+		var chipsPrev = document.getElementById('chips-prev');
+		var chipsNext = document.getElementById('chips-next');
 
-	const dragStop = () => {
-		isDragging = false;
-		tabsBox.classList.remove("dragging");
+		if ((chipsChoise.style.transform == 'translateX(-368px)')) {
+			chipsNext.style.display = 'none';
+			chipsPrev.style.display = 'flex';
+			$('#scroll-chips-overlay').css(
+				'mask-image',
+				'linear-gradient(to right,transparent 0,transparent 51px,#000 77px,#000 100%)'
+			);
+			return;
+		}
 	}
-
-	tabsBox.addEventListener("mousedown", () => isDragging = true);
-	tabsBox.addEventListener("mousemove", dragging);
-	document.addEventListener("mouseup", dragStop);
 
 	// ========CHIPS END==========
 

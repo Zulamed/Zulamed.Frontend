@@ -19,9 +19,7 @@
 		<div class="menu-icon-background flex-div">
 			<img class="menu-icon" src="/img/icons/menu.svg" alt="" />
 		</div>
-		<a class="flex-div" href="index.html"
-			><img class="logo" src="/img/logo-white-theme.png" alt="" /></a
-		>
+		<a class="flex-div" href="/"><img class="logo" src="/img/logo-white-theme.png" alt="" /></a>
 	</div>
 	<div class="nav-center flex-div">
 		<form class="searchbar flex-div" action="">

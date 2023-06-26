@@ -2,6 +2,19 @@
 	import { page } from '$app/stores';
 	import SidebarAndNavbar from '$lib/components/sidebarAndNavbar/sidebarAndNavbar.svelte';
 	import SidebarAndNavbarDrawer from '$lib/components/sidebarAndNavbarDrawer/sidebarAndNavbarDrawer.svelte';
+	import NProgress from 'nprogress';
+	import { navigating } from '$app/stores';
+	import 'nprogress/nprogress.css';
+
+	NProgress.configure({
+		minimum: 0.16
+	});
+
+	$: {
+		if ($navigating) {
+			NProgress.start();
+		} else NProgress.done();
+	}
 </script>
 
 <svelte:head>
@@ -22,4 +35,6 @@
 	<SidebarAndNavbarDrawer />
 {/if}
 
-<slot />
+<div class="container">
+	<slot />
+</div>

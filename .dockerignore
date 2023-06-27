@@ -21,5 +21,10 @@
 **/obj
 **/secrets.dev.yaml
 **/values.dev.yaml
+/.svelte-kit
+/build
+.npmrc
+.prettierrc
+.prettierignore
 LICENSE
 README.md

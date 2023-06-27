@@ -7,10 +7,11 @@ RUN pnpm install
 
 FROM install as build
 WORKDIR /app
+ENV NODE_ENV=production
+ARG BACKEND_URL
+ENV PUBLIC_BACKEND_URL=$BACKEND_URL
 COPY . .
 RUN pnpm build
-
-ENV BACKEND_URL=$BACKEND_URL;
 
 FROM build as start
 WORKDIR /app

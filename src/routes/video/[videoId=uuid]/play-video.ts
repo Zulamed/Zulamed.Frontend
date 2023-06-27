@@ -1,10 +1,8 @@
-import $ from 'jquery';
 export function scripts(): void {
-
 	const allChips: HTMLElement[] = Array.from(document.querySelectorAll('.chip'));
 	const chipsContainer = document.querySelector('.chips__choice') as HTMLElement;
 	allChips.forEach((chip: HTMLElement) => {
-		chip.addEventListener("click", () => {
+		chip.addEventListener('click', () => {
 			const activeChip: HTMLElement | null = chipsContainer.querySelector('.chip--active');
 			if (activeChip) {
 				activeChip.classList.remove('chip--active');
@@ -36,10 +34,13 @@ export function scripts(): void {
 		if (chipsChoise.style.transform === 'translateX(0px)') {
 			chipsNext.style.display = 'flex';
 			chipsPrev.style.display = 'none';
-			$('#scroll-chips-overlay').css(
-				'mask-image',
-				'linear-gradient(to left,transparent 0,transparent 51px,#000 77px, #000 100%)'
-			);
+			// $('#scroll-chips-overlay').css(
+			// 	'mask-image',
+			// 	'linear-gradient(to left,transparent 0,transparent 51px,#000 77px, #000 100%)'
+			// );
+			const scrollChipsOverlay = document.getElementById('scroll-chips-overlay') as HTMLElement;
+			scrollChipsOverlay.style.maskImage =
+				'linear-gradient(to left,transparent 0,transparent 51px,#000 77px, #000 100%)';
 			return;
 		}
 	}
@@ -52,10 +53,13 @@ export function scripts(): void {
 		if (chipsChoise.style.transform === 'translateX(-368px)') {
 			chipsNext.style.display = 'none';
 			chipsPrev.style.display = 'flex';
-			$('#scroll-chips-overlay').css(
-				'mask-image',
-				'linear-gradient(to right,transparent 0,transparent 51px,#000 77px,#000 100%)'
-			);
+			// $('#scroll-chips-overlay').css(
+			// 	'mask-image',
+			// 	'linear-gradient(to right,transparent 0,transparent 51px,#000 77px,#000 100%)'
+			// );
+			const scrollChipsOverlay = document.getElementById('scroll-chips-overlay') as HTMLElement;
+			scrollChipsOverlay.style.maskImage =
+				'linear-gradient(to right,transparent 0,transparent 51px,#000 77px,#000 100%)';
 			return;
 		}
 	}

@@ -1,13 +1,17 @@
 import $ from 'jquery';
 export function scripts(): void {
-	// ========CHIPS==========
-	(function () {
-		$('.chips__choice .chip').on('click', function () {
-			$('.chips__choice .chip').removeClass('chip--active');
-			$(this).addClass('chip--active');
+
+	const allChips: HTMLElement[] = Array.from(document.querySelectorAll('.chip'));
+	const chipsContainer = document.querySelector('.chips__choice') as HTMLElement;
+	allChips.forEach((chip: HTMLElement) => {
+		chip.addEventListener("click", () => {
+			const activeChip: HTMLElement | null = chipsContainer.querySelector('.chip--active');
+			if (activeChip) {
+				activeChip.classList.remove('chip--active');
+			}
+			chip.classList.add('chip--active');
 		});
 	});
-
 	const chipsPrev = document.getElementById('chips-prev') as HTMLElement;
 
 	chipsPrev.onclick = () => {

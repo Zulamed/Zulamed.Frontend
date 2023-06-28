@@ -31,7 +31,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@types/jquery": "^3.5.16",
 		"hls.js": "^1.4.6",
 		"nprogress": "^0.2.0",
 		"vidstack": "^0.6.13"

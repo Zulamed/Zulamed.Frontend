@@ -1,13 +1,14 @@
 <script lang="ts">
-	import Portal from 'svelte-portal';
+	import { portal } from 'svelte-portal';
 	import { onMount } from 'svelte';
 	import { scripts } from './script.js';
 	onMount(scripts);
 </script>
 
-<Portal target="body">
+<!-- <Portal target="body">
 	<div class="overlay" />
-</Portal>
+</Portal> -->
+<div use:portal class="overlay" />
 <form action="" class="flex-div" id="search-mobile-form">
 	<div class="searchbar-mobile flex-div">
 		<input placeholder="Search..." name="" type="text" />

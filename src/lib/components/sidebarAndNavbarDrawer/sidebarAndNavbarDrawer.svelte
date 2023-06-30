@@ -1,14 +1,12 @@
 <script lang="ts">
-	import Portal from 'svelte-portal';
+	import { portal } from 'svelte-portal';
 	import { onMount } from 'svelte';
 	import { scripts } from './play-videoDrawer';
 	onMount(scripts);
 </script>
 
 <!-- ============NAVIGATION============ -->
-<Portal target="body">
-	<div class="overlay" />
-</Portal>
+<div use:portal class="overlay" />
 <form action="" class="flex-div" id="search-mobile-form">
 	<div class="searchbar-mobile flex-div">
 		<input placeholder="Search..." name="" type="text" />

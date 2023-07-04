@@ -60,6 +60,8 @@
 	aspect-ratio="16/9"
 	crossorigin
 	user-idle-delay="1000"
+	playsinline
+	webkit-playsinline
 	on:attached|once={playerAttached}
 >
 	<media-outlet />

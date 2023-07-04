@@ -17,7 +17,7 @@
 
 		player.addEventListener('provider-change', (event: MediaProviderChangeEvent) => {
 			const provider = event.detail;
-			if (provider?.type === 'hls') {
+			if (provider?.type === 'hls' && !Hls.isSupported()) {
 				(provider as HLSProvider).library = Hls;
 			}
 		});

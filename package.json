@@ -33,6 +33,7 @@
 	"dependencies": {
 		"hls.js": "^1.4.6",
 		"nprogress": "^0.2.0",
+		"svelte-portal": "^2.2.0",
 		"vidstack": "^0.6.13"
 	}
 }

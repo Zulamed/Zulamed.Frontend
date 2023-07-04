@@ -66,6 +66,16 @@ nav {
     width: 20px;
 }
 
+input,
+div,
+textarea,
+button,
+select,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
 /* ==========LANGUAGE DROPDOWN============ */
 
 .lang-icon {

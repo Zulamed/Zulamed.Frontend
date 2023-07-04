@@ -1,4 +1,13 @@
 /* ============NAVIGATION============ */
+input,
+div,
+textarea,
+button,
+select,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
 .searchbar-mobile {
     display: none;
 }
@@ -256,7 +265,7 @@ nav {
     -ms-overflow-style: none;
     scrollbar-width: none;
     z-index: 2;
-    transition: left .1s ease-in;
+    transition: left .1s linear;
 }
 
 .sidebar.open {

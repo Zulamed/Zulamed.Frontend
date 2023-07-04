@@ -6,6 +6,15 @@
 	--primary-color: #54b9a2;
 }
 
+input,
+div,
+textarea,
+button,
+select,
+a {
+	-webkit-tap-highlight-color: transparent;
+}
+
 * {
 	margin: 0;
 	padding: 0;

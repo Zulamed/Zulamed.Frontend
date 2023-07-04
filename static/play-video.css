@@ -23,10 +23,20 @@
 	--video-border-radius-reset: 0;
 }
 
+input,
+div,
+textarea,
+button,
+select,
+a {
+	-webkit-tap-highlight-color: transparent;
+}
+
 /* ============PLAYER SETTINGS============ */
 :where(media-player[data-view-type="video"]:not([data-fullscreen])) :where(media-outlet, video, media-poster, div[part="scrim"]) {
 	border-radius: var(--video-border-radius-reset) !important;
 }
+
 :where(media-player [data-media-slider] [part~='track-fill']) {
 	z-index: 2;
 	background-color: var(--primary-color) !important;
@@ -45,8 +55,7 @@
 	background-color: transparent !important;
 }
 
-:where(media-player[data-view-type='video']:not([data-fullscreen]))
-	:where(media-outlet, video, media-poster, div[part='scrim']) {
+:where(media-player[data-view-type='video']:not([data-fullscreen])):where(media-outlet, video, media-poster, div[part='scrim']) {
 	border-radius: 0 !important;
 }
 
@@ -154,7 +163,7 @@ img {
 }
 
 .video-container {
-	background-color: #000000;
+	background-color: transparent;
 	aspect-ratio: 16 / 9;
 	margin-bottom: 19px;
 	display: flex;
@@ -567,13 +576,11 @@ img {
 	overflow-x: scroll;
 	overflow-y: hidden;
 	scrollbar-width: none;
-	-webkit-mask-image: linear-gradient(
-		to left,
-		transparent 0,
-		transparent 51px,
-		#000 77px,
-		#000 100%
-	);
+	-webkit-mask-image: linear-gradient(to left,
+			transparent 0,
+			transparent 51px,
+			#000 77px,
+			#000 100%);
 	mask-image: linear-gradient(to left, transparent 0, transparent 51px, #000 77px, #000 100%);
 }
 
@@ -902,6 +909,7 @@ img {
 }
 
 @media (max-width: 364px) {
+
 	.play-video-stats p,
 	.play-video-stats span {
 		font-size: 11px;

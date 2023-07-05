@@ -1,6 +1,4 @@
 <script lang="ts">
-	import defaultCss from 'vidstack/styles/defaults.css?url';
-	import communityPlayerCss from 'vidstack/styles/community-skin/video.css?url';
 	import { onMount, onDestroy } from 'svelte';
 	import Hls from 'hls.js';
 	import { defineCustomElements } from 'vidstack/elements';
@@ -47,11 +45,6 @@
 	});
 </script>
 
-<svelte:head>
-	<link rel="stylesheet" href={defaultCss} />
-	<link rel="stylesheet" href={communityPlayerCss} />
-</svelte:head>
-
 <media-player
 	bind:this={player}
 	id="video"
@@ -68,3 +61,8 @@
 	<media-community-skin />
 	<media-poster alt="Preview." />
 </media-player>
+
+<style>
+	@import 'vidstack/styles/defaults.css';
+	@import 'vidstack/styles/community-skin/video.css';
+</style>

@@ -53,7 +53,7 @@
 
 <svelte:head>
 	<link rel="stylesheet" href={defaultCss} />
-	<link rel="stylesheet" href={skinCss} />"
+	<link rel="stylesheet" href={skinCss} />
 </svelte:head>
 
 <media-player

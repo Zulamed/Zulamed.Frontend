@@ -21,7 +21,7 @@
 	{#each data.videoResponse.videos as video}
 		<div class="vid-list">
 			<a class="preview" href="/video/{video.id}"
-				><img src="/img/videoPreviews/video-skeleton.png" class="thumbnail" alt="" /></a
+				><img src="{video.videoThumbnail}" class="thumbnail" alt="" /></a
 			>
 			<div class="flex-div">
 				<img src="/img/icons/user.png" alt="" />

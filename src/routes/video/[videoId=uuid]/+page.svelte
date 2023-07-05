@@ -14,7 +14,7 @@
 <div id="row" class="row">
 	<div id="play-video" class="play-video">
 		<div class="video-container">
-			<VideoPlayer src="{data.video.videoUrl}/master.m3u8" />
+			<VideoPlayer src="{data.video.videoUrl}/master.m3u8" poster="{data.video.videoThumbnail}"/>
 		</div>
 
 		<h3>{data.video.videoTitle}</h3>

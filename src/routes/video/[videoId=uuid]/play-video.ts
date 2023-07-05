@@ -1,68 +1,68 @@
 export function scripts(): void {
-	const allChips: HTMLElement[] = Array.from(document.querySelectorAll('.chip'));
-	const chipsContainer = document.querySelector('.chips__choice') as HTMLElement;
-	allChips.forEach((chip: HTMLElement) => {
-		chip.addEventListener('click', () => {
-			const activeChip: HTMLElement | null = chipsContainer.querySelector('.chip--active');
-			if (activeChip) {
-				activeChip.classList.remove('chip--active');
-			}
-			chip.classList.add('chip--active');
-		});
-	});
-	const chipsPrev = document.getElementById('chips-prev') as HTMLElement;
-
-	chipsPrev.onclick = () => {
-		const chipsChoise = document.getElementById('chips__choise') as HTMLElement;
-		chipsChoise.style.transform = 'translateX(0px)';
-		chipsScrollMin();
-	};
-
-	const chipsNext = document.getElementById('chips-next') as HTMLElement;
-
-	chipsNext.onclick = () => {
-		const chipsChoise = document.getElementById('chips__choise') as HTMLElement;
-		chipsChoise.style.transform = 'translateX(-368px)';
-		chipsScrollMax();
-	};
-
-	function chipsScrollMin(): void {
-		const chipsChoise = document.getElementById('chips__choise') as HTMLElement;
-		const chipsPrev = document.getElementById('chips-prev') as HTMLElement;
-		const chipsNext = document.getElementById('chips-next') as HTMLElement;
-
-		if (chipsChoise.style.transform === 'translateX(0px)') {
-			chipsNext.style.display = 'flex';
-			chipsPrev.style.display = 'none';
-			// $('#scroll-chips-overlay').css(
-			// 	'mask-image',
-			// 	'linear-gradient(to left,transparent 0,transparent 51px,#000 77px, #000 100%)'
-			// );
-			const scrollChipsOverlay = document.getElementById('scroll-chips-overlay') as HTMLElement;
-			scrollChipsOverlay.style.maskImage =
-				'linear-gradient(to left,transparent 0,transparent 51px,#000 77px, #000 100%)';
-			return;
-		}
-	}
-
-	function chipsScrollMax(): void {
-		const chipsChoise = document.getElementById('chips__choise') as HTMLElement;
-		const chipsPrev = document.getElementById('chips-prev') as HTMLElement;
-		const chipsNext = document.getElementById('chips-next') as HTMLElement;
-
-		if (chipsChoise.style.transform === 'translateX(-368px)') {
-			chipsNext.style.display = 'none';
-			chipsPrev.style.display = 'flex';
-			// $('#scroll-chips-overlay').css(
-			// 	'mask-image',
-			// 	'linear-gradient(to right,transparent 0,transparent 51px,#000 77px,#000 100%)'
-			// );
-			const scrollChipsOverlay = document.getElementById('scroll-chips-overlay') as HTMLElement;
-			scrollChipsOverlay.style.maskImage =
-				'linear-gradient(to right,transparent 0,transparent 51px,#000 77px,#000 100%)';
-			return;
-		}
-	}
+	// const allChips: HTMLElement[] = Array.from(document.querySelectorAll('.chip'));
+	// const chipsContainer = document.querySelector('.chips__choice') as HTMLElement;
+	// allChips.forEach((chip: HTMLElement) => {
+	// 	chip.addEventListener('click', () => {
+	// 		const activeChip: HTMLElement | null = chipsContainer.querySelector('.chip--active');
+	// 		if (activeChip) {
+	// 			activeChip.classList.remove('chip--active');
+	// 		}
+	// 		chip.classList.add('chip--active');
+	// 	});
+	// });
+	// const chipsPrev = document.getElementById('chips-prev') as HTMLElement;
+	//
+	// chipsPrev.onclick = () => {
+	// 	const chipsChoise = document.getElementById('chips__choise') as HTMLElement;
+	// 	chipsChoise.style.transform = 'translateX(0px)';
+	// 	chipsScrollMin();
+	// };
+	//
+	// const chipsNext = document.getElementById('chips-next') as HTMLElement;
+	//
+	// chipsNext.onclick = () => {
+	// 	const chipsChoise = document.getElementById('chips__choise') as HTMLElement;
+	// 	chipsChoise.style.transform = 'translateX(-368px)';
+	// 	chipsScrollMax();
+	// };
+	//
+	// function chipsScrollMin(): void {
+	// 	const chipsChoise = document.getElementById('chips__choise') as HTMLElement;
+	// 	const chipsPrev = document.getElementById('chips-prev') as HTMLElement;
+	// 	const chipsNext = document.getElementById('chips-next') as HTMLElement;
+	//
+	// 	if (chipsChoise.style.transform === 'translateX(0px)') {
+	// 		chipsNext.style.display = 'flex';
+	// 		chipsPrev.style.display = 'none';
+	// 		// $('#scroll-chips-overlay').css(
+	// 		// 	'mask-image',
+	// 		// 	'linear-gradient(to left,transparent 0,transparent 51px,#000 77px, #000 100%)'
+	// 		// );
+	// 		const scrollChipsOverlay = document.getElementById('scroll-chips-overlay') as HTMLElement;
+	// 		scrollChipsOverlay.style.maskImage =
+	// 			'linear-gradient(to left,transparent 0,transparent 51px,#000 77px, #000 100%)';
+	// 		return;
+	// 	}
+	// }
+	//
+	// function chipsScrollMax(): void {
+	// 	const chipsChoise = document.getElementById('chips__choise') as HTMLElement;
+	// 	const chipsPrev = document.getElementById('chips-prev') as HTMLElement;
+	// 	const chipsNext = document.getElementById('chips-next') as HTMLElement;
+	//
+	// 	if (chipsChoise.style.transform === 'translateX(-368px)') {
+	// 		chipsNext.style.display = 'none';
+	// 		chipsPrev.style.display = 'flex';
+	// 		// $('#scroll-chips-overlay').css(
+	// 		// 	'mask-image',
+	// 		// 	'linear-gradient(to right,transparent 0,transparent 51px,#000 77px,#000 100%)'
+	// 		// );
+	// 		const scrollChipsOverlay = document.getElementById('scroll-chips-overlay') as HTMLElement;
+	// 		scrollChipsOverlay.style.maskImage =
+	// 			'linear-gradient(to right,transparent 0,transparent 51px,#000 77px,#000 100%)';
+	// 		return;
+	// 	}
+	// }
 
 	// ========CHIPS END==========
 

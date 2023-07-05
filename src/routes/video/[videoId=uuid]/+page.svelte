@@ -3,6 +3,7 @@
 	import { scripts } from './play-video';
 	import VideoPlayer from './components/videoPlayer/videoPlayer.svelte';
 	import type { PageData } from './$types';
+    import Chips from './components/chips.svelte';
 	onMount(async () => {
 		scripts();
 	});
@@ -131,23 +132,24 @@
 	</div>
 
 	<div id="right-videolist" class="right-videolist">
-		<div class="scroll-chips">
-			<div id="scroll-chips-overlay" class="scroll-chips-overlay">
-				<div id="chips__choise" class="chips__choice">
-					<button class="chip chip--active">All videos</button>
-					<button class="chip">Author</button>
-					<button class="chip">Related content</button>
-					<button class="chip">Recently published</button>
-					<button class="chip">Viewed</button>
-				</div>
-			</div>
-			<div id="chips-prev" class="control prev">
-				<img src="/img/icons/arrow_back_ios_black_24dp.svg" alt="" />
-			</div>
-			<div id="chips-next" class="control next">
-				<img src="/img/icons/arrow_forward_ios_black_24dp.svg" alt="" />
-			</div>
-		</div>
+		<!-- <div class="scroll-chips"> -->
+		<!-- 	<div id="scroll-chips-overlay" class="scroll-chips-overlay"> -->
+		<!-- 		<div id="chips__choise" class="chips__choice"> -->
+		<!-- 			<button class="chip chip--active">All videos</button> -->
+		<!-- 			<button class="chip">Author</button> -->
+		<!-- 			<button class="chip">Related content</button> -->
+		<!-- 			<button class="chip">Recently published</button> -->
+		<!-- 			<button class="chip">Viewed</button> -->
+		<!-- 		</div> -->
+		<!-- 	</div> -->
+		<!-- 	<div id="chips-prev" class="control prev"> -->
+		<!-- 		<img src="/img/icons/arrow_back_ios_black_24dp.svg" alt="" /> -->
+		<!-- 	</div> -->
+		<!-- 	<div id="chips-next" class="control next"> -->
+		<!-- 		<img src="/img/icons/arrow_forward_ios_black_24dp.svg" alt="" /> -->
+		<!-- 	</div> -->
+		<!-- </div> -->
+		<Chips />
 
 		<div class="side-video-list">
 			<a href="." class="small-thumbnail"

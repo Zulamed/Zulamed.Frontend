@@ -8,9 +8,9 @@
 	export let src: string;
 	export let poster = '/img/videoPreviews/2.png';
 
-    if (!poster) {
-        poster = '/img/videoPreviews/2.png';
-    }
+	if (!poster) {
+		poster = '/img/videoPreviews/2.png';
+	}
 
 	let player: MediaPlayerElement;
 

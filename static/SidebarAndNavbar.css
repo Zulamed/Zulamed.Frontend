@@ -563,7 +563,7 @@ a {
 
 /* ==========SIDEBAR SMALL========== */
 
-@media (max-width: 1395px) {
+@media (max-width: 1440px) {
     .sidebar {
         width: 20%;
     }
@@ -573,6 +573,27 @@ a {
         padding-left: 0;
     }
 
+    .shortcut-links a p {
+        color: white;
+        font-size: 14px;
+    }
+
+    .about-logo img {
+        width: 161px !important;
+    }
+
+    .about-container p {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+    }
+
+    .about-link {
+        font-weight: 300 !important;
+        font-size: 14px !important;
+        line-height: 18px;
+        color: #ffffff;
+    }
 }
 
 @media (max-width: 1238px) {

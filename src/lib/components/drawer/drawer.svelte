@@ -1,23 +1,86 @@
 <script lang="ts">
 	import { portal } from 'svelte-portal';
-	import { onMount } from 'svelte';
-	import { scripts } from './play-videoDrawer';
-	onMount(scripts);
+
+	let isMobileSearchBarOpen = false;
+	let displayProfileContainer = 'none';
+	let displayLanguageContainer = 'none';
+	let sidebarMobileLeft = '-100%';
+	let sidebarOpen = false;
+	let searchbarMobileTop = '0';
+	let navigationBoxShadow = '0px 0px 0px #00000040';
+	let searchMobileType = 'button';
+	let overlayLeft = '-100%';
+
+	const toggleProfileContainer = () => {
+		displayProfileContainer = displayProfileContainer === 'none' ? 'block' : 'none';
+	};
+
+	const toggleLanguageContainer = () => {
+		displayLanguageContainer = displayLanguageContainer === 'none' ? 'block' : 'none';
+	};
+
+	const closeLanguageContainer = () => {
+		displayLanguageContainer = 'none';
+	};
+
+	const toggleSidebar = () => {
+		sidebarOpen = !sidebarOpen;
+	};
+
+	const openMobileSidebar = () => {
+		sidebarMobileLeft = '0';
+		overlayLeft = '0';
+	};
+
+	const closeMobileSidebar = () => {
+		sidebarMobileLeft = '-100%';
+		overlayLeft = '-100%';
+	};
+
+	const openSearchbarMobile = (e: Event) => {
+		searchbarMobileTop = '74px';
+		navigationBoxShadow = '0px 4px 4px #00000040';
+		searchMobileType = 'submit';
+		isMobileSearchBarOpen = true;
+		e.stopPropagation();
+	};
+
+	const closeSearchbarMobile = () => {
+		searchbarMobileTop = '0';
+		navigationBoxShadow = '0px 0px 0px #00000040';
+		searchMobileType = 'button';
+		isMobileSearchBarOpen = false;
+	};
+
+	function bodyOnClick(e: MouseEvent) {
+		let target = e.target as HTMLElement;
+		if (isMobileSearchBarOpen && !target.closest('#search-mobile-form')) {
+			closeSearchbarMobile();
+		}
+	}
+
+	function bodyOnTouchMove() {
+		displayLanguageContainer = 'none';
+		displayProfileContainer = 'none';
+	}
 </script>
 
-<!-- ============NAVIGATION============ -->
-<div use:portal class="overlay" />
+<svelte:body on:click={bodyOnClick} on:touchmove={bodyOnTouchMove} />
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div use:portal class="overlay" on:click={closeMobileSidebar} style:left={overlayLeft} />
 <form action="" class="flex-div" id="search-mobile-form">
-	<div class="searchbar-mobile flex-div">
+	<div class="searchbar-mobile flex-div" style:top={searchbarMobileTop}>
 		<input placeholder="Search..." name="" type="text" />
 	</div>
 </form>
-<nav class="flex-div" id="navigation">
+<nav class="flex-div" id="navigation" style:box-shadow={navigationBoxShadow}>
 	<div class="nav-left flex-div">
-		<div class="menu-icon-background-small flex-div">
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<div class="menu-icon-background-small flex-div" on:click={openMobileSidebar}>
 			<img class="menu-icon" src="/img/icons/menu.svg" alt="" />
 		</div>
-		<div class="menu-icon-background flex-div">
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<div class="menu-icon-background flex-div" on:click={toggleSidebar}>
 			<img class="menu-icon" src="/img/icons/menu.svg" alt="" />
 		</div>
 		<a class="flex-div" href="/"><img class="logo" src="/img/logo-white-theme.png" alt="" /></a>
@@ -33,7 +96,8 @@
 		</form>
 	</div>
 	<div class="nav-right flex-div">
-		<div class="flex-div lang-icon">
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<div class="flex-div lang-icon" on:click={toggleLanguageContainer}>
 			<img width="20px" src="/img/flagIcons/az.svg" alt="" />
 			<img width="20px" src="/img/icons/dropdown.svg" alt="" />
 		</div>
@@ -43,15 +107,27 @@
 			id="search-mobile"
 			type="button"
 			class="search-mobile flex-div"
+			on:click|preventDefault={openSearchbarMobile}
 		>
 			<img src="/img/icons/Search_light.svg" alt="" />
 		</button>
 
-		<div class="language-container" id="language-container">
+		<div
+			class="language-container"
+			id="language-container"
+			style:display={displayLanguageContainer}
+		>
 			<div style="padding-left: 8px; height: 40px;" class="flex-div">
 				<h5>Choose your language</h5>
 				&nbsp;&nbsp;&nbsp;
-				<img id="lang-close-icon" width="18px" src="/img/icons/close_black_24dp.svg" alt="" />
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<img
+					id="lang-close-icon"
+					width="18px"
+					src="/img/icons/close_black_24dp.svg"
+					alt=""
+					on:click={closeLanguageContainer}
+				/>
 			</div>
 			<hr />
 			<a class="lang-link" href=".">
@@ -68,8 +144,14 @@
 			</a>
 		</div>
 
-		<img class="user-icon" src="/img/icons/User_circle.png" alt="" />
-		<div class="profile-container" id="profile-container">
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<img
+			class="user-icon"
+			src="/img/icons/User_circle.png"
+			alt=""
+			on:click={toggleProfileContainer}
+		/>
+		<div class="profile-container" id="profile-container" style:display={displayProfileContainer}>
 			<div class="popup-profile flex-div">
 				<a href="."><img src="/img/icons/user.png" alt="" /></a>
 				<div>
@@ -111,7 +193,7 @@
 <!-- ============NAVIGATION END============ -->
 <!-- ============SIDEBAR============ -->
 
-<div class="sidebar">
+<div class="sidebar" class:open={sidebarOpen}>
 	<div class="shortcut-links">
 		<a id="shortcut-link" class="active-shortcut" href="."
 			><img src="/img/icons/Home_fill.svg" alt="" />
@@ -200,7 +282,7 @@
 <!-- ============SIDEBAR END============ -->
 <!-- ------------sidebar-small------------ -->
 
-<div class="sidebar-mobile">
+<div class="sidebar-mobile" style:left={sidebarMobileLeft}>
 	<div class="shortcut-links">
 		<a id="shortcut-link" class="active-shortcut" href="."
 			><img src="/img/icons/Home_fill.svg" alt="" />
@@ -283,4 +365,5 @@
 	</div>
 </div>
 
-<!-- ------------sidebar-small------------ -->
+<style src="./drawer.css">
+</style>

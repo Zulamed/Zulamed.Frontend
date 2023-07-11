@@ -143,9 +143,9 @@
 			<p>Lorem Ipsum</p>
 		</a>
 
-		<div class="show-more">
+		<button class="show-more">
 			<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
-		</div>
+		</button>
 
 		<hr />
 		<a class="shortcut-link" href="."
@@ -231,9 +231,9 @@
 			<p>Lorem Ipsum</p>
 		</a>
 
-		<div class="show-more">
+		<button type="button" class="show-more">
 			<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
-		</div>
+		</button>
 
 		<hr />
 		<a class="shortcut-link" href="."

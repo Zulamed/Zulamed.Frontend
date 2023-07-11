@@ -1,4 +1,5 @@
 <script lang="ts">
+    import './main.css'
 	import { page } from '$app/stores';
 	import SidebarAndNavbar from '$lib/components/sidebarAndNavbar/sidebarAndNavbar.svelte';
 	import NProgress from 'nprogress';

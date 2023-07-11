@@ -1,8 +1,5 @@
 <script lang="ts">
 	import { portal } from 'svelte-portal';
-	// import { onMount } from 'svelte';
-	// import { scripts } from './script.js';
-	// onMount(scripts);
     import {sidebarOpened} from './stores/sidebarOpened'
 	let isMobileSearchBarOpen = false;
 	let displayProfileContainer = 'none';

@@ -8,7 +8,6 @@
 	let sidebarOpen = false;
 	let searchbarMobileTop = '0';
 	let navigationBoxShadow = '0px 0px 0px #00000040';
-	let searchMobileType = 'button';
 	let overlayLeft = '-100%';
 
 	const toggleProfileContainer = () => {
@@ -40,7 +39,6 @@
 	const openSearchbarMobile = (e: Event) => {
 		searchbarMobileTop = '74px';
 		navigationBoxShadow = '0px 4px 4px #00000040';
-		searchMobileType = 'submit';
 		isMobileSearchBarOpen = true;
 		e.stopPropagation();
 	};
@@ -48,7 +46,6 @@
 	const closeSearchbarMobile = () => {
 		searchbarMobileTop = '0';
 		navigationBoxShadow = '0px 0px 0px #00000040';
-		searchMobileType = 'button';
 		isMobileSearchBarOpen = false;
 	};
 

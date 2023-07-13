@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { user } from '$lib/stores/auth';
-    import { page } from '$app/stores';
     import type {PageServerData} from "./$types"
 
     export let data: PageServerData;

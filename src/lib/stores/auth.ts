@@ -24,7 +24,6 @@ if (browser) {
             path: '/',
             maxAge: token ? undefined : 0,
         })
-        console.log(newUser);
         user.set(newUser);
     });
 }

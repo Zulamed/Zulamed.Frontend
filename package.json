@@ -32,7 +32,10 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@types/cookie": "^0.5.1",
+		"cookie": "^0.5.0",
 		"firebase": "^10.0.0",
+		"firebase-admin": "^11.10.0",
 		"hls.js": "^1.4.6",
 		"nprogress": "^0.2.0",
 		"svelte-portal": "^2.2.0",

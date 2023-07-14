@@ -7,6 +7,9 @@
 	import Description from './components/description.svelte';
 	import Comments from './components/comments.svelte';
 
+	let showMoreButtonActive = false;
+	let videoVisibility = true;
+
 	let matches = false;
 
 	onMount(async () => {
@@ -14,11 +17,24 @@
 		let match = () => {
 			matches = media.matches;
 		};
+		const resize = () => {
+			if (window.innerWidth <= 600) {
+				videoVisibility = false;
+				showMoreButtonActive = true;
+			} else {
+				videoVisibility = true;
+				showMoreButtonActive = false;
+			}
+		};
+        resize();
+        // i originally used <svelte:window> to bind the event listener but sometimes it didn't work need to investigate
+		window.addEventListener('resize', resize);
 		match();
 		media.addEventListener('change', match);
 		scripts();
 		return () => {
 			media.removeEventListener('change', match);
+			window.removeEventListener('resize', resize);
 		};
 	});
 	export let data: PageData;
@@ -80,94 +96,103 @@
 					<p class="vid-views">670k views</p>
 				</div>
 			</div>
-			<div class="side-video-list">
-				<a href="." class="small-thumbnail"><img src="/img/videoPreviews/2.png" alt="" /></a>
-				<div class="vid-info">
-					<a href=".">What happens during surgery?</a>
-					<p>Lorem Ipsum</p>
-					<p class="vid-views">670k views</p>
+			{#if videoVisibility}
+				<div class="side-video-list">
+					<a href="." class="small-thumbnail"><img src="/img/videoPreviews/2.png" alt="" /></a>
+					<div class="vid-info">
+						<a href=".">What happens during surgery?</a>
+						<p>Lorem Ipsum</p>
+						<p class="vid-views">670k views</p>
+					</div>
 				</div>
-			</div>
-			<div class="side-video-list">
-				<a href="." class="small-thumbnail"><img src="/img/videoPreviews/3.png" alt="" /></a>
-				<div class="vid-info">
-					<a href=".">What happens during surgery?</a>
-					<p>Lorem Ipsum</p>
-					<p class="vid-views">670k views</p>
+				<div class="side-video-list">
+					<a href="." class="small-thumbnail"><img src="/img/videoPreviews/3.png" alt="" /></a>
+					<div class="vid-info">
+						<a href=".">What happens during surgery?</a>
+						<p>Lorem Ipsum</p>
+						<p class="vid-views">670k views</p>
+					</div>
 				</div>
-			</div>
-			<div class="side-video-list">
-				<a href="." class="small-thumbnail"><img src="/img/videoPreviews/4.png" alt="" /></a>
-				<div class="vid-info">
-					<a href=".">What happens during surgery?</a>
-					<p>Lorem Ipsum</p>
-					<p class="vid-views">670k views</p>
+				<div class="side-video-list">
+					<a href="." class="small-thumbnail"><img src="/img/videoPreviews/4.png" alt="" /></a>
+					<div class="vid-info">
+						<a href=".">What happens during surgery?</a>
+						<p>Lorem Ipsum</p>
+						<p class="vid-views">670k views</p>
+					</div>
 				</div>
-			</div>
-			<div class="side-video-list">
-				<a href="." class="small-thumbnail"><img src="/img/videoPreviews/5.png" alt="" /></a>
-				<div class="vid-info">
-					<a href=".">What happens during surgery?</a>
-					<p>Lorem Ipsum</p>
-					<p class="vid-views">670k views</p>
+				<div class="side-video-list">
+					<a href="." class="small-thumbnail"><img src="/img/videoPreviews/5.png" alt="" /></a>
+					<div class="vid-info">
+						<a href=".">What happens during surgery?</a>
+						<p>Lorem Ipsum</p>
+						<p class="vid-views">670k views</p>
+					</div>
 				</div>
-			</div>
 
-			<div class="side-video-list">
-				<a href="." class="small-thumbnail"><img src="/img/videoPreviews/6.png" alt="" /></a>
-				<div class="vid-info">
-					<a href=".">What happens during surgery?</a>
-					<p>Lorem Ipsum</p>
-					<p class="vid-views">670k views</p>
+				<div class="side-video-list">
+					<a href="." class="small-thumbnail"><img src="/img/videoPreviews/6.png" alt="" /></a>
+					<div class="vid-info">
+						<a href=".">What happens during surgery?</a>
+						<p>Lorem Ipsum</p>
+						<p class="vid-views">670k views</p>
+					</div>
 				</div>
-			</div>
 
-			<div class="side-video-list">
-				<a href="." class="small-thumbnail"><img src="/img/videoPreviews/1.png" alt="" /></a>
-				<div class="vid-info">
-					<a href=".">What happens during surgery?</a>
-					<p>Lorem Ipsum</p>
-					<p class="vid-views">670k views</p>
+				<div class="side-video-list">
+					<a href="." class="small-thumbnail"><img src="/img/videoPreviews/1.png" alt="" /></a>
+					<div class="vid-info">
+						<a href=".">What happens during surgery?</a>
+						<p>Lorem Ipsum</p>
+						<p class="vid-views">670k views</p>
+					</div>
 				</div>
-			</div>
 
-			<div class="side-video-list">
-				<a href="." class="small-thumbnail"><img src="/img/videoPreviews/2.png" alt="" /></a>
-				<div class="vid-info">
-					<a href=".">What happens during surgery?</a>
-					<p>Lorem Ipsum</p>
-					<p class="vid-views">670k views</p>
+				<div class="side-video-list">
+					<a href="." class="small-thumbnail"><img src="/img/videoPreviews/2.png" alt="" /></a>
+					<div class="vid-info">
+						<a href=".">What happens during surgery?</a>
+						<p>Lorem Ipsum</p>
+						<p class="vid-views">670k views</p>
+					</div>
 				</div>
-			</div>
 
-			<div class="side-video-list">
-				<a href="." class="small-thumbnail"><img src="/img/videoPreviews/3.png" alt="" /></a>
-				<div class="vid-info">
-					<a href=".">What happens during surgery?</a>
-					<p>Lorem Ipsum</p>
-					<p class="vid-views">670k views</p>
+				<div class="side-video-list">
+					<a href="." class="small-thumbnail"><img src="/img/videoPreviews/3.png" alt="" /></a>
+					<div class="vid-info">
+						<a href=".">What happens during surgery?</a>
+						<p>Lorem Ipsum</p>
+						<p class="vid-views">670k views</p>
+					</div>
 				</div>
-			</div>
 
-			<div class="side-video-list">
-				<a href="." class="small-thumbnail"><img src="/img/videoPreviews/4.png" alt="" /></a>
-				<div class="vid-info">
-					<a href=".">What happens during surgery?</a>
-					<p>Lorem Ipsum</p>
-					<p class="vid-views">670k views</p>
+				<div class="side-video-list">
+					<a href="." class="small-thumbnail"><img src="/img/videoPreviews/4.png" alt="" /></a>
+					<div class="vid-info">
+						<a href=".">What happens during surgery?</a>
+						<p>Lorem Ipsum</p>
+						<p class="vid-views">670k views</p>
+					</div>
 				</div>
-			</div>
 
-			<div class="side-video-list">
-				<a href="." class="small-thumbnail"><img src="/img/videoPreviews/5.png" alt="" /></a>
-				<div class="vid-info">
-					<a href=".">What happens during surgery?</a>
-					<p>Lorem Ipsum</p>
-					<p class="vid-views">670k views</p>
+				<div class="side-video-list">
+					<a href="." class="small-thumbnail"><img src="/img/videoPreviews/5.png" alt="" /></a>
+					<div class="vid-info">
+						<a href=".">What happens during surgery?</a>
+						<p>Lorem Ipsum</p>
+						<p class="vid-views">670k views</p>
+					</div>
 				</div>
-			</div>
-
-			<button id="showMoreButton">show more</button>
+			{/if}
+			{#if showMoreButtonActive}
+				<button
+					id="showMoreButton"
+					on:click={() => {
+						videoVisibility = true;
+						showMoreButtonActive = false;
+					}}>show more</button
+				>
+			{/if}
 		</div>
 		{#if matches}
 			<Comments />

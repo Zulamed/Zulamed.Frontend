@@ -59,34 +59,34 @@ export function scripts(): void {
 
 	// ================VIDEO SHOW MORE MOBILE ==================
 
-	const container = document.getElementById('right-videolist') as HTMLElement;
-	const showMoreButton = document.getElementById('showMoreButton') as HTMLElement;
-	const itemsToShow = container.getElementsByClassName('side-video-list');
-
-	function screenWidthVideos(): void {
-		if (window.innerWidth <= 600) {
-			for (let i = 1; i < itemsToShow.length; i++) {
-				(itemsToShow[i] as HTMLElement).style.display = 'none';
-				showMoreButton.style.display = 'block';
-			}
-
-			showMoreButton.addEventListener('click', function () {
-				for (let i = 1; i < itemsToShow.length; i++) {
-					(itemsToShow[i] as HTMLElement).style.display = 'block';
-				}
-
-				showMoreButton.style.display = 'none';
-			});
-		} else {
-			for (let i = 0; i < itemsToShow.length; i++) {
-				(itemsToShow[i] as HTMLElement).style.display = 'flex';
-			}
-			showMoreButton.style.display = 'none';
-		}
-	}
-
-	screenWidthVideos();
-	window.addEventListener('resize', screenWidthVideos);
+	// const container = document.getElementById('right-videolist') as HTMLElement;
+	// const showMoreButton = document.getElementById('showMoreButton') as HTMLElement;
+	// const itemsToShow = container.getElementsByClassName('side-video-list');
+	//
+	// function screenWidthVideos(): void {
+	// 	if (window.innerWidth <= 600) {
+	// 		for (let i = 1; i < itemsToShow.length; i++) {
+	// 			(itemsToShow[i] as HTMLElement).style.display = 'none';
+	// 			showMoreButton.style.display = 'block';
+	// 		}
+	//
+	// 		showMoreButton.addEventListener('click', function () {
+	// 			for (let i = 1; i < itemsToShow.length; i++) {
+	// 				(itemsToShow[i] as HTMLElement).style.display = 'block';
+	// 			}
+	//
+	// 			showMoreButton.style.display = 'none';
+	// 		});
+	// 	} else {
+	// 		for (let i = 0; i < itemsToShow.length; i++) {
+	// 			(itemsToShow[i] as HTMLElement).style.display = 'flex';
+	// 		}
+	// 		showMoreButton.style.display = 'none';
+	// 	}
+	// }
+	//
+	// screenWidthVideos();
+	// window.addEventListener('resize', screenWidthVideos);
 
 	// ================VIDEO SHOW MORE MOBILE ==================
 

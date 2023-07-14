@@ -1,7 +1,4 @@
 /* ============NAVIGATION============ */
-:root {
-	--primary-color: #54b9a2;
-}
 
 * {
 	margin: 0;
@@ -615,6 +612,7 @@ nav {
 }
 
 @media (max-width: 1027px) {
+
 	/* =============NAVIGATION============ */
 	nav {
 		background-color: white;
@@ -701,6 +699,7 @@ nav {
 	.searchbar {
 		display: none;
 	}
+
 	.overlay {
 		top: 0;
 		left: -100%;

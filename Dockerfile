@@ -16,5 +16,5 @@ RUN pnpm build
 FROM build as start
 WORKDIR /app
 EXPOSE 3000
-CMD ["node", "build"]
+CMD node -r dotenv/config build
 

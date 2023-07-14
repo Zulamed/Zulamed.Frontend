@@ -6,7 +6,6 @@
 	import { navigating } from '$app/stores';
 	import 'nprogress/nprogress.css';
 	import Drawer from '$lib/components/drawer/drawer.svelte';
-	import { sidebarOpened } from '$lib/components/sidebarAndNavbar/stores/sidebarOpened';
 
 	NProgress.configure({
 		minimum: 0.16
@@ -20,10 +19,7 @@
 </script>
 
 <svelte:head>
-	{#if $page.url.pathname == '/'}
-		<link rel="stylesheet" href="/style.css" />
-		<!-- <link rel="stylesheet" href="/SidebarAndNavbar.css" /> -->
-	{:else if $page.url.pathname.includes('/video')}
+	{#if $page.url.pathname.includes('/video')}
 		<link rel="stylesheet" href="/play-video.css" />
 	{/if}
 </svelte:head>
@@ -35,25 +31,3 @@
 {/if}
 
 <slot />
-
-<style>
-	.large-container {
-		padding-left: 4%;
-	}
-	@media (max-width: 1440px) {
-		.large-container {
-			padding-left: 6%;
-		}
-	}
-	@media (max-width: 1238px) {
-		.large-container {
-			padding-left: 8%;
-		}
-	}
-	@media (max-width: 900px) {
-		.large-container {
-			padding-left: 0;
-			padding-right: 0;
-		}
-	}
-</style>

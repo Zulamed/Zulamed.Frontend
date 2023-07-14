@@ -22,40 +22,40 @@ export function scripts(): void {
 	// ========DESCRIPTION==========
 	// ========COMMENTS==========
 
-	let contains = false;
+	// let contains = false;
 
-	function foo(x: MediaQueryList): void {
-		if (x.matches) {
-			const comments = document.getElementById('play-video-comments') as HTMLElement;
-			const videoContainer = document.getElementById('play-video') as HTMLElement;
-			const moreComments = document.getElementById('more-comments') as HTMLElement;
-			const row = document.getElementById('row') as HTMLElement;
+	// function foo(x: MediaQueryList): void {
+	// 	if (x.matches) {
+	// 		const comments = document.getElementById('play-video-comments') as HTMLElement;
+	// 		const videoContainer = document.getElementById('play-video') as HTMLElement;
+	// 		const moreComments = document.getElementById('more-comments') as HTMLElement;
+	// 		const row = document.getElementById('row') as HTMLElement;
 
-			videoContainer.removeChild(comments);
-			videoContainer.removeChild(moreComments);
-			row.insertAdjacentElement('beforeend', comments);
-			row.insertAdjacentElement('beforeend', moreComments);
-			contains = true;
-		} else {
-			const comments = document.getElementById('play-video-comments') as HTMLElement;
-			const videoContainer = document.getElementById('play-video') as HTMLElement;
-			const moreComments = document.getElementById('more-comments') as HTMLElement;
-			const row = document.getElementById('row') as HTMLElement;
-			if (contains) {
-				row.removeChild(comments);
-				row.removeChild(moreComments);
-				videoContainer.insertAdjacentElement('beforeend', comments);
-				videoContainer.insertAdjacentElement('beforeend', moreComments);
-				contains = false;
-			}
-		}
-	}
+	// 		videoContainer.removeChild(comments);
+	// 		videoContainer.removeChild(moreComments);
+	// 		row.insertAdjacentElement('beforeend', comments);
+	// 		row.insertAdjacentElement('beforeend', moreComments);
+	// 		contains = true;
+	// 	} else {
+	// 		const comments = document.getElementById('play-video-comments') as HTMLElement;
+	// 		const videoContainer = document.getElementById('play-video') as HTMLElement;
+	// 		const moreComments = document.getElementById('more-comments') as HTMLElement;
+	// 		const row = document.getElementById('row') as HTMLElement;
+	// 		if (contains) {
+	// 			row.removeChild(comments);
+	// 			row.removeChild(moreComments);
+	// 			videoContainer.insertAdjacentElement('beforeend', comments);
+	// 			videoContainer.insertAdjacentElement('beforeend', moreComments);
+	// 			contains = false;
+	// 		}
+	// 	}
+	// }
 
-	const media = window.matchMedia('(max-width:1027px)');
-	foo(media);
-	media.addEventListener('change', () => {
-		foo(media);
-	});
+	// const media = window.matchMedia('(max-width:1027px)');
+	// foo(media);
+	// media.addEventListener('change', () => {
+	// 	foo(media);
+	// });
 
 	// ================VIDEO SHOW MORE MOBILE ==================
 

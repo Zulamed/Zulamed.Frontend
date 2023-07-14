@@ -838,9 +838,9 @@ img {
 		border-radius: 0px;
 	}
 
-	.play-video-description {
-		margin-bottom: 37px;
-	}
+	/* .play-video-description { */
+	/* 	margin-bottom: 37px; */
+	/* } */
 
 	.side-video-list {
 		display: flex;
@@ -864,11 +864,11 @@ img {
 		line-height: 17px;
 	}
 
-	.play-video-stats p,
-	.play-video-stats span {
-		font-size: 13px;
-		line-height: 16px;
-	}
+	/* .play-video-stats p, */
+	/* .play-video-stats span { */
+	/* 	font-size: 13px; */
+	/* 	line-height: 16px; */
+	/* } */
 
 	.channel-info div h5 {
 		font-weight: 600;
@@ -912,11 +912,11 @@ img {
 
 @media (max-width: 364px) {
 
-	.play-video-stats p,
-	.play-video-stats span {
-		font-size: 11px;
-		line-height: 18px;
-	}
+	/* .play-video-stats p, */
+	/* .play-video-stats span { */
+	/* 	font-size: 11px; */
+	/* 	line-height: 18px; */
+	/* } */
 }
 
 /* ============MEDIAQUERY END============ */

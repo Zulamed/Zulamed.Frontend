@@ -8,6 +8,7 @@ a {
     color: #5a5a5a;
 }
 
+
 nav {
     background-color: white;
     height: 74px;
@@ -20,10 +21,12 @@ nav {
 
 .nav-right .user-icon {
     width: 35px;
+    cursor: pointer;
 }
 
 .nav-left .menu-icon {
     width: 30px;
+    cursor: pointer;
 }
 
 .menu-icon-background-small {
@@ -53,6 +56,7 @@ nav {
 
 .nav-left .logo {
     width: 164px;
+    cursor: pointer;
 }
 
 .searchbar-mobile {
@@ -90,6 +94,7 @@ a {
 
 .lang-icon {
     margin-right: 8px;
+    cursor: pointer;
 }
 
 .language-container {
@@ -124,6 +129,7 @@ a {
 
 #lang-close-icon {
     float: right;
+    cursor: pointer;
 }
 
 .language-container p {
@@ -142,6 +148,7 @@ a {
     height: 40px;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .language-container a.active {

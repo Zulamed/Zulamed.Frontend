@@ -1,12 +1,12 @@
 <script lang="ts">
-    import './main.css'
+	import './main.css';
 	import { page } from '$app/stores';
 	import SidebarAndNavbar from '$lib/components/sidebarAndNavbar/sidebarAndNavbar.svelte';
 	import NProgress from 'nprogress';
 	import { navigating } from '$app/stores';
 	import 'nprogress/nprogress.css';
 	import Drawer from '$lib/components/drawer/drawer.svelte';
-    import { sidebarOpened } from '$lib/components/sidebarAndNavbar/stores/sidebarOpened';
+	import { sidebarOpened } from '$lib/components/sidebarAndNavbar/stores/sidebarOpened';
 
 	NProgress.configure({
 		minimum: 0.16
@@ -34,9 +34,7 @@
 	<Drawer />
 {/if}
 
-<div class="container" class:large-container={!$sidebarOpened && $page.url.pathname == '/'}>
-	<slot />
-</div>
+<slot />
 
 <style>
 	.large-container {

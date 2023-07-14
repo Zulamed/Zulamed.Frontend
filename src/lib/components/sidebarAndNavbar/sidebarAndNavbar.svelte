@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { portal } from 'svelte-portal';
-    import {sidebarOpened} from './stores/sidebarOpened'
+	import { sidebarOpened } from './stores/sidebarOpened';
 	let isMobileSearchBarOpen = false;
 	let displayProfileContainer = 'none';
 	let displayLanguageContainer = 'none';
@@ -11,10 +11,9 @@
 	let overlayLeft = '-100%';
 	let shortcutPadding = '7px';
 
-    $: {
-        $sidebarOpened = sidebarOpen;
-    }
-
+	$: {
+		$sidebarOpened = sidebarOpen;
+	}
 
 	const toggleProfileContainer = () => {
 		displayProfileContainer = displayProfileContainer === 'none' ? 'block' : 'none';
@@ -30,8 +29,8 @@
 
 	const toggleSidebar = () => {
 		sidebarOpen = !sidebarOpen;
-		if (sidebarOpen) shortcutPadding = '0';
-		else shortcutPadding = '7px';
+		if (sidebarOpen) shortcutPadding = '7px';
+		else shortcutPadding = '0';
 	};
 
 	const openMobileSidebar = () => {

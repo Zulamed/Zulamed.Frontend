@@ -1,6 +1,13 @@
-:root {
-	--primary-color: #54b9a2;
+.flex-div {
+    display: flex;
+    align-items: center;
 }
+
+a {
+    text-decoration: none;
+    color: #5a5a5a;
+}
+
 nav {
     background-color: white;
     height: 74px;
@@ -312,6 +319,10 @@ a {
     display: block;
     flex-direction: column;
     align-items: center;
+}
+
+.small-sidebar .shortcut-link {
+    padding: 12px 0 11px 0px;
 }
 
 .shortcut-links a {

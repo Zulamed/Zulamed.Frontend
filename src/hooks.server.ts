@@ -1,10 +1,16 @@
 import { auth } from '$lib/firebase/admin';
 import { redirect, type Handle } from '@sveltejs/kit';
+import type { DecodedIdToken } from 'firebase-admin/auth';
 
 export const handle = (async ({ event, resolve }) => {
     const token = event.cookies.get('token');
     const path = event.url.pathname;
-    const user = token ? await auth.verifyIdToken(token) : undefined;
+    let user: DecodedIdToken | undefined = undefined;
+    try {
+        user = token ? await auth.verifyIdToken(token) : undefined;
+    } catch (error) {
+        return await resolve(event);
+    }
     if (user) {
         event.locals.userId = user['UserId']
     }

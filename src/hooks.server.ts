@@ -8,15 +8,16 @@ export const handle = (async ({ event, resolve }) => {
     let user: DecodedIdToken | undefined = undefined;
     try {
         user = token ? await auth.verifyIdToken(token) : undefined;
+        if (user) {
+            event.locals.userId = user['UserId']
+        }
+        if (path === '/protected' && !user) {
+            throw redirect(307, '/')
+        }
     } catch (error) {
-        return await resolve(event);
-    }
-    if (user) {
-        event.locals.userId = user['UserId']
-    }
-    if (path === '/protected' && !user) {
+        // if token is invalid, remove it from cookies
+        event.cookies.set('token', '', { maxAge: -1 });
         throw redirect(307, '/')
     }
-
     return await resolve(event);
 }) satisfies Handle;

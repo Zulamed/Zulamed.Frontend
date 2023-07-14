@@ -319,39 +319,39 @@ img {
 	display: none;
 }
 
-.play-video-description {
-	min-height: 64px;
-	height: 64px;
-	width: 100%;
-	background: #ebf8f5;
-	border-radius: 18px;
-	padding: 8px 19px;
-	overflow: hidden;
-	cursor: pointer;
-	margin-bottom: 14px;
-}
-
-.play-video-stats {
-	width: 100%;
-	display: flex;
-	margin-bottom: 14px;
-}
-
-.play-video-stats p {
-	margin-right: 10px;
-	font-weight: 600;
-	font-size: 16px;
-	line-height: 19px;
-	color: #000000;
-}
-
-.play-video-stats span {
-	margin-right: 10px;
-	font-weight: 500;
-	font-size: 16px;
-	line-height: 19px;
-	color: #616163;
-}
+/* .play-video-description { */
+/* 	min-height: 64px; */
+/* 	height: 64px; */
+/* 	width: 100%; */
+/* 	background: #ebf8f5; */
+/* 	border-radius: 18px; */
+/* 	padding: 8px 19px; */
+/* 	overflow: hidden; */
+/* 	cursor: pointer; */
+/* 	margin-bottom: 14px; */
+/* } */
+/**/
+/* .play-video-stats { */
+/* 	width: 100%; */
+/* 	display: flex; */
+/* 	margin-bottom: 14px; */
+/* } */
+/**/
+/* .play-video-stats p { */
+/* 	margin-right: 10px; */
+/* 	font-weight: 600; */
+/* 	font-size: 16px; */
+/* 	line-height: 19px; */
+/* 	color: #000000; */
+/* } */
+/**/
+/* .play-video-stats span { */
+/* 	margin-right: 10px; */
+/* 	font-weight: 500; */
+/* 	font-size: 16px; */
+/* 	line-height: 19px; */
+/* 	color: #616163; */
+/* } */
 
 /* ============DESCRIPTION END============ */
 /* ============COMMENTS============ */

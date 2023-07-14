@@ -4,6 +4,7 @@
 	import VideoPlayer from './components/videoPlayer/videoPlayer.svelte';
 	import type { PageData } from './$types';
 	import Chips from './components/chips.svelte';
+	import Description from './components/description.svelte';
 	onMount(async () => {
 		scripts();
 	});
@@ -47,17 +48,7 @@
 					>
 				</div>
 			</div>
-			<div id="play-video-description" class="play-video-description">
-				<div class="play-video-stats">
-					<p>304k views</p>
-					<p>5 days ago</p>
-					<span>#cardio #operation</span>
-				</div>
-
-				<p class="description-text">
-					{data.video.videoDescription}
-				</p>
-			</div>
+			<Description textContent={data.video.videoDescription} />
 
 			<div id="play-video-comments" class="play-video-comments">
 				<p style="margin-bottom: 69px;">2k comments</p>

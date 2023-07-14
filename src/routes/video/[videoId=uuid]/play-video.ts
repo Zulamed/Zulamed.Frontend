@@ -1,23 +1,23 @@
 export function scripts(): void {
 	// ========DESCRIPTION==========
 
-	const descriptionText = document.querySelector('.description-text') as HTMLElement;
-	const originalText = descriptionText.textContent;
-	const description = document.querySelector('#play-video-description') as HTMLElement;
-	const text = descriptionText.innerHTML;
-	const trimmedText = text.substring(0, 30) + '... Read more';
-	descriptionText.textContent = trimmedText;
-	function toggleDescription(): void {
-		const height = window.getComputedStyle(description).getPropertyValue('height');
-		if (height === '64px') {
-			description.style.height = 'auto';
-			descriptionText.textContent = originalText;
-		} else {
-			description.style.height = '64px';
-			descriptionText.textContent = trimmedText;
-		}
-	}
-	document.querySelector('.play-video-description')?.addEventListener('click', toggleDescription);
+	// const descriptionText = document.querySelector('.description-text') as HTMLElement;
+	// const originalText = descriptionText.textContent;
+	// const description = document.querySelector('#play-video-description') as HTMLElement;
+	// const text = descriptionText.innerHTML;
+	// const trimmedText = text.substring(0, 30) + '... Read more';
+	// descriptionText.textContent = trimmedText;
+	// function toggleDescription(): void {
+	// 	const height = window.getComputedStyle(description).getPropertyValue('height');
+	// 	if (height === '64px') {
+	// 		description.style.height = 'auto';
+	// 		descriptionText.textContent = originalText;
+	// 	} else {
+	// 		description.style.height = '64px';
+	// 		descriptionText.textContent = trimmedText;
+	// 	}
+	// }
+	// document.querySelector('.play-video-description')?.addEventListener('click', toggleDescription);
 
 	// ========DESCRIPTION==========
 	// ========COMMENTS==========

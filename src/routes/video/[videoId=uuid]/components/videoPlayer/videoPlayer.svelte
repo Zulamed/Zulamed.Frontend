@@ -3,8 +3,8 @@
 	import Hls from 'hls.js';
 	import { defineCustomElements } from 'vidstack/elements';
 	import type { HLSProvider, MediaPlayerElement, MediaProviderChangeEvent } from 'vidstack';
-	import defaultCss from 'vidstack/styles/defaults.css?url';
-	import skinCss from 'vidstack/styles/community-skin/video.css?url';
+	import 'vidstack/styles/defaults.css';
+	import 'vidstack/styles/community-skin/video.css';
 	import { playerVolume } from '../../stores/video-sound-store';
 
 	export let src: string;
@@ -51,10 +51,10 @@
 	});
 </script>
 
-<svelte:head>
-	<link rel="stylesheet" href={defaultCss} />
-	<link rel="stylesheet" href={skinCss} />
-</svelte:head>
+<!-- <svelte:head> -->
+<!-- 	<link rel="stylesheet" href={defaultCss} /> -->
+<!-- 	<link rel="stylesheet" href={skinCss} /> -->
+<!-- </svelte:head> -->
 
 <media-player
 	bind:this={player}

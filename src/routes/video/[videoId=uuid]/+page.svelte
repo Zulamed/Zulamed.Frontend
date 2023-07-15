@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { scripts } from './play-video';
 	import VideoPlayer from './components/videoPlayer/videoPlayer.svelte';
 	import type { PageData } from './$types';
 	import Chips from './components/chips.svelte';
@@ -9,6 +8,9 @@
 
 	let showMoreVideosButton = false;
 	let videoVisibility = true;
+	let likeActive = false;
+	let dislikeActive = false;
+	let followActive = false;
 
 	let matches = false;
 
@@ -31,7 +33,6 @@
 		window.addEventListener('resize', resize);
 		match();
 		media.addEventListener('change', match);
-		scripts();
 		return () => {
 			media.removeEventListener('change', match);
 			window.removeEventListener('resize', resize);
@@ -60,16 +61,39 @@
 						</div>
 					</div>
 
-					<button type="button" id="follow-btn" class="interaction-btn follow-btn">FOLLOW</button>
+					<button
+						type="button"
+						id="follow-btn"
+						class:active={followActive}
+						on:click={() => {
+							followActive = !followActive;
+						}}
+						class="interaction-btn follow-btn">{followActive ? 'FOLLOWED' : 'FOLLOW'}</button
+					>
 				</div>
 				<div class="play-video-info-right">
 					<div class="interaction-btn-group">
-						<button id="like-btn" type="button" class="interaction-btn like-btn"
+						<button
+							id="like-btn"
+							type="button"
+							class="interaction-btn like-btn"
+							class:active={likeActive}
+							on:click={() => {
+								likeActive = !likeActive;
+								dislikeActive = false;
+							}}
 							><img src="/img/icons/thumb_up_white_24dp.svg" alt="" />
 							10k</button
 						>
-						<button id="dislike-btn" type="button" class="interaction-btn dislike-btn"
-							><img src="/img/icons/thumb_down_white_24dp.svg" alt="" /></button
+						<button
+							id="dislike-btn"
+							type="button"
+							class="interaction-btn dislike-btn"
+							class:active={dislikeActive}
+							on:click={() => {
+								dislikeActive = !dislikeActive;
+								likeActive = false;
+							}}><img src="/img/icons/thumb_down_white_24dp.svg" alt="" /></button
 						>
 					</div>
 					<button type="button" class="interaction-btn share-btn"
@@ -201,3 +225,5 @@
 
 	<!-- ============MAIN END============ -->
 </div>
+
+<style src="./play-video.css"></style>

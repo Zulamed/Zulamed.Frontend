@@ -18,11 +18,6 @@
 	}
 </script>
 
-<svelte:head>
-	{#if $page.url.pathname.includes('/video')}
-		<link rel="stylesheet" href="/play-video.css" />
-	{/if}
-</svelte:head>
 
 {#if $page.url.pathname == '/'}
 	<SidebarAndNavbar />

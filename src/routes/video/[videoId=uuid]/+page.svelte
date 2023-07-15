@@ -12,30 +12,37 @@
 	let dislikeActive = false;
 	let followActive = false;
 
-	let matches = false;
+	let matches1027px = false;
+	let matches600px = false;
+
+	$: {
+		if (matches600px) {
+			videoVisibility = false;
+			showMoreVideosButton = true;
+		} else {
+			videoVisibility = true;
+			showMoreVideosButton = false;
+		}
+	}
 
 	onMount(async () => {
-		let media = window.matchMedia('(max-width:1027px)');
-		let match = () => {
-			matches = media.matches;
+		let media1027px = window.matchMedia('(max-width:1027px)');
+		let media600px = window.matchMedia('(max-width:600px)');
+		const match1027px = () => {
+			matches1027px = media1027px.matches;
 		};
-		const resize = () => {
-			if (window.innerWidth <= 600) {
-				videoVisibility = false;
-				showMoreVideosButton = true;
-			} else {
-				videoVisibility = true;
-				showMoreVideosButton = false;
-			}
+		const match600px = () => {
+			matches600px = media600px.matches;
 		};
-		resize();
+		match600px();
 		// i originally used <svelte:window> to bind the event listener but sometimes it didn't work need to investigate
-		window.addEventListener('resize', resize);
-		match();
-		media.addEventListener('change', match);
+		window.addEventListener('resize', match600px);
+		match1027px();
+		media1027px.addEventListener('change', match1027px);
+        media600px.addEventListener('change', match600px);
 		return () => {
-			media.removeEventListener('change', match);
-			window.removeEventListener('resize', resize);
+			media1027px.removeEventListener('change', match1027px);
+            media600px.removeEventListener('change', match600px);
 		};
 	});
 	export let data: PageData;
@@ -102,7 +109,7 @@
 				</div>
 			</div>
 			<Description textContent={data.video.videoDescription} />
-			{#if !matches}
+			{#if !matches1027px}
 				<Comments />
 			{/if}
 		</div>
@@ -218,7 +225,7 @@
 				>
 			{/if}
 		</div>
-		{#if matches}
+		{#if matches1027px}
 			<Comments />
 		{/if}
 	</div>

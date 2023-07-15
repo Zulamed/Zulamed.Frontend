@@ -91,37 +91,37 @@ export function scripts(): void {
 	// ================VIDEO SHOW MORE MOBILE ==================
 
 	// ================COMMENTS SHOW MORE ==================
-
-	const commentsContainer = document.getElementById('play-video-comments') as HTMLElement;
-	const showMoreComments = document.getElementById('more-comments') as HTMLElement;
-	const commentsToShow = commentsContainer.getElementsByClassName('comment-container');
-
-	function screenWidthComments(): void {
-		if (window.innerWidth > 600) {
-			for (let i = 2; i < commentsToShow.length; i++) {
-				(commentsToShow[i] as HTMLElement).style.display = 'none';
-				showMoreComments.style.display = 'flex';
-				commentsContainer.style.maskImage =
-					'linear-gradient(180deg, rgba(0, 0, 0, 1), transparent 150%)';
-			}
-
-			showMoreComments.addEventListener('click', function () {
-				for (let i = 1; i < commentsToShow.length; i++) {
-					(commentsToShow[i] as HTMLElement).style.display = 'flex';
-					commentsContainer.style.maskImage = 'none';
-				}
-				showMoreComments.style.display = 'none';
-			});
-		} else {
-			for (let i = 0; i < commentsToShow.length; i++) {
-				(commentsToShow[i] as HTMLElement).style.display = 'flex';
-			}
-			showMoreComments.style.display = 'none';
-		}
-	}
-
-	screenWidthComments();
-	window.addEventListener('resize', screenWidthComments);
+	//
+	// const commentsContainer = document.getElementById('play-video-comments') as HTMLElement;
+	// const showMoreComments = document.getElementById('more-comments') as HTMLElement;
+	// const commentsToShow = commentsContainer.getElementsByClassName('comment-container');
+	//
+	// function screenWidthComments(): void {
+	// 	if (window.innerWidth > 600) {
+	// 		for (let i = 2; i < commentsToShow.length; i++) {
+	// 			(commentsToShow[i] as HTMLElement).style.display = 'none';
+	// 			showMoreComments.style.display = 'flex';
+	// 			commentsContainer.style.maskImage =
+	// 				'linear-gradient(180deg, rgba(0, 0, 0, 1), transparent 150%)';
+	// 		}
+	//
+	// 		showMoreComments.addEventListener('click', function () {
+	// 			for (let i = 1; i < commentsToShow.length; i++) {
+	// 				(commentsToShow[i] as HTMLElement).style.display = 'flex';
+	// 				commentsContainer.style.maskImage = 'none';
+	// 			}
+	// 			showMoreComments.style.display = 'none';
+	// 		});
+	// 	} else {
+	// 		for (let i = 0; i < commentsToShow.length; i++) {
+	// 			(commentsToShow[i] as HTMLElement).style.display = 'flex';
+	// 		}
+	// 		showMoreComments.style.display = 'none';
+	// 	}
+	// }
+	//
+	// screenWidthComments();
+	// window.addEventListener('resize', screenWidthComments);
 	// ================COMMENTS SHOW MORE ==================
 
 	// =============COMMENT INPUT===============

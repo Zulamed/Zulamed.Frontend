@@ -7,7 +7,7 @@
 	import Description from './components/description.svelte';
 	import Comments from './components/comments.svelte';
 
-	let showMoreButtonActive = false;
+	let showMoreVideosButton = false;
 	let videoVisibility = true;
 
 	let matches = false;
@@ -20,14 +20,14 @@
 		const resize = () => {
 			if (window.innerWidth <= 600) {
 				videoVisibility = false;
-				showMoreButtonActive = true;
+				showMoreVideosButton = true;
 			} else {
 				videoVisibility = true;
-				showMoreButtonActive = false;
+				showMoreVideosButton = false;
 			}
 		};
-        resize();
-        // i originally used <svelte:window> to bind the event listener but sometimes it didn't work need to investigate
+		resize();
+		// i originally used <svelte:window> to bind the event listener but sometimes it didn't work need to investigate
 		window.addEventListener('resize', resize);
 		match();
 		media.addEventListener('change', match);
@@ -184,12 +184,12 @@
 					</div>
 				</div>
 			{/if}
-			{#if showMoreButtonActive}
+			{#if showMoreVideosButton}
 				<button
 					id="showMoreButton"
 					on:click={() => {
 						videoVisibility = true;
-						showMoreButtonActive = false;
+						showMoreVideosButton = false;
 					}}>show more</button
 				>
 			{/if}

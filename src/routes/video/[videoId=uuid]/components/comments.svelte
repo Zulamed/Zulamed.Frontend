@@ -18,20 +18,27 @@
 		border: '1px solid #54B9A2'
 	};
 	let currentProps: typeof disabledProps | undefined = undefined;
+
+	let matches600px = false;
+
+	$: {
+		if (!matches600px) {
+			visibility = false;
+			showMoreCommentsButton = true;
+		} else {
+			visibility = true;
+			showMoreCommentsButton = false;
+		}
+	}
 	onMount(() => {
-		const resize = () => {
-			if (window.innerWidth > 600) {
-				visibility = false;
-				showMoreCommentsButton = true;
-			} else {
-				visibility = true;
-				showMoreCommentsButton = false;
-			}
+		let media = window.matchMedia('(max-width:600px)');
+		const match600px = () => {
+			matches600px = media.matches;
 		};
-		resize();
-		window.addEventListener('resize', resize);
+		match600px();
+		media.addEventListener('change', match600px);
 		return () => {
-			window.removeEventListener('resize', resize);
+			media.removeEventListener('change', match600px);
 		};
 	});
 </script>

@@ -126,34 +126,34 @@ export function scripts(): void {
 
 	// =============COMMENT INPUT===============
 
-	function showBtns(): void {
-		const btns = document.querySelector('.write-comment-buttons') as HTMLElement;
-		btns.style.display = 'flex';
-	}
-	document.querySelector('.comment-input')?.addEventListener('click', showBtns);
-
-	function hideBtns(): void {
-		const btns = document.querySelector('.write-comment-buttons') as HTMLElement;
-		btns.style.display = 'none';
-	}
-	document.querySelector('.cancel-btn')?.addEventListener('click', hideBtns);
-
-	const inputComment = document.querySelector('.comment-input') as HTMLInputElement;
-	const commentButton = document.querySelector('.comment') as HTMLButtonElement;
-
-	inputComment.addEventListener('input', function () {
-		if (inputComment.value.length > 0) {
-			commentButton.style.color = '#54B9A2';
-			commentButton.style.border = '1px solid #54B9A2';
-			commentButton.style.cursor = 'pointer';
-			commentButton.disabled = false;
-		} else {
-			commentButton.style.color = '#616163';
-			commentButton.style.border = '1px solid #616163';
-			commentButton.style.cursor = 'default';
-			commentButton.disabled = true;
-		}
-	});
+	// function showBtns(): void {
+	// 	const btns = document.querySelector('.write-comment-buttons') as HTMLElement;
+	// 	btns.style.display = 'flex';
+	// }
+	// document.querySelector('.comment-input')?.addEventListener('click', showBtns);
+	//
+	// function hideBtns(): void {
+	// 	const btns = document.querySelector('.write-comment-buttons') as HTMLElement;
+	// 	btns.style.display = 'none';
+	// }
+	// document.querySelector('.cancel-btn')?.addEventListener('click', hideBtns);
+	//
+	// const inputComment = document.querySelector('.comment-input') as HTMLInputElement;
+	// const commentButton = document.querySelector('.comment') as HTMLButtonElement;
+	//
+	// inputComment.addEventListener('input', function () {
+	// 	if (inputComment.value.length > 0) {
+	// 		commentButton.style.color = '#54B9A2';
+	// 		commentButton.style.border = '1px solid #54B9A2';
+	// 		commentButton.style.cursor = 'pointer';
+	// 		commentButton.disabled = false;
+	// 	} else {
+	// 		commentButton.style.color = '#616163';
+	// 		commentButton.style.border = '1px solid #616163';
+	// 		commentButton.style.cursor = 'default';
+	// 		commentButton.disabled = true;
+	// 	}
+	// });
 	// =============COMMENT INPUT===============
 
 	// =============LIKE/DISLIKE & FOLLOW BUTTONS===============

@@ -3,6 +3,21 @@
 
 	let visibility = false;
 	let showMoreCommentsButton = true;
+	let inputVisibility = false;
+	let inputText = '';
+	let disabledProps = {
+		disabled: true,
+		color: '#616163',
+		cursor: 'default',
+		border: '1px solid #616163'
+	};
+	let enabledProps = {
+		disabled: false,
+		color: '#54B9A2',
+		cursor: 'pointer',
+		border: '1px solid #54B9A2'
+	};
+	let currentProps: typeof disabledProps | undefined = undefined;
 	onMount(() => {
 		const resize = () => {
 			if (window.innerWidth > 600) {
@@ -33,11 +48,40 @@
 	<div class="write-comment">
 		<img class="user-profile-picture" src="/img/icons/channel-logo.jpg" alt="" />
 		<form class="write-comment-input">
-			<input placeholder="Add comment..." type="text" class="comment-input" />
-			<div class="write-comment-buttons">
-				<button type="button" class="comment-btn cancel-btn">cancel</button>
-				<button type="submit" disabled class="comment-btn comment">comment</button>
-			</div>
+			<input
+				placeholder="Add comment..."
+				type="text"
+				class="comment-input"
+				bind:value={inputText}
+				on:click={() => {
+					inputVisibility = true;
+				}}
+				on:input={() => {
+					currentProps = inputText.length > 0 ? enabledProps : disabledProps;
+				}}
+			/>
+			{#if inputVisibility}
+				<div class="write-comment-buttons" style:display="flex">
+					<button
+						type="button"
+						class="comment-btn cancel-btn"
+						on:click={() => {
+							inputVisibility = false;
+						}}>cancel</button
+					>
+					<button
+						type="submit"
+						disabled
+						class="comment-btn comment"
+						style="
+                            border: {currentProps?.border};
+                            color: {currentProps?.color};
+                            cursor: {currentProps?.cursor};
+                            disabled: {currentProps?.disabled};
+                      ">comment</button
+					>
+				</div>
+			{/if}
 		</form>
 	</div>
 

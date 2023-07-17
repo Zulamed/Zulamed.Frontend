@@ -85,7 +85,7 @@
                             color: {currentProps?.color};
                             cursor: {currentProps?.cursor};
                             disabled: {currentProps?.disabled};
-                      ">comment</button
+                      ">send a comment</button
 					>
 				</div>
 			{/if}

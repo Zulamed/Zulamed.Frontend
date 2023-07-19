@@ -13,117 +13,176 @@
 			}
 		}
 	}
+	let eyeIcon = 'img/icons/View.svg';
+	let inputPassword: HTMLInputElement;
 </script>
 
 <form on:submit|preventDefault={handleSubmit}>
-	<div class="loginContainer">
-		<h2 class="form-header">Login to Your <br /> ZulaMed Account</h2>
-		<div class="email-container">
-			<label class="form-label" for="email">Email Address</label>
-			<input class="email" name="email" type="email" placeholder="Email" bind:value={email} />
-			{#if errorLogin}
-				<p class="error">Data not found or incorrectly entered</p>
-			{/if}
-		</div>
-		<div class="pass-container">
-			<label class="form-label" for="password">Password</label>
+	<div class="field input-field">
+		<label for="email">Email Address</label>
+		<input name="email" type="email" placeholder="Email" class="input" />
+	</div>
+	{#if errorLogin}
+		<p class="error">Data not found or incorrectly entered</p>
+	{/if}
+
+	<div class="field input-field">
+		<label for="password">Password</label>
+		<div class="pass-group">
 			<input
-				class="password"
+				bind:this={inputPassword}
 				name="password"
 				type="password"
-				placeholder="Password"
+				placeholder="*********"
+				class="password"
 				bind:value={password}
 			/>
-			{#if errorLogin}
-				<p class="error">Data not found or incorrectly entered</p>
-			{/if}
+			<button
+				type="button"
+				class="showpass-btn"
+				on:click={() => {
+					if (eyeIcon == 'img/icons/View.svg') {
+						eyeIcon = 'img/icons/View_hide.svg';
+						inputPassword.type = 'text';
+					} else {
+						eyeIcon = 'img/icons/View.svg';
+						inputPassword.type = 'password';
+					}
+				}}
+			>
+				<img src={eyeIcon} class="eye-icon" alt="" />
+			</button>
 		</div>
-
-		<button class="form-button" type="submit">Log In</button>
+		{#if errorLogin}
+			<p class="error pass-error">Incorrect password</p>
+		{/if}
 	</div>
-	<a class="add-link" href="">Forgot Password?</a>
-	<a class="add-link account-create" href=""
-		>Don’t have account? <span>Click here to Sign Up</span></a
-	>
+
+	<div class="field button-field">
+		<button class="login-btn">Log In</button>
+	</div>
+	<div class="form-link">
+		<a href="." class="forgot-pass">Forgot password?</a>
+	</div>
 </form>
 
 <!-- can be moved to a css file with <style src="./<your-css-file>.css"></style> -->
 <style>
 	form {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
+		margin-top: 77px;
 	}
-	.add-link {
+
+	.field input,
+	.field .login-btn {
+		height: 100%;
+		width: 100%;
+		border: none;
+		font-size: 16px;
+		font-weight: 400;
+	}
+
+	label {
+		color: #000;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: normal;
+	}
+
+	.field input {
+		height: 55px;
+		outline: none;
+		padding: 0 15px;
+		border: 0.5px solid #999999d3;
+		margin-top: 16px;
+	}
+
+	.password {
+		margin-top: 0 !important;
+	}
+
+	.field input:focus {
+		border-bottom-width: 2px;
+	}
+
+	.pass-group {
+		position: relative;
+		margin-top: 16px;
+	}
+
+	/* .eye-icon {
+		position: absolute;
+		top: 50%;
+		right: 10px;
+		transform: translateY(-50%);
+		font-size: 18px;
+		color: #8b8b8b;
+		cursor: pointer;
+		padding: 5px;
+	} */
+
+	.button-field {
+		margin-top: 59px;
+		justify-content: center;
+		display: flex;
+		margin-bottom: 37px !important;
+	}
+
+	.field .login-btn {
+		width: 210px;
+		height: 55px;
+		border-radius: 8px;
+		background: #00baa2;
+		transition: all 0.3s ease;
+		cursor: pointer;
+		color: #273b4a;
+		text-align: center;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 600;
+	}
+
+	.field .login-btn:hover {
+		background-color: #00a790;
+	}
+
+	.form-link {
+		text-align: center;
+		margin-top: 15px;
+	}
+
+	.form-link .forgot-pass {
 		color: #000;
 		text-align: center;
-		font-size: 14px;
+		font-size: 15px;
 		font-style: normal;
 		font-weight: 400;
 		line-height: normal;
 		text-decoration-line: underline;
-		margin-bottom: 22px;
 	}
-	.account-create {
-		color: #273b4a;
-		text-decoration-line: none;
-		margin-bottom: 0;
+	.input-field {
+		position: relative;
+		width: 100%;
+		border-radius: 6px;
+		margin-top: 31px;
 	}
-	.account-create span {
-		text-decoration-line: underline;
-	}
-	.email {
-		margin-bottom: 30px;
-	}
-	.password {
-		margin-bottom: 50px;
-	}
-	.form-button {
-		width: 150px;
-		height: 45px;
-		flex-shrink: 0;
-		border-radius: 8px;
-		background: #00baa2;
-		border: none;
-		outline: none;
-		color: #273b4a;
-		text-align: center;
-		font-size: 15px;
-		font-style: normal;
-		font-weight: 600;
+	.showpass-btn {
+		all: unset;
+		position: absolute;
+		top: 50%;
+		right: 10px;
+		transform: translateY(-50%);
+		font-size: 18px;
+		color: #8b8b8b;
 		cursor: pointer;
-		margin-bottom: 35px;
+		padding: 5px;
 	}
 	.error {
 		color: #ff3e24;
 		font-size: 12px;
 		font-style: normal;
 		font-weight: 500;
-	}
-	.form-header {
-		color: #000;
-		text-align: center;
-		font-size: 28px;
-		font-style: normal;
-		font-weight: 400;
-		margin-bottom: 40px;
-	}
-	.loginContainer {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-	.form-label {
-		color: #000;
-		font-size: 14px;
-		font-style: normal;
-		font-weight: 600;
-		margin-bottom: 15px;
-	}
-	.email-container,
-	.pass-container {
-		display: flex;
-		flex-direction: column;
+		line-height: normal;
+		margin-top: 12px;
 	}
 </style>

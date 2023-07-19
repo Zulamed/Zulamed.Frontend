@@ -1,11 +1,14 @@
 <script lang="ts">
-    import { sidebarOpened } from '$lib/components/sidebarAndNavbar/stores/sidebarOpened';
+	import { sidebarOpened } from '$lib/components/sidebarAndNavbar/stores/sidebarOpened';
 	import type { PageData } from './$types';
 	export let data: PageData;
 </script>
 
+<svelte:head>
+	<title>ZulaMED</title>
+</svelte:head>
 <!-- ------------main--------------- -->
-<div class="container"  class:large-container={!$sidebarOpened} >
+<div class="container" class:large-container={!$sidebarOpened}>
 	<div class="banner">
 		<!-- <div class="searchbar flex-div"> -->
 		<form class="searchbar flex-div" action="">

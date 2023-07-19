@@ -6,7 +6,13 @@
 	import { navigating } from '$app/stores';
 	import 'nprogress/nprogress.css';
 	import Drawer from '$lib/components/drawer/drawer.svelte';
-
+	import { beforeNavigate } from '$app/navigation';
+	let searchbar = $page.url.pathname != '/login';
+	beforeNavigate((aboba) => {
+		if (aboba.to?.url.pathname == '/login') {
+			searchbar = false;
+		}
+	});
 	NProgress.configure({
 		minimum: 0.16
 	});
@@ -18,11 +24,10 @@
 	}
 </script>
 
-
 {#if $page.url.pathname == '/'}
 	<SidebarAndNavbar />
 {:else}
-	<Drawer />
+	<Drawer showSearchbar={searchbar} />
 {/if}
 
 <slot />

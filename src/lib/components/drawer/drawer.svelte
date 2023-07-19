@@ -9,7 +9,7 @@
 	let searchbarMobileTop = '0';
 	let navigationBoxShadow = '0px 0px 0px #00000040';
 	let overlayLeft = '-100%';
-
+	export let showSearchbar = true;
 	const toggleProfileContainer = () => {
 		displayProfileContainer = displayProfileContainer === 'none' ? 'block' : 'none';
 	};
@@ -82,16 +82,19 @@
 		</div>
 		<a class="flex-div" href="/"><img class="logo" src="/img/logo-white-theme.png" alt="" /></a>
 	</div>
-	<div class="nav-center flex-div">
-		<form class="searchbar flex-div" action="">
-			<div class="searchbox">
-				<input type="text" placeholder="Search..." />
-			</div>
-			<button class="search-button" type="submit"
-				><img src="/img/icons/search_white_24dp.svg" alt="" /></button
-			>
-		</form>
-	</div>
+	{#if showSearchbar}
+		<div class="nav-center flex-div">
+			<form class="searchbar flex-div" action="">
+				<div class="searchbox">
+					<input type="text" placeholder="Search..." />
+				</div>
+				<button class="search-button" type="submit"
+					><img src="/img/icons/search_white_24dp.svg" alt="" /></button
+				>
+			</form>
+		</div>
+	{/if}
+
 	<div class="nav-right flex-div">
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div class="flex-div lang-icon" on:click={toggleLanguageContainer}>

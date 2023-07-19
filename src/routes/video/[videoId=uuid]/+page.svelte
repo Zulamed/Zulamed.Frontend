@@ -39,15 +39,18 @@
 		window.addEventListener('resize', match600px);
 		match1027px();
 		media1027px.addEventListener('change', match1027px);
-        media600px.addEventListener('change', match600px);
+		media600px.addEventListener('change', match600px);
 		return () => {
 			media1027px.removeEventListener('change', match1027px);
-            media600px.removeEventListener('change', match600px);
+			media600px.removeEventListener('change', match600px);
 		};
 	});
 	export let data: PageData;
 </script>
 
+<svelte:head>
+	<title>{data.video.videoTitle}</title>
+</svelte:head>
 <!-- ============MAIN============ -->
 <div class="container">
 	<div id="row" class="row">

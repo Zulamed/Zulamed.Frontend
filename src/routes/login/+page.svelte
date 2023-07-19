@@ -1,49 +1,102 @@
-<script>
+<script lang="ts">
 	import LoginForm from './components/loginForm/loginForm.svelte';
 </script>
 
-<div class="container">
-	<img class="background-img" src="/img/main-background-mobile.png" alt="" />
-	<div class="container-overlay">
-		<div class="loginForm">
+<section class="container forms">
+	<img class="container-img" src="img/main-background-mobile.png" alt="" />
+	<div class="container-overlay" />
+	<div class="form login">
+		<div class="form-content">
+			<header>
+				Login to Your <br />
+				ZulaMed Account
+			</header>
 			<LoginForm />
+
+			<div class="form-link">
+				<span
+					>Don't have an account? <a href="." class="link signup-link">Click here to Sign Up</a
+					></span
+				>
+			</div>
 		</div>
 	</div>
-</div>
+</section>
 
 <style>
-	.container {
-		width: 100%;
-		height: 100vh;
-		background-color: #018b7b;
-		position: fixed;
-		display: block;
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		font-family: 'Inter', sans-serif;
 	}
-	.loginForm {
-		width: 400px;
-		height: 600px;
-		border-radius: 27px;
-		background-color: #fff;
+	.container {
+		height: 100vh;
+		width: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: 20px 40px;
+		background: #018b7b;
+		column-gap: 30px;
+		margin-top: -74px;
+	}
+	.container-img {
+		width: 100%;
+		height: 80%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		object-position: top;
 	}
 	.container-overlay {
 		width: 100%;
-		height: 100vh;
-		position: absolute;
-		top: -74px;
-		left: 0;
-		background-color: #ffffffa4;
-		display: flex;
-		align-items: center;
-		justify-content: center;
+		height: 100%;
+		position: fixed;
+		background-color: #fff;
+		filter: opacity(0.66);
 	}
-	.background-img {
+	.form-content a:hover {
+		text-decoration: underline;
+	}
+	header {
+		color: #000;
+		text-align: center;
+		font-size: 35px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: normal;
+	}
+	.form-link span {
+		color: #273b4a;
+		font-size: 15px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: normal;
+	}
+
+	.form-link {
+		text-align: center;
+		margin-top: 15px;
+	}
+	.signup-link {
+		color: #273b4a;
+		font-size: 15px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: normal;
+		text-decoration-line: underline;
+	}
+	.form {
+		margin-top: 77px;
+	}
+	.form {
+		position: absolute;
+		max-width: 520px;
 		width: 100%;
-		height: 50%;
-		object-fit: cover;
-		object-position: top;
+		padding: 73px 50px;
+		border-radius: 27px;
+		background: #fff;
+		max-height: 730px;
+		height: 100%;
 	}
 </style>

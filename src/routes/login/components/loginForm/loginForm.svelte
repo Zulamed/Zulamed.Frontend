@@ -110,17 +110,6 @@
 		margin-top: 16px;
 	}
 
-	/* .eye-icon {
-		position: absolute;
-		top: 50%;
-		right: 10px;
-		transform: translateY(-50%);
-		font-size: 18px;
-		color: #8b8b8b;
-		cursor: pointer;
-		padding: 5px;
-	} */
-
 	.button-field {
 		margin-top: 59px;
 		justify-content: center;
@@ -184,5 +173,39 @@
 		font-weight: 500;
 		line-height: normal;
 		margin-top: 12px;
+	}
+	@media (max-width: 1280px) {
+		form {
+			margin-top: 0px;
+		}
+	}
+	@media (max-width: 480px) {
+		label {
+			font-size: 14px;
+			font-weight: 600;
+		}
+		.input-field {
+			margin-top: 20px;
+		}
+		.login-btn {
+			width: 157px !important;
+			height: 65px !important;
+			color: #273b4a;
+			font-size: 22px !important;
+			font-weight: 600;
+		}
+		.button-field {
+			margin-top: 29px;
+			margin-bottom: 28px !important;
+		}
+		.form-link {
+			margin-top: 20px;
+		}
+		.form-link .forgot-pass {
+			font-size: 14px;
+		}
+		form {
+			margin-top: 27px;
+		}
 	}
 </style>

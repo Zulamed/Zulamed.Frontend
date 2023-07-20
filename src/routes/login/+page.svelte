@@ -24,12 +24,6 @@
 </section>
 
 <style>
-	* {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-		font-family: 'Inter', sans-serif;
-	}
 	.container {
 		height: 100vh;
 		width: 100%;
@@ -47,6 +41,7 @@
 		top: 0;
 		left: 0;
 		object-position: top;
+		object-fit: cover;
 	}
 	.container-overlay {
 		width: 100%;
@@ -98,5 +93,46 @@
 		background: #fff;
 		max-height: 730px;
 		height: 100%;
+	}
+
+	.form {
+		max-width: 520px;
+		width: 100%;
+		padding: 73px 28px 73px 28px;
+		max-height: 730px;
+		height: 85%;
+	}
+	.form-content {
+		height: 100%;
+	}
+
+	@media (max-width: 480px) {
+		.form {
+			max-width: 100%;
+			width: 100%;
+			padding: 95px 28px 73px 28px;
+			max-height: 100%;
+			height: 100%;
+			border-radius: 0;
+			margin-top: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		header {
+			color: #018b7b;
+			font-size: 25px;
+		}
+
+		.form-content {
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+		.form-link span,
+		.signup-link {
+			font-size: 14px;
+		}
 	}
 </style>

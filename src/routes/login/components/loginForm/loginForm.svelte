@@ -20,7 +20,15 @@
 <form on:submit|preventDefault={handleSubmit}>
 	<div class="field input-field">
 		<label for="email">Email Address</label>
-		<input name="email" type="email" placeholder="Email" class="input" />
+		<div class="email-group">
+			{#if errorLogin == false}
+				<input name="email" type="email" placeholder="Email" class="input" />
+			{/if}
+			{#if errorLogin == true}
+				<input name="email" type="email" placeholder="Email" class="input input-error" />
+				<img class="error-icon" src="img/icons/Error-login.svg" alt="" />
+			{/if}
+		</div>
 	</div>
 	{#if errorLogin}
 		<p class="error">Data not found or incorrectly entered</p>
@@ -29,14 +37,27 @@
 	<div class="field input-field">
 		<label for="password">Password</label>
 		<div class="pass-group">
-			<input
-				bind:this={inputPassword}
-				name="password"
-				type="password"
-				placeholder="*********"
-				class="password"
-				bind:value={password}
-			/>
+			{#if errorLogin == false}
+				<input
+					bind:this={inputPassword}
+					name="password"
+					type="password"
+					placeholder="*********"
+					class="password"
+					bind:value={password}
+				/>
+			{/if}
+			{#if errorLogin == true}
+				<input
+					bind:this={inputPassword}
+					name="password"
+					type="password"
+					placeholder="*********"
+					class="password input-error"
+					bind:value={password}
+				/>
+				<img class="error-icon" src="img/icons/Error-login.svg" alt="" />
+			{/if}
 			<button
 				type="button"
 				class="showpass-btn"
@@ -68,6 +89,15 @@
 
 <!-- can be moved to a css file with <style src="./<your-css-file>.css"></style> -->
 <style>
+	.input-error {
+		color: red;
+	}
+	.error-icon {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		right: -24px;
+	}
 	form {
 		margin-top: 77px;
 	}
@@ -94,7 +124,6 @@
 		outline: none;
 		padding: 0 15px;
 		border: 0.5px solid #999999d3;
-		margin-top: 16px;
 	}
 
 	.password {
@@ -105,7 +134,8 @@
 		border-bottom-width: 2px;
 	}
 
-	.pass-group {
+	.pass-group,
+	.email-group {
 		position: relative;
 		margin-top: 16px;
 	}

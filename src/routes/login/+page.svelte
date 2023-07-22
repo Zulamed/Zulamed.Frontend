@@ -84,6 +84,7 @@
 	.form {
 		margin-top: 77px;
 	}
+
 	.form {
 		position: absolute;
 		max-width: 520px;
@@ -99,7 +100,7 @@
 		max-width: 520px;
 		width: 100%;
 		padding: 73px 28px 73px 28px;
-		max-height: 730px;
+		max-height: 770px;
 		height: 85%;
 	}
 	.form-content {

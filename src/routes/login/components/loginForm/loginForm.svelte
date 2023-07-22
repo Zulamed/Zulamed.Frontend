@@ -21,11 +21,14 @@
 	<div class="field input-field">
 		<label for="email">Email Address</label>
 		<div class="email-group">
-			{#if errorLogin == false}
-				<input name="email" type="email" placeholder="Email" class="input" />
-			{/if}
+			<input
+				name="email"
+				type="email"
+				placeholder="Email"
+				class="input"
+				class:input-error={errorLogin}
+			/>
 			{#if errorLogin == true}
-				<input name="email" type="email" placeholder="Email" class="input input-error" />
 				<img class="error-icon" src="img/icons/Error-login.svg" alt="" />
 			{/if}
 		</div>
@@ -37,25 +40,16 @@
 	<div class="field input-field">
 		<label for="password">Password</label>
 		<div class="pass-group">
-			{#if errorLogin == false}
-				<input
-					bind:this={inputPassword}
-					name="password"
-					type="password"
-					placeholder="*********"
-					class="password"
-					bind:value={password}
-				/>
-			{/if}
+			<input
+				bind:this={inputPassword}
+				name="password"
+				type="password"
+				placeholder="*********"
+				class="password"
+                class:input-error={errorLogin}
+				bind:value={password}
+			/>
 			{#if errorLogin == true}
-				<input
-					bind:this={inputPassword}
-					name="password"
-					type="password"
-					placeholder="*********"
-					class="password input-error"
-					bind:value={password}
-				/>
 				<img class="error-icon" src="img/icons/Error-login.svg" alt="" />
 			{/if}
 			<button

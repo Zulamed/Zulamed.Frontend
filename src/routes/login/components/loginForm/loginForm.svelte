@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { login } from '$lib/stores/auth';
 	import { FirebaseError } from 'firebase/app';
 	let email = '';
@@ -7,6 +8,7 @@
 	async function handleSubmit() {
 		try {
 			await login(email, password);
+            goto('/');
 		} catch (error) {
 			if (error instanceof FirebaseError) {
 				errorLogin = true;
@@ -22,6 +24,7 @@
 		<label for="email">Email Address</label>
 		<div class="email-group">
 			<input
+                bind:value={email}
 				name="email"
 				type="email"
 				placeholder="Email"

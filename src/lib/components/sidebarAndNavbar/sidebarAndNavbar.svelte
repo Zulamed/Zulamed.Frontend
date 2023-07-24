@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { portal } from 'svelte-portal';
 	import { sidebarOpened } from './stores/sidebarOpened';
+	import type { User } from '$lib/userBackend/getUser';
 	let isMobileSearchBarOpen = false;
 	let displayProfileContainer = 'none';
 	let displayLanguageContainer = 'none';
@@ -10,6 +11,7 @@
 	let navigationBoxShadow = '0px 0px 0px #00000040';
 	let overlayLeft = '-100%';
 	let shortcutPadding = '7px';
+	export let user: User;
 
 	$: {
 		$sidebarOpened = sidebarOpen;
@@ -146,14 +148,16 @@
 			on:click={toggleProfileContainer}
 		/>
 		<div class="profile-container" id="profile-container" style:display={displayProfileContainer}>
-			<div class="popup-profile flex-div">
-				<a class="shortcut-link" href="."><img src="/img/icons/user.png" alt="" /></a>
-				<div>
-					<a href=".">Username</a>
-					<p>@username</p>
-					<a href="." class="account-manage">Manage your Account</a>
+			{#if user}
+				<div class="popup-profile flex-div">
+					<a class="shortcut-link" href="."><img src="/img/icons/user.png" alt="" /></a>
+					<div>
+						<a href=".">{user.name} {user.surname}</a>
+						<p>{user.email}</p>
+						<a href="." class="account-manage">Manage your Account</a>
+					</div>
 				</div>
-			</div>
+			{/if}
 
 			<!-- Другие элементы контейнера -->
 			<a class="profile-link" href="."

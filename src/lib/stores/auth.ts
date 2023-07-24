@@ -25,6 +25,7 @@ if (browser) {
             maxAge: token ? undefined : 0,
         })
         user.set(newUser);
+        console.log(document.cookie);
     });
 }
 

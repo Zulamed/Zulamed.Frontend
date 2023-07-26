@@ -1,5 +1,5 @@
 import { auth } from '$lib/firebase/admin';
-import { getUser } from '$lib/userBackend/getUser';
+import { getUser } from '$backend/user/get/getUser';
 import { redirect, type Handle } from '@sveltejs/kit';
 
 export const handle = (async ({ event, resolve }) => {
@@ -10,8 +10,6 @@ export const handle = (async ({ event, resolve }) => {
         if (user) {
             // event.locals.userId = user['UserId']
             const userResponse = await getUser(user['UserId']);
-            console.log(userResponse);
-            console.log(userResponse);
             if ('error' in userResponse) {
                 throw redirect(307, '/')
             } else if ('user' in userResponse) {

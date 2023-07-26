@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { portal } from 'svelte-portal';
 	import { sidebarOpened } from './stores/sidebarOpened';
-	import type { User } from '$lib/userBackend/getUser';
+	import type { User } from '$backend/user/get/types';
 	let isMobileSearchBarOpen = false;
 	let displayProfileContainer = 'none';
 	let displayLanguageContainer = 'none';

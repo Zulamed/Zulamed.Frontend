@@ -1,5 +1,5 @@
 import { PUBLIC_BACKEND_URL } from "$env/static/public";
-import type { UserRetrievalResult, UserNotFoundError, UserResponse } from "./userTypes";
+import type { UserRetrievalResult, UserNotFoundError, UserResponse } from "./types";
 
 
 export async function getUser(userId: string): Promise<UserRetrievalResult> {

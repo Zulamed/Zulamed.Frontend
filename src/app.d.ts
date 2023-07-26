@@ -1,5 +1,5 @@
 // See https://kit.svelte.dev/docs/types#app
-import type { User } from "$lib/userBackend/getUser.ts"
+import type { User } from "$backend/user/get/types"
 
 // for information about these interfaces
 declare global {

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { User } from '$lib/userBackend/getUser';
+	import type { User } from '$backend/user/get/types';
 	import { portal } from 'svelte-portal';
 
 	let isMobileSearchBarOpen = false;

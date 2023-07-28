@@ -11,11 +11,9 @@ export const handle = (async ({ event, resolve }) => {
         if (user) {
             // event.locals.userId = user['UserId']
             const userResponse = await getUser(user['UserId']);
-            console.log(userResponse);
             match(userResponse)
                 .with({ tag: "success" }, ({ user: response }) => {
                     event.locals.user = response.user
-                    console.log(event.locals.user)
                 })
                 .with({ tag: "not found" }, () => { throw redirect(307, '/') })
                 .with({ tag: "error" }, () => { throw redirect(307, '/') })

@@ -29,6 +29,9 @@ dependencies:
   svelte-portal:
     specifier: ^2.2.0
     version: 2.2.0
+  ts-pattern:
+    specifier: ^5.0.4
+    version: 5.0.4
   vidstack:
     specifier: ^0.6.13
     version: 0.6.13
@@ -7821,6 +7824,10 @@ packages:
 
   /tr46@0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
+    dev: false
+
+  /ts-pattern@5.0.4:
+    resolution: {integrity: sha512-D5iVliqugv2C9541W2CNXFYNEZxr4TiHuLPuf49tKEdQFp/8y8fR0v1RExUvXkiWozKCwE7zv07C6EKxf0lKuQ==}
     dev: false
 
   /tslib@1.14.1:

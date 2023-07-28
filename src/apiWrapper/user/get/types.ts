@@ -9,8 +9,8 @@ export type User = {
     surname: string;
 };
 
-export type UserNotFoundError = {
-    error: string;
-};
 
-export type UserRetrievalResult = UserResponse | UserNotFoundError | never;
+export type UserRetrievalResult =
+    | { tag: "success", user: UserResponse }
+    | { tag: "not found" }
+    | { tag: "error", error: string };

@@ -21,6 +21,10 @@ export const handle = (async ({ event, resolve }) => {
         if (path === '/protected' && !user) {
             throw redirect(307, '/')
         }
+        // prevent logged in users from accessing login page
+        if ((path === '/login' || path === '/register') && user) {
+            throw redirect(307, '/')
+        }
     } catch (error) {
         // if token is invalid, remove it from cookies
         event.cookies.set('token', '', { maxAge: -1 });

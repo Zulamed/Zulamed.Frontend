@@ -1,5 +1,6 @@
 <script lang="ts">
-	import type { User } from '$backend/user/get/types';
+    import { user } from '$lib/stores/auth';
+	import { logout } from '$lib/stores/auth';
 	import { portal } from 'svelte-portal';
 
 	let isMobileSearchBarOpen = false;
@@ -11,7 +12,6 @@
 	let navigationBoxShadow = '0px 0px 0px #00000040';
 	let overlayLeft = '-100%';
 	export let showSearchbar = true;
-	export let user: User;
 	const toggleProfileContainer = () => {
 		displayProfileContainer = displayProfileContainer === 'none' ? 'block' : 'none';
 	};
@@ -148,7 +148,7 @@
 
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 
-		{#if user}
+		{#if $user}
 			<img
 				class="user-icon"
 				src="/img/icons/User_circle.png"
@@ -159,8 +159,8 @@
 				<div class="popup-profile flex-div">
 					<a href="."><img src="/img/icons/user.png" alt="" /></a>
 					<div>
-						<a href=".">{user.name} {user.surname}</a>
-						<p class="email">{user.email}</p>
+						<a href=".">{$user.name} {$user.surname}</a>
+						<p class="email">{$user.email}</p>
 						<a href="." class="account-manage">Manage your Account</a>
 					</div>
 				</div>
@@ -184,13 +184,14 @@
 					><img src="/img/profileContainerIcons/settings_black_24dp.svg" alt="" />
 					<p>Settings</p>
 				</a>
-				<a class="profile-link" href="."
+				<button class="profile-link"
+                on:click={logout}
 					><img src="/img/profileContainerIcons/logout_black_24dp.svg" alt="" />
 					<p>Sign out</p>
-				</a>
+				</button>
 			</div>
 		{/if}
-		{#if !user}
+		{#if !$user}
 			<a class="user-register" href="/register">register</a>
 			<a class="user-login" href="/login">log in</a>
 		{/if}

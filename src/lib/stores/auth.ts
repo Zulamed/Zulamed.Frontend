@@ -1,8 +1,11 @@
 import cookie from 'cookie'
 import { browser } from '$app/environment';
 import { auth } from '$lib/firebase/client';
-import { signInWithEmailAndPassword, type User} from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { writable } from 'svelte/store';
+import type { User } from '$backend/user/get/types';
+import { getUser } from '$backend/user/get/getUser';
+import { match } from 'ts-pattern';
 
 export const user = writable<User | null>(null);
 
@@ -24,7 +27,19 @@ if (browser) {
             path: '/',
             maxAge: token ? undefined : 0,
         })
-        user.set(newUser);
+        if (!newUser) {
+            user.set(null);
+            return;
+        }
+        const jwtToken = await newUser?.getIdTokenResult();
+        const id = jwtToken?.claims['UserId'] as string | undefined;
+        if (!id)
+            return;
+        const backendUser = await getUser(id);
+        match(backendUser)
+            .with({ tag: "success" }, ({ user: response }) => {
+                user.set(response.user);
+            });
     });
 }
 

@@ -8,6 +8,7 @@
 	import Drawer from '$lib/components/drawer/drawer.svelte';
 	import { beforeNavigate } from '$app/navigation';
 	import type { LayoutServerData } from './$types';
+	import { user } from '$lib/stores/auth';
 	let searchbar = $page.url.pathname != '/login';
 	beforeNavigate((aboba) => {
 		if (aboba.to?.url.pathname == '/login') {
@@ -24,12 +25,15 @@
 		} else NProgress.done();
 	}
     export let data: LayoutServerData;
+    $: {
+        $user = data.user;
+    }
 </script>
 
 {#if $page.url.pathname == '/'}
-	<SidebarAndNavbar user={data.user} />
+	<SidebarAndNavbar />
 {:else}
-	<Drawer user={data.user} showSearchbar={searchbar} />
+	<Drawer showSearchbar={searchbar} />
 {/if}
 
 <slot />

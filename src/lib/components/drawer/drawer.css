@@ -469,7 +469,7 @@ nav {
 
 .sidebar-mobile {
 	height: 100%;
-	width: 70%;
+	width: min-content;
 	background-color: var(--primary-color);
 	position: fixed;
 	top: 0;

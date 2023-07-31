@@ -46,7 +46,7 @@
 				type="password"
 				placeholder="*********"
 				class="password"
-                class:input-error={errorLogin}
+				class:input-error={errorLogin}
 				bind:value={password}
 			/>
 			{#if errorLogin == true}

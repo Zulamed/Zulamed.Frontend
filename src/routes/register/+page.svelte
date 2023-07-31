@@ -6,16 +6,17 @@
 	<img class="container-img" src="img/main-background-mobile.png" alt="" />
 	<div class="container-overlay" />
 	<div class="form register">
-		<div class="form-content">
-			<header>
+		<header>
+			<h2>
 				Create Your <br />
 				ZulaMed Account
-			</header>
-			<RegisterForm />
+			</h2>
+		</header>
 
-			<div class="form-link">
-				<a href="." class="link signin-link">Click here</a> <span>to go back to Login</span>
-			</div>
+		<RegisterForm />
+
+		<div class="form-link">
+			<a href="." class="link signin-link">Click here</a> <span>to go back to Login</span>
 		</div>
 	</div>
 </section>
@@ -24,9 +25,6 @@
 	.container {
 		height: 100vh;
 		width: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
 		background: #018b7b;
 		column-gap: 30px;
 		margin-top: -74px;
@@ -47,10 +45,7 @@
 		background-color: #fff;
 		filter: opacity(0.66);
 	}
-	.form-content a:hover {
-		text-decoration: underline;
-	}
-	header {
+	h2 {
 		color: #000;
 		text-align: center;
 		font-size: 35px;
@@ -60,7 +55,7 @@
 	}
 	.form-link span {
 		color: #273b4a;
-		font-size: 15px;
+		font-size: 19px;
 		font-style: normal;
 		font-weight: 400;
 		line-height: normal;
@@ -72,63 +67,56 @@
 	}
 	.signin-link {
 		color: #273b4a;
-		font-size: 15px;
+		font-size: 19px;
 		font-style: normal;
 		font-weight: 400;
 		line-height: normal;
 		text-decoration-line: underline;
 	}
-	.form {
-		margin-top: 77px;
+	.form::-webkit-scrollbar {
+		display: none;
 	}
 
 	.form {
-		position: absolute;
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 		max-width: 520px;
 		width: 100%;
-		padding: 73px 50px;
 		border-radius: 27px;
 		background: #fff;
+		padding: 30px 50px 30px 50px;
 		max-height: 730px;
-		height: 100%;
-	}
-
-	.form {
-		max-width: 520px;
-		width: 100%;
-		padding: 73px 28px 73px 28px;
-		max-height: 770px;
 		height: 85%;
-	}
-	.form-content {
-		width: 100%;
-		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+		overflow-y: scroll;
+		margin-top: 20px;
 	}
 
 	@media (max-width: 480px) {
 		.form {
 			max-width: 100%;
 			width: 100%;
-			padding: 95px 64px 73px 64px;
+			padding: 0 28px;
 			max-height: 100%;
 			height: 100%;
 			border-radius: 0;
-			margin-top: 0;
+			margin-top: 74px;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 		}
-		header {
+		h2 {
 			color: #018b7b;
 			font-size: 25px;
+			margin-bottom: 18px;
 		}
 
-		.form-content {
-			height: 100%;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-		}
 		.form-link span,
 		.signin-link {
 			font-size: 14px;

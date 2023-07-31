@@ -25,9 +25,8 @@
 		} else NProgress.done();
 	}
     export let data: LayoutServerData;
-    $: {
-        $user = data.user;
-    }
+    $user = data.user;
+
 </script>
 
 {#if $page.url.pathname == '/'}

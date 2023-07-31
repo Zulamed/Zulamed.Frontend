@@ -9,7 +9,6 @@ export const handle = (async ({ event, resolve }) => {
     try {
         const user = token ? await auth.verifyIdToken(token) : undefined;
         if (user) {
-            // event.locals.userId = user['UserId']
             const userResponse = await getUser(user['UserId']);
             match(userResponse)
                 .with({ tag: "success" }, ({ user: response }) => {
@@ -19,16 +18,16 @@ export const handle = (async ({ event, resolve }) => {
                 .with({ tag: "error" }, () => { throw redirect(307, '/') })
         }
         if (path === '/protected' && !user) {
-            throw redirect(307, '/')
+            return new Response('Redirect', {status: 303, headers: { Location: '/login' }})
         }
         // prevent logged in users from accessing login page
         if ((path === '/login' || path === '/register') && user) {
-            throw redirect(307, '/')
+            return new Response('Redirect', { status: 307, headers: { Location: '/' } })
         }
     } catch (error) {
         // if token is invalid, remove it from cookies
         event.cookies.set('token', '', { maxAge: -1 });
-        throw redirect(307, '/')
+        return new Response('Redirect', {status: 307, headers: { Location: '/' }})
     }
     return await resolve(event);
 }) satisfies Handle;

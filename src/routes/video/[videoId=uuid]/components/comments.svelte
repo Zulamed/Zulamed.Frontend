@@ -7,17 +7,17 @@
 	let inputText = '';
 	let disabledProps = {
 		disabled: true,
-		color: '#616163',
+		color: '#FFFFFF',
 		cursor: 'default',
-		border: '1px solid #616163'
+		background: '#999999'
 	};
 	let enabledProps = {
 		disabled: false,
-		color: '#54B9A2',
+		color: '#FFFFFF',
 		cursor: 'pointer',
-		border: '1px solid #54B9A2'
+		background: '#54B9A2'
 	};
-	let currentProps: typeof disabledProps | undefined = undefined;
+	let currentProps: typeof disabledProps = disabledProps;
 
 	let matches600px = false;
 
@@ -81,11 +81,12 @@
 						disabled
 						class="comment-btn comment"
 						style="
-                            border: {currentProps?.border};
+							border: none;
+                            background-color: {currentProps?.background};
                             color: {currentProps?.color};
                             cursor: {currentProps?.cursor};
                             disabled: {currentProps?.disabled};
-                      ">send a comment</button
+                      ">Send comment</button
 					>
 				</div>
 			{/if}

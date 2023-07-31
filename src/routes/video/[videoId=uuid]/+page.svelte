@@ -14,7 +14,7 @@
 
 	let matches1027px = false;
 	let matches600px = false;
-
+	let messageActive = false;
 	$: {
 		if (matches600px) {
 			videoVisibility = false;
@@ -82,6 +82,7 @@
 					>
 				</div>
 				<div class="play-video-info-right">
+					<button type="button" class="message-btn" class:active={messageActive}>CHAT</button>
 					<div class="interaction-btn-group">
 						<button
 							id="like-btn"

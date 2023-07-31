@@ -147,14 +147,15 @@
 		</div>
 
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<img
-			class="user-icon"
-			src="/img/icons/User_circle.png"
-			alt=""
-			on:click={toggleProfileContainer}
-		/>
-		<div class="profile-container" id="profile-container" style:display={displayProfileContainer}>
-			{#if user}
+
+		{#if user}
+			<img
+				class="user-icon"
+				src="/img/icons/User_circle.png"
+				alt=""
+				on:click={toggleProfileContainer}
+			/>
+			<div class="profile-container" id="profile-container" style:display={displayProfileContainer}>
 				<div class="popup-profile flex-div">
 					<a href="."><img src="/img/icons/user.png" alt="" /></a>
 					<div>
@@ -163,34 +164,36 @@
 						<a href="." class="account-manage">Manage your Account</a>
 					</div>
 				</div>
-			{/if}
-
-			<!-- Другие элементы контейнера -->
-			<a class="profile-link" href="."
-				><img src="/img/profileContainerIcons/account_box_black_24dp.svg" alt="" />
-				<p>Your channel</p>
-			</a>
-			<a class="profile-link" href="."
-				><img src="/img/profileContainerIcons/groups_black_24dp.svg" alt="" />
-				<p>Switch account</p>
-			</a>
-			<a class="profile-link" href="."
-				><img src="/img/profileContainerIcons/wallet_black_24dp.svg" alt="" />
-				<p>Purchases and membership</p>
-			</a>
-			<a class="profile-link" href="."
-				><img src="/img/profileContainerIcons/translate_black_24dp.svg" alt="" />
-				<p>Language: English</p>
-			</a>
-			<a class="profile-link" href="."
-				><img src="/img/profileContainerIcons/settings_black_24dp.svg" alt="" />
-				<p>Settings</p>
-			</a>
-			<a class="profile-link" href="."
-				><img src="/img/profileContainerIcons/logout_black_24dp.svg" alt="" />
-				<p>Sign out</p>
-			</a>
-		</div>
+				<a class="profile-link" href="."
+					><img src="/img/profileContainerIcons/account_box_black_24dp.svg" alt="" />
+					<p>Your channel</p>
+				</a>
+				<a class="profile-link" href="."
+					><img src="/img/profileContainerIcons/groups_black_24dp.svg" alt="" />
+					<p>Switch account</p>
+				</a>
+				<a class="profile-link" href="."
+					><img src="/img/profileContainerIcons/wallet_black_24dp.svg" alt="" />
+					<p>Purchases and membership</p>
+				</a>
+				<a class="profile-link" href="."
+					><img src="/img/profileContainerIcons/translate_black_24dp.svg" alt="" />
+					<p>Language: English</p>
+				</a>
+				<a class="profile-link" href="."
+					><img src="/img/profileContainerIcons/settings_black_24dp.svg" alt="" />
+					<p>Settings</p>
+				</a>
+				<a class="profile-link" href="."
+					><img src="/img/profileContainerIcons/logout_black_24dp.svg" alt="" />
+					<p>Sign out</p>
+				</a>
+			</div>
+		{/if}
+		{#if !user}
+			<a class="user-register" href="/register">register</a>
+			<a class="user-login" href="/login">log in</a>
+		{/if}
 	</div>
 </nav>
 

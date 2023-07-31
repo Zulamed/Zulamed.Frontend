@@ -32,8 +32,7 @@ a {
 }
 
 /* ============PLAYER SETTINGS============ */
-:global(:where(media-player[data-view-type='video']:not([data-fullscreen])):where(media-outlet, video, media-poster, div[part='scrim']))
-{
+:global(:where(media-player[data-view-type='video']:not([data-fullscreen])):where(media-outlet, video, media-poster, div[part='scrim'])) {
 	border-radius: var(--video-border-radius-reset) !important;
 }
 
@@ -56,9 +55,9 @@ a {
 }
 
 :global(:where(media-player[data-view-type='video']:not([data-fullscreen])):where(media-outlet,
-	video,
-	media-poster,
-	div[part='scrim'])) {
+		video,
+		media-poster,
+		div[part='scrim'])) {
 	border-radius: 0 !important;
 }
 
@@ -228,16 +227,18 @@ img {
 }
 
 .play-video-info-right {
-	justify-content: end;
+	justify-content: start;
+	gap: 13px;
 }
 
 .play-video-info-left {
 	align-items: center;
+	margin-right: 13px;
 }
 
 .play-video-info-left,
 .play-video-info-right {
-	width: 100%;
+	width: fit-content;
 	display: flex;
 }
 
@@ -265,8 +266,39 @@ img {
 	align-items: center;
 	justify-content: center;
 	gap: 5px;
-	margin-left: 66px;
 	width: 172px;
+}
+
+.message-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 160px;
+	background-color: #999;
+	height: 47px;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	border-radius: 23.5px;
+	font-weight: 500;
+	font-size: 15px;
+	line-height: 18px;
+	text-align: center;
+	color: #ffffff;
+	transition: background 0.1s ease;
+}
+
+.message-btn:hover {
+	background-color: #7c7c7c !important;
+}
+
+.message-btn.active {
+	background-color: #54b9a2;
+}
+
+.message-btn.active:hover {
+	background-color: #49a08c !important;
+
 }
 
 .interaction-btn-group,
@@ -796,6 +828,11 @@ img {
 		min-width: 107px;
 	}
 
+	.play-video-info-right {
+		gap: 12px;
+	}
+
+	.message-btn,
 	.interaction-btn {
 		height: 34px;
 		font-weight: 500;
@@ -805,16 +842,19 @@ img {
 	}
 
 	.like-btn {
-		width: 95px;
+		width: 78px;
 	}
 
 	.dislike-btn {
 		width: 45px;
 	}
 
+	.message-btn {
+		width: 80px;
+	}
+
 	.share-btn {
 		width: 107px;
-		margin-left: 21px;
 	}
 
 	#showMoreButton {

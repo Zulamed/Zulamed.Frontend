@@ -1,5 +1,7 @@
 import { auth } from '$lib/firebase/admin';
+import { getUser } from '$backend/user/get/getUser';
 import { redirect, type Handle } from '@sveltejs/kit';
+import { match } from 'ts-pattern';
 
 export const handle = (async ({ event, resolve }) => {
     const token = event.cookies.get('token');
@@ -7,7 +9,14 @@ export const handle = (async ({ event, resolve }) => {
     try {
         const user = token ? await auth.verifyIdToken(token) : undefined;
         if (user) {
-            event.locals.userId = user['UserId']
+            // event.locals.userId = user['UserId']
+            const userResponse = await getUser(user['UserId']);
+            match(userResponse)
+                .with({ tag: "success" }, ({ user: response }) => {
+                    event.locals.user = response.user
+                })
+                .with({ tag: "not found" }, () => { throw redirect(307, '/') })
+                .with({ tag: "error" }, () => { throw redirect(307, '/') })
         }
         if (path === '/protected' && !user) {
             throw redirect(307, '/')

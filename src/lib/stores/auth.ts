@@ -11,7 +11,16 @@ export const user = writable<User | null>(null);
 
 
 export async function login(email: string, password: string) {
-    await signInWithEmailAndPassword(auth, email, password);
+    const { user: newUser } = await signInWithEmailAndPassword(auth, email, password);
+    const jwtToken = await newUser?.getIdTokenResult();
+    const id = jwtToken?.claims['UserId'] as string | undefined;
+    if (!id)
+        return;
+    const backendUser = await getUser(id);
+    match(backendUser)
+        .with({ tag: "success" }, ({ user: response }) => {
+            user.set(response.user);
+        });
 }
 
 
@@ -29,17 +38,7 @@ if (browser) {
         })
         if (!newUser) {
             user.set(null);
-            return;
         }
-        const jwtToken = await newUser?.getIdTokenResult();
-        const id = jwtToken?.claims['UserId'] as string | undefined;
-        if (!id)
-            return;
-        const backendUser = await getUser(id);
-        match(backendUser)
-            .with({ tag: "success" }, ({ user: response }) => {
-                user.set(response.user);
-            });
     });
 }
 

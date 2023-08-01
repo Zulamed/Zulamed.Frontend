@@ -49,25 +49,31 @@
 </script>
 
 <svelte:head>
-	<title>{data.video.videoTitle}</title>
+	<title>{data.videoInfo.video.videoTitle}</title>
 </svelte:head>
 <!-- ============MAIN============ -->
 <div class="container">
 	<div id="row" class="row">
 		<div id="play-video" class="play-video">
 			<div class="video-container">
-				<VideoPlayer src="{data.video.videoUrl}/master.m3u8" poster={data.video.videoThumbnail} />
+				<VideoPlayer
+					src="{data.videoInfo.video.videoUrl}/master.m3u8"
+					poster={data.videoInfo.video.videoThumbnail}
+				/>
 			</div>
 
-			<h3>{data.video.videoTitle}</h3>
+			<h3>{data.videoInfo.video.videoTitle}</h3>
 
 			<div class="play-video-info">
 				<div class="play-video-info-left">
 					<div class="flex-div channel-info">
-						<img src="/img/icons/channel-logo.jpg" alt="" />
+						<img
+							src={data.videoInfo.user.profilePictureUrl ?? '/img/icons/channel-logo.jpg'}
+							alt=""
+						/>
 						<div>
-							<h5>Dr.Norman</h5>
-							<p>680 K. followers</p>
+							<h5>{data.videoInfo.user.username}</h5>
+							<p>{data.videoInfo.user.subscribers} followers</p>
 						</div>
 					</div>
 
@@ -112,7 +118,7 @@
 					>
 				</div>
 			</div>
-			<Description textContent={data.video.videoDescription} />
+			<Description textContent={data.videoInfo.video.videoDescription} />
 			{#if !matches1027px}
 				<Comments />
 			{/if}

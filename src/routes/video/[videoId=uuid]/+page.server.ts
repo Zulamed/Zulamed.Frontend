@@ -5,10 +5,10 @@ import { match } from 'ts-pattern';
 
 export const load = (async ({ params }) => {
     const result = await getVideoById(params.videoId);
-    const video = match(result)
-        .with({ tag: "success" }, ({ video }) => video)
+    const videoInfo = match(result)
+        .with({ tag: "success" }, ({ response }) => response)
         .with({ tag: "failure" }, ({ error }) => { throw err(500, error) })
         .with({ tag: "not-found" }, () => { throw err(404, "Video not found") })
         .exhaustive();
-    return { video };
+    return {  videoInfo };
 }) satisfies PageServerLoad;

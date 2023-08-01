@@ -1,6 +1,6 @@
 import { PUBLIC_BACKEND_URL } from "$env/static/public";
 import type { Video } from "$lib/models/video";
-import type { VideoResponse } from "./types";
+import type { User, VideoResponse } from "./types";
 
 export async function getVideoById(id: string): Promise<VideoResponse> {
     try {
@@ -11,8 +11,8 @@ export async function getVideoById(id: string): Promise<VideoResponse> {
         if (!response.ok){
             return { tag: "failure", error: "Error while fetching video" };
         }
-        const video = await response.json() as Video;
-        return { tag: "success", video };
+        const video = await response.json() as {video: Video, user: User};
+        return { tag: "success", response: video};
 
     } catch (error) {
         return { tag: "failure", error: (error as Error).message };

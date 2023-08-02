@@ -1,11 +1,9 @@
 <script lang="ts">
 	import Individual from './individual.svelte';
-
-	let step = 0;
 	function increaseStep() {
-		if (step == 1) return;
-		step++;
+		step += 1;
 	}
+    let step = 0;
 	let eyeIcon = 'img/icons/View.svg';
 	let eyeIconRepeat = 'img/icons/View.svg';
 	let inputPassword: HTMLInputElement;
@@ -117,9 +115,9 @@
 			</div>
 		{/if}
 
-		{#if step == 1}
+		{#if step >= 1 && radioValue}
 			{#if radioValue == 'individual'}
-				<Individual />
+				<Individual step={step}/>
 			{/if}
 			{#if radioValue == 'hospital'}
 				1111

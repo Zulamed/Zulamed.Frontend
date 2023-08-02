@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Individual from './individual.svelte';
+
 	let step = 0;
 	function increaseStep() {
 		if (step == 1) return;
@@ -8,6 +10,7 @@
 	let eyeIconRepeat = 'img/icons/View.svg';
 	let inputPassword: HTMLInputElement;
 	let repeatPassword: HTMLInputElement;
+	let radioValue = '';
 	let email = '';
 	let password = '';
 	let passwordrepeat = '';
@@ -31,6 +34,7 @@
 			</svg> &nbsp; Back</button
 		>
 	{/if}
+
 	<div class="form-container">
 		{#if step == 0}
 			<div class="input-container">
@@ -49,7 +53,14 @@
 							/>
 						</svg>
 						<p>Individual</p>
-						<input class="radio-all" id="individual-account" type="radio" name="aaaa" value="0" />
+						<input
+							bind:group={radioValue}
+							class="radio-all"
+							id="individual-account"
+							type="radio"
+							name="account-type"
+							value="individual"
+						/>
 						<img class="radio-img" src="" alt="" />
 					</label>
 					<label class="radio-label" for="bbbb">
@@ -68,7 +79,14 @@
 							/>
 						</svg>
 						<p>Hospital Account</p>
-						<input class="radio-all" id="bbbb" type="radio" name="aaaa" value="1" />
+						<input
+							bind:group={radioValue}
+							class="radio-all"
+							id="bbbb"
+							type="radio"
+							name="account-type"
+							value="hospital"
+						/>
 						<img class="radio-img" src="" alt="" />
 					</label>
 					<label class="radio-label" for="aaaa">
@@ -85,14 +103,32 @@
 							/>
 						</svg>
 						<p>University Account</p>
-						<input class="radio-all" id="aaaa" type="radio" name="aaaa" value="2" />
+						<input
+							bind:group={radioValue}
+							class="radio-all"
+							id="aaaa"
+							type="radio"
+							name="account-type"
+							value="university"
+						/>
 						<img class="radio-img" src="" alt="" />
 					</label>
 				</div>
 			</div>
 		{/if}
+
 		{#if step == 1}
-			<div class="input-container">
+			{#if radioValue == 'individual'}
+				<Individual />
+			{/if}
+			{#if radioValue == 'hospital'}
+				1111
+			{/if}
+			{#if radioValue == 'university'}
+				sdfgsdfg
+			{/if}
+
+			<!-- <div class="input-container">
 				<div class="radio-content">
 					<div class="field input-field">
 						<label for="email">Email</label>
@@ -169,7 +205,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		{/if}
 	</div>
 

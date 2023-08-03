@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { sidebarOpened } from '$lib/components/sidebarAndNavbar/stores/sidebarOpened';
+	import { user } from '$lib/stores/auth';
 	import type { PageData } from './$types';
 	export let data: PageData;
 </script>
@@ -22,16 +23,16 @@
 		<!-- </div> -->
 	</div>
 	<div class="list-container">
-		{#each data.videoResponse.videos as video}
+		{#each data.videoResponse as response}
 			<div class="vid-list">
-				<a class="preview" href="/video/{video.id}"
-					><img src={video.videoThumbnail} class="thumbnail" alt="" /></a
+				<a class="preview" href="/video/{response.video.id}"
+					><img src={response.video.videoThumbnail} class="thumbnail" alt="" /></a
 				>
 				<div class="flex-div">
-					<img src="/img/icons/user.png" alt="" />
+					<img src={response.user.profilePictureUrl ?? '/img/icons/user.png'} alt="" />
 					<div class="vid-info">
-						<a href="/video/{video.id}">{video.videoTitle}</a>
-						<p>Lorem ipsum</p>
+						<a href="/video/{response.video.id}">{response.video.videoTitle}</a>
+						<p>{response.user.username}</p>
 						<p class="vid-views">1k views</p>
 					</div>
 				</div>

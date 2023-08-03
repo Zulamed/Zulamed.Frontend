@@ -1,22 +1,30 @@
 import type { PageLoad } from './$types';
-import { PUBLIC_BACKEND_URL } from '$env/static/public';
-import type { Video } from '$lib/models/video';
-import { error } from '@sveltejs/kit';
+import { error as err } from '@sveltejs/kit';
+import { getAllVideos } from '$backend/video/getAll/endpoint';
+import { match } from 'ts-pattern';
 
-type VideoAllResponse = {
-	videos: Video[];
-};
 
-export const load = (async ({ fetch }) => {
-	const response = await fetch(`${PUBLIC_BACKEND_URL}/video`);
-	if (response.ok) {
-		const videoResponse = (await response.json()) as VideoAllResponse;
-		for (let i = 0; i < 5; i++) {
-			videoResponse.videos.push(videoResponse.videos[0])
-		}
-		return {
-			videoResponse
-		};
-	}
-	throw error(500, "Couldn't load videos");
+export const load = (async () => {
+    // const response = await fetch(`${PUBLIC_BACKEND_URL}/video`);
+    // if (response.ok) {
+    // 	const videoResponse = (await response.json()) as VideoAllResponse;
+    // 	for (let i = 0; i < 5; i++) {
+    // 		videoResponse.videos.push(videoResponse.videos[0])
+    // 	}
+    // 	return {
+    // 		videoResponse
+    // 	};
+    // }
+    const response = await getAllVideos();
+    const videosResponse = match(response)
+        .with({ tag: "success" }, ({ data }) => data)
+        .with({ tag: "error" }, ({ error }) => {throw err(500, error)})
+        .exhaustive();
+    const videos = videosResponse.videos;
+    for (let i = 0; i < 5; i++) {
+        videos.push(videos[0]);
+    }
+    return {
+        videoResponse: videos
+    }
 }) satisfies PageLoad;

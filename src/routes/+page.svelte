@@ -33,7 +33,7 @@
 					<div class="vid-info">
 						<a href="/video/{response.video.id}">{response.video.videoTitle}</a>
 						<p>{response.user.username}</p>
-						<p class="vid-views">1k views</p>
+						<p class="vid-views">{response.video.videoViews} views</p>
 					</div>
 				</div>
 			</div>

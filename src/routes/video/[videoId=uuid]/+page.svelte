@@ -118,7 +118,7 @@
 					>
 				</div>
 			</div>
-			<Description textContent={data.videoInfo.video.videoDescription} />
+			<Description views={data.videoInfo.video.videoViews} textContent={data.videoInfo.video.videoDescription} />
 			{#if !matches1027px}
 				<Comments />
 			{/if}

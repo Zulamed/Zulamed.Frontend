@@ -5,4 +5,5 @@ export type Video = {
 	videoThumbnail: string;
 	videoDescription: string;
 	videoPublishedDate: string;
+    videoViews: number;
 };

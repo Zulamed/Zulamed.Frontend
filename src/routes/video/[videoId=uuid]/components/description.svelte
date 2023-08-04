@@ -1,5 +1,6 @@
 <script lang="ts">
 	export let textContent: string;
+    export let views: number;
 	const originalText = textContent;
 	let trimmedText = textContent.substring(0, 30) + '... Read more';
 	textContent = trimmedText;
@@ -19,7 +20,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div on:click={toggle} id="play-video-description" class="play-video-description" style:height>
 	<div class="play-video-stats">
-		<p>304k views</p>
+		<p>{views} views</p>
 		<p>5 days ago</p>
 		<span>#cardio #operation</span>
 	</div>

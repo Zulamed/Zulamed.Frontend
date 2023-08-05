@@ -1,0 +1,113 @@
+<script lang="ts">
+	import { createCombobox, melt } from '@melt-ui/svelte';
+	interface Book {
+		author: string;
+		title: string;
+		disabled: boolean;
+	}
+
+	let books: Book[] = [
+		{
+			author: 'Harper Lee',
+			title: 'To Kill a Mockingbird',
+			disabled: false
+		},
+		{
+			author: 'Lev Tolstoy',
+			title: 'War and Peace',
+			disabled: false
+		},
+		{
+			author: 'Fyodor Dostoyevsy',
+			title: 'The Idiot',
+			disabled: true
+		},
+		{
+			author: 'Oscar Wilde',
+			title: 'A Picture of Dorian Gray',
+			disabled: false
+		},
+		{
+			author: 'George Orwell',
+			title: '1984',
+			disabled: false
+		},
+		{
+			author: 'Jane Austen',
+			title: 'Pride and Prejudice',
+			disabled: false
+		},
+		{
+			author: 'Marcus Aurelius',
+			title: 'Meditations',
+			disabled: false
+		},
+		{
+			author: 'Fyodor Dostoevsky',
+			title: 'The Brothers Karamazov',
+			disabled: false
+		},
+		{
+			author: 'Lev Tolstoy',
+			title: 'Anna Karenina',
+			disabled: false
+		},
+		{
+			author: 'Fyodor Dostoevsky',
+			title: 'Crime and Punishment',
+			disabled: false
+		}
+	];
+
+	const {
+		elements: { input, menu, item, label },
+		states: { open, inputValue, filteredItems },
+		helpers: { isSelected }
+	} = createCombobox({
+		filterFunction: (item, inputValue) => {
+			// Example string normalization function. Replace as needed.
+			const normalize = (str: string) => str.normalize().toLowerCase();
+			const normalizedInput = normalize(inputValue);
+			return (
+				normalizedInput === '' ||
+				normalize(item.title).includes(normalizedInput) ||
+				normalize(item.author).includes(normalizedInput)
+			);
+		},
+		items: books,
+		itemToString: (item) => item.title
+	});
+</script>
+
+<label use:melt={$label}>
+	<span>Choose your favorite book:</span>
+	<div>
+		<input use:melt={$input} placeholder="Best book ever" value={$inputValue} />
+	</div>
+</label>
+
+<div class="menu-container" use:melt={$menu}>
+	<ul class="menu">
+		{#if $open}
+			{#if $filteredItems.length !== 0}
+				{#each $filteredItems as book, index (index)}
+					<li
+						use:melt={$item({
+							index,
+							item: book,
+							disabled: book.disabled
+						})}
+						class="item"
+					>
+						<div>
+							<span>{book.title}</span>
+							<span class="author">{book.author}</span>
+						</div>
+					</li>
+				{/each}
+			{:else}
+				<li class="item">No results found</li>
+			{/if}
+		{/if}
+	</ul>
+</div>

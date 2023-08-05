@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Combobox from "./combobox.svelte";
+
 	export let step: number;
 	let eyeIcon = 'img/icons/View.svg';
 	let eyeIconRepeat = 'img/icons/View.svg';
@@ -144,6 +146,8 @@
 			</div>
 		</div>
 	</div>
+{:else if step == 3}
+<Combobox></Combobox>
 {/if}
 
 <style>

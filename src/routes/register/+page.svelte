@@ -1,11 +1,33 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import RegisterForm from './components/registerForm/registerForm.svelte';
+
+	let justify = 'center';
+	let matches768px = false;
+	function onStepChanged(e: CustomEvent<{ step: number }>) {
+		if (matches768px) {
+			justify = e.detail.step == 0 ? 'center' : 'start';
+			return;
+		}
+		justify = 'center';
+	}
+	onMount(() => {
+		let media = window.matchMedia('(max-width:768px)');
+		const match768px = () => {
+			matches768px = media.matches;
+		};
+		match768px();
+		media.addEventListener('change', match768px);
+		return () => {
+			media.removeEventListener('change', match768px);
+		};
+	});
 </script>
 
 <section class="container forms">
 	<img class="container-img" src="img/main-background-mobile.png" alt="" />
 	<div class="container-overlay" />
-	<div class="form register">
+	<div class="form register" style:justify-content={justify}>
 		<header>
 			<h2>
 				Create Your <br />
@@ -13,7 +35,7 @@
 			</h2>
 		</header>
 
-		<RegisterForm />
+		<RegisterForm on:stepChanged={onStepChanged} />
 
 		<div class="form-link">
 			<a href="." class="link signin-link">Click here</a> <span>to go back to Login</span>
@@ -23,11 +45,10 @@
 
 <style>
 	.container {
-		height: 100vh;
+		height: calc(100vh - 74px);
 		width: 100%;
 		background: #018b7b;
-		column-gap: 30px;
-		margin-top: -74px;
+		display: grid;
 	}
 	.container-img {
 		width: 100%;
@@ -63,7 +84,7 @@
 
 	.form-link {
 		text-align: center;
-		margin-top: 15px;
+		margin-top: 24px;
 	}
 	.signin-link {
 		color: #273b4a;
@@ -78,48 +99,78 @@
 	}
 
 	.form {
-		position: fixed;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
+		place-self: center;
 		max-width: 520px;
 		width: 100%;
+		max-height: 80vh;
+		height: 100%;
 		border-radius: 27px;
 		background: #fff;
-		padding: 30px 50px 30px 50px;
-		max-height: 730px;
-		height: 85%;
+		padding: 0 50px 0 50px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		justify-content: center;
 		-ms-overflow-style: none; /* IE and Edge */
 		scrollbar-width: none; /* Firefox */
 		overflow-y: scroll;
-		margin-top: 20px;
+		z-index: 1;
 	}
 
-	@media (max-width: 480px) {
+	@media (max-width: 1280px) {
 		.form {
-			max-width: 100%;
-			width: 100%;
-			padding: 0 28px;
-			max-height: 100%;
-			height: 100%;
-			border-radius: 0;
-			margin-top: 74px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
+			max-width: 448px;
 		}
-		h2 {
-			color: #018b7b;
-			font-size: 25px;
-			margin-bottom: 18px;
-		}
-
 		.form-link span,
 		.signin-link {
 			font-size: 14px;
 		}
+		.form-link {
+			margin-top: 22px;
+		}
+		h2 {
+			font-size: 28px;
+		}
 	}
+	@media (max-width: 1024px) {
+		.form {
+			max-width: 370px;
+			max-height: 85vh;
+		}
+		.form-link span,
+		.signin-link {
+			font-size: 11px;
+		}
+		.form-link {
+			margin-top: 14px;
+		}
+		h2 {
+			font-size: 22px;
+		}
+	}
+	@media (max-width: 768px) {
+		.form {
+			padding: 0 28px 20px 28px;
+			max-width: 100%;
+			max-height: 100vh;
+			border-radius: 0;
+			/* justify-content: start; */
+			z-index: 0;
+			overflow-y: auto;
+		}
+		.form-link span,
+		.signin-link {
+			font-size: 14px;
+		}
+		.form-link {
+			margin-top: 20px;
+		}
+		h2 {
+			color: #018b7b;
+			font-size: 25px;
+		}
+	}
+	/* @media (max-width: 480px) {
+
+	} */
 </style>

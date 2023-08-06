@@ -111,3 +111,97 @@
 		{/if}
 	</ul>
 </div>
+
+<style>
+	label {
+		cursor: pointer;
+	}
+
+	label > span {
+		display: block;
+		padding-bottom: 0.25rem;
+		text-transform: capitalize;
+	}
+
+	label > div {
+		position: relative;
+	}
+
+	label input {
+		display: flex;
+		height: 2.5rem;
+		align-items: center;
+		justify-content: space-between;
+		border-radius: 0.375rem;
+
+		background-color: whitesmoke;
+
+		padding-left: 0.75rem;
+		padding-right: 3rem;
+
+		color: black;
+	}
+
+	.menu-container {
+		display: flex;
+		flex-direction: column;
+
+		z-index: 10;
+		max-height: 300px;
+
+		overflow: hidden;
+
+		border-radius: 0.375rem;
+	}
+
+	.menu {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+
+		max-height: 100%;
+
+		overflow-y: auto;
+
+		background-color: whitesmoke;
+
+		padding: 0.5rem;
+	}
+
+	.item {
+		position: relative;
+		cursor: pointer;
+		border-radius: 0.375rem;
+
+		padding: 0.25rem 2rem 0.25rem 1rem;
+
+		color: rgb(var(--color-neutral-800) / 1);
+	}
+
+	.item[data-highlighted] {
+		background-color: rgb(var(--color-magnum-100) / 1);
+
+		color: rgb(var(--color-magnum-700) / 1);
+	}
+
+	.item[data-disabled] {
+		opacity: 0.5;
+	}
+
+	.item .author {
+		display: block;
+
+		font-size: 0.875rem;
+		line-height: 1.25rem;
+
+		opacity: 0.7;
+	}
+
+	.check {
+		position: absolute;
+		left: 0.5rem;
+		top: 50%;
+		color: whitesmoke;
+		translate: 0 calc(-50% + 1px);
+	}
+</style>

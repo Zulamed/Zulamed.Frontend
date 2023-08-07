@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
+    import type {BranchType} from './../types';
 	import Hospital from './hospital.svelte';
 	import Individual from './individual.svelte';
 	import University from './university.svelte';
 	function increaseStep() {
 		step += 1;
-		dispatch('stepChanged', { step });
+		dispatch('stepChanged', { step , branch: radioValue});
 	}
 	let step = 0;
 	let eyeIcon = 'img/icons/View.svg';
@@ -16,8 +17,18 @@
 	let password = '';
 	let passwordrepeat = '';
 	let errorLogin = false;
-	let radioValue = 'individual';
-	const dispatch = createEventDispatcher<{ stepChanged: { step: number } }>();
+	let radioValue: BranchType = 'individual';
+	let buttonTextValue = 'Next step';
+	const dispatch = createEventDispatcher<{ stepChanged: { step: number, branch: BranchType} }>();
+
+	$: {
+		if ((step == 4 && radioValue != 'university') || (step == 5 && radioValue == 'university')) {
+			buttonTextValue = 'Create Account';
+		}
+        else {
+			buttonTextValue = 'Next step';
+		}
+	}
 </script>
 
 <form action="">
@@ -28,7 +39,7 @@
 				on:click={() => {
 					if (step > 0) {
 						step--;
-						dispatch('stepChanged', { step });
+						dispatch('stepChanged', { step, branch: radioValue });
 					}
 				}}
 				><svg
@@ -222,7 +233,7 @@
 	{/if}
 
 	<div class="field button-field">
-		<button class="next-step" on:click={increaseStep}>Next Step</button>
+		<button class="next-step" on:click={increaseStep}>{buttonTextValue}</button>
 	</div>
 </form>
 

@@ -1,16 +1,25 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import RegisterForm from './components/registerForm/registerForm.svelte';
+	import type { BranchType } from './components/types';
 
 	let justify = 'center';
 	let matches768px = false;
-	function onStepChanged(e: CustomEvent<{ step: number }>) {
+	function onStepChanged(e: CustomEvent<{ step: number, branch: BranchType  }>) {
 		if (matches768px) {
 			justify = e.detail.step == 0 ? 'center' : 'start';
-			return;
+		} else {
+			justify = 'center';
 		}
-		justify = 'center';
+        if (e.detail.step >= 0)
+            headerText = 'Create Your <br /> ZulaMed Account';
+        if (e.detail.step == 5 && e.detail.branch != 'university')
+            headerText = 'Last step';
+        if (e.detail.step == 6 && e.detail.branch == 'university')
+            headerText = 'Last step';
+
 	}
+	let headerText = 'Create Your <br /> ZulaMed Account';
 	onMount(() => {
 		let media = window.matchMedia('(max-width:768px)');
 		const match768px = () => {
@@ -30,8 +39,8 @@
 	<div class="form register" style:justify-content={justify}>
 		<header>
 			<h2>
-				Create Your <br />
-				ZulaMed Account
+				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+				{@html headerText}
 			</h2>
 		</header>
 

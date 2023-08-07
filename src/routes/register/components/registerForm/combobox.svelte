@@ -2,7 +2,7 @@
 	import { createCombobox, melt } from '@melt-ui/svelte';
 	export let labelText: string;
 	export let inputPlaceholder: string;
-	export let obligatoryField: boolean = false;
+	export let obligatoryField = false;
 	interface Book {
 		author: string;
 		title: string;
@@ -65,7 +65,6 @@
 	const {
 		elements: { input, menu, item, label },
 		states: { open, inputValue, filteredItems },
-		helpers: { isSelected }
 	} = createCombobox({
 		filterFunction: (item, inputValue) => {
 			// Example string normalization function. Replace as needed.
@@ -82,6 +81,7 @@
 	});
 </script>
 
+ <!-- eslint-disable-next-line svelte/valid-compile -->
 <label use:melt={$label}
 	>{labelText}
 	{#if obligatoryField == true}

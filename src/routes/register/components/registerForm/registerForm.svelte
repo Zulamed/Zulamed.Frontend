@@ -25,6 +25,9 @@
 		if ((step == 4 && radioValue != 'university') || (step == 5 && radioValue == 'university')) {
 			buttonTextValue = 'Create Account';
 		}
+        else if ((step == 5 && radioValue != 'university') || (step == 6 && radioValue == 'university')) {
+            buttonTextValue = 'Submit';
+        }
         else {
 			buttonTextValue = 'Next step';
 		}

@@ -1,5 +1,8 @@
 <script lang="ts">
 	import { createCombobox, melt } from '@melt-ui/svelte';
+	export let labelText: string;
+	export let inputPlaceholder: string;
+	export let obligatoryField: boolean = false;
 	interface Book {
 		author: string;
 		title: string;
@@ -79,12 +82,16 @@
 	});
 </script>
 
-<label use:melt={$label}>
-	<span>Choose your favorite book:</span>
-	<div>
-		<input use:melt={$input} placeholder="Best book ever" value={$inputValue} />
-	</div>
+<label use:melt={$label}
+	>{labelText}
+	{#if obligatoryField == true}
+		<span class="obligatory-field">*</span>
+	{/if}
 </label>
+
+<div class="group">
+	<input class="input" use:melt={$input} placeholder={inputPlaceholder} value={$inputValue} />
+</div>
 
 <div class="menu-container" use:melt={$menu}>
 	<ul class="menu">
@@ -113,33 +120,37 @@
 </div>
 
 <style>
-	label {
-		cursor: pointer;
-	}
-
-	label > span {
-		display: block;
-		padding-bottom: 0.25rem;
-		text-transform: capitalize;
-	}
-
-	label > div {
+	.group {
 		position: relative;
+		margin-top: 16px;
 	}
-
-	label input {
+	.input {
+		font-family: 'Montserrat', sans-serif;
 		display: flex;
-		height: 2.5rem;
+		height: 55px;
+		width: 100%;
+		outline: none;
 		align-items: center;
 		justify-content: space-between;
-		border-radius: 0.375rem;
-
-		background-color: whitesmoke;
-
-		padding-left: 0.75rem;
-		padding-right: 3rem;
-
-		color: black;
+		padding: 0 15px;
+		border: 0.5px solid #d2d0d0;
+		background-color: transparent;
+		font-size: 16px;
+		transition: all 0.2s ease;
+	}
+	.input:focus {
+		border: 0.5px solid #00a790;
+	}
+	.obligatory-field {
+		color: red;
+	}
+	label {
+		cursor: pointer;
+		color: #000;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: normal;
 	}
 
 	.menu-container {
@@ -201,7 +212,43 @@
 		position: absolute;
 		left: 0.5rem;
 		top: 50%;
-		color: whitesmoke;
+		color: rgb(255, 255, 255);
 		translate: 0 calc(-50% + 1px);
+	}
+	@media (max-width: 1280px) {
+		label {
+			font-size: 15px;
+		}
+		.group {
+			margin-top: 10px;
+		}
+		.input {
+			height: 50px;
+			font-size: 15px;
+			padding: 0 12px;
+		}
+	}
+	@media (max-width: 1024px) {
+		label {
+			font-size: 13px;
+		}
+		.group {
+			margin-top: 10px;
+		}
+		.input {
+			height: 45px;
+			font-size: 13px;
+			padding: 0 6px;
+		}
+	}
+	@media (max-width: 768px) {
+		label {
+			font-size: 14px;
+		}
+		.input {
+			padding: 0 14px 0 14px;
+			font-size: 15px;
+			height: 60px;
+		}
 	}
 </style>

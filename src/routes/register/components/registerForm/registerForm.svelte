@@ -236,6 +236,7 @@
 		justify-content: space-between;
 		padding: 0 25px;
 		margin-top: 50px;
+		cursor: pointer;
 	}
 	.radio-label p {
 		width: 197px;

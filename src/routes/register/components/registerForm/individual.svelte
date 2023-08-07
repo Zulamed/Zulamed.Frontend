@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Combobox from "./combobox.svelte";
+	import Combobox from './combobox.svelte';
 
 	export let step: number;
 	let eyeIcon = 'img/icons/View.svg';
@@ -10,6 +10,14 @@
 	let password = '';
 	let passwordrepeat = '';
 	let errorLogin = false;
+	function preventDeletion(event: KeyboardEvent) {
+		const input = document.getElementById('username') as HTMLInputElement;
+		const inputValue = input.value;
+		const cursorPosition = input.selectionStart;
+		if (event.key === 'Backspace' && cursorPosition === 1 && inputValue.charAt(0) === '@') {
+			event.preventDefault();
+		}
+	}
 </script>
 
 {#if step == 1}
@@ -18,47 +26,53 @@
 			<div class="field input-field">
 				<label for="title">Title</label>
 				<div class="group">
-					<input name="title" type="text" placeholder="Your title" class="input" />
+					<input id="title" name="title" type="text" placeholder="Your title" class="input" />
 				</div>
 			</div>
 			<div class="field input-field">
 				<label for="name">First name(s)</label>
 				<div class="group">
-					<input name="name" type="text" placeholder="Your first name(s)" class="input" />
+					<input id="name" name="name" type="text" placeholder="Your first name(s)" class="input" />
 				</div>
 			</div>
 			<div class="field input-field">
 				<label for="surname">Family name(s)</label>
 				<div class="group">
-					<input name="surname" type="text" placeholder="Your family name(s)" class="input" />
+					<input
+						id="surname"
+						name="surname"
+						type="text"
+						placeholder="Your family name(s)"
+						class="input"
+					/>
 				</div>
 			</div>
 			<div class="inputs-group">
-				<div class="field input-field">
+				<div class="field g input-field">
 					<label for="gender">Gender</label>
 					<div class="group">
-						<select class="gender-select" name="gender" id="">
+						<select class="gender-select" name="gender" id="gender">
 							<option value="male">Male</option>
 							<option value="female">Female</option>
 							<option value="other">Other</option>
 						</select>
 					</div>
 				</div>
-				<div class="field input-field">
+				<div class="field bd input-field">
 					<label for="birthday-date">Date of birth</label>
 					<div class="birthday-date">
 						<div class="date-group">
-							<select class="date-select" name="birthday-date" id="">
+							<select class="date-select" name="birthday-date" id="birthday-date">
 								<option value="1">1</option>
 							</select>
 						</div>
 						<div class="date-group">
-							<select class="date-select" name="birthday-date" id="">
+							<select class="date-select" name="birthday-date">
 								<option value="December">December</option>
 							</select>
 						</div>
 						<div class="date-group">
-							<select class="date-select" name="birthday-date" id="">
+							<select class="date-select" name="birthday-date">
 								<option value="1990">1990</option>
 							</select>
 						</div>
@@ -73,19 +87,20 @@
 			<div class="field input-field">
 				<label for="email">Email</label>
 				<div class="email-group">
-					<input name="email" type="email" placeholder="Email" class="input" />
+					<input id="email" name="email" type="email" placeholder="Email" class="input" />
 				</div>
 			</div>
 			<div class="field input-field">
-				<label for="email">Repeat email</label>
+				<label for="repeat-email">Repeat email</label>
 				<div class="email-group">
-					<input name="email" type="email" placeholder="Email" class="input" />
+					<input id="repeat-email" name="email" type="email" placeholder="Email" class="input" />
 				</div>
 			</div>
 			<div class="field input-field">
 				<label for="password">Password</label>
 				<div class="pass-group">
 					<input
+						id="password"
 						bind:this={inputPassword}
 						name="password"
 						type="password"
@@ -94,9 +109,6 @@
 						class:input-error={errorLogin}
 						bind:value={password}
 					/>
-					{#if errorLogin == true}
-						<img class="error-icon" src="img/icons/Error-login.svg" alt="" />
-					{/if}
 					<button
 						type="button"
 						class="showpass-btn"
@@ -118,6 +130,7 @@
 				<label for="password-repeat">Re-type password</label>
 				<div class="pass-group">
 					<input
+						id="password-repeat"
 						bind:this={repeatPassword}
 						name="password-repeat"
 						type="password"
@@ -147,11 +160,89 @@
 		</div>
 	</div>
 {:else if step == 3}
-<Combobox></Combobox>
+	<div class="input-container">
+		<div class="radio-content">
+			<div class="field input-field">
+				<Combobox
+					obligatoryField={true}
+					labelText="Stage in career:"
+					inputPlaceholder="Select a stage in career"
+				/>
+			</div>
+			<div class="field input-field">
+				<Combobox
+					obligatoryField={true}
+					labelText="Professional Activity:"
+					inputPlaceholder="Select a Profession"
+				/>
+			</div>
+			<div class="field input-field">
+				<Combobox labelText="Please specify" inputPlaceholder="Select a speciality" />
+			</div>
+			<div class="field input-field">
+				<Combobox labelText="My Place(s) of work" inputPlaceholder="Select your place(s) of work" />
+			</div>
+		</div>
+	</div>
+{:else if step == 4}
+	<div class="input-container">
+		<div class="radio-content">
+			<div class="field input-field country">
+				<Combobox labelText="Country:" inputPlaceholder="Select a country" />
+			</div>
+			<div class="field input-field city">
+				<Combobox labelText="City:" inputPlaceholder="Select a city" />
+			</div>
+			<div class="field input-field institute">
+				<Combobox labelText="Institute" inputPlaceholder="Select an institute" />
+			</div>
+			<div class="field input-field department">
+				<label for="department">Department</label>
+				<div class="group">
+					<input id="department" name="department" type="text" placeholder="" class="input" />
+				</div>
+			</div>
+			<div class="field input-field role">
+				<Combobox labelText="Role" inputPlaceholder="Select a role" />
+			</div>
+		</div>
+	</div>
+{:else if step == 5}
+	<p class="note last-step-note">
+		Please note that your username is very important. It helps others find you.
+	</p>
+	<div class="field input-field username-field">
+		<label for="username">Your username</label>
+		<div class="group">
+			<input
+				on:keydown={preventDeletion}
+				value="@"
+				id="username"
+				name="username"
+				type="text"
+				placeholder=""
+				class="input"
+			/>
+		</div>
+	</div>
 {/if}
 
 <style>
+	.note {
+		color: #585858;
+		text-align: center;
+		font-size: 12px;
+		font-style: normal;
+		font-weight: 400;
+	}
 	/* ====Step2===== */
+	.input-field.country,
+	.input-field.city,
+	.input-field.department,
+	.input-field.institute,
+	.input-field.role {
+		margin-top: 15px;
+	}
 
 	.showpass-btn {
 		all: unset;
@@ -180,6 +271,9 @@
 	.input-field:last-child {
 		margin-bottom: 40px;
 	}
+	.input-field.role {
+		margin-bottom: 19px;
+	}
 	.birthday-date,
 	.group,
 	.email-group,
@@ -201,9 +295,15 @@
 		height: 55px;
 		outline: none;
 		padding: 0 15px;
-		border: 0.5px solid #999999d3;
+		border: 0.5px solid #d2d0d0;
 		background-color: transparent;
 		font-size: 16px;
+		transition: all 0.2s ease;
+		font-family: 'Montserrat', sans-serif;
+	}
+	.field input:focus,
+	.field select:focus {
+		border: 0.5px solid #00a790;
 	}
 	label {
 		color: #000;
@@ -211,13 +311,11 @@
 		font-style: normal;
 		font-weight: 600;
 		line-height: normal;
+		cursor: pointer;
 	}
 	/* ====Step2===== */
 
 	@media (max-width: 1280px) {
-		.field input {
-			height: 50px;
-		}
 		label {
 			font-size: 15px;
 		}
@@ -225,7 +323,9 @@
 		.field select {
 			padding: 0 5px 0 12px;
 			font-size: 15px;
+			height: 50px;
 		}
+		.gender-select,
 		.date-select {
 			font-size: 11px;
 		}
@@ -240,7 +340,8 @@
 		}
 	}
 	@media (max-width: 1024px) {
-		.field input {
+		.field input,
+		.field select {
 			height: 45px;
 		}
 		label {
@@ -262,6 +363,12 @@
 		}
 		.input-field {
 			margin-top: 11px;
+		}
+		.input-field:last-child {
+			margin-bottom: 19px;
+		}
+		.bd {
+			margin-bottom: 0px !important;
 		}
 		.inputs-group {
 			margin-bottom: 19px;

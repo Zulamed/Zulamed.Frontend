@@ -84,7 +84,7 @@
 
 	.form-link {
 		text-align: center;
-		margin-top: 24px;
+		margin-top: 16px;
 	}
 	.signin-link {
 		color: #273b4a;
@@ -102,7 +102,7 @@
 		place-self: center;
 		max-width: 520px;
 		width: 100%;
-		max-height: 80vh;
+		max-height: 83vh;
 		height: 100%;
 		border-radius: 27px;
 		background: #fff;

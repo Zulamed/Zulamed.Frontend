@@ -4,7 +4,7 @@ import { getAllVideos } from '$backend/video/getAll/endpoint';
 import { match } from 'ts-pattern';
 
 
-export const load = (async () => {
+export const load = (async ({fetch}) => {
     // const response = await fetch(`${PUBLIC_BACKEND_URL}/video`);
     // if (response.ok) {
     // 	const videoResponse = (await response.json()) as VideoAllResponse;
@@ -15,7 +15,7 @@ export const load = (async () => {
     // 		videoResponse
     // 	};
     // }
-    const response = await getAllVideos();
+    const response = await getAllVideos(fetch);
     const videosResponse = match(response)
         .with({ tag: "success" }, ({ data }) => data)
         .with({ tag: "error" }, ({ error }) => {throw err(500, error)})

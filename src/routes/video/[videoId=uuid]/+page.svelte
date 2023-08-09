@@ -5,6 +5,7 @@
 	import Chips from './components/chips.svelte';
 	import Description from './components/description.svelte';
 	import Comments from './components/comments.svelte';
+	import { likeVideo } from '$backend/video/like/like';
 
 	let showMoreVideosButton = false;
 	let videoVisibility = true;
@@ -95,9 +96,10 @@
 							type="button"
 							class="interaction-btn like-btn"
 							class:active={likeActive}
-							on:click={() => {
+							on:click={async () => {
 								likeActive = !likeActive;
 								dislikeActive = false;
+                                await likeVideo(data.videoInfo.video.id);
 							}}
 							><img src="/img/icons/thumb_up_white_24dp.svg" alt="" />
 							10k</button

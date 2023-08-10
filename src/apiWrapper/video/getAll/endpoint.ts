@@ -1,9 +1,7 @@
 import { PUBLIC_BACKEND_URL } from "$env/static/public";
 import type { Video } from "$lib/models/video";
+import type { FetchCallbackType } from "$backend/fetchCallbackType";
 import type { User, VideoAllResponse } from "./types";
-
-type FetchCallbackType = typeof fetch;
-
 
 export async function getAllVideos(fetchCallback: FetchCallbackType = fetch)
 : Promise<VideoAllResponse> {

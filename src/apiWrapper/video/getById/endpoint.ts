@@ -1,8 +1,9 @@
+import type { FetchCallbackType } from "$backend/fetchCallbackType";
 import { PUBLIC_BACKEND_URL } from "$env/static/public";
 import type { Video } from "$lib/models/video";
 import type { User, VideoResponse } from "./types";
 
-export async function getVideoById(id: string): Promise<VideoResponse> {
+export async function getVideoById(id: string, fetch: FetchCallbackType = global.fetch): Promise<VideoResponse> {
     try {
         const response = await fetch(`${PUBLIC_BACKEND_URL}/video/${id}`);
         if (response.status == 404){

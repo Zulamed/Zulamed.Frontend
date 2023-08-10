@@ -9,7 +9,7 @@ export const handle = (async ({ event, resolve }) => {
     try {
         const user = token ? await auth.verifyIdToken(token) : undefined;
         if (user) {
-            const userResponse = await getUser(user['UserId']);
+            const userResponse = await getUser(user['UserId'], event.fetch);
             match(userResponse)
                 .with({ tag: "success" }, ({ user: response }) => {
                     event.locals.user = response.user

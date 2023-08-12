@@ -18,6 +18,14 @@
 			event.preventDefault();
 		}
 	}
+	function preventInsertion() {
+		const input = document.getElementById('username') as HTMLInputElement;
+		const inputValue = input.value;
+
+		if (inputValue.charAt(0) !== '@') {
+			input.value = '@';
+		}
+	}
 </script>
 
 {#if step == 1}
@@ -186,20 +194,35 @@
 	</div>
 {:else if step == 4}
 	<div class="input-container">
-		<div class="radio-content">
+		<div class="radio-content step-4-overflow">
 			<div class="field input-field country">
 				<Combobox labelText="Country:" inputPlaceholder="Select a country" />
+				<p class="error-message">Error message</p>
 			</div>
 			<div class="field input-field city">
 				<Combobox labelText="City:" inputPlaceholder="Select a city" />
 			</div>
 			<div class="field input-field institute">
-				<Combobox labelText="Institute" inputPlaceholder="Select an institute" />
+				<Combobox
+					inputNote="Please select the name of your institute, if it does not exist, simply type a new institute name in English, using only latin characters without special characters or accents."
+					labelText="Institute"
+					inputPlaceholder="Select an institute"
+				/>
 			</div>
 			<div class="field input-field department">
 				<label for="department">Department</label>
-				<div class="group">
-					<input id="department" name="department" type="text" placeholder="" class="input" />
+				<p class="input-note">
+					Please enter the name in English of your department, using only latin characters without
+					special characters or accents.
+				</p>
+				<div class="group-less">
+					<input
+						id="department"
+						name="department"
+						type="text"
+						placeholder=""
+						class="input input-department"
+					/>
 				</div>
 			</div>
 			<div class="field input-field role">
@@ -212,10 +235,11 @@
 		Please note that your username is very important. It helps others find you.
 	</p>
 	<div class="field input-field username-field">
-		<label for="username">Your username</label>
+		<label class="large-label" for="username">Your username</label>
 		<div class="group">
 			<input
 				on:keydown={preventDeletion}
+				on:input={preventInsertion}
 				value="@"
 				id="username"
 				name="username"
@@ -225,9 +249,117 @@
 			/>
 		</div>
 	</div>
+	<div class="field input-field username-type-field">
+		<label class="large-label" for="username"
+			>Automatically generated username from your first and last name</label
+		>
+		<div class="group username-type-group">
+			<label class="radio-label" for="NameSurname">
+				<input
+					class="radio-all"
+					id="NameSurname"
+					type="radio"
+					name="username-type"
+					value="NameSurname"
+				/>
+				<img class="radio-img" src="" alt="" />
+				<p class="username-type-label">NameSurname</p>
+			</label>
+
+			<label class="radio-label" for="Name_Surname">
+				<input
+					class="radio-all"
+					id="Name_Surname"
+					type="radio"
+					name="username-type"
+					value="Name_Surname"
+				/>
+				<img class="radio-img" src="" alt="" />
+				<p class="username-type-label">Name_Surname</p>
+			</label>
+
+			<label class="radio-label" for="Name-Surname">
+				<input
+					class="radio-all"
+					id="Name-Surname"
+					type="radio"
+					name="username-type"
+					value="Name-Surname"
+				/>
+				<img class="radio-img" src="" alt="" />
+				<p class="username-type-label">Name-Surname</p>
+			</label>
+
+			<label class="radio-label" for="NameSurnameYearofBirth">
+				<input
+					class="radio-all"
+					id="NameSurnameYearofBirth"
+					type="radio"
+					name="username-type"
+					value="NameSurnameYearofBirth"
+				/>
+				<img class="radio-img" src="" alt="" />
+				<p class="username-type-label">NameSurnameYearofBirth</p>
+			</label>
+
+			<label class="radio-label" for="NameSurnameNumber">
+				<input
+					class="radio-all"
+					id="NameSurnameNumber"
+					type="radio"
+					name="username-type"
+					value="NameSurnameNumber"
+				/>
+				<img class="radio-img" src="" alt="" />
+				<p class="username-type-label">NameSurnameNumber</p>
+			</label>
+		</div>
+	</div>
 {/if}
 
 <style>
+	.username-type-group {
+		margin-top: 45px !important;
+	}
+	.username-type-field {
+		margin-top: 40px !important;
+		margin-bottom: 55px;
+	}
+
+	.radio-label {
+		display: flex;
+		align-items: center;
+	}
+	.radio-label:not(:last-child) {
+		margin-bottom: 12px;
+	}
+	.radio-all {
+		position: absolute;
+		visibility: hidden;
+	}
+	div.group > label > img {
+		margin-right: 25px;
+		width: 24px;
+		height: 24px;
+		content: url(../img/icons/Dell2.svg);
+		border: none;
+		pointer-events: none;
+	}
+
+	div.group > label > input:checked + img {
+		content: url(../img/icons/Dell.svg);
+	}
+
+	/* ============================ */
+
+	.error-message {
+		margin-top: 6px;
+		color: #ff3e24;
+		font-family: 'Montserrat';
+		font-size: 12px;
+		font-style: normal;
+		font-weight: 500;
+	}
 	.note {
 		color: #585858;
 		text-align: center;
@@ -235,15 +367,24 @@
 		font-style: normal;
 		font-weight: 400;
 	}
+	.last-step-note {
+		margin-top: 19px;
+	}
+	.input-note {
+		font-size: 12px;
+		color: #585858;
+		font-style: normal;
+		font-weight: 400;
+		margin-top: 10px;
+	}
 	/* ====Step2===== */
 	.input-field.country,
 	.input-field.city,
 	.input-field.department,
 	.input-field.institute,
 	.input-field.role {
-		margin-top: 15px;
+		margin-top: 8px;
 	}
-
 	.showpass-btn {
 		all: unset;
 		position: absolute;
@@ -274,6 +415,10 @@
 	.input-field.role {
 		margin-bottom: 19px;
 	}
+	.group-less {
+		position: relative;
+		margin-top: 10px;
+	}
 	.birthday-date,
 	.group,
 	.email-group,
@@ -292,9 +437,9 @@
 
 	.field input,
 	.field select {
-		height: 55px;
+		height: 60px;
 		outline: none;
-		padding: 0 15px;
+		padding: 0 16px;
 		border: 0.5px solid #d2d0d0;
 		background-color: transparent;
 		font-size: 16px;
@@ -313,9 +458,42 @@
 		line-height: normal;
 		cursor: pointer;
 	}
+	.large-label {
+		color: #000;
+		font-size: 20px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: normal;
+		cursor: pointer;
+	}
 	/* ====Step2===== */
-
+	.field .date-select {
+		padding: 0 26px;
+	}
+	.radio-content {
+		padding: 0 10px;
+	}
+	.step-4-overflow {
+		overflow-y: scroll;
+		scrollbar-color: #00baa2 #eaeae6;
+		max-height: 500px;
+		scrollbar-width: thin;
+	}
+	.step-4-overflow::-webkit-scrollbar-thumb {
+		background: #00baa2 !important;
+		width: 6px !important;
+	}
+	.step-4-overflow::-webkit-scrollbar-track {
+		background: #ffffff !important;
+		width: 2px !important;
+	}
 	@media (max-width: 1280px) {
+		.radio-content {
+			padding: 0 10px;
+		}
+		.step-4-overflow {
+			max-height: 330px;
+		}
 		label {
 			font-size: 15px;
 		}
@@ -328,6 +506,9 @@
 		.gender-select,
 		.date-select {
 			font-size: 11px;
+		}
+		.date-select {
+			padding: 0 5px !important;
 		}
 		.birthday-date,
 		.group,
@@ -375,12 +556,25 @@
 		}
 	}
 	@media (max-width: 768px) {
+		.step-4-overflow {
+			overflow-y: hidden;
+			max-height: 100%;
+		}
+		.large-label {
+			font-size: 14px;
+		}
+		.username-type-group {
+			margin-top: 30px !important;
+		}
 		.input-container {
 			margin-bottom: 20px;
 			width: 100%;
 		}
 		.inputs-group {
 			display: block;
+		}
+		.input-field {
+			width: 100%;
 		}
 		label {
 			font-size: 14px;

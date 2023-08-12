@@ -1,42 +1,41 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-    import type {BranchType} from './../types';
+	import type { BranchType } from './../types';
 	import Hospital from './hospital.svelte';
 	import Individual from './individual.svelte';
 	import University from './university.svelte';
 	function increaseStep() {
 		step += 1;
-		dispatch('stepChanged', { step , branch: radioValue});
+		dispatch('stepChanged', { step, branch: radioValue });
 	}
 	let step = 0;
-	let eyeIcon = 'img/icons/View.svg';
-	let eyeIconRepeat = 'img/icons/View.svg';
-	let inputPassword: HTMLInputElement;
-	let repeatPassword: HTMLInputElement;
-	let email = '';
-	let password = '';
-	let passwordrepeat = '';
-	let errorLogin = false;
 	let radioValue: BranchType = 'individual';
 	let buttonTextValue = 'Next step';
-	const dispatch = createEventDispatcher<{ stepChanged: { step: number, branch: BranchType} }>();
+	let prevStep = true;
+	const dispatch = createEventDispatcher<{ stepChanged: { step: number; branch: BranchType } }>();
 
 	$: {
-		if ((step == 4 && radioValue != 'university') || (step == 5 && radioValue == 'university')) {
+		if ((step == 3 && radioValue == 'university') || (step == 4 && radioValue == 'individual')) {
 			buttonTextValue = 'Create Account';
-		}
-        else if ((step == 5 && radioValue != 'university') || (step == 6 && radioValue == 'university')) {
-            buttonTextValue = 'Submit';
-        }
-        else {
+		} else if (
+			(step == 4 && radioValue == 'university') ||
+			(step == 5 && radioValue == 'individual')
+		) {
+			buttonTextValue = 'Submit';
+		} else {
 			buttonTextValue = 'Next step';
+		}
+		if ((step == 5 && radioValue == 'individual') || (step == 4 && radioValue == 'university')) {
+			prevStep = false;
+		} else {
+			prevStep = true;
 		}
 	}
 </script>
 
 <form action="">
-	{#if step > 0}
-		<div style="width: 100%; display: flex; align-items: start;">
+	{#if step > 0 && prevStep}
+		<div class="prev" style="width: 100%; display: flex; align-items: start;">
 			<button
 				class="prev-step"
 				on:click={() => {
@@ -66,8 +65,8 @@
 				<label class="radio-label" for="individual-account">
 					<svg
 						class="svg-icons"
-						width="60"
-						height="60"
+						width="70"
+						height="70"
 						viewBox="0 0 50 50"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"
@@ -91,8 +90,8 @@
 				<label class="radio-label" for="bbbb">
 					<svg
 						class="svg-icons"
-						width="60"
-						height="60"
+						width="70"
+						height="70"
 						viewBox="0 0 55 50"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"
@@ -118,8 +117,8 @@
 				<label class="radio-label" for="aaaa">
 					<svg
 						class="svg-icons"
-						width="60"
-						height="60"
+						width="70"
+						height="70"
 						viewBox="0 0 58 50"
 						fill="none"
 						xmlns="http://www.w3.org/2000/svg"
@@ -253,9 +252,9 @@
 		cursor: pointer;
 	}
 	.radio-label p {
-		width: 197px;
+		width: 205px;
 		color: #000;
-		font-size: 19px;
+		font-size: 22px;
 		font-style: normal;
 		font-weight: 600;
 	}
@@ -264,8 +263,8 @@
 		visibility: hidden;
 	}
 	div.radio-content > label > img {
-		width: 30px;
-		height: 30px;
+		width: 35px;
+		height: 35px;
 		content: url(../img/icons/Check_ring.svg);
 		border: none;
 		pointer-events: none;
@@ -275,7 +274,8 @@
 	}
 	.input-container {
 		width: 100%;
-		margin-bottom: 50px;
+		margin-bottom: 85px;
+		margin-top: 85px;
 	}
 
 	.button-field {
@@ -283,15 +283,16 @@
 		display: flex;
 	}
 	.field .next-step {
-		width: 240px;
-		height: 65px;
+		width: 215px;
+		height: 59px;
 		border-radius: 8px;
 		background: #00baa2;
+		background-color: rgb(0, 186, 162);
 		transition: all 0.3s ease;
 		cursor: pointer;
 		color: #273b4a;
 		text-align: center;
-		font-size: 20px;
+		font-size: 19px;
 		font-style: normal;
 		font-weight: 600;
 		border: none;
@@ -369,7 +370,8 @@
 		.field .next-step {
 			width: 157px;
 			height: 65px;
-			font-size: 22px;
+			font-size: 17px;
+			white-space: nowrap;
 		}
 		.radio-label:not(:first-child) {
 			margin-top: 50px;
@@ -392,7 +394,11 @@
 		.input-container {
 			max-width: 375px;
 			margin-bottom: 50px;
+			margin-top: 50px;
 			width: 100%;
+		}
+		.radio-content {
+			margin-top: 0 !important;
 		}
 		form {
 			display: flex;

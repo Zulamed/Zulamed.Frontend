@@ -3,6 +3,7 @@
 	export let labelText: string;
 	export let inputPlaceholder: string;
 	export let obligatoryField = false;
+	export let inputNote = '';
 	interface Book {
 		author: string;
 		title: string;
@@ -64,7 +65,7 @@
 
 	const {
 		elements: { input, menu, item, label },
-		states: { open, inputValue, filteredItems },
+		states: { open, inputValue, filteredItems }
 	} = createCombobox({
 		filterFunction: (item, inputValue) => {
 			// Example string normalization function. Replace as needed.
@@ -81,16 +82,23 @@
 	});
 </script>
 
- <!-- eslint-disable-next-line svelte/valid-compile -->
+<!-- eslint-disable-next-line svelte/valid-compile -->
 <label use:melt={$label}
 	>{labelText}
 	{#if obligatoryField == true}
 		<span class="obligatory-field">*</span>
 	{/if}
 </label>
-
-<div class="group">
+<p class="input-note">{inputNote}</p>
+<div class="group-less">
 	<input class="input" use:melt={$input} placeholder={inputPlaceholder} value={$inputValue} />
+	<div class="chevron-wrapper">
+		{#if $open}
+			<img class="chevron" src="img/icons/Expand_up.png" alt="" />
+		{:else}
+			<img class="chevron" src="img/icons/Expand_down.png" alt="" />
+		{/if}
+	</div>
 </div>
 
 <div class="menu-container" use:melt={$menu}>
@@ -120,14 +128,31 @@
 </div>
 
 <style>
+	.chevron {
+		position: absolute;
+		top: 50%;
+		right: 2%;
+		transform: translateY(-50%);
+	}
 	.group {
 		position: relative;
 		margin-top: 16px;
 	}
+	.group-less {
+		position: relative;
+		margin-top: 16px;
+	}
+	.input-note {
+		font-size: 12px;
+		color: #585858;
+		font-style: normal;
+		font-weight: 400;
+		margin-top: 10px;
+	}
 	.input {
 		font-family: 'Montserrat', sans-serif;
 		display: flex;
-		height: 55px;
+		height: 60px;
 		width: 100%;
 		outline: none;
 		align-items: center;
@@ -151,6 +176,7 @@
 		font-style: normal;
 		font-weight: 600;
 		line-height: normal;
+		margin-bottom: 10px;
 	}
 
 	.menu-container {

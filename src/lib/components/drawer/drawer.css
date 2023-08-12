@@ -796,6 +796,11 @@ nav {
 		margin-left: 0px;
 	}
 
+	.search-mobile {
+		width: 27px;
+		height: 24px;
+	}
+
 	.lang-icon,
 	.search-mobile {
 		margin-right: 3px;

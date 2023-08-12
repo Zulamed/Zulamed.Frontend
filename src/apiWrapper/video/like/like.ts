@@ -6,7 +6,9 @@ export type Response =
     | { status: "ok" }
     | { status: "error", error: string }
 
-export async function likeVideo(id: string, userId: string, fetch: FetchCallbackType = global.fetch): Promise<Response> {
+const originalFetch = fetch;
+
+export async function likeVideo(id: string, userId: string, fetch: FetchCallbackType = originalFetch): Promise<Response> {
     try {
         const result = await fetch(`${PUBLIC_BACKEND_URL}/video/${id}/like`, {
             method: "POST",
@@ -17,7 +19,7 @@ export async function likeVideo(id: string, userId: string, fetch: FetchCallback
             body: JSON.stringify({ userId })
         });
         if (!result.ok) {
-            return { status: "error", error: await result.json()}
+            return { status: "error", error: await result.json() }
         }
         return { status: "ok" }
     } catch (error) {

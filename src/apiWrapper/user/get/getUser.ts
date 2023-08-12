@@ -1,9 +1,9 @@
 import type { FetchCallbackType } from "$backend/fetchCallbackType";
 import { PUBLIC_BACKEND_URL } from "$env/static/public";
 import type { UserRetrievalResult, UserResponse } from "./types";
+const origFetch = fetch;
 
-
-export async function getUser(userId: string, fetch: FetchCallbackType = global.fetch)
+export async function getUser(userId: string, fetch: FetchCallbackType = origFetch)
 : Promise<UserRetrievalResult> {
     try {
         const response = await fetch(`${PUBLIC_BACKEND_URL}/user/${userId}`);

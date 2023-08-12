@@ -6,7 +6,6 @@ import { match } from 'ts-pattern';
 export const handle = (async ({ event, resolve }) => {
     const token = event.cookies.get('token');
     const path = event.url.pathname;
-    console.log('salam!');
     try {
         const user = token ? await auth.verifyIdToken(token) : undefined;
         if (user) {
@@ -27,7 +26,6 @@ export const handle = (async ({ event, resolve }) => {
         }
     } catch (error) {
         // if token is invalid, remove it from cookies
-        console.log('error!')
         event.cookies.set('token', '', { maxAge: -1 });
         throw redirect(307, '/');
     }

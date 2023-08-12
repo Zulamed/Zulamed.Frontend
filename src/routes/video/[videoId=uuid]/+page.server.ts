@@ -18,9 +18,6 @@ export const actions = {
     like: async ({fetch,request,locals}) => {
         const data = await request.formData();
         const videoId = data.get("videoId") as string;
-        const response = await likeVideo(videoId,locals.user.id, fetch);
-        if (response.status == "error") {
-            console.log(response.error);
-        }
+        await likeVideo(videoId,locals.user.id, fetch);
     }
 } satisfies Actions;

@@ -6,6 +6,7 @@
 	import Description from './components/description.svelte';
 	import Comments from './components/comments.svelte';
 	import { likeVideo } from '$backend/video/like/like';
+	import { enhance } from '$app/forms';
 
 	let showMoreVideosButton = false;
 	let videoVisibility = true;
@@ -91,19 +92,21 @@
 				<div class="play-video-info-right">
 					<button type="button" class="message-btn" class:active={messageActive}>CHAT</button>
 					<div class="interaction-btn-group">
-						<button
-							id="like-btn"
-							type="button"
-							class="interaction-btn like-btn"
-							class:active={likeActive}
-							on:click={async () => {
-								likeActive = !likeActive;
-								dislikeActive = false;
-                                await likeVideo(data.videoInfo.video.id);
-							}}
-							><img src="/img/icons/thumb_up_white_24dp.svg" alt="" />
-							10k</button
-						>
+						<form method="post" action="?/like" use:enhance>
+							<button
+								id="like-btn"
+								class="interaction-btn like-btn"
+								class:active={likeActive}
+								on:click={async () => {
+									likeActive = !likeActive;
+									dislikeActive = false;
+								}}
+								><img src="/img/icons/thumb_up_white_24dp.svg" alt="" />
+								10k</button
+							>
+							<input name="videoId" type="hidden" value={data.videoInfo.video.id} />
+						</form>
+
 						<button
 							id="dislike-btn"
 							type="button"
@@ -120,7 +123,10 @@
 					>
 				</div>
 			</div>
-			<Description views={data.videoInfo.video.videoViews} textContent={data.videoInfo.video.videoDescription} />
+			<Description
+				views={data.videoInfo.video.videoViews}
+				textContent={data.videoInfo.video.videoDescription}
+			/>
 			{#if !matches1027px}
 				<Comments />
 			{/if}

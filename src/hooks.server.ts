@@ -6,6 +6,7 @@ import { match } from 'ts-pattern';
 export const handle = (async ({ event, resolve }) => {
     const token = event.cookies.get('token');
     const path = event.url.pathname;
+    console.log('salam!');
     try {
         const user = token ? await auth.verifyIdToken(token) : undefined;
         if (user) {
@@ -18,7 +19,7 @@ export const handle = (async ({ event, resolve }) => {
                 .with({ tag: "error" }, () => { throw redirect(307, '/') })
         }
         if (path === '/protected' && !user) {
-            return new Response('Redirect', {status: 303, headers: { Location: '/login' }})
+            return new Response('Redirect', { status: 303, headers: { Location: '/login' } })
         }
         // prevent logged in users from accessing login page
         if ((path === '/login' || path === '/register') && user) {
@@ -26,8 +27,9 @@ export const handle = (async ({ event, resolve }) => {
         }
     } catch (error) {
         // if token is invalid, remove it from cookies
+        console.log('error!')
         event.cookies.set('token', '', { maxAge: -1 });
-        return new Response('Redirect', {status: 307, headers: { Location: '/' }})
+        throw redirect(307, '/');
     }
     return await resolve(event);
 }) satisfies Handle;

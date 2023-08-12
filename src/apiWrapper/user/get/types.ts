@@ -3,7 +3,7 @@ export type UserResponse = {
 }
 
 export type User = {
-    userId: string;
+    id: string;
     email: string;
     name: string;
     surname: string;

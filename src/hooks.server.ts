@@ -1,6 +1,6 @@
 import { auth } from '$lib/firebase/admin';
 import { getUser } from '$backend/user/get/getUser';
-import { redirect, type Handle } from '@sveltejs/kit';
+import { redirect, type Handle, type HandleFetch } from '@sveltejs/kit';
 import { match } from 'ts-pattern';
 
 export const handle = (async ({ event, resolve }) => {
@@ -31,3 +31,8 @@ export const handle = (async ({ event, resolve }) => {
     }
     return await resolve(event);
 }) satisfies Handle;
+
+export const handleFetch = (async ({ event,request, fetch }) => {
+    request.headers.set('Authorization', `Bearer ${event.cookies.get('token')}`)
+    return fetch(request);
+}) satisfies HandleFetch;

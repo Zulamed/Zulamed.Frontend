@@ -5,8 +5,9 @@
 	import Chips from './components/chips.svelte';
 	import Description from './components/description.svelte';
 	import Comments from './components/comments.svelte';
-	import { likeVideo } from '$backend/video/like/like';
 	import { enhance } from '$app/forms';
+	import { likeVideo } from '$backend/video/like/like';
+	import { viewVideo } from '$backend/video/view/endpoint';
 
 	let showMoreVideosButton = false;
 	let videoVisibility = true;
@@ -28,6 +29,7 @@
 	}
 
 	onMount(async () => {
+        await viewVideo(data.videoInfo.video.id);
 		let media1027px = window.matchMedia('(max-width:1027px)');
 		let media600px = window.matchMedia('(max-width:600px)');
 		const match1027px = () => {

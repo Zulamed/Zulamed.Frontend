@@ -2,10 +2,12 @@
 	export let labelText: string | undefined;
 	export let inputPlaceholder: string | undefined;
 	export let inputId: string | undefined;
+	export let inputNote = '';
 	export let inputType = 'text';
 </script>
 
 <label for={inputId}>{labelText}</label>
+<p class="input-note">{inputNote}</p>
 <div class="group">
 	<input
 		id={inputId}
@@ -17,6 +19,13 @@
 </div>
 
 <style>
+	.input-note {
+		font-size: 12px;
+		color: #585858;
+		font-style: normal;
+		font-weight: 400;
+		margin-top: 10px;
+	}
 	input::-webkit-outer-spin-button,
 	input::-webkit-inner-spin-button {
 		-webkit-appearance: none;

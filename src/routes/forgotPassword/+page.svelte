@@ -1,66 +1,18 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import RegisterForm from './components/registerForm/registerForm.svelte';
-	import type { BranchType } from './components/types';
-
-	let headerNote = false;
-	let justify = 'center';
-	let matches768px = false;
-	function onStepChanged(e: CustomEvent<{ step: number; branch: BranchType }>) {
-		headerNote = false;
-		if (matches768px) {
-			justify = e.detail.step == 0 ? 'center' : 'start';
-		} else {
-			justify = 'center';
-		}
-		if (e.detail.step >= 0) headerText = 'Create Your <br /> ZulaMed Account';
-		if (e.detail.step == 5 && e.detail.branch != 'university') headerText = 'Last step';
-		if (e.detail.step == 4) headerNote = true;
-		if (e.detail.branch == 'university') headerNote = false;
-		if (
-			(e.detail.step == 4 && e.detail.branch == 'university') ||
-			(e.detail.step == 4 && e.detail.branch == 'hospital')
-		) {
-			headerNote = false;
-			headerText = 'Last step';
-		} else {
-			headerText;
-		}
-	}
-	let headerText = 'Create Your <br /> ZulaMed Account';
-	onMount(() => {
-		let media = window.matchMedia('(max-width:768px)');
-		const match768px = () => {
-			matches768px = media.matches;
-		};
-		match768px();
-		media.addEventListener('change', match768px);
-		return () => {
-			media.removeEventListener('change', match768px);
-		};
-	});
+	import ForgotPassForm from './components/forgotPasswordForm/forgotPassForm.svelte';
 </script>
 
 <section class="container forms">
 	<img class="container-img" src="img/main-background-mobile.png" alt="" />
 	<div class="container-overlay" />
-	<div class="form register" style:justify-content={justify}>
+	<div class="form register">
 		<header>
 			<h2>
-				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
-				{@html headerText}
+				Request a Password <br />
+				Reset
 			</h2>
 		</header>
-		{#if headerNote == true}
-			<p class="note">
-				Please provide the legal name of your hospital, university or research centre. If you work
-				in multiple university, please provide the one where you spend the most time or that you
-				consider to be your main place of practice.
-			</p>
-		{/if}
-
-		<RegisterForm on:stepChanged={onStepChanged} />
-
+		<ForgotPassForm />
 		<div class="form-link">
 			<a href="/login" class="link signin-link">Click here</a> <span>to go back to Login</span>
 		</div>
@@ -100,14 +52,14 @@
 	h2 {
 		color: #000;
 		text-align: center;
-		font-size: 32px;
+		font-size: 35px;
 		font-style: normal;
 		font-weight: 400;
 		line-height: normal;
 	}
 	.form-link span {
 		color: #273b4a;
-		font-size: 19px;
+		font-size: 22px;
 		font-style: normal;
 		font-weight: 400;
 		line-height: normal;
@@ -119,7 +71,7 @@
 	}
 	.signin-link {
 		color: #273b4a;
-		font-size: 19px;
+		font-size: 22px;
 		font-style: normal;
 		font-weight: 400;
 		line-height: normal;
@@ -161,7 +113,7 @@
 			margin-top: 22px;
 		}
 		h2 {
-			font-size: 28px;
+			font-size: 26px;
 		}
 	}
 	@media (max-width: 1024px) {
@@ -189,7 +141,7 @@
 			max-width: 100%;
 			max-height: 100vh;
 			border-radius: 0;
-			/* justify-content: start; */
+			justify-content: start;
 			z-index: 0;
 			overflow-y: auto;
 		}
@@ -205,7 +157,4 @@
 			font-size: 25px;
 		}
 	}
-	/* @media (max-width: 480px) {
-
-	} */
 </style>

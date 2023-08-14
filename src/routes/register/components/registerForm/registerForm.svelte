@@ -15,17 +15,26 @@
 	const dispatch = createEventDispatcher<{ stepChanged: { step: number; branch: BranchType } }>();
 
 	$: {
-		if ((step == 3 && radioValue == 'university') || (step == 4 && radioValue == 'individual')) {
+		if (
+			(step == 3 && radioValue == 'university') ||
+			(step == 4 && radioValue == 'individual') ||
+			(step == 3 && radioValue == 'hospital')
+		) {
 			buttonTextValue = 'Create Account';
 		} else if (
 			(step == 4 && radioValue == 'university') ||
-			(step == 5 && radioValue == 'individual')
+			(step == 5 && radioValue == 'individual') ||
+			(step == 4 && radioValue == 'hospital')
 		) {
 			buttonTextValue = 'Submit';
 		} else {
 			buttonTextValue = 'Next step';
 		}
-		if ((step == 5 && radioValue == 'individual') || (step == 4 && radioValue == 'university')) {
+		if (
+			(step == 5 && radioValue == 'individual') ||
+			(step == 4 && radioValue == 'university') ||
+			(step == 4 && radioValue == 'hospital')
+		) {
 			prevStep = false;
 		} else {
 			prevStep = true;
@@ -153,85 +162,6 @@
 		{#if radioValue == 'university'}
 			<University {step} />
 		{/if}
-
-		<!-- <div class="input-container">
-				<div class="radio-content">
-					<div class="field input-field">
-						<label for="email">Email</label>
-						<div class="email-group">
-							<input name="email" type="email" placeholder="Email" class="input" />
-						</div>
-					</div>
-					<div class="field input-field">
-						<label for="email">Repeat email</label>
-						<div class="email-group">
-							<input name="email" type="email" placeholder="Email" class="input" />
-						</div>
-					</div>
-					<div class="field input-field">
-						<label for="password">Password</label>
-						<div class="pass-group">
-							<input
-								bind:this={inputPassword}
-								name="password"
-								type="password"
-								placeholder="*********"
-								class="password"
-								class:input-error={errorLogin}
-								bind:value={password}
-							/>
-							{#if errorLogin == true}
-								<img class="error-icon" src="img/icons/Error-login.svg" alt="" />
-							{/if}
-							<button
-								type="button"
-								class="showpass-btn"
-								on:click={() => {
-									if (eyeIcon == 'img/icons/View.svg') {
-										eyeIcon = 'img/icons/View_hide.svg';
-										inputPassword.type = 'text';
-									} else {
-										eyeIcon = 'img/icons/View.svg';
-										inputPassword.type = 'password';
-									}
-								}}
-							>
-								<img src={eyeIcon} class="eye-icon" alt="" />
-							</button>
-						</div>
-					</div>
-					<div class="field input-field">
-						<label for="password-repeat">Re-type password</label>
-						<div class="pass-group">
-							<input
-								bind:this={repeatPassword}
-								name="password-repeat"
-								type="password"
-								placeholder="*********"
-								class="password"
-								class:input-error={errorLogin}
-								bind:value={passwordrepeat}
-							/>
-
-							<button
-								type="button"
-								class="showpass-btn"
-								on:click={() => {
-									if (eyeIconRepeat == 'img/icons/View.svg') {
-										eyeIconRepeat = 'img/icons/View_hide.svg';
-										repeatPassword.type = 'text';
-									} else {
-										eyeIconRepeat = 'img/icons/View.svg';
-										repeatPassword.type = 'password';
-									}
-								}}
-							>
-								<img src={eyeIconRepeat} class="eye-icon" alt="" />
-							</button>
-						</div>
-					</div>
-				</div>
-			</div> -->
 	{/if}
 
 	<div class="field button-field">
@@ -247,7 +177,7 @@
 		height: 75px;
 		align-items: center;
 		justify-content: space-between;
-		padding: 0 25px;
+		padding: 0 50px;
 		margin-top: 50px;
 		cursor: pointer;
 	}

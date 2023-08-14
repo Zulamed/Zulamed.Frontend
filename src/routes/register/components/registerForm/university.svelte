@@ -113,13 +113,7 @@
 	.last-step-note {
 		margin-top: 19px;
 	}
-	.input-note {
-		font-size: 12px;
-		color: #585858;
-		font-style: normal;
-		font-weight: 400;
-		margin-top: 10px;
-	}
+
 	/* ======================== */
 
 	.input-field {
@@ -151,6 +145,9 @@
 		.step-3-overflow {
 			overflow-y: hidden;
 			max-height: 100%;
+		}
+		.input-field {
+			width: 100%;
 		}
 	}
 </style>

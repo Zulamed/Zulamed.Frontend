@@ -8,7 +8,7 @@
 	async function handleSubmit() {
 		try {
 			await login(email, password);
-            goto('/');
+			goto('/');
 		} catch (error) {
 			if (error instanceof FirebaseError) {
 				errorLogin = true;
@@ -24,7 +24,7 @@
 		<label for="email">Email Address</label>
 		<div class="email-group">
 			<input
-                bind:value={email}
+				bind:value={email}
 				name="email"
 				type="email"
 				placeholder="Email"
@@ -80,7 +80,7 @@
 		<button class="login-btn">Log In</button>
 	</div>
 	<div class="form-link">
-		<a href="." class="forgot-pass">Forgot password?</a>
+		<a href="/forgotPassword" class="forgot-pass">Forgot password?</a>
 	</div>
 </form>
 

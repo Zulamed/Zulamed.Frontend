@@ -1,33 +1,15 @@
 <script lang="ts">
 	export let labelText: string | undefined;
-	export let inputPlaceholder = '';
+	export let inputPlaceholder: string | undefined;
 	export let inputId: string | undefined;
+	export let inputNote = '';
 	export let inputType = 'text';
-	let usernameError = false;
-	function preventDeletion(event: KeyboardEvent) {
-		const input = document.getElementById('username') as HTMLInputElement;
-		const inputValue = input.value;
-		const cursorPosition = input.selectionStart;
-		if (event.key === 'Backspace' && cursorPosition === 1 && inputValue.charAt(0) === '@') {
-			event.preventDefault();
-		}
-	}
-	function preventInsertion() {
-		const input = document.getElementById('username') as HTMLInputElement;
-		const inputValue = input.value;
-
-		if (inputValue.charAt(0) !== '@') {
-			input.value = '@';
-		}
-	}
 </script>
 
-<label class="large-label" for={inputId}>{labelText}</label>
+<label for={inputId}>{labelText}</label>
+<p class="input-note">{inputNote}</p>
 <div class="group">
 	<input
-		on:keydown={preventDeletion}
-		on:input={preventInsertion}
-		value="@"
 		id={inputId}
 		name={inputId}
 		type={inputType}
@@ -35,30 +17,36 @@
 		class="input"
 	/>
 </div>
-{#if usernameError == true}
-	<p class="error-message">Error message</p>
-{/if}
 
 <style>
-	.error-message {
-		margin-top: 6px;
-		color: #ff3e24;
-		font-family: 'Montserrat';
+	.input-note {
 		font-size: 12px;
+		color: #585858;
 		font-style: normal;
-		font-weight: 500;
+		font-weight: 400;
+		margin-top: 10px;
 	}
-	.large-label {
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+	input[type='number'] {
+		-moz-appearance: textfield;
+		appearance: textfield;
+	}
+	.group {
+		position: relative;
+		margin-top: 26px;
+	}
+	label {
 		color: #000;
 		font-size: 20px;
 		font-style: normal;
 		font-weight: 600;
 		line-height: normal;
 		cursor: pointer;
-	}
-	.group {
-		position: relative;
-		margin-top: 16px;
+		padding-left: 32px;
 	}
 	.input {
 		height: 100%;
@@ -81,10 +69,10 @@
 	.input:focus {
 		border: 0.5px solid #00a790;
 	}
-
 	@media (max-width: 1280px) {
 		label {
 			font-size: 15px;
+			padding: 0;
 		}
 		.input {
 			padding: 0 5px 0 12px;
@@ -92,7 +80,7 @@
 			height: 50px;
 		}
 		.group {
-			margin-top: 10px;
+			margin-top: 19px;
 		}
 	}
 	@media (max-width: 1024px) {
@@ -112,14 +100,13 @@
 	@media (max-width: 768px) {
 		label {
 			font-size: 14px;
+			padding-left: 0;
 		}
+
 		.input {
 			padding: 0 14px 0 14px;
 			font-size: 15px;
 			height: 60px;
-		}
-		.large-label {
-			font-size: 14px;
 		}
 	}
 </style>

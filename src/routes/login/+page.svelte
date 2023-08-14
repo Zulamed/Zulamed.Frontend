@@ -15,7 +15,8 @@
 
 			<div class="form-link">
 				<span
-					>Don't have an account? <a href="." class="link signup-link">Click here to Sign Up</a
+					>Don't have an account? <a href="/register" class="link signup-link"
+						>Click here to Sign Up</a
 					></span
 				>
 			</div>

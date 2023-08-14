@@ -1,6 +1,6 @@
 <script lang="ts"></script>
 
-<label class="large-label" for="username"
+<label class="large-label" for=""
 	>Automatically generated username from your first and last name</label
 >
 <div class="group username-type-group">

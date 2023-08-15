@@ -4,14 +4,14 @@ import { z } from "zod";
 
 
 const IndividualFirstStep = z.object({
-    title: z.string(),
-    firstName: z.string(),
-    lastName: z.string(),
-    gender: z.string(), // probaly should be enum
-    dateOfBirth: z.date()
+    title: z.string().nonempty(),
+    name: z.string().nonempty(),
+    surname: z.string().nonempty(),
+    gender: z.enum(['Male', 'Female', 'Other']),
+    "birthday-date": z.string()
 });
 
-export type IndividualFirstStep = z.infer<typeof IndividualFirstStep>;
+type IndividualFirstStep = z.infer<typeof IndividualFirstStep>;
 
 const IndividualSecondStep = z.object({
     email: z.string().email(),
@@ -19,7 +19,7 @@ const IndividualSecondStep = z.object({
 });
 
 
-export type IndividualSecondStep = z.infer<typeof IndividualSecondStep>;
+type IndividualSecondStep = z.infer<typeof IndividualSecondStep>;
 
 const IndividualThirdStep = z.object({
     stageInCareer: z.string(),
@@ -28,7 +28,7 @@ const IndividualThirdStep = z.object({
     placeOfWork: z.string()
 });
 
-export type IndividualThirdStep = z.infer<typeof IndividualThirdStep>;
+type IndividualThirdStep = z.infer<typeof IndividualThirdStep>;
 
 const IndividualFourthStep = z.object({
     country: z.string(),
@@ -37,13 +37,13 @@ const IndividualFourthStep = z.object({
     department: z.string(),
 });
 
-export type IndividualFourthStep = z.infer<typeof IndividualFourthStep>;
+type IndividualFourthStep = z.infer<typeof IndividualFourthStep>;
 
 const IndividualFifthStep = z.object({
     username: z.string(),
 });
 
-export type IndividualFifthStep = z.infer<typeof IndividualFifthStep>;
+type IndividualFifthStep = z.infer<typeof IndividualFifthStep>;
 
 const Data = z.discriminatedUnion("step", [
     z.object({

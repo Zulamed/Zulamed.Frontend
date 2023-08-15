@@ -5,15 +5,39 @@
 	import Individual from './individual.svelte';
 	import University from './university.svelte';
 	import { validateIndividual, type IndividualData } from '../../schemas/individual';
+	import { addToast } from '$lib/components/errorToast.svelte';
 	function increaseStep() {
+		let salam = new FormData(formElement);
+		let data = { ...Object.fromEntries(salam), step: step } as IndividualData;
+
+		if (!validateStep(data)) {
+			return;
+		}
 		step += 1;
 		dispatch('stepChanged', { step, branch: radioValue });
 	}
-	function areValuesValid(step: number, values: IndividualData) {
+	function validateStep(values: IndividualData) {
+		if (step == 0) {
+			return true;
+		}
 		if (radioValue == 'individual' && step >= 1) {
-			validateIndividual(values); // ??? what to pass in?(probably need a store to share values between components)
+			let result = validateIndividual(values);
+			if (result.success) {
+				return true;
+			} else {
+				// show alert/toast
+				// console.log(result.error);
+				addToast({
+					data: {
+						fieldName: 'salam!',
+						error: 'error'
+					}
+				});
+			}
 		}
 	}
+
+	let formElement: HTMLFormElement;
 
 	let step = 0;
 	let radioValue: BranchType = 'individual';
@@ -49,7 +73,7 @@
 	}
 </script>
 
-<form action="">
+<form method="" bind:this={formElement}>
 	{#if step > 0 && prevStep}
 		<div class="prev" style="width: 100%; display: flex; align-items: start;">
 			<button

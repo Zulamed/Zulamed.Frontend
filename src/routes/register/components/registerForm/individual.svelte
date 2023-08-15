@@ -53,8 +53,8 @@
 						placeholder="Your family name(s)"
 						class="input"
 					/>
-				</div>
 			</div>
+            </div>
 			<div class="inputs-group">
 				<div class="field g input-field">
 					<label for="gender">Gender</label>

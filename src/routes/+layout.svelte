@@ -9,6 +9,7 @@
 	import { beforeNavigate } from '$app/navigation';
 	import type { LayoutServerData } from './$types';
 	import { user } from '$lib/stores/auth';
+	import ErrorToast from '$lib/components/errorToast.svelte';
 	let searchbar = $page.url.pathname != '/login';
 	beforeNavigate((aboba) => {
 		if (aboba.to?.url.pathname == '/login') {
@@ -24,10 +25,11 @@
 			NProgress.start();
 		} else NProgress.done();
 	}
-    export let data: LayoutServerData;
-    $user = data.user;
-
+	export let data: LayoutServerData;
+	$user = data.user;
 </script>
+
+<ErrorToast />
 
 {#if $page.url.pathname == '/'}
 	<SidebarAndNavbar />

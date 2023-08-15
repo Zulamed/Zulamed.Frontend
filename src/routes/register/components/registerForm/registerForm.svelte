@@ -4,10 +4,17 @@
 	import Hospital from './hospital.svelte';
 	import Individual from './individual.svelte';
 	import University from './university.svelte';
+	import { validateIndividual, type IndividualData } from '../../schemas/individual';
 	function increaseStep() {
 		step += 1;
 		dispatch('stepChanged', { step, branch: radioValue });
 	}
+	function areValuesValid(step: number, values: IndividualData) {
+		if (radioValue == 'individual' && step >= 1) {
+			validateIndividual(values); // ??? what to pass in?(probably need a store to share values between components)
+		}
+	}
+
 	let step = 0;
 	let radioValue: BranchType = 'individual';
 	let buttonTextValue = 'Next step';

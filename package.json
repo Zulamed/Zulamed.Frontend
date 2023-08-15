@@ -44,6 +44,7 @@
 		"nprogress": "^0.2.0",
 		"svelte-portal": "^2.2.0",
 		"ts-pattern": "^5.0.4",
-		"vidstack": "^0.6.13"
+		"vidstack": "^0.6.13",
+		"zod": "^3.21.4"
 	}
 }

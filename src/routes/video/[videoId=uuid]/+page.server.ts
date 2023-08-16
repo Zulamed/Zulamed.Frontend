@@ -16,8 +16,11 @@ export const load = (async ({ params, fetch }) => {
 
 export const actions = {
     like: async ({fetch,request,locals}) => {
+        if (!locals.user)
+            return;
         const data = await request.formData();
         const videoId = data.get("videoId") as string;
+        console.log(videoId);
         await likeVideo(videoId,locals.user.id, fetch);
     }
 } satisfies Actions;

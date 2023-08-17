@@ -7,8 +7,8 @@
 	import { validateIndividual, type IndividualData } from '../../schemas/individual';
 	import { addToast } from '$lib/components/errorToast.svelte';
 	function increaseStep() {
-		let salam = new FormData(formElement);
-		let data = { ...Object.fromEntries(salam), step: step } as IndividualData;
+		let formData = new FormData(formElement);
+		let data = { ...Object.fromEntries(formData), step: step } as IndividualData;
 
 		if (!validateStep(data)) {
 			return;
@@ -25,14 +25,15 @@
 			if (result.success) {
 				return true;
 			} else {
-				// show alert/toast
-				// console.log(result.error);
-				addToast({
-					data: {
-						fieldName: 'salam!',
-						error: 'error'
-					}
+				result.error.errors.forEach((error) => {
+					addToast({
+						data: {
+							fieldName: error.path[0].toString(),
+							error: error.message
+						}
+					});
 				});
+				return false;
 			}
 		}
 	}
@@ -73,11 +74,15 @@
 	}
 </script>
 
-<form method="" bind:this={formElement}>
+<form
+	method="post"
+	bind:this={formElement}
+>
 	{#if step > 0 && prevStep}
 		<div class="prev" style="width: 100%; display: flex; align-items: start;">
 			<button
 				class="prev-step"
+				type="button"
 				on:click={() => {
 					if (step > 0) {
 						step--;
@@ -196,7 +201,7 @@
 	{/if}
 
 	<div class="field button-field">
-		<button class="next-step" on:click={increaseStep}>{buttonTextValue}</button>
+		<button type="button" class="next-step" on:click={increaseStep}>{buttonTextValue}</button>
 	</div>
 </form>
 

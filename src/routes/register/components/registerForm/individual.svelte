@@ -60,9 +60,9 @@
 					<label for="gender">Gender</label>
 					<div class="group">
 						<select class="gender-select" name="gender" id="gender">
-							<option value="male">Male</option>
-							<option value="female">Female</option>
-							<option value="other">Other</option>
+							<option value="Male">Male</option>
+							<option value="Female">Female</option>
+							<option value="Other">Other</option>
 						</select>
 					</div>
 				</div>
@@ -101,7 +101,7 @@
 			<div class="field input-field">
 				<label for="repeat-email">Repeat email</label>
 				<div class="email-group">
-					<input id="repeat-email" name="email" type="email" placeholder="Email" class="input" />
+					<input id="repeat-email" name="confirmEmail" type="email" placeholder="Email" class="input" />
 				</div>
 			</div>
 			<div class="field input-field">
@@ -140,7 +140,7 @@
 					<input
 						id="password-repeat"
 						bind:this={repeatPassword}
-						name="password-repeat"
+						name="confirmPassword"
 						type="password"
 						placeholder="*********"
 						class="password"

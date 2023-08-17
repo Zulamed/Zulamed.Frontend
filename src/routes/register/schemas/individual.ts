@@ -15,7 +15,15 @@ type IndividualFirstStep = z.infer<typeof IndividualFirstStep>;
 
 const IndividualSecondStep = z.object({
     email: z.string().email(),
+    confirmEmail: z.string(),
     password: z.string().min(8),
+    confirmPassword: z.string(),
+}).refine(data => data.email === data.confirmEmail, {
+    message: "Emails don't match",
+    path: ["confirmEmail"]
+}).refine(data => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"]
 });
 
 

@@ -7,7 +7,7 @@ import type { User } from '$backend/user/get/types';
 import { getUser } from '$backend/user/get/getUser';
 import { match } from 'ts-pattern';
 
-export const user = writable<User | null>(null);
+export const user = writable<User | undefined>(undefined);
 
 
 export async function login(email: string, password: string) {
@@ -37,7 +37,7 @@ if (browser) {
             maxAge: token ? undefined : 0,
         })
         if (!newUser) {
-            user.set(null);
+            user.set(undefined);
         }
     });
 }

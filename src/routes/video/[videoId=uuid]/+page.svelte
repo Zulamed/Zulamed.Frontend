@@ -6,7 +6,6 @@
 	import Description from './components/description.svelte';
 	import Comments from './components/comments.svelte';
 	import { enhance } from '$app/forms';
-	import { likeVideo } from '$backend/video/like/like';
 	import { viewVideo } from '$backend/video/view/endpoint';
 
 	let showMoreVideosButton = false;
@@ -29,7 +28,7 @@
 	}
 
 	onMount(async () => {
-        await viewVideo(data.videoInfo.video.id);
+		await viewVideo(data.videoInfo.video.id);
 		let media1027px = window.matchMedia('(max-width:1027px)');
 		let media600px = window.matchMedia('(max-width:600px)');
 		const match1027px = () => {
@@ -50,6 +49,8 @@
 		};
 	});
 	export let data: PageData;
+    likeActive = data.userLiked;
+    dislikeActive = data.userDisliked;
 </script>
 
 <svelte:head>
@@ -109,16 +110,18 @@
 							<input name="videoId" type="hidden" value={data.videoInfo.video.id} />
 						</form>
 
-						<button
-							id="dislike-btn"
-							type="button"
-							class="interaction-btn dislike-btn"
-							class:active={dislikeActive}
-							on:click={() => {
-								dislikeActive = !dislikeActive;
-								likeActive = false;
-							}}><img src="/img/icons/thumb_down_white_24dp.svg" alt="" /></button
-						>
+						<form method="post" action="?/dislike" use:enhance>
+							<button
+								id="dislike-btn"
+								class="interaction-btn dislike-btn"
+								class:active={dislikeActive}
+								on:click={() => {
+									dislikeActive = !dislikeActive;
+									likeActive = false;
+								}}><img src="/img/icons/thumb_down_white_24dp.svg" alt="" /></button
+							>
+                            <input name="videoId" type="hidden" value={data.videoInfo.video.id} />
+						</form>
 					</div>
 					<button type="button" class="interaction-btn share-btn"
 						><img src="/img/icons/send_white_24dp.svg" alt="" />SHARE</button

@@ -1,8 +1,11 @@
-import type { PageServerLoad , Actions} from './$types';
+import type { PageServerLoad, Actions } from './$types';
 import { getVideoById } from '$backend/video/getById/endpoint';
 import { error as err } from '@sveltejs/kit';
 import { match } from 'ts-pattern';
 import { likeVideo } from '$backend/video/like/like';
+import type { FetchCallbackType } from '$backend/fetchCallbackType';
+import { PUBLIC_BACKEND_URL } from '$env/static/public';
+import { dislikeVideo } from '$backend/video/dislike/dislike';
 
 export const load = (async ({ params, fetch }) => {
     const result = await getVideoById(params.videoId, fetch);
@@ -11,16 +14,57 @@ export const load = (async ({ params, fetch }) => {
         .with({ tag: "failure" }, ({ error }) => { throw err(500, error) })
         .with({ tag: "not-found" }, () => { throw err(404, "Video not found") })
         .exhaustive();
-    return { videoInfo };
+    const userLiked = await hasLiked(params.videoId, fetch);
+    let userDisliked = false;
+    if (userLiked){
+        userDisliked = await hasDisliked(params.videoId, fetch);
+    }
+    return { videoInfo, userLiked, userDisliked };
 }) satisfies PageServerLoad;
 
 export const actions = {
-    like: async ({fetch,request,locals}) => {
+    like: async ({ fetch, request, locals }) => {
         if (!locals.user)
             return;
         const data = await request.formData();
         const videoId = data.get("videoId") as string;
-        console.log(videoId);
-        await likeVideo(videoId,locals.user.id, fetch);
+        const userLiked = await hasLiked(videoId, fetch);
+        const userDisliked = await hasDisliked(videoId, fetch);
+        if (userDisliked) {
+            await dislikeVideo(videoId, true, fetch);
+        }
+        await likeVideo(videoId, userLiked, fetch);
+    },
+    dislike: async ({ fetch, request, locals }) => {
+        if (!locals.user)
+            return;
+        const data = await request.formData();
+        const videoId = data.get("videoId") as string;
+        const userLiked = await hasLiked(videoId, fetch);
+        const userDisliked = await hasDisliked(videoId, fetch);
+        if (userLiked) {
+            await likeVideo(videoId, true, fetch);
+        }
+        await dislikeVideo(videoId, userDisliked, fetch);
     }
 } satisfies Actions;
+
+
+async function hasLiked(id: string, fetch: FetchCallbackType): Promise<boolean> {
+    try {
+        const result = await fetch(`${PUBLIC_BACKEND_URL}/video/${id}/like`);
+        return result.status === 200;
+    } catch (error) {
+        return false;
+    }
+}
+
+async function hasDisliked(id: string, fetch: FetchCallbackType): Promise<boolean> {
+    try {
+        const result = await fetch(`${PUBLIC_BACKEND_URL}/video/${id}/dislike`);
+        return result.status === 200;
+    } catch (error) {
+        return false;
+    }
+}
+

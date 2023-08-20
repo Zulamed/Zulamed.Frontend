@@ -13,7 +13,6 @@ export async function viewVideo(id: string, fetch: FetchCallbackType = globalFet
             method: "POST"
         });
         if (!response.ok) {
-            console.log('error!');
             return { status: "error", message: await response.json() };
         }
         return { status: "ok" };

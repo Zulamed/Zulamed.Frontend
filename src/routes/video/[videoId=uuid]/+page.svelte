@@ -49,8 +49,10 @@
 		};
 	});
 	export let data: PageData;
-    likeActive = data.userLiked;
-    dislikeActive = data.userDisliked;
+    $: {
+        likeActive = data.userLiked;
+        dislikeActive = data.userDisliked;
+    }
 </script>
 
 <svelte:head>

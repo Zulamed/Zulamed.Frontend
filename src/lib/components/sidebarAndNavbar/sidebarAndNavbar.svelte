@@ -2,6 +2,7 @@
 	import { portal } from 'svelte-portal';
 	import { sidebarOpened } from './stores/sidebarOpened';
 	import { logout, user } from '$lib/stores/auth';
+	import { invalidateAll } from '$app/navigation';
 	let isMobileSearchBarOpen = false;
 	let displayProfileContainer = 'none';
 	let displayLanguageContainer = 'none';
@@ -179,7 +180,10 @@
 					<p>Settings</p>
 				</a>
 				<button style="all: unset; cursor: pointer;" class="profile-link"
-                    on:click={logout}
+                    on:click={async () => {
+                        await logout();
+                        await invalidateAll();
+                    }}
 					><img src="/img/profileContainerIcons/logout_black_24dp.svg" alt="" />
 					<p>Sign out</p>
 				</button>

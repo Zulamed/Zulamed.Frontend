@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { user } from '$lib/stores/auth';
+    import { invalidateAll } from '$app/navigation';
+import { user } from '$lib/stores/auth';
 	import { logout } from '$lib/stores/auth';
 	import { portal } from 'svelte-portal';
 
@@ -185,7 +186,10 @@
 					<p>Settings</p>
 				</a>
 				<button class="profile-link"
-                on:click={logout}
+                on:click={async () => {
+                    await logout();
+                    await invalidateAll();
+                }}
 					><img src="/img/profileContainerIcons/logout_black_24dp.svg" alt="" />
 					<p>Sign out</p>
 				</button>

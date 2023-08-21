@@ -8,6 +8,6 @@ export type User = {
 }
 
 export type VideoResponse =
-    | {tag: 'success', response: {video: Video, user: User}}
+    | {tag: 'success', response: {video: Video, user: User, numberOfLikes: number}}
     | {tag: 'failure', error: string}
     | {tag: 'not-found'}

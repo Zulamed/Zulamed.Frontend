@@ -107,7 +107,7 @@
 									dislikeActive = false;
 								}}
 								><img src="/img/icons/thumb_up_white_24dp.svg" alt="" />
-								10k</button
+								{data.videoInfo.numberOfLikes}</button
 							>
 							<input name="videoId" type="hidden" value={data.videoInfo.video.id} />
 						</form>

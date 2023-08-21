@@ -9,7 +9,9 @@
 		helpers,
 		states: { toasts },
 		actions: { portal }
-	} = createToaster<ToastData>();
+	} = createToaster<ToastData>({
+		closeDelay: 100000
+	});
 
 	export const addToast = helpers.addToast;
 </script>
@@ -20,30 +22,46 @@
 	import { fly } from 'svelte/transition';
 </script>
 
-<div class="salam" use:portal>
+<div class="toast-container" use:portal>
 	{#each $toasts as { id, data } (id)}
 		<div
 			use:melt={$content(id)}
 			animate:flip={{ duration: 500 }}
 			in:fly={{ duration: 150, x: '100%' }}
 			out:fly={{ duration: 150, x: '100%' }}
-			class="salam2"
+			class="toast-inner"
 		>
-			<div class="salam3">
+			<div class="toast-content">
 				<div>
-					<h3 use:melt={$title(id)} class="salam4">
+					<h3 use:melt={$title(id)} class="toast-fieldname">
 						{data.fieldName}
-						<span>AHHHHHHHHHHHHHHHHH</span>
+						<span />
 					</h3>
 					<div use:melt={$description(id)}>
 						{data.error}
 					</div>
 				</div>
-				<button
-					use:melt={$close(id)}
-					class="salam5"
-				>
-					<!-- <X class="square-4" /> -->
+				<button use:melt={$close(id)} class="toast-close-btn">
+					<svg
+						width="25"
+						height="25"
+						viewBox="0 0 18 18"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<path
+							d="M13.5 4.5L4.5 13.5"
+							stroke="#ffffff"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						/>
+						<path
+							d="M4.5 4.5L13.5 13.5"
+							stroke="#ffffff"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						/>
+					</svg>
 				</button>
 			</div>
 		</div>
@@ -51,23 +69,23 @@
 </div>
 
 <style>
-	.salam {
+	.toast-container {
 		display: flex;
 		position: fixed;
 		right: 0;
 		bottom: 0;
-		z-index: 50;
+		z-index: 3;
 		margin: 1rem;
 		flex-direction: column;
 		gap: 0.5rem;
 		align-items: flex-end;
 	}
-	.salam2 {
+	.toast-inner {
 		border-radius: 0.5rem;
 		color: #ffffff;
 		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 	}
-	.salam3 {
+	.toast-content {
 		display: flex;
 		position: relative;
 		padding: 1.25rem;
@@ -75,22 +93,42 @@
 		justify-content: space-between;
 		align-items: center;
 		width: 24rem;
-		max-width: calc(100vw-2rem);
+		background: #fa000065;
+		border-radius: 10px;
 	}
 
-	.salam4 {
+	.toast-fieldname {
 		display: flex;
 		gap: 0.5rem;
 		align-items: center;
 		font-weight: 600;
 	}
 
-	.salam5 {
+	.toast-close-btn {
+		all: unset;
 		display: grid;
+		padding: 3px;
 		position: absolute;
 		top: 1rem;
 		right: 1rem;
 		place-items: center;
-		border-radius: 9999px;
+		border-radius: 0;
+		cursor: pointer;
+	}
+	.toast-close-btn:hover {
+		background-color: #b4b4b469;
+	}
+	.toast-close-btn:active {
+		background-color: #b4b4b469;
+	}
+	@media (max-width: 768px) {
+		.toast-container {
+			top: 0;
+			right: 0;
+			height: 83px;
+		}
+		.toast-content {
+			width: 18rem;
+		}
 	}
 </style>

@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
-	import type { Comment } from '$backend/video/getCommentsForAVideo/endpoint';
+	import { applyAction, enhance } from '$app/forms';
+	import type { Response } from '$backend/video/createComment/endpoint';
 	import { onMount } from 'svelte';
+	import type { Comment } from '$backend/video/types';
 
 	let visibility = false;
 	let showMoreCommentsButton = true;
@@ -45,7 +46,16 @@
 			media.removeEventListener('change', match600px);
 		};
 	});
-    $: rangeComments = !visibility ? comments.slice(0, 2) : comments;
+	$: rangeComments = !visibility ? comments.slice(0, 2) : comments;
+
+    // push new comment to comments array
+	function iNeedAutoComplete(data: Record<string,unknown>){
+        let response = data as Response;
+        if (response.status === "ok"){
+            comments.push(response.data);
+            comments = comments;
+        }
+	}
 </script>
 
 <div
@@ -59,7 +69,26 @@
 
 	<div class="write-comment">
 		<img class="user-profile-picture" src="/img/icons/channel-logo.jpg" alt="" />
-		<form method="post" action="?/comment" class="write-comment-input" use:enhance>
+		<form
+			method="post"
+			action="?/comment"
+			class="write-comment-input"
+			use:enhance={() => {
+				return async ({ result, form }) => {
+					if (result.type === 'success') {
+						HTMLFormElement.prototype.reset.call(form);
+						visibility = true;
+                        if (result.data){
+                            iNeedAutoComplete(result.data); // i'm addicted
+                            console.log(result.data);
+                        }
+
+					} else {
+						applyAction(result);
+					}
+				};
+			}}
+		>
 			<input
 				placeholder="Add comment..."
 				type="text"
@@ -101,9 +130,11 @@
 
 	{#each rangeComments as comment}
 		<div class="comment-container">
-			<img src={comment.sentBy.profilePictureUrl ?? "/img/icons/channel-logo.jpg"} alt="" />
+			<img src={comment.sentBy.profilePictureUrl ?? '/img/icons/channel-logo.jpg'} alt="" />
 			<div class="user-comment">
-				<a href="/user/{comment.sentBy.id}">{comment.sentBy.username}<span>{comment.sentAt}</span></a>
+				<a href="/user/{comment.sentBy.id}"
+					>{comment.sentBy.username}<span>{comment.sentAt}</span></a
+				>
 				<p>{comment.content}</p>
 			</div>
 		</div>

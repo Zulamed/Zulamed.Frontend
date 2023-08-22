@@ -5,7 +5,7 @@
 	import Chips from './components/chips.svelte';
 	import Description from './components/description.svelte';
 	import Comments from './components/comments.svelte';
-	import { enhance } from '$app/forms';
+	import { applyAction, enhance } from '$app/forms';
 	import { viewVideo } from '$backend/video/view/endpoint';
 
 	let showMoreVideosButton = false;
@@ -49,10 +49,8 @@
 		};
 	});
 	export let data: PageData;
-    $: {
-        likeActive = data.userLiked;
-        dislikeActive = data.userDisliked;
-    }
+	likeActive = data.userLiked;
+	dislikeActive = data.userDisliked;
 </script>
 
 <svelte:head>
@@ -97,32 +95,54 @@
 				<div class="play-video-info-right">
 					<button type="button" class="message-btn" class:active={messageActive}>CHAT</button>
 					<div class="interaction-btn-group">
-						<form method="post" action="?/like" use:enhance>
-							<button
-								id="like-btn"
-								class="interaction-btn like-btn"
-								class:active={likeActive}
-								on:click={async () => {
-									likeActive = !likeActive;
-									dislikeActive = false;
-								}}
+						<form
+							method="post"
+							action="?/like"
+							use:enhance={() => {
+								return async ({ result }) => {
+									if (result.type === 'success') {
+										likeActive = !likeActive;
+										dislikeActive = false;
+										if (likeActive) data.videoInfo.numberOfLikes++;
+										else data.videoInfo.numberOfLikes--;
+										data = data; // make svelte aware that the data has changed
+									} else {
+										applyAction(result);
+									}
+								};
+							}}
+						>
+							<button id="like-btn" class="interaction-btn like-btn" class:active={likeActive}
 								><img src="/img/icons/thumb_up_white_24dp.svg" alt="" />
 								{data.videoInfo.numberOfLikes}</button
 							>
 							<input name="videoId" type="hidden" value={data.videoInfo.video.id} />
 						</form>
 
-						<form method="post" action="?/dislike" use:enhance>
+						<form
+							method="post"
+							action="?/dislike"
+							use:enhance={() => {
+								return async ({ result }) => {
+									if (result.type === 'success') {
+                                        if (likeActive) data.videoInfo.numberOfLikes--;
+                                        data = data; // make svelte aware that the data has changed
+										dislikeActive = !dislikeActive;
+										likeActive = false;
+
+									} else {
+										applyAction(result);
+									}
+								};
+							}}
+						>
 							<button
 								id="dislike-btn"
 								class="interaction-btn dislike-btn"
 								class:active={dislikeActive}
-								on:click={() => {
-									dislikeActive = !dislikeActive;
-									likeActive = false;
-								}}><img src="/img/icons/thumb_down_white_24dp.svg" alt="" /></button
+								><img src="/img/icons/thumb_down_white_24dp.svg" alt="" /></button
 							>
-                            <input name="videoId" type="hidden" value={data.videoInfo.video.id} />
+							<input name="videoId" type="hidden" value={data.videoInfo.video.id} />
 						</form>
 					</div>
 					<button type="button" class="interaction-btn share-btn"
@@ -135,7 +155,7 @@
 				textContent={data.videoInfo.video.videoDescription}
 			/>
 			{#if !matches1027px}
-				<Comments comments={data.videoInfo.comments} videoId={data.videoInfo.video.id}/>
+				<Comments comments={data.videoInfo.comments} videoId={data.videoInfo.video.id} />
 			{/if}
 		</div>
 
@@ -251,7 +271,7 @@
 			{/if}
 		</div>
 		{#if matches1027px}
-			<Comments comments={data.videoInfo.comments} videoId={data.videoInfo.video.id}/>
+			<Comments comments={data.videoInfo.comments} videoId={data.videoInfo.video.id} />
 		{/if}
 	</div>
 

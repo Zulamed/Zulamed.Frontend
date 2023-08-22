@@ -22,10 +22,10 @@ export const load = (async ({ params, fetch }) => {
         .with({ status: "not-found" }, () => [])
         .with({ status: "error" }, ({ error }) => { throw err(500, error) })
         .exhaustive();
-    const videoInfo = { ...video, ...comments };
+    const videoInfo = { ...video, comments };
     const userLiked = await hasLiked(params.videoId, fetch);
     let userDisliked = false;
-    if (userLiked) {
+    if (!userLiked) {
         userDisliked = await hasDisliked(params.videoId, fetch);
     }
     return { videoInfo, userLiked, userDisliked };
@@ -62,7 +62,7 @@ export const actions = {
         const data = await request.formData();
         const videoId = data.get("videoId") as string;
         const comment = data.get("comment-input") as string;
-        await createComment(videoId, comment, fetch);
+        return await createComment(videoId, comment, fetch);
     }
 } satisfies Actions;
 

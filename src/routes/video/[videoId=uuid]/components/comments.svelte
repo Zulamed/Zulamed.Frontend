@@ -45,7 +45,7 @@
 			media.removeEventListener('change', match600px);
 		};
 	});
-    $: rangeComments = visibility ? comments.slice(0, 2) : comments;
+    $: rangeComments = !visibility ? comments.slice(0, 2) : comments;
 </script>
 
 <div

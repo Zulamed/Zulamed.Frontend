@@ -17,7 +17,6 @@ export async function createComment(videoId: string, comment: string, fetch: Fet
             // subject to change
             body: JSON.stringify({content: comment}),
         });
-        console.log(response);
         if (response.status == 404) {
             return { status: "not-found" };
         }

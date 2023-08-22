@@ -62,10 +62,7 @@ export const actions = {
         const data = await request.formData();
         const videoId = data.get("videoId") as string;
         const comment = data.get("comment-input") as string;
-        const response = await createComment(videoId, comment, fetch);
-        if (response.status == "error") {
-            console.log(response.message);
-        }
+        await createComment(videoId, comment, fetch);
     }
 } satisfies Actions;
 

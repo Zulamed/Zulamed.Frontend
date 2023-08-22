@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
+	import type { Comment } from '$backend/video/getCommentsForAVideo/endpoint';
 	import { onMount } from 'svelte';
 
 	let visibility = false;
@@ -30,6 +32,8 @@
 			showMoreCommentsButton = false;
 		}
 	}
+	export let videoId: string;
+	export let comments: Comment[];
 	onMount(() => {
 		let media = window.matchMedia('(max-width:600px)');
 		const match600px = () => {
@@ -41,6 +45,7 @@
 			media.removeEventListener('change', match600px);
 		};
 	});
+    $: rangeComments = visibility ? comments.slice(0, 2) : comments;
 </script>
 
 <div
@@ -54,11 +59,12 @@
 
 	<div class="write-comment">
 		<img class="user-profile-picture" src="/img/icons/channel-logo.jpg" alt="" />
-		<form class="write-comment-input">
+		<form method="post" action="?/comment" class="write-comment-input" use:enhance>
 			<input
 				placeholder="Add comment..."
 				type="text"
 				class="comment-input"
+				name="comment-input"
 				bind:value={inputText}
 				on:click={() => {
 					inputVisibility = true;
@@ -67,6 +73,7 @@
 					currentProps = inputText.length > 0 ? enabledProps : disabledProps;
 				}}
 			/>
+			<input type="hidden" name="videoId" value={videoId} />
 			{#if inputVisibility}
 				<div class="write-comment-buttons" style:display="flex">
 					<button
@@ -78,7 +85,6 @@
 					>
 					<button
 						type="submit"
-						disabled
 						class="comment-btn comment"
 						style="
 							border: none;
@@ -93,56 +99,54 @@
 		</form>
 	</div>
 
-	<div class="comment-container">
-		<img src="/img/icons/channel-logo.jpg" alt="" />
-		<div class="user-comment">
-			<a href=".">Lorelai Gilbert <span>5 days ago</span></a>
-			<p>
-				While the anaesthetic team continue to look after you, the surgical team carry out your
-				operation. The surgeon will have at least one assistant – I have known more than ten people
-				to be part of this team for major head and neck cancer surgery. While the anaesthetic team
-				continue to look after you, the surgical team carry out your operation.
-			</p>
-		</div>
-	</div>
-	<div class="comment-container">
-		<img src="/img/icons/channel-logo.jpg" alt="" />
-		<div class="user-comment">
-			<a href=".">Lorelai Gilbert <span>1 day ago</span></a>
-			<p>
-				While the anaesthetic team continue to look after you, the surgical team carry out your
-				operation. The surgeon will have at least one assistant – I have known more than ten people
-				to be part of this team for major head and neck cancer surgery. While the anaesthetic team
-				continue to look after you, the surgical team carry out your operation. While the
-				anaesthetic team continue to look after you, the surgical team carry out your operation. The
-				surgeon will have at least one assistant – I have known more than ten people to be part of
-				this team for major head and neck cancer surgery. While the anaesthetic team continue to
-				look after you, the surgical team carry out your operation.
-			</p>
-		</div>
-	</div>
-	{#if visibility}
+	{#each rangeComments as comment}
 		<div class="comment-container">
-			<img src="/img/icons/channel-logo.jpg" alt="" />
+			<img src={comment.sentBy.profilePictureUrl ?? "/img/icons/channel-logo.jpg"} alt="" />
 			<div class="user-comment">
-				<a href=".">Lorelai Gilbert <span>1 day ago</span></a>
-				<p>
-					While the anaesthetic team continue to look after you, the surgical team carry out your
-					operation. The surgeon will have at least one assistant
-				</p>
+				<a href="/user/{comment.sentBy.id}">{comment.sentBy.username}<span>{comment.sentAt}</span></a>
+				<p>{comment.content}</p>
 			</div>
 		</div>
-		<div class="comment-container">
-			<img src="/img/icons/channel-logo.jpg" alt="" />
-			<div class="user-comment">
-				<a href=".">Lorelai Gilbert <span>1 day ago</span></a>
-				<p>
-					While the anaesthetic team continue to look after you, the surgical team carry out your
-					operation. The surgeon will have at least one assistant
-				</p>
-			</div>
-		</div>
-	{/if}
+	{/each}
+
+	<!-- <div class="comment-container"> -->
+	<!-- 	<img src="/img/icons/channel-logo.jpg" alt="" /> -->
+	<!-- 	<div class="user-comment"> -->
+	<!-- 		<a href=".">Lorelai Gilbert <span>1 day ago</span></a> -->
+	<!-- 		<p> -->
+	<!-- 			While the anaesthetic team continue to look after you, the surgical team carry out your -->
+	<!-- 			operation. The surgeon will have at least one assistant – I have known more than ten people -->
+	<!-- 			to be part of this team for major head and neck cancer surgery. While the anaesthetic team -->
+	<!-- 			continue to look after you, the surgical team carry out your operation. While the -->
+	<!-- 			anaesthetic team continue to look after you, the surgical team carry out your operation. The -->
+	<!-- 			surgeon will have at least one assistant – I have known more than ten people to be part of -->
+	<!-- 			this team for major head and neck cancer surgery. While the anaesthetic team continue to -->
+	<!-- 			look after you, the surgical team carry out your operation. -->
+	<!-- 		</p> -->
+	<!-- 	</div> -->
+	<!-- </div> -->
+	<!-- {#if visibility} -->
+	<!-- 	<div class="comment-container"> -->
+	<!-- 		<img src="/img/icons/channel-logo.jpg" alt="" /> -->
+	<!-- 		<div class="user-comment"> -->
+	<!-- 			<a href=".">Lorelai Gilbert <span>1 day ago</span></a> -->
+	<!-- 			<p> -->
+	<!-- 				While the anaesthetic team continue to look after you, the surgical team carry out your -->
+	<!-- 				operation. The surgeon will have at least one assistant -->
+	<!-- 			</p> -->
+	<!-- 		</div> -->
+	<!-- 	</div> -->
+	<!-- 	<div class="comment-container"> -->
+	<!-- 		<img src="/img/icons/channel-logo.jpg" alt="" /> -->
+	<!-- 		<div class="user-comment"> -->
+	<!-- 			<a href=".">Lorelai Gilbert <span>1 day ago</span></a> -->
+	<!-- 			<p> -->
+	<!-- 				While the anaesthetic team continue to look after you, the surgical team carry out your -->
+	<!-- 				operation. The surgeon will have at least one assistant -->
+	<!-- 			</p> -->
+	<!-- 		</div> -->
+	<!-- 	</div> -->
+	<!-- {/if} -->
 </div>
 {#if showMoreCommentsButton}
 	<!-- svelte-ignore a11y-click-events-have-key-events -->

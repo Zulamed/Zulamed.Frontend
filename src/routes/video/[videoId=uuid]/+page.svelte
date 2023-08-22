@@ -135,7 +135,7 @@
 				textContent={data.videoInfo.video.videoDescription}
 			/>
 			{#if !matches1027px}
-				<Comments />
+				<Comments comments={data.videoInfo.comments} videoId={data.videoInfo.video.id}/>
 			{/if}
 		</div>
 
@@ -251,7 +251,7 @@
 			{/if}
 		</div>
 		{#if matches1027px}
-			<Comments />
+			<Comments comments={data.videoInfo.comments} videoId={data.videoInfo.video.id}/>
 		{/if}
 	</div>
 

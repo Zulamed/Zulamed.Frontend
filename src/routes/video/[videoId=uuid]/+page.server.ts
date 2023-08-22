@@ -6,17 +6,26 @@ import { likeVideo } from '$backend/video/like/like';
 import type { FetchCallbackType } from '$backend/fetchCallbackType';
 import { PUBLIC_BACKEND_URL } from '$env/static/public';
 import { dislikeVideo } from '$backend/video/dislike/dislike';
+import { createComment } from '$backend/video/createComment/endpoint';
+import { getComments } from '$backend/video/getCommentsForAVideo/endpoint';
 
 export const load = (async ({ params, fetch }) => {
-    const result = await getVideoById(params.videoId, fetch);
-    const videoInfo = match(result)
+    const videoResult = await getVideoById(params.videoId, fetch);
+    const commentResult = await getComments(params.videoId, fetch);
+    const video = match(videoResult)
         .with({ tag: "success" }, ({ response }) => response)
         .with({ tag: "failure" }, ({ error }) => { throw err(500, error) })
         .with({ tag: "not-found" }, () => { throw err(404, "Video not found") })
         .exhaustive();
+    const comments = match(commentResult)
+        .with({ status: "ok" }, ({ data }) => data.comments)
+        .with({ status: "not-found" }, () => [])
+        .with({ status: "error" }, ({ error }) => { throw err(500, error) })
+        .exhaustive();
+    const videoInfo = { ...video, ...comments };
     const userLiked = await hasLiked(params.videoId, fetch);
     let userDisliked = false;
-    if (userLiked){
+    if (userLiked) {
         userDisliked = await hasDisliked(params.videoId, fetch);
     }
     return { videoInfo, userLiked, userDisliked };
@@ -46,6 +55,17 @@ export const actions = {
             await likeVideo(videoId, true, fetch);
         }
         await dislikeVideo(videoId, userDisliked, fetch);
+    },
+    comment: async ({ fetch, request, locals }) => {
+        if (!locals.user)
+            return;
+        const data = await request.formData();
+        const videoId = data.get("videoId") as string;
+        const comment = data.get("comment-input") as string;
+        const response = await createComment(videoId, comment, fetch);
+        if (response.status == "error") {
+            console.log(response.message);
+        }
     }
 } satisfies Actions;
 

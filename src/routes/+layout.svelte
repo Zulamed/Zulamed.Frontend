@@ -31,7 +31,7 @@
 
 <ErrorToast />
 
-{#if $page.url.pathname == '/'}
+{#if $page.url.pathname == '/' || $page.url.pathname.includes('/user')}
 	<SidebarAndNavbar />
 {:else}
 	<Drawer showSearchbar={searchbar} />

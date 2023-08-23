@@ -49,10 +49,10 @@
 		};
 	});
 	export let data: PageData;
-    $: {
-        likeActive = data.userLiked;
-        dislikeActive = data.userDisliked;
-    }
+	$: {
+		likeActive = data.userLiked;
+		dislikeActive = data.userDisliked;
+	}
 </script>
 
 <svelte:head>
@@ -122,7 +122,7 @@
 									likeActive = false;
 								}}><img src="/img/icons/thumb_down_white_24dp.svg" alt="" /></button
 							>
-                            <input name="videoId" type="hidden" value={data.videoInfo.video.id} />
+							<input name="videoId" type="hidden" value={data.videoInfo.video.id} />
 						</form>
 					</div>
 					<button type="button" class="interaction-btn share-btn"

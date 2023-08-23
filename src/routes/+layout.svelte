@@ -11,7 +11,6 @@
 	import { user } from '$lib/stores/auth';
 	import ErrorToast from '$lib/components/errorToast.svelte';
 	let searchbar = $page.url.pathname != '/login';
-	console.log(searchbar);
 	beforeNavigate((aboba) => {
 		if (aboba.to?.url.pathname == '/login') {
 			searchbar = false;

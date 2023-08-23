@@ -35,6 +35,7 @@ if (browser) {
         document.cookie = cookie.serialize('token', token ?? "", {
             path: '/',
             maxAge: token ? undefined : 0,
+            sameSite: true,
         })
         if (!newUser) {
             user.set(undefined);

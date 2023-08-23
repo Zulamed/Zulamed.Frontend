@@ -44,7 +44,7 @@ export const handle = (async ({ event, resolve }) => {
             .with({ tag: "error" }, () => { event.locals.user = undefined })
     } else {
         // if token is invalid, remove it from cookies
-        event.cookies.set('token', '', { maxAge: -1 });
+        event.cookies.set('token', '', { maxAge: -1, sameSite: true });
     }
     if (!protectRoutes(path, !!user)) {  // fucking javascript lol
         throw redirect(307, '/');

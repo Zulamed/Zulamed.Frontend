@@ -80,7 +80,6 @@
 						visibility = true;
                         if (result.data){
                             iNeedAutoComplete(result.data); // i'm addicted
-                            console.log(result.data);
                         }
 
 					} else {

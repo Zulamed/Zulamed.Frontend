@@ -5,35 +5,36 @@
 <section class="container forms">
 	<img class="container-img" src="img/main-background-mobile.png" alt="" />
 	<div class="container-overlay" />
-	<div class="form login">
-		<div class="form-content">
-			<header>
-				Login to Your <br />
-				ZulaMed Account
-			</header>
-			<LoginForm />
+	<div class="form register" style="justify-content: center;">
+		<header>
+			<h2>Login to Your <br /> ZulaMed Account</h2>
+		</header>
 
-			<div class="form-link">
-				<span
-					>Don't have an account? <a href="/register" class="link signup-link"
-						>Click here to Sign Up</a
-					></span
-				>
-			</div>
+		<LoginForm />
+
+		<div class="form-link">
+			<span
+				>Don't have an account? <a href="/register" class="link signup-link"
+					>Click here to Sign Up</a
+				></span
+			>
 		</div>
 	</div>
 </section>
 
 <style>
+	.note {
+		color: #585858;
+		text-align: center;
+		font-size: 12px;
+		font-style: normal;
+		font-weight: 400;
+	}
 	.container {
-		height: 100vh;
+		height: calc(100vh - 74px);
 		width: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
 		background: #018b7b;
-		column-gap: 30px;
-		margin-top: -74px;
+		display: grid;
 	}
 	.container-img {
 		width: 100%;
@@ -51,20 +52,17 @@
 		background-color: #fff;
 		filter: opacity(0.66);
 	}
-	.form-content a:hover {
-		text-decoration: underline;
-	}
-	header {
+	h2 {
 		color: #000;
 		text-align: center;
-		font-size: 35px;
+		font-size: 32px;
 		font-style: normal;
 		font-weight: 400;
 		line-height: normal;
 	}
 	.form-link span {
 		color: #273b4a;
-		font-size: 15px;
+		font-size: 19px;
 		font-style: normal;
 		font-weight: 400;
 		line-height: normal;
@@ -72,69 +70,94 @@
 
 	.form-link {
 		text-align: center;
-		margin-top: 15px;
+		margin-top: 16px;
 	}
 	.signup-link {
 		color: #273b4a;
-		font-size: 15px;
+		font-size: 19px;
 		font-style: normal;
 		font-weight: 400;
 		line-height: normal;
 		text-decoration-line: underline;
 	}
-	.form {
-		margin-top: 77px;
+	.form::-webkit-scrollbar {
+		display: none;
 	}
 
 	.form {
-		position: absolute;
-		max-width: 520px;
+		place-self: center;
+		max-width: 600px;
 		width: 100%;
-		padding: 73px 50px;
+		max-height: 88vh;
+		height: 100%;
 		border-radius: 27px;
 		background: #fff;
-		max-height: 730px;
-		height: 100%;
+		padding: 0 50px 0 50px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+		overflow-y: scroll;
+		z-index: 1;
 	}
 
-	.form {
-		max-width: 520px;
-		width: 100%;
-		padding: 73px 28px 73px 28px;
-		max-height: 770px;
-		height: 85%;
-	}
-	.form-content {
-		height: 100%;
-	}
-
-	@media (max-width: 480px) {
+	@media (max-width: 1280px) {
 		.form {
-			max-width: 100%;
-			width: 100%;
-			padding: 95px 28px 73px 28px;
-			max-height: 100%;
-			height: 100%;
-			border-radius: 0;
-			margin-top: 0;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-		header {
-			color: #018b7b;
-			font-size: 25px;
-		}
-
-		.form-content {
-			height: 100%;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
+			padding: 0 32px 0 32px;
+			max-width: 448px;
 		}
 		.form-link span,
 		.signup-link {
 			font-size: 14px;
 		}
+		.form-link {
+			margin-top: 22px;
+		}
+		h2 {
+			font-size: 28px;
+		}
 	}
+	@media (max-width: 1024px) {
+		.form {
+			max-width: 370px;
+			max-height: 85vh;
+		}
+		.form-link span,
+		.signup-link {
+			font-size: 11px;
+		}
+		.form-link {
+			margin-top: 14px;
+		}
+		h2 {
+			font-size: 22px;
+		}
+	}
+	@media (max-width: 768px) {
+		.form {
+			padding: 0 28px 20px 28px;
+			max-width: 100%;
+			max-height: 100vh;
+			border-radius: 0;
+			/* justify-content: start; */
+			z-index: 0;
+			overflow-y: auto;
+		}
+		.form-link span,
+		.signup-link {
+			font-size: 14px;
+		}
+		.form-link {
+			margin-top: 20px;
+		}
+		h2 {
+			color: #018b7b;
+			font-size: 25px;
+		}
+	}
+	/* @media (max-width: 480px) {
+
+	} */
 </style>

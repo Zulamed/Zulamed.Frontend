@@ -210,6 +210,8 @@
 		text-decoration: none;
 	}
 	.vid-info a {
+		max-width: 735px;
+		width: fit-content;
 		color: #000;
 		font-size: 25px;
 		font-style: normal;

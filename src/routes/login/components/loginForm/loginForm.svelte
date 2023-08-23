@@ -25,6 +25,7 @@
 		<div class="email-group">
 			<input
 				bind:value={email}
+				id="email"
 				name="email"
 				type="email"
 				placeholder="Email"
@@ -51,6 +52,7 @@
 				class="password"
 				class:input-error={errorLogin}
 				bind:value={password}
+				id="password"
 			/>
 			{#if errorLogin == true}
 				<img class="error-icon" src="img/icons/Error-login.svg" alt="" />
@@ -97,6 +99,7 @@
 	}
 	form {
 		margin-top: 77px;
+		width: 100%;
 	}
 
 	.field input,
@@ -114,6 +117,7 @@
 		font-style: normal;
 		font-weight: 600;
 		line-height: normal;
+		cursor: pointer;
 	}
 
 	.field input {
@@ -128,7 +132,7 @@
 	}
 
 	.field input:focus {
-		border-bottom-width: 2px;
+		border: 0.5px solid #00a790;
 	}
 
 	.pass-group,

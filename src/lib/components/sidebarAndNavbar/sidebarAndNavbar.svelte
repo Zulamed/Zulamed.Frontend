@@ -179,11 +179,13 @@
 					><img src="/img/profileContainerIcons/settings_black_24dp.svg" alt="" />
 					<p>Settings</p>
 				</a>
-				<button style="all: unset; cursor: pointer;" class="profile-link"
-                    on:click={async () => {
-                        await logout();
-                        await invalidateAll();
-                    }}
+				<button
+					style="all: unset; cursor: pointer;"
+					class="profile-link"
+					on:click={async () => {
+						await logout();
+						await invalidateAll();
+					}}
 					><img src="/img/profileContainerIcons/logout_black_24dp.svg" alt="" />
 					<p>Sign out</p>
 				</button>

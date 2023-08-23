@@ -7,6 +7,20 @@
 	import Comments from './components/comments.svelte';
 	import { applyAction, enhance } from '$app/forms';
 	import { viewVideo } from '$backend/video/view/endpoint';
+	import { createTooltip, melt } from '@melt-ui/svelte';
+	import { fade } from 'svelte/transition';
+
+	const {
+		elements: { trigger, content, arrow },
+		states: { open }
+	} = createTooltip({
+		positioning: {
+			placement: 'bottom'
+		},
+		openDelay: 1,
+		closeOnPointerDown: false,
+		forceVisible: true
+	});
 
 	let showMoreVideosButton = false;
 	let videoVisibility = true;
@@ -83,6 +97,7 @@
 					</div>
 
 					<button
+						use:melt={$trigger}
 						type="button"
 						id="follow-btn"
 						class:active={followActive}
@@ -91,6 +106,16 @@
 						}}
 						class="interaction-btn follow-btn">{followActive ? 'FOLLOWED' : 'FOLLOW'}</button
 					>
+					{#if $open}
+						<div
+							use:melt={$content}
+							transition:fade={{ duration: 100 }}
+							class="z-10 rounded-md bg-white shadow-sm"
+						>
+							<div use:melt={$arrow} />
+							<p class="px-4 py-1 text-magnum-700">Aboba</p>
+						</div>
+					{/if}
 				</div>
 				<div class="play-video-info-right">
 					<button type="button" class="message-btn" class:active={messageActive}>CHAT</button>
@@ -125,11 +150,10 @@
 							use:enhance={() => {
 								return async ({ result }) => {
 									if (result.type === 'success') {
-                                        if (likeActive) data.videoInfo.numberOfLikes--;
-                                        data = data; // make svelte aware that the data has changed
+										if (likeActive) data.videoInfo.numberOfLikes--;
+										data = data; // make svelte aware that the data has changed
 										dislikeActive = !dislikeActive;
 										likeActive = false;
-
 									} else {
 										applyAction(result);
 									}

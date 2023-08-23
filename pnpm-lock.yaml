@@ -29,6 +29,9 @@ dependencies:
   nprogress:
     specifier: ^0.2.0
     version: 0.2.0
+  svelte-file-dropzone:
+    specifier: ^2.0.2
+    version: 2.0.2(svelte@3.59.1)
   svelte-portal:
     specifier: ^2.2.0
     version: 2.2.0
@@ -4650,6 +4653,13 @@ packages:
       flat-cache: 3.0.4
     dev: true
 
+  /file-selector@0.2.4:
+    resolution: {integrity: sha512-ZDsQNbrv6qRi1YTDOEWzf5J2KjZ9KMI1Q2SGeTkCJmNNW25Jg4TW4UMcmoqcg4WrAyKRcpBXdbWRxkfrOzVRbA==}
+    engines: {node: '>= 10'}
+    dependencies:
+      tslib: 2.6.1
+    dev: false
+
   /fill-range@4.0.0:
     resolution: {integrity: sha512-VcpLTWqWDiTerugjj8e3+esbg+skS3M9e54UuR3iCeIDMXCLTsAH8hTSzDQU/X6/6t3eYkOKoZSef2PlU6U1XQ==}
     engines: {node: '>=0.10.0'}
@@ -7818,6 +7828,15 @@ packages:
       espree: 9.5.2
       svelte: 3.59.1
     dev: true
+
+  /svelte-file-dropzone@2.0.2(svelte@3.59.1):
+    resolution: {integrity: sha512-+0gSO21Jp3zDvpzq0AQTz/afInQGjkjv0CSr8+dXvLg+JjIQxQ9mJRa5+Taqx4/NTKExqB5zr8XoTfCdk30FTQ==}
+    peerDependencies:
+      svelte: ^3.54.0 || ^4.0.0
+    dependencies:
+      file-selector: 0.2.4
+      svelte: 3.59.1
+    dev: false
 
   /svelte-hmr@0.15.2(svelte@3.59.1):
     resolution: {integrity: sha512-q/bAruCvFLwvNbeE1x3n37TYFb3mTBJ6TrCq6p2CoFbSTNhDE9oAtEfpy+wmc9So8AG0Tja+X0/mJzX9tSfvIg==}

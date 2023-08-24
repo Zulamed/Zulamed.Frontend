@@ -274,8 +274,10 @@ hr.dialog-hr {
 
 .dialog-content {
 	position: relative;
+	width: 100%;
 	height: calc(100% - 81px);
 	display: flex;
+	padding: 20px 0;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
@@ -291,12 +293,8 @@ hr.dialog-hr {
 	background-color: #cececede;
 }
 
-
-.close:focus {
-	outline: 2px solid transparent;
-	outline-offset: 2px;
-
-	box-shadow: 0px 0px 0px 3px #54b9a2;
+.dropzone.svelte-ywjphi:hover {
+	background-color: #7e7e7e;
 }
 
 .title {

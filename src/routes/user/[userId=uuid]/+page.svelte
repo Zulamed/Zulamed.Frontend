@@ -108,39 +108,39 @@
 						class="content"
 						use:melt={$contentDialog}
 					>
-						<Dropzone
-							on:drop={handleFilesSelect}
-							accept={['video/*']}
-							inputElement={inputFile}
-							containerStyles="height:100%; width:100%"
-						>
-							<div class="dialog-head">
-								<h2 use:melt={$title} class="title">Upload videos</h2>
-								<hr class="dialog-hr" />
-							</div>
-							<button use:melt={$close} aria-label="close" class="close">
-								<svg
-									width="25"
-									height="25"
-									viewBox="0 0 18 18"
-									fill="none"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path
-										d="M13.5 4.5L4.5 13.5"
-										stroke="#000"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-									/>
-									<path
-										d="M4.5 4.5L13.5 13.5"
-										stroke="#000"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-									/>
-								</svg>
-							</button>
-							<div class="dialog-content">
+						<div class="dialog-head">
+							<h2 use:melt={$title} class="title">Upload videos</h2>
+							<hr class="dialog-hr" />
+						</div>
+						<button use:melt={$close} aria-label="close" class="close">
+							<svg
+								width="25"
+								height="25"
+								viewBox="0 0 18 18"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									d="M13.5 4.5L4.5 13.5"
+									stroke="#000"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								/>
+								<path
+									d="M4.5 4.5L13.5 13.5"
+									stroke="#000"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								/>
+							</svg>
+						</button>
+						<div class="dialog-content">
+							<Dropzone
+								on:drop={handleFilesSelect}
+								accept={['video/*']}
+								inputElement={inputFile}
+								containerStyles="height:100%; width:100%; justify-content: center; background-color: #FFF; border-color: #54B9A2;"
+							>
 								<div class="upload-icon">
 									<svg
 										width="131"
@@ -192,8 +192,8 @@
 										<input id="upload" class="file-upload__input" type="file" name="file-upload" />
 									</div>
 								</form>
-							</div>
-						</Dropzone>
+							</Dropzone>
+						</div>
 					</div>
 				{/if}
 			</div>

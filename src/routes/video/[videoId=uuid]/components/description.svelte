@@ -2,8 +2,10 @@
 	export let textContent: string;
     export let views: number;
 	const originalText = textContent;
-	let trimmedText = textContent.substring(0, 30) + '... Read more';
-	textContent = trimmedText;
+	let trimmedText = originalText.substring(0, 30) + '... Read more';
+	// textContent = trimmedText;
+
+    let text : string;
 
 	let height = '64px';
 	const toggle = () => {
@@ -26,7 +28,7 @@
 	</div>
 
 	<p class="description-text">
-		{textContent}
+		{text}
 	</p>
 </div>
 

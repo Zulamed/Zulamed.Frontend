@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Dropdown from '$lib/components/dropdown.svelte';
 	import Tooltip from '$lib/components/tooltip.svelte';
 	import { melt } from '@melt-ui/svelte';
 </script>
@@ -9,12 +10,22 @@
  <!--        Your id is {data.userId} -->
 	<!-- {/if} -->
  <!--    <a href="/login">Go to login page</a> -->
-    <Tooltip placement="bottom">
-        <button use:melt={trigger} slot="button" let:trigger>Hover me</button>
-        <p slot="content">Tooltip content</p>
-    </Tooltip>
-    <Tooltip placement="right">
-        <button use:melt={trigger} slot="button" let:trigger>Hover me</button>
-        <p slot="content">Tooltip content</p>
-    </Tooltip>
+    <!-- <Tooltip placement="bottom"> -->
+    <!--     <button use:melt={trigger} slot="button" let:trigger>Hover me</button> -->
+    <!--     <p slot="content">Tooltip content</p> -->
+    <!-- </Tooltip> -->
+    <!-- <Tooltip placement="right"> -->
+    <!--     <button use:melt={trigger} slot="button" let:trigger>Hover me</button> -->
+    <!--     <p slot="content">Tooltip content</p> -->
+    <!-- </Tooltip> -->
+    <Dropdown>
+        <button use:melt={trigger} slot="button" let:trigger>Salam aleykim!</button>
+        <div slot="item" let:item>
+            <button use:melt={item}>Test!</button>
+            <button use:melt={item}>Test 2!</button>
+            <button use:melt={item}>Test 3!</button>
+            <button use:melt={item}>Test 4!</button>
+            <button use:melt={item}>Test 5!</button>
+        </div>
+    </Dropdown>
 </div>

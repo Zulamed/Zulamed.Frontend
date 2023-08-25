@@ -32,7 +32,7 @@
 					<img src={response.user.profilePictureUrl ?? '/img/icons/user.png'} alt="" />
 					<div class="vid-info">
 						<a href="/video/{response.video.id}">{response.video.videoTitle}</a>
-						<p>{response.user.username}</p>
+						<a class="channel-name" href=".">{response.user.username}</a>
 						<p class="vid-views">{response.video.videoViews} views</p>
 					</div>
 				</div>
@@ -49,7 +49,7 @@
 				<img src="/img/icons/user.png" alt="" />
 				<div class="vid-info">
 					<a href=".">LOREM IPSUM - Lorem ipsum</a>
-					<p>Lorem ipsum</p>
+					<a class="channel-name" href=".">Lorem ipsum</a>
 					<p class="vid-views">1k watching</p>
 				</div>
 			</div>
@@ -64,7 +64,7 @@
 				<img src="/img/icons/user.png" alt="" />
 				<div class="vid-info">
 					<a href=".">LOREM IPSUM - Lorem ipsum</a>
-					<p>Lorem ipsum</p>
+					<a class="channel-name" href=".">Lorem ipsum</a>
 					<p class="vid-views">1k watching</p>
 				</div>
 			</div>
@@ -79,7 +79,7 @@
 				<img src="/img/icons/user.png" alt="" />
 				<div class="vid-info">
 					<a href=".">LOREM IPSUM - Lorem ipsum</a>
-					<p>Lorem ipsum</p>
+					<a class="channel-name" href=".">Lorem ipsum</a>
 					<p class="vid-views">1k watching</p>
 				</div>
 			</div>
@@ -94,7 +94,7 @@
 				<img src="/img/icons/user.png" alt="" />
 				<div class="vid-info">
 					<a href=".">LOREM IPSUM - Lorem ipsum</a>
-					<p>Lorem ipsum</p>
+					<a class="channel-name" href=".">Lorem ipsum</a>
 					<p class="vid-views">1k watching</p>
 				</div>
 			</div>
@@ -109,7 +109,7 @@
 				<img src="/img/icons/user.png" alt="" />
 				<div class="vid-info">
 					<a href=".">LOREM IPSUM - Lorem ipsum</a>
-					<p>Lorem ipsum</p>
+					<a class="channel-name" href=".">Lorem ipsum</a>
 					<p class="vid-views">1k watching</p>
 				</div>
 			</div>
@@ -124,7 +124,7 @@
 				<img src="/img/icons/user.png" alt="" />
 				<div class="vid-info">
 					<a href=".">LOREM IPSUM - Lorem ipsum</a>
-					<p>Lorem ipsum</p>
+					<a class="channel-name" href=".">Lorem ipsum</a>
 					<p class="vid-views">1k watching</p>
 				</div>
 			</div>

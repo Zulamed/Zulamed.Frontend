@@ -3,6 +3,9 @@
 	import type { Response } from '$backend/video/createComment/endpoint';
 	import { onMount } from 'svelte';
 	import type { Comment } from '$backend/video/types';
+	import Dropdown from '$lib/components/dropdown.svelte';
+	import { melt } from '@melt-ui/svelte';
+	import { user } from '$lib/stores/auth';
 
 	let visibility = false;
 	let showMoreCommentsButton = true;
@@ -48,23 +51,17 @@
 	});
 	$: rangeComments = !visibility ? comments.slice(0, 2) : comments;
 
-    // push new comment to comments array
-	function iNeedAutoComplete(data: Record<string,unknown>){
-        let response = data as Response;
-        if (response.status === "ok"){
-            comments.push(response.data);
-            comments = comments;
-        }
+	// push new comment to comments array
+	function iNeedAutoComplete(data: Record<string, unknown>) {
+		let response = data as Response;
+		if (response.status === 'ok') {
+			comments.push(response.data);
+			comments = comments;
+		}
 	}
 </script>
 
-<div
-	id="play-video-comments"
-	class="play-video-comments"
-	style:mask-image={!visibility
-		? 'linear-gradient(180deg, rgba(0, 0, 0, 1), transparent 150%)'
-		: ''}
->
+<div id="play-video-comments" class="play-video-comments">
 	<p style="margin-bottom: 69px;">2k comments</p>
 
 	<div class="write-comment">
@@ -78,10 +75,9 @@
 					if (result.type === 'success') {
 						HTMLFormElement.prototype.reset.call(form);
 						visibility = true;
-                        if (result.data){
-                            iNeedAutoComplete(result.data); // i'm addicted
-                        }
-
+						if (result.data) {
+							iNeedAutoComplete(result.data); // i'm addicted
+						}
 					} else {
 						applyAction(result);
 					}
@@ -136,6 +132,56 @@
 				>
 				<p>{comment.content}</p>
 			</div>
+			<Dropdown>
+				<button use:melt={trigger} slot="button" let:trigger class="dots-vertical">
+					<svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30"
+						><path
+							d="M479.858-160Q460-160 446-174.142q-14-14.141-14-34Q432-228 446.142-242q14.141-14 34-14Q500-256 514-241.858q14 14.141 14 34Q528-188 513.858-174q-14.141 14-34 14Zm0-272Q460-432 446-446.142q-14-14.141-14-34Q432-500 446.142-514q14.141-14 34-14Q500-528 514-513.858q14 14.141 14 34Q528-460 513.858-446q-14.141 14-34 14Zm0-272Q460-704 446-718.142q-14-14.141-14-34Q432-772 446.142-786q14.141-14 34-14Q500-800 514-785.858q14 14.141 14 34Q528-732 513.858-718q-14.141 14-34 14Z"
+						/></svg
+					>
+				</button>
+				<div class="dropdown-container" slot="item" let:item>
+					{#if $user?.id == comment.sentBy.id}
+						<button class="dropdown-button" use:melt={item}
+							><svg
+								xmlns="http://www.w3.org/2000/svg"
+								height="24px"
+								viewBox="0 0 24 24"
+								width="24px"
+								fill="#ffffff"
+								><path d="M0 0h24v24H0V0z" fill="none" /><path
+									d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"
+								/></svg
+							>Edit</button
+						>
+						<button class="dropdown-button" use:melt={item}
+							><svg
+								xmlns="http://www.w3.org/2000/svg"
+								height="24px"
+								viewBox="0 0 24 24"
+								width="24px"
+								fill="#ffffff"
+								><path d="M0 0h24v24H0V0z" fill="none" /><path
+									d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"
+								/></svg
+							>Delete</button
+						>
+					{:else}
+						<button class="dropdown-button" use:melt={item}
+							><svg
+								xmlns="http://www.w3.org/2000/svg"
+								height="24px"
+								viewBox="0 0 24 24"
+								width="24px"
+								fill="#ffffff"
+								><path d="M0 0h24v24H0V0z" fill="none" /><path
+									d="M12.36 6l.4 2H18v6h-3.36l-.4-2H7V6h5.36M14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6L14 4z"
+								/></svg
+							>Report</button
+						>
+					{/if}
+				</div>
+			</Dropdown>
 		</div>
 	{/each}
 
@@ -194,6 +240,59 @@
 
 <!-- put styles from play-video.css to here --->
 <style>
+	.dropdown-container .dropdown-button {
+		all: unset;
+		cursor: pointer;
+		min-height: 36px;
+		padding: 0 12px 0 16px;
+		color: #fff;
+		display: flex;
+		align-items: center;
+		justify-content: left;
+		background-color: transparent;
+	}
+	.dropdown-container .dropdown-button:hover {
+		background-color: #449e89;
+	}
+	.dropdown-button svg {
+		margin-right: 13px;
+	}
+	.dropdown-container {
+		background-color: #54b9a2;
+		width: 150px;
+		display: flex;
+		flex-direction: column;
+		border-radius: 11px;
+		padding: 7px 0;
+	}
+	.dots-vertical {
+		position: absolute;
+		right: 0;
+		background-color: transparent;
+		border: none;
+		outline: none;
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		cursor: pointer;
+		opacity: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: 1px solid transparent;
+		transition: border 0.1s ease;
+	}
+	.dots-vertical:active {
+		border: 1px solid #d3d3d3;
+		background-color: #d3d3d3;
+	}
+	.dots-vertical svg {
+		margin-right: 0;
+		fill: #000000;
+	}
+	.dots-vertical:hover svg {
+		fill: #54b9a2;
+	}
 	.play-video-comments {
 		width: 100%;
 		height: auto;
@@ -288,9 +387,14 @@
 	}
 
 	.comment-container {
-		width: 70%;
+		width: 100%;
 		display: flex;
 		margin-bottom: 39px;
+		position: relative;
+	}
+
+	.comment-container:hover .dots-vertical {
+		opacity: 1;
 	}
 
 	.comment-container img {
@@ -298,6 +402,9 @@
 		margin-right: 20px;
 		width: 48px;
 		height: 48px;
+	}
+	.user-comment {
+		max-width: 70%;
 	}
 	.user-comment a {
 		font-weight: 500;
@@ -321,6 +428,7 @@
 		line-height: 17px;
 		color: #000000;
 		margin-top: 10px;
+		word-break: break-all;
 	}
 	.more-comments {
 		width: 100%;
@@ -348,6 +456,9 @@
 		}
 		.comment-container {
 			width: 100%;
+		}
+		.dots-vertical {
+			opacity: 1;
 		}
 	}
 	@media (max-width: 600px) {

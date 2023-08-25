@@ -8,6 +8,7 @@
 	import { applyAction, enhance } from '$app/forms';
 	import { viewVideo } from '$backend/video/view/endpoint';
 	import { createTooltip, melt } from '@melt-ui/svelte';
+	import Tooltip from '$lib/components/tooltip.svelte';
 	import { fade } from 'svelte/transition';
 
 	const {
@@ -96,29 +97,35 @@
 						</div>
 					</div>
 
-					<button
-						use:melt={$trigger}
-						type="button"
-						id="follow-btn"
-						class:active={followActive}
-						on:click={() => {
-							followActive = !followActive;
-						}}
-						class="interaction-btn follow-btn">{followActive ? 'FOLLOWED' : 'FOLLOW'}</button
-					>
-					{#if $open}
-						<div
-							use:melt={$content}
-							transition:fade={{ duration: 100 }}
-							class="z-10 rounded-md bg-white shadow-sm"
+					<Tooltip placement="bottom">
+						<button
+							use:melt={trigger}
+							slot="button"
+							let:trigger
+							type="button"
+							id="follow-btn"
+							class:active={followActive}
+							on:click={() => {
+								followActive = !followActive;
+							}}
+							class="interaction-btn follow-btn">{followActive ? 'FOLLOWED' : 'FOLLOW'}</button
 						>
-							<div use:melt={$arrow} />
-							<p class="px-4 py-1 text-magnum-700">Aboba</p>
-						</div>
-					{/if}
+						<p slot="content">Follow</p>
+					</Tooltip>
 				</div>
 				<div class="play-video-info-right">
-					<button type="button" class="message-btn" class:active={messageActive}>CHAT</button>
+					<Tooltip placement="bottom">
+						<button
+							use:melt={trigger}
+							slot="button"
+							let:trigger
+							type="button"
+							class="message-btn"
+							class:active={messageActive}>CHAT</button
+						>
+						<p slot="content">Chat</p>
+					</Tooltip>
+
 					<div class="interaction-btn-group">
 						<form
 							method="post"
@@ -137,10 +144,20 @@
 								};
 							}}
 						>
-							<button id="like-btn" class="interaction-btn like-btn" class:active={likeActive}
-								><img src="/img/icons/thumb_up_white_24dp.svg" alt="" />
-								{data.videoInfo.numberOfLikes}</button
-							>
+							<Tooltip placement="bottom">
+								<button
+									use:melt={trigger}
+									slot="button"
+									let:trigger
+									id="like-btn"
+									class="interaction-btn like-btn"
+									class:active={likeActive}
+									><img src="/img/icons/thumb_up_white_24dp.svg" alt="" />
+									{data.videoInfo.numberOfLikes}</button
+								>
+								<p slot="content">Like</p>
+							</Tooltip>
+
 							<input name="videoId" type="hidden" value={data.videoInfo.video.id} />
 						</form>
 
@@ -160,18 +177,33 @@
 								};
 							}}
 						>
-							<button
-								id="dislike-btn"
-								class="interaction-btn dislike-btn"
-								class:active={dislikeActive}
-								><img src="/img/icons/thumb_down_white_24dp.svg" alt="" /></button
-							>
+							<Tooltip placement="bottom">
+								<button
+									use:melt={trigger}
+									slot="button"
+									let:trigger
+									id="dislike-btn"
+									class="interaction-btn dislike-btn"
+									class:active={dislikeActive}
+									><img src="/img/icons/thumb_down_white_24dp.svg" alt="" /></button
+								>
+								<p slot="content">Dislike</p>
+							</Tooltip>
+
 							<input name="videoId" type="hidden" value={data.videoInfo.video.id} />
 						</form>
 					</div>
-					<button type="button" class="interaction-btn share-btn"
-						><img src="/img/icons/send_white_24dp.svg" alt="" />SHARE</button
-					>
+					<Tooltip placement="bottom">
+						<button
+							use:melt={trigger}
+							slot="button"
+							let:trigger
+							type="button"
+							class="interaction-btn share-btn"
+							><img src="/img/icons/send_white_24dp.svg" alt="" />SHARE</button
+						>
+						<p slot="content">Share</p>
+					</Tooltip>
 				</div>
 			</div>
 			<Description
@@ -215,6 +247,86 @@
 				</div>
 				<div class="side-video-list">
 					<a href="." class="small-thumbnail"><img src="/img/videoPreviews/4.png" alt="" /></a>
+					<div class="vid-info">
+						<a href=".">What happens during surgery?</a>
+						<p>Lorem Ipsum</p>
+						<p class="vid-views">670k views</p>
+					</div>
+				</div>
+				<div class="side-video-list">
+					<a href="." class="small-thumbnail"><img src="/img/videoPreviews/5.png" alt="" /></a>
+					<div class="vid-info">
+						<a href=".">What happens during surgery?</a>
+						<p>Lorem Ipsum</p>
+						<p class="vid-views">670k views</p>
+					</div>
+				</div>
+				<div class="side-video-list">
+					<a href="." class="small-thumbnail"><img src="/img/videoPreviews/5.png" alt="" /></a>
+					<div class="vid-info">
+						<a href=".">What happens during surgery?</a>
+						<p>Lorem Ipsum</p>
+						<p class="vid-views">670k views</p>
+					</div>
+				</div>
+				<div class="side-video-list">
+					<a href="." class="small-thumbnail"><img src="/img/videoPreviews/5.png" alt="" /></a>
+					<div class="vid-info">
+						<a href=".">What happens during surgery?</a>
+						<p>Lorem Ipsum</p>
+						<p class="vid-views">670k views</p>
+					</div>
+				</div>
+				<div class="side-video-list">
+					<a href="." class="small-thumbnail"><img src="/img/videoPreviews/5.png" alt="" /></a>
+					<div class="vid-info">
+						<a href=".">What happens during surgery?</a>
+						<p>Lorem Ipsum</p>
+						<p class="vid-views">670k views</p>
+					</div>
+				</div>
+				<div class="side-video-list">
+					<a href="." class="small-thumbnail"><img src="/img/videoPreviews/5.png" alt="" /></a>
+					<div class="vid-info">
+						<a href=".">What happens during surgery?</a>
+						<p>Lorem Ipsum</p>
+						<p class="vid-views">670k views</p>
+					</div>
+				</div>
+				<div class="side-video-list">
+					<a href="." class="small-thumbnail"><img src="/img/videoPreviews/5.png" alt="" /></a>
+					<div class="vid-info">
+						<a href=".">What happens during surgery?</a>
+						<p>Lorem Ipsum</p>
+						<p class="vid-views">670k views</p>
+					</div>
+				</div>
+				<div class="side-video-list">
+					<a href="." class="small-thumbnail"><img src="/img/videoPreviews/5.png" alt="" /></a>
+					<div class="vid-info">
+						<a href=".">What happens during surgery?</a>
+						<p>Lorem Ipsum</p>
+						<p class="vid-views">670k views</p>
+					</div>
+				</div>
+				<div class="side-video-list">
+					<a href="." class="small-thumbnail"><img src="/img/videoPreviews/5.png" alt="" /></a>
+					<div class="vid-info">
+						<a href=".">What happens during surgery?</a>
+						<p>Lorem Ipsum</p>
+						<p class="vid-views">670k views</p>
+					</div>
+				</div>
+				<div class="side-video-list">
+					<a href="." class="small-thumbnail"><img src="/img/videoPreviews/5.png" alt="" /></a>
+					<div class="vid-info">
+						<a href=".">What happens during surgery?</a>
+						<p>Lorem Ipsum</p>
+						<p class="vid-views">670k views</p>
+					</div>
+				</div>
+				<div class="side-video-list">
+					<a href="." class="small-thumbnail"><img src="/img/videoPreviews/5.png" alt="" /></a>
 					<div class="vid-info">
 						<a href=".">What happens during surgery?</a>
 						<p>Lorem Ipsum</p>

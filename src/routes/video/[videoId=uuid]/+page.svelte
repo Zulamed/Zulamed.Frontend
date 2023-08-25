@@ -65,6 +65,7 @@
 	export let data: PageData;
 	likeActive = data.userLiked;
 	dislikeActive = data.userDisliked;
+    followActive = data.userFollowed;
 </script>
 
 <svelte:head>
@@ -96,16 +97,28 @@
 						</div>
 					</div>
 
-					<button
-						use:melt={$trigger}
-						type="button"
-						id="follow-btn"
-						class:active={followActive}
-						on:click={() => {
-							followActive = !followActive;
-						}}
-						class="interaction-btn follow-btn">{followActive ? 'FOLLOWED' : 'FOLLOW'}</button
-					>
+					<form method="post" action="?/followToggle" use:enhance={() => {
+                        return async ({ result }) => {
+                            if (result.type === 'success') {
+                                followActive = !followActive;
+                                if (followActive) data.videoInfo.user.subscribers++;
+                                else data.videoInfo.user.subscribers--;
+                                data = data; // make svelte aware that the data has changed
+                            } else {
+                                applyAction(result);
+                            }
+                        };
+                    }}>
+						<button
+							use:melt={$trigger}
+							type="submit"
+							id="follow-btn"
+							class:active={followActive}
+							class="interaction-btn follow-btn">{followActive ? 'FOLLOWED' : 'FOLLOW'}</button
+						>
+                        <input name="userId" type="hidden" value={data.videoInfo.user.id} />
+					</form>
+
 					{#if $open}
 						<div
 							use:melt={$content}

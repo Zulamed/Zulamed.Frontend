@@ -1,26 +1,28 @@
 <script lang="ts">
 	export let textContent: string;
-    export let views: number;
+	export let views: number;
 	const originalText = textContent;
-	let trimmedText = originalText.substring(0, 30) + '... Read more';
+	let trimmedText = originalText.substring(0, 30) + '... show more';
 	// textContent = trimmedText;
 
-    let text : string;
-
+	// let text: string;
 	let height = '64px';
-	const toggle = () => {
-		if (height === '64px') {
-			height = 'auto';
-			textContent = originalText;
-		} else {
-			height = '64px';
-			textContent = trimmedText;
-		}
+
+	const showMore = () => {
+		if (height === 'auto') return;
+		height = 'auto';
 	};
+
+	const showLess = () => {
+		height = '64px';
+		console.log(height);
+	};
+
+	$: text = height === '64px' ? trimmedText : originalText;
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div on:click={toggle} id="play-video-description" class="play-video-description" style:height>
+<div on:click={showMore} id="play-video-description" class="play-video-description" style:height>
 	<div class="play-video-stats">
 		<p>{views} views</p>
 		<p>5 days ago</p>
@@ -30,6 +32,9 @@
 	<p class="description-text">
 		{text}
 	</p>
+	{#if height === 'auto'}
+		<button style="all:unset" on:click|stopPropagation={showLess}>show less</button>
+	{/if}
 </div>
 
 <style>

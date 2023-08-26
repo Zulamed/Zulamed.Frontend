@@ -6,6 +6,7 @@
 	import Dropdown from '$lib/components/dropdown.svelte';
 	import { melt } from '@melt-ui/svelte';
 	import { user } from '$lib/stores/auth';
+	import SplittedComment from './splittedComment.svelte';
 	let textArea: HTMLTextAreaElement;
 	let textAreaHeight = 25;
 	function adjustTextAreaHeight(event: any) {
@@ -65,7 +66,10 @@
 		}
 	}
 
+    // let splittedStrings: string[] = [];
+
 	function splitString(str: string): string[] {
+        console.log(str);
 		return str.split(/\r?\n/);
 	}
 </script>
@@ -143,9 +147,10 @@
 					>{comment.sentBy.username}<span>{comment.sentAt}</span></a
 				>
 				<div class="comment-content">
-					{#each splitString(comment.content) as commentContent}
-						<span class="user-comment-text">{commentContent}</span>
-					{/each}
+					<!-- {#each splitString(comment.content) as commentContent} -->
+					<!-- 	<span class="user-comment-text">{commentContent}</span> -->
+					<!-- {/each} -->
+                    <SplittedComment commentTextClasses="user-comment-text" commentContents={splitString(comment.content)} />
 				</div>
 			</div>
 			<Dropdown>
@@ -441,7 +446,7 @@
 		margin-top: 7px;
 	}
 
-	.user-comment .user-comment-text {
+	.user-comment :global(.user-comment-text) {
 		display: block;
 		font-weight: 600;
 		font-size: 14px;

@@ -66,6 +66,7 @@
 	export let data: PageData;
 	likeActive = data.userLiked;
 	dislikeActive = data.userDisliked;
+    followActive = data.userFollowed;
 </script>
 
 <svelte:head>
@@ -97,21 +98,34 @@
 						</div>
 					</div>
 
-					<Tooltip placement="bottom">
-						<button
-							use:melt={trigger}
-							slot="button"
-							let:trigger
-							type="button"
-							id="follow-btn"
-							class:active={followActive}
-							on:click={() => {
-								followActive = !followActive;
-							}}
-							class="interaction-btn follow-btn">{followActive ? 'FOLLOWED' : 'FOLLOW'}</button
-						>
-						<p slot="content">Follow</p>
+
+					<form method="post" action="?/followToggle" use:enhance={() => {
+                        return async ({ result }) => {
+                            if (result.type === 'success') {
+                                followActive = !followActive;
+                                if (followActive) data.videoInfo.user.subscribers++;
+                                else data.videoInfo.user.subscribers--;
+                                data = data; // make svelte aware that the data has changed
+                            } else {
+                                applyAction(result);
+                            }
+                        };
+                    }}>
+          
+						<Tooltip placement="bottom">
+                <button
+                  use:melt={trigger}
+                  slot="button"
+                  let:trigger
+                  id="follow-btn"
+                  class:active={followActive}
+                  class="interaction-btn follow-btn">{followActive ? 'FOLLOWED' : 'FOLLOW'}</button
+                >
+                <p slot="content">Follow</p>
 					</Tooltip>
+              <input name="userId" type="hidden" value={data.videoInfo.user.id} />
+					</form>
+
 				</div>
 				<div class="play-video-info-right">
 					<Tooltip placement="bottom">

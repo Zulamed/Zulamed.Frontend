@@ -15,7 +15,6 @@
 
 	const showLess = () => {
 		height = '64px';
-		console.log(height);
 	};
 
 	$: text = height === '64px' ? trimmedText : originalText;

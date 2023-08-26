@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { sidebarOpened } from '$lib/components/sidebarAndNavbar/stores/sidebarOpened';
 	import UserHome from './components/userHome.svelte';
+	import UserPlaylist from './components/userPlaylist.svelte';
+	import UserChannels from './components/userChannels.svelte';
+	import UserAbout from './components/userAbout.svelte';
 	import { flyAndScale } from '$lib/animations/flyAndScale';
 	import Dropzone from 'svelte-file-dropzone/Dropzone.svelte';
 
@@ -200,10 +203,10 @@
 		</div>
 		<hr />
 	</div>
-	<div use:melt={$content('tab-1')} class="grow bg-white p-5"><UserHome /></div>
-	<div use:melt={$content('tab-2')} class="grow bg-white p-5">Playlist</div>
-	<div use:melt={$content('tab-3')} class="grow bg-white p-5">Channels</div>
-	<div use:melt={$content('tab-4')} class="grow bg-white p-5">About</div>
+	<div use:melt={$content('tab-1')} class="tab-content-container"><UserHome /></div>
+	<div use:melt={$content('tab-2')} class="tab-content-container"><UserPlaylist /></div>
+	<div use:melt={$content('tab-3')} class="tab-content-container"><UserChannels /></div>
+	<div use:melt={$content('tab-4')} class="tab-content-container"><UserAbout /></div>
 </div>
 
 <style lang="css" src="./user.css"></style>

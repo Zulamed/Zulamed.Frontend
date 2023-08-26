@@ -26,7 +26,7 @@
 	Videos
 </h1>
 <div class="list-container">
-	<div class="vid-list">
+	<a href="." class="vid-list">
 		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
 		<div class="flex-div">
 			<div class="list-vid-info">
@@ -37,8 +37,8 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="vid-list">
+	</a>
+	<a href="." class="vid-list">
 		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
 		<div class="flex-div">
 			<div class="list-vid-info">
@@ -49,8 +49,8 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="vid-list">
+	</a>
+	<a href="." class="vid-list">
 		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
 		<div class="flex-div">
 			<div class="list-vid-info">
@@ -61,8 +61,8 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="vid-list">
+	</a>
+	<a href="." class="vid-list">
 		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
 		<div class="flex-div">
 			<div class="list-vid-info">
@@ -73,8 +73,8 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="vid-list">
+	</a>
+	<a href="." class="vid-list">
 		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
 		<div class="flex-div">
 			<div class="list-vid-info">
@@ -85,8 +85,8 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="vid-list">
+	</a>
+	<a href="." class="vid-list">
 		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
 		<div class="flex-div">
 			<div class="list-vid-info">
@@ -97,8 +97,8 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="vid-list">
+	</a>
+	<a href="." class="vid-list">
 		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
 		<div class="flex-div">
 			<div class="list-vid-info">
@@ -109,8 +109,8 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="vid-list">
+	</a>
+	<a href="." class="vid-list">
 		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
 		<div class="flex-div">
 			<div class="list-vid-info">
@@ -121,8 +121,8 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="vid-list">
+	</a>
+	<a href="." class="vid-list">
 		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
 		<div class="flex-div">
 			<div class="list-vid-info">
@@ -133,8 +133,8 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="vid-list">
+	</a>
+	<a href="." class="vid-list">
 		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
 		<div class="flex-div">
 			<div class="list-vid-info">
@@ -145,8 +145,8 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="vid-list">
+	</a>
+	<a href="." class="vid-list">
 		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
 		<div class="flex-div">
 			<div class="list-vid-info">
@@ -157,8 +157,8 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="vid-list">
+	</a>
+	<a href="." class="vid-list">
 		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
 		<div class="flex-div">
 			<div class="list-vid-info">
@@ -169,7 +169,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</a>
 </div>
 
 <style>
@@ -250,6 +250,7 @@
 	}
 	.vid-list {
 		margin-top: 32px;
+		text-decoration: none;
 	}
 
 	.vid-list .thumbnail {

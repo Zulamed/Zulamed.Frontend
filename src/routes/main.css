@@ -10,4 +10,8 @@
 
 :root {
     --primary-color: #54b9a2;
+    --btn-color: #54b9a2;
+    --btn-hover-color: #49a08c;
+    --disabled-btn: #999;
+    --disabled-btn-hover: #7c7c7c;
 }

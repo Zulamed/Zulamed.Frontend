@@ -564,6 +564,11 @@ img {
 	color: #000000;
 }
 
+.side-video-list:hover .vid-info a {
+	color: var(--primary-color);
+
+}
+
 .vid-info p {
 	font-weight: 500;
 	font-size: 15px;

@@ -6,7 +6,12 @@
 	import Dropdown from '$lib/components/dropdown.svelte';
 	import { melt } from '@melt-ui/svelte';
 	import { user } from '$lib/stores/auth';
-
+	let textArea: HTMLTextAreaElement;
+	let textAreaHeight = 25;
+	function adjustTextAreaHeight(event: any) {
+		event.target.style.height = '25px';
+		event.target.style.height = `${event.target.scrollHeight}px`;
+	}
 	let visibility = false;
 	let showMoreCommentsButton = true;
 	let inputVisibility = false;
@@ -59,6 +64,10 @@
 			comments = comments;
 		}
 	}
+
+	function splitString(str: string): string[] {
+		return str.split(/\r?\n/);
+	}
 </script>
 
 <div id="play-video-comments" class="play-video-comments">
@@ -75,6 +84,7 @@
 					if (result.type === 'success') {
 						HTMLFormElement.prototype.reset.call(form);
 						visibility = true;
+						textArea.style.height = '25px';
 						if (result.data) {
 							iNeedAutoComplete(result.data); // i'm addicted
 						}
@@ -84,16 +94,18 @@
 				};
 			}}
 		>
-			<input
+			<textarea
+				bind:this={textArea}
+				bind:value={inputText}
+				style="height: {textAreaHeight}px; overflow-y: hidden;"
 				placeholder="Add comment..."
-				type="text"
 				class="comment-input"
 				name="comment-input"
-				bind:value={inputText}
 				on:click={() => {
 					inputVisibility = true;
 				}}
-				on:input={() => {
+				on:input={(e) => {
+					adjustTextAreaHeight(e);
 					currentProps = inputText.length > 0 ? enabledProps : disabledProps;
 				}}
 			/>
@@ -130,7 +142,11 @@
 				<a href="/user/{comment.sentBy.id}"
 					>{comment.sentBy.username}<span>{comment.sentAt}</span></a
 				>
-				<p>{comment.content}</p>
+				<div class="comment-content">
+					{#each splitString(comment.content) as commentContent}
+						<span class="user-comment-text">{commentContent}</span>
+					{/each}
+				</div>
 			</div>
 			<Dropdown>
 				<button use:melt={trigger} slot="button" let:trigger class="dots-vertical">
@@ -324,18 +340,18 @@
 	}
 
 	.comment-input {
-		font-size: 14px;
 		position: relative;
-		height: 25px;
+		width: 100%;
+		resize: none;
 		outline: none;
 		border: none;
 		background-image: none;
+		font-size: 14px;
 		background-color: transparent;
 		-webkit-box-shadow: none;
 		-moz-box-shadow: none;
 		box-shadow: none;
 		border-bottom: 1px solid rgb(134, 134, 134);
-		transition: ease 0.2s all;
 	}
 
 	.comment-input:focus {
@@ -421,14 +437,18 @@
 		color: #a1a1a1;
 		margin-left: 16px;
 	}
+	.comment-content {
+		margin-top: 7px;
+	}
 
-	.user-comment p {
+	.user-comment .user-comment-text {
+		display: block;
 		font-weight: 600;
 		font-size: 14px;
 		line-height: 17px;
 		color: #000000;
-		margin-top: 10px;
 		word-break: break-all;
+		white-space: pre-line;
 	}
 	.more-comments {
 		width: 100%;

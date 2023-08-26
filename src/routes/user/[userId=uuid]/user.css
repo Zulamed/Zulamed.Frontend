@@ -65,6 +65,10 @@
 	width: 75%;
 }
 
+.tab-content-container {
+	min-height: 800px;
+}
+
 .btns-container {
 	display: flex;
 	align-items: center;

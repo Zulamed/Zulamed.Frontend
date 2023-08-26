@@ -2,7 +2,7 @@
 	export let textContent: string;
 	export let views: number;
 	const originalText = textContent;
-	let trimmedText = originalText.substring(0, 30) + '... show more';
+	let trimmedText = originalText.substring(0, 30) + ' ...more';
 	// textContent = trimmedText;
 
 	// let text: string;
@@ -31,12 +31,28 @@
 	<p class="description-text">
 		{text}
 	</p>
+	<br />
 	{#if height === 'auto'}
-		<button style="all:unset" on:click|stopPropagation={showLess}>show less</button>
+		<button class="show-less" on:click|stopPropagation={showLess}>Show less</button>
 	{/if}
 </div>
 
 <style>
+	.description-text {
+		white-space: pre-line;
+	}
+	.show-less {
+		all: unset;
+		background-color: transparent;
+		transition: background 0.1s ease;
+	}
+	.show-less:hover {
+		color: #49a08c;
+		user-select: none;
+	}
+	.show-less:active {
+		background-color: #30706141;
+	}
 	.play-video-description {
 		min-height: 64px;
 		height: 64px;

@@ -12,7 +12,7 @@ import { hasSubscribedTo } from '$backend/user/hasSubscribed';
 import { subscribe } from '$backend/user/subscribe';
 import { unsubscribe } from '$backend/user/unsubscribe';
 
-export const load = (async ({ params, fetch }) => {
+export const load = (async ({ params, fetch, locals }) => {
     const videoResult = await getVideoById(params.videoId, fetch);
     const commentResult = await getComments(params.videoId, fetch);
     const video = match(videoResult)
@@ -26,19 +26,23 @@ export const load = (async ({ params, fetch }) => {
         .with({ status: "error" }, ({ error }) => { throw err(500, error) })
         .exhaustive();
     const videoInfo = { ...video, comments };
-    const userLiked = await hasLiked(params.videoId, fetch);
-    const isFollowing = await hasSubscribedTo(videoInfo.user.id, fetch);
-    const userFollowed = match(isFollowing)
-        .with({ status: "ok" }, () => true)
-        .with({ status: "not-found" }, () => false)
-        .with({ status: "error" }, ({ message }) => { throw err(500, message) })
-        .exhaustive();
-
-    let userDisliked = false;
-    if (!userLiked) {
-        userDisliked = await hasDisliked(params.videoId, fetch);
+    let userLiked: boolean | undefined = undefined;
+    let userDisliked: boolean | undefined = undefined;
+    let userFollowed: boolean | undefined = undefined;
+    if (locals.user) {
+        userLiked = await hasLiked(params.videoId, fetch);
+        const isFollowing = await hasSubscribedTo(videoInfo.user.id, fetch);
+        userFollowed = match(isFollowing)
+            .with({ status: "ok" }, () => true)
+            .with({ status: "not-found" }, () => false)
+            .with({ status: "error" }, ({ message }) => { throw err(500, message) })
+            .exhaustive();
+        userDisliked = false;
+        if (!userLiked) {
+            userDisliked = await hasDisliked(params.videoId, fetch);
+        }
     }
-    return { videoInfo, userLiked, userDisliked, userFollowed};
+    return { videoInfo, userLiked, userDisliked, userFollowed };
 }) satisfies PageServerLoad;
 
 export const actions = {

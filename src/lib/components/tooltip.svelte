@@ -3,7 +3,7 @@
 	import type { FloatingConfig } from '@melt-ui/svelte/internal/actions';
 	import { fade } from 'svelte/transition';
 
-    export let placement: FloatingConfig['placement'] = 'top';
+	export let placement: FloatingConfig['placement'] = 'top';
 
 	const {
 		elements: { trigger, content, arrow },
@@ -12,8 +12,8 @@
 		positioning: {
 			placement: placement
 		},
-		openDelay: 500,
-		closeOnPointerDown: false,
+		openDelay: 1,
+		closeOnPointerDown: true,
 		forceVisible: true
 	});
 </script>
@@ -21,12 +21,15 @@
 <slot trigger={$trigger} name="button" />
 
 {#if $open}
-	<div
-		use:melt={$content}
-		transition:fade={{ duration: 100 }}
-		class="z-10 rounded-md bg-white shadow-sm"
-	>
-		<div use:melt={$arrow} />
-        <slot class="salam" name="content" />
+	<div use:melt={$content} transition:fade={{ duration: 100 }} class="tooltip">
+		<slot class="salam" name="content" />
 	</div>
 {/if}
+
+<style>
+	.tooltip {
+		background-color: #49a08c;
+		padding: 7px 15px;
+		color: #fff;
+	}
+</style>

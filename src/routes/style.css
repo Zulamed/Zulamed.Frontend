@@ -201,7 +201,8 @@ input::-moz-focus-inner {
 	font-weight: 400;
 }
 
-.vid-info p {
+.vid-info .channel-name {
+	display: block;
 	color: var(--primary-color);
 	font-size: 15px;
 	font-weight: 400;

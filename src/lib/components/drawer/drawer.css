@@ -267,6 +267,9 @@ nav {
 }
 
 .profile-link {
+	width: 100%;
+	all: unset;
+	cursor: pointer;
 	display: flex !important;
 	margin-bottom: 15px;
 }

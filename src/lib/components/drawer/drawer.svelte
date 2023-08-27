@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { invalidateAll } from '$app/navigation';
-import { user } from '$lib/stores/auth';
+	import { invalidateAll } from '$app/navigation';
+	import { user } from '$lib/stores/auth';
 	import { logout } from '$lib/stores/auth';
 	import { portal } from 'svelte-portal';
 
@@ -165,31 +165,32 @@ import { user } from '$lib/stores/auth';
 						<a href="." class="account-manage">Manage your Account</a>
 					</div>
 				</div>
-				<a class="profile-link" href="."
+				<button class="profile-link"
 					><img src="/img/profileContainerIcons/account_box_black_24dp.svg" alt="" />
 					<p>Your channel</p>
-				</a>
-				<a class="profile-link" href="."
+				</button>
+				<button class="profile-link"
 					><img src="/img/profileContainerIcons/groups_black_24dp.svg" alt="" />
 					<p>Switch account</p>
-				</a>
-				<a class="profile-link" href="."
+				</button>
+				<button class="profile-link"
 					><img src="/img/profileContainerIcons/wallet_black_24dp.svg" alt="" />
 					<p>Purchases and membership</p>
-				</a>
-				<a class="profile-link" href="."
+				</button>
+				<button class="profile-link"
 					><img src="/img/profileContainerIcons/translate_black_24dp.svg" alt="" />
 					<p>Language: English</p>
-				</a>
-				<a class="profile-link" href="."
+				</button>
+				<button class="profile-link"
 					><img src="/img/profileContainerIcons/settings_black_24dp.svg" alt="" />
 					<p>Settings</p>
-				</a>
-				<button class="profile-link"
-                on:click={async () => {
-                    await logout();
-                    await invalidateAll();
-                }}
+				</button>
+				<button
+					class="profile-link"
+					on:click={async () => {
+						await logout();
+						await invalidateAll();
+					}}
 					><img src="/img/profileContainerIcons/logout_black_24dp.svg" alt="" />
 					<p>Sign out</p>
 				</button>

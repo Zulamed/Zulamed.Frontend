@@ -498,10 +498,6 @@
 		.comment-container {
 			width: 100%;
 		}
-		.user-comment p {
-			font-size: 14px;
-			line-height: 17px;
-		}
 		.more-comments {
 			display: none;
 		}

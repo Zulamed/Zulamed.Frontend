@@ -63,9 +63,9 @@
 		};
 	});
 	export let data: PageData;
-	likeActive = data.userLiked;
-	dislikeActive = data.userDisliked;
-	followActive = data.userFollowed;
+	likeActive = data.userLiked ?? false;
+	dislikeActive = data.userDisliked ?? false;
+	followActive = data.userFollowed ?? false;
 </script>
 
 <svelte:head>

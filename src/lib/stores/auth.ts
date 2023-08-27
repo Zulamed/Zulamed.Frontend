@@ -1,18 +1,15 @@
 import cookie from 'cookie'
 import { browser } from '$app/environment';
 import { auth } from '$lib/firebase/client';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { writable } from 'svelte/store';
+import { signInWithEmailAndPassword, type IdTokenResult } from 'firebase/auth';
+import { get, writable } from 'svelte/store';
 import type { User } from '$backend/user/get/types';
 import { getUser } from '$backend/user/get/getUser';
 import { match } from 'ts-pattern';
 
 export const user = writable<User | undefined>(undefined);
 
-
-export async function login(email: string, password: string) {
-    const { user: newUser } = await signInWithEmailAndPassword(auth, email, password);
-    const jwtToken = await newUser?.getIdTokenResult();
+async function fetchUser(jwtToken: IdTokenResult) {
     const id = jwtToken?.claims['UserId'] as string | undefined;
     if (!id)
         return;
@@ -21,6 +18,14 @@ export async function login(email: string, password: string) {
         .with({ tag: "success" }, ({ user: response }) => {
             user.set(response.user);
         });
+
+}
+
+
+export async function login(email: string, password: string) {
+    const { user: newUser } = await signInWithEmailAndPassword(auth, email, password);
+    const jwtToken = await newUser?.getIdTokenResult();
+    fetchUser(jwtToken);
 }
 
 
@@ -39,6 +44,12 @@ if (browser) {
         })
         if (!newUser) {
             user.set(undefined);
+        }
+        if (!get(user)) {
+            const jwtToken = await newUser?.getIdTokenResult();
+            if (!jwtToken)
+                return;
+            fetchUser(jwtToken);
         }
     });
 }

@@ -45,6 +45,7 @@ if (browser) {
         if (!newUser) {
             user.set(undefined);
         }
+        // if user store wasn't set by the backend, set it now
         if (!get(user)) {
             const jwtToken = await newUser?.getIdTokenResult();
             if (!jwtToken)

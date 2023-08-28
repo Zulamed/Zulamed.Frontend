@@ -1,24 +1,33 @@
 <script lang="ts">
 	import { applyAction, enhance } from '$app/forms';
 	import type { Response } from '$backend/video/createComment/endpoint';
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import type { Comment } from '$backend/video/types';
 	import Dropdown from '$lib/components/dropdown.svelte';
 	import { melt } from '@melt-ui/svelte';
 	import { user } from '$lib/stores/auth';
 	import SplittedComment from './splittedComment.svelte';
 	import { flyAndScale } from '$lib/animations/flyAndScale';
-
-	let confirmationVisible = false;
+	import { any } from 'zod';
+	let commentDeletingId = '';
+	let isEditing = false;
+	let editingId = '';
+	function startEditing(id: string) {
+		isEditing = true;
+		editingId = id;
+	}
 	let textArea: HTMLTextAreaElement;
+	let confirmationVisible = false;
 	let textAreaHeight = 25;
 	function adjustTextAreaHeight(event: any) {
 		event.target.style.height = '25px';
 		event.target.style.height = `${event.target.scrollHeight}px`;
 	}
+	let editTextArea: HTMLTextAreaElement;
 	let visibility = false;
 	let showMoreCommentsButton = true;
 	let inputVisibility = false;
+	let inputVisibility2 = false;
 	let inputText = '';
 	let disabledProps = {
 		disabled: true,
@@ -45,11 +54,13 @@
 			showMoreCommentsButton = false;
 		}
 	}
-	function openConfirmation() {
+	function openConfirmation(id: string) {
 		confirmationVisible = true;
+		commentDeletingId = id;
 	}
 	function cancelUnsubscribe() {
 		confirmationVisible = false;
+		commentDeletingId = '';
 	}
 	export let videoId: string;
 	export let comments: Comment[];
@@ -148,26 +159,71 @@
 			{/if}
 		</form>
 	</div>
-
 	{#each rangeComments as comment}
 		<div class="comment-container">
 			<img src={comment.sentBy.profilePictureUrl ?? '/img/icons/channel-logo.jpg'} alt="" />
-			<div class="user-comment">
-				<a href="/user/{comment.sentBy.id}"
-					>{comment.sentBy.username}<span>{comment.sentAt}</span></a
-				>
-				<div class="comment-content">
-					<!-- {#each splitString(comment.content) as commentContent} -->
-					<!-- 	<span class="user-comment-text">{commentContent}</span> -->
-					<!-- {/each} -->
-					<SplittedComment
-						commentTextClasses="user-comment-text"
-						commentContents={splitString(comment.content)}
+			{#if isEditing && comment.id == editingId}
+				<form class="write-comment-input">
+					<textarea
+						bind:this={editTextArea}
+						style="height: {textAreaHeight}px; overflow-y: hidden;"
+						value={comment.content}
+						class="comment-input"
+						name="comment-input"
+						on:click={() => {
+							inputVisibility2 = true;
+						}}
+						on:input={(e) => {
+							adjustTextAreaHeight(e);
+							currentProps = inputText.length > 0 ? enabledProps : disabledProps;
+						}}
 					/>
+					<div class="write-comment-buttons" style:display="flex">
+						<button
+							type="button"
+							class="comment-btn cancel-btn"
+							on:click={() => {
+								isEditing = false;
+							}}>cancel</button
+						>
+						<button
+							type="submit"
+							class="comment-btn comment"
+							style="
+						border: none;
+						background-color: {currentProps?.background};
+						color: {currentProps?.color};
+						cursor: {currentProps?.cursor};
+						disabled: {currentProps?.disabled};
+				  ">Save</button
+						>
+					</div>
+				</form>
+			{:else}
+				<div class="user-comment">
+					<a href="/user/{comment.sentBy.id}"
+						>{comment.sentBy.username}<span>{comment.sentAt}</span></a
+					>
+					<div class="comment-content">
+						<!-- {#each splitString(comment.content) as commentContent} -->
+						<!-- 	<span class="user-comment-text">{commentContent}</span> -->
+						<!-- {/each} -->
+
+						<SplittedComment
+							commentTextClasses="user-comment-text"
+							commentContents={splitString(comment.content)}
+						/>
+					</div>
 				</div>
-			</div>
+			{/if}
 			<Dropdown>
-				<button use:melt={trigger} slot="button" let:trigger class="dots-vertical">
+				<button
+					use:melt={trigger}
+					slot="button"
+					let:trigger
+					class="dots-vertical"
+					style:display={isEditing && comment.id == editingId ? 'none' : 'block'}
+				>
 					<svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30"
 						><path
 							d="M479.858-160Q460-160 446-174.142q-14-14.141-14-34Q432-228 446.142-242q14.141-14 34-14Q500-256 514-241.858q14 14.141 14 34Q528-188 513.858-174q-14.141 14-34 14Zm0-272Q460-432 446-446.142q-14-14.141-14-34Q432-500 446.142-514q14.141-14 34-14Q500-528 514-513.858q14 14.141 14 34Q528-460 513.858-446q-14.141 14-34 14Zm0-272Q460-704 446-718.142q-14-14.141-14-34Q432-772 446.142-786q14.141-14 34-14Q500-800 514-785.858q14 14.141 14 34Q528-732 513.858-718q-14.141 14-34 14Z"
@@ -176,7 +232,14 @@
 				</button>
 				<div class="dropdown-container" slot="item" let:item>
 					{#if $user?.id == comment.sentBy.id}
-						<button class="dropdown-button" use:melt={item}
+						<button
+							class="dropdown-button"
+							use:melt={item}
+							on:click={async () => {
+								startEditing(comment.id);
+								await tick();
+								editTextArea.style.height = `${editTextArea.scrollHeight}px`;
+							}}
 							><svg
 								xmlns="http://www.w3.org/2000/svg"
 								height="24px"
@@ -189,7 +252,12 @@
 							>Edit</button
 						>
 
-						<button on:click={openConfirmation} class="dropdown-button" use:melt={item}
+						<button
+							on:click={() => {
+								openConfirmation(comment.id);
+							}}
+							class="dropdown-button"
+							use:melt={item}
 							><svg
 								xmlns="http://www.w3.org/2000/svg"
 								height="24px"
@@ -217,7 +285,7 @@
 					{/if}
 				</div>
 			</Dropdown>
-			{#if confirmationVisible}
+			{#if confirmationVisible && comment.id == commentDeletingId}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<div class="overlay" on:click={cancelUnsubscribe} />
 				<div
@@ -565,12 +633,12 @@
 
 	.comment-container img {
 		border-radius: 50%;
-		margin-right: 20px;
 		width: 48px;
 		height: 48px;
 	}
 	.user-comment {
 		max-width: 70%;
+		margin-left: 20px;
 	}
 	.user-comment a {
 		font-weight: 500;

@@ -11,12 +11,12 @@
 </script>
 
 {#each spans as commentContent}
-	<span class={commentTextClasses}>{commentContent == "" ? "\xa0" : commentContent}</span>
+	<span class={commentTextClasses}>{commentContent == '' ? '\xa0' : commentContent}</span>
 {/each}
 
 {#if commentContents.length > 5}
 	<button
-        class={showMoreClasses}
+		class={showMoreClasses}
 		on:click={() => {
 			showToggle = !showToggle;
 			showText = showToggle ? 'Show less' : 'Show more';

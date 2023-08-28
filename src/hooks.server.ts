@@ -25,6 +25,10 @@ function protectRoutes(path: string, isAuthenticated: boolean): boolean {
     if ((path === '/login' || path === '/register') && isAuthenticated) {
         return false;
     }
+
+    if (path.includes('/settings') && !isAuthenticated){
+        return false;
+    }
     return true;
 }
 

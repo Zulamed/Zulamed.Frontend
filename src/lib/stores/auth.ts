@@ -51,6 +51,7 @@ if (browser) {
             if (!jwtToken)
                 return;
             fetchUser(jwtToken);
+            console.log('salam!');
         }
     });
 }

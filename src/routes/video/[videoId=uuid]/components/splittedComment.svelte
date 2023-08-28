@@ -8,7 +8,6 @@
 
 	$: spans =
 		commentContents.length > 5 && !showToggle ? commentContents.slice(0, 5) : commentContents;
-    console.log(commentContents);
 </script>
 
 {#each spans as commentContent}

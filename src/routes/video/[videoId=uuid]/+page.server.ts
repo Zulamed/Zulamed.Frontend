@@ -11,6 +11,7 @@ import { getComments } from '$backend/video/getCommentsForAVideo/endpoint';
 import { hasSubscribedTo } from '$backend/user/hasSubscribed';
 import { subscribe } from '$backend/user/subscribe';
 import { unsubscribe } from '$backend/user/unsubscribe';
+import { deleteComment } from '$backend/video/deleteComment';
 
 export const load = (async ({ params, fetch, locals }) => {
     const videoResult = await getVideoById(params.videoId, fetch);
@@ -78,13 +79,20 @@ export const actions = {
         const comment = data.get("comment-input") as string;
         return await createComment(videoId, comment, fetch);
     },
+    deleteComment: async ({ fetch, request, locals }) => {
+        if (!locals.user)
+            return;
+        const data = await request.formData();
+        const videoId = data.get("videoId") as string;
+        const commentId = data.get("commentId") as string;
+        return deleteComment(commentId, videoId, fetch);
+    },
     followToggle: async ({ fetch, request, locals }) => {
         if (!locals.user) {
             return;
         }
         const data = await request.formData();
         const userId = data.get("userId") as string;
-        console.log(userId);
         const result = await hasSubscribedTo(userId, fetch);
         const isSubscribed = match(result)
             .with({ status: "ok" }, () => true)

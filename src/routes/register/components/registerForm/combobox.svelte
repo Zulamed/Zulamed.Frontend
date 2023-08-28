@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createCombobox, melt } from '@melt-ui/svelte';
+	import { createCombobox, melt, type ComboboxFilterFunction } from '@melt-ui/svelte';
 	export let labelText: string;
 	export let inputPlaceholder: string;
 	export let obligatoryField = false;
@@ -63,23 +63,29 @@
 		}
 	];
 
+	const filterFunction: ComboboxFilterFunction<Book> = ({ itemValue, input }) => {
+		// Example string normalization function. Replace as needed.
+		const normalize = (str: string) => str.normalize().toLowerCase();
+		const normalizedInput = normalize(input);
+		return (
+			normalizedInput === '' ||
+			normalize(itemValue.title).includes(normalizedInput) ||
+			normalize(itemValue.author).includes(normalizedInput)
+		);
+	};
+
 	const {
-		elements: { input, menu, item, label },
-		states: { open, inputValue, filteredItems }
+		elements: { input, menu, option, label },
+		states: { open, inputValue, isEmpty }
 	} = createCombobox({
-		filterFunction: (item, inputValue) => {
-			// Example string normalization function. Replace as needed.
-			const normalize = (str: string) => str.normalize().toLowerCase();
-			const normalizedInput = normalize(inputValue);
-			return (
-				normalizedInput === '' ||
-				normalize(item.title).includes(normalizedInput) ||
-				normalize(item.author).includes(normalizedInput)
-			);
-		},
-		items: books,
-		itemToString: (item) => item.title
+		filterFunction,
+		forceVisible: true
 	});
+
+	// i don't know why but isEmpty is always true when the input is empty when first rendered
+	$: emptyBug = $isEmpty && $inputValue.value === '';
+
+	export let customOption = false;
 </script>
 
 <!-- eslint-disable-next-line svelte/valid-compile -->
@@ -91,7 +97,7 @@
 </label>
 <p class="input-note">{inputNote}</p>
 <div class="group-less">
-	<input class="input" use:melt={$input} placeholder={inputPlaceholder} value={$inputValue} />
+	<input class="input" use:melt={$input} placeholder={inputPlaceholder} />
 	<div class="chevron-wrapper">
 		{#if $open}
 			<img class="chevron" src="img/icons/Expand_up.png" alt="" />
@@ -102,29 +108,47 @@
 </div>
 
 <div class="menu-container" use:melt={$menu}>
-	<ul class="menu">
-		{#if $open}
-			{#if $filteredItems.length !== 0}
-				{#each $filteredItems as book, index (index)}
-					<li
-						use:melt={$item({
-							index,
-							item: book,
-							disabled: book.disabled
-						})}
-						class="item"
-					>
-						<div>
-							<span>{book.title}</span>
-							<span class="author">{book.author}</span>
-						</div>
-					</li>
-				{/each}
-			{:else}
+	{#if $open}
+		<ul class="menu">
+			{#if $inputValue.value !== '' && customOption}
+				<li
+					use:melt={$option({
+						value: {
+							author: $inputValue.value,
+							title: 'custom',
+							disabled: false
+						},
+						label: $inputValue.value,
+						disabled: false
+					})}
+					class="item"
+				>
+					<div>
+						<span>{$inputValue.value}</span>
+						<span class="author">Custom</span>
+					</div>
+				</li>
+			{/if}
+			{#each books as book, index (index)}
+				<li
+					use:melt={$option({
+						value: book,
+						label: book.title,
+						disabled: book.disabled
+					})}
+					class="item"
+				>
+					<div>
+						<span>{book.title}</span>
+						<span class="author">{book.author}</span>
+					</div>
+				</li>
+			{/each}
+			{#if $isEmpty && !emptyBug}
 				<li class="item">No results found</li>
 			{/if}
-		{/if}
-	</ul>
+		</ul>
+	{/if}
 </div>
 
 <style>

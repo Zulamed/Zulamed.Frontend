@@ -66,12 +66,13 @@
 		}
 	}
 
-    // let splittedStrings: string[] = [];
+	// let splittedStrings: string[] = [];
 
 	function splitString(str: string): string[] {
-        console.log(str);
 		return str.split(/\r?\n/);
 	}
+
+    let commentDeleteForm: HTMLFormElement;
 </script>
 
 <div id="play-video-comments" class="play-video-comments">
@@ -150,7 +151,10 @@
 					<!-- {#each splitString(comment.content) as commentContent} -->
 					<!-- 	<span class="user-comment-text">{commentContent}</span> -->
 					<!-- {/each} -->
-                    <SplittedComment commentTextClasses="user-comment-text" commentContents={splitString(comment.content)} />
+					<SplittedComment
+						commentTextClasses="user-comment-text"
+						commentContents={splitString(comment.content)}
+					/>
 				</div>
 			</div>
 			<Dropdown>
@@ -175,18 +179,40 @@
 								/></svg
 							>Edit</button
 						>
-						<button class="dropdown-button" use:melt={item}
-							><svg
-								xmlns="http://www.w3.org/2000/svg"
-								height="24px"
-								viewBox="0 0 24 24"
-								width="24px"
-								fill="#ffffff"
-								><path d="M0 0h24v24H0V0z" fill="none" /><path
-									d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"
-								/></svg
-							>Delete</button
+						<form
+							method="post"
+							action="?/deleteComment"
+                            bind:this={commentDeleteForm}
+							use:enhance={() => {
+								return async ({ result, form, formData }) => {
+									if (result.type === 'success') {
+										HTMLFormElement.prototype.reset.call(form);
+										comments = comments.filter((comment) => {
+											return comment.id !== formData.get('commentId');
+										});
+									} else {
+										applyAction(result);
+									}
+								};
+							}}
 						>
+							<button
+								class="dropdown-button"
+								use:melt={item}
+								><svg
+									xmlns="http://www.w3.org/2000/svg"
+									height="24px"
+									viewBox="0 0 24 24"
+									width="24px"
+									fill="#ffffff"
+									><path d="M0 0h24v24H0V0z" fill="none" /><path
+										d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"
+									/></svg
+								>Delete</button
+							>
+							<input type="hidden" name="videoId" value={videoId} />
+							<input type="hidden" name="commentId" value={comment.id} />
+						</form>
 					{:else}
 						<button class="dropdown-button" use:melt={item}
 							><svg

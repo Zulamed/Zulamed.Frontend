@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, setContext } from 'svelte';
 	import VideoPlayer from './components/videoPlayer/videoPlayer.svelte';
 	import type { PageData } from './$types';
 	import Chips from './components/chips.svelte';
@@ -9,6 +9,7 @@
 	import { viewVideo } from '$backend/video/view/endpoint';
 	import { createTooltip, melt } from '@melt-ui/svelte';
 	import Tooltip from '$lib/components/tooltip.svelte';
+
 
 	const {
 		elements: { trigger, content, arrow },

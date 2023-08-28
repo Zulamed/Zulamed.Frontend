@@ -12,6 +12,7 @@ import { hasSubscribedTo } from '$backend/user/hasSubscribed';
 import { subscribe } from '$backend/user/subscribe';
 import { unsubscribe } from '$backend/user/unsubscribe';
 import { deleteComment } from '$backend/video/deleteComment';
+import { editComment } from '$backend/video/editComment';
 
 export const load = (async ({ params, fetch, locals }) => {
     const videoResult = await getVideoById(params.videoId, fetch);
@@ -106,6 +107,22 @@ export const actions = {
         await unsubscribe(userId, fetch);
         return { isSubscribed: !isSubscribed };
     },
+    editComment: async ({ fetch, request, locals }) => {
+        if (!locals.user)
+            return;
+        const data = await request.formData();
+        const videoId = data.get("videoId") as string;
+        const commentId = data.get("commentId") as string;
+        const editedText = data.get("comment-input") as string;
+        const result = await editComment(videoId, commentId, editedText, fetch);
+        const editResult = match(result)
+            .with({ status: "ok" }, (data) => data)
+            .with({ status: "not-found" }, () => { throw err(404, "Comment not found") })
+            .with({ status: "error" }, ({ message }) => { throw err(500, message) })
+            .exhaustive();
+
+        return { editedText: editResult.editedComment };
+    }
 } satisfies Actions;
 
 

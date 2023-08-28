@@ -9,6 +9,7 @@
 	import SplittedComment from './splittedComment.svelte';
 	import { flyAndScale } from '$lib/animations/flyAndScale';
 	import { any } from 'zod';
+	import { addToast } from '$lib/components/errorToast.svelte';
 	let commentDeletingId = '';
 	let isEditing = false;
 	let editingId = '';
@@ -84,6 +85,11 @@
 			comments.push(response.data);
 			comments = comments;
 		}
+	}
+
+	function updateComment(comment: Comment, data: Record<string, unknown>) {
+		let text = data.editedText as string;
+		comment.content = text;
 	}
 
 	// let splittedStrings: string[] = [];
@@ -163,7 +169,26 @@
 		<div class="comment-container">
 			<img src={comment.sentBy.profilePictureUrl ?? '/img/icons/channel-logo.jpg'} alt="" />
 			{#if isEditing && comment.id == editingId}
-				<form class="write-comment-input">
+				<form
+					class="write-comment-input"
+                    method="post"
+                    action="?/editComment"
+					use:enhance={() => {
+						return async ({ result, form }) => {
+							if (result.type === 'success') {
+								HTMLFormElement.prototype.reset.call(form);
+								isEditing = false;
+								editingId = '';
+								if (result.data) {
+									updateComment(comment, result.data);
+                                    comment = comment;
+								}
+							} else {
+								applyAction(result);
+							}
+						};
+					}}
+				>
 					<textarea
 						bind:this={editTextArea}
 						style="height: {textAreaHeight}px; overflow-y: hidden;"
@@ -198,6 +223,8 @@
 				  ">Save</button
 						>
 					</div>
+					<input type="hidden" name="videoId" value={videoId} />
+					<input type="hidden" name="commentId" value={comment.id} />
 				</form>
 			{:else}
 				<div class="user-comment">
@@ -313,6 +340,12 @@
 										comments = comments.filter((comment) => {
 											return comment.id !== formData.get('commentId');
 										});
+                                        addToast({
+                                            data: {
+                                                error: "Comment deleted successfully",
+                                                fieldName: "comment"
+                                            }
+                                        });
 									} else {
 										applyAction(result);
 									}

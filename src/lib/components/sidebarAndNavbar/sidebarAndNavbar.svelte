@@ -175,7 +175,7 @@
 					><img src="/img/profileContainerIcons/translate_black_24dp.svg" alt="" />
 					<p>Language: English</p>
 				</a>
-				<a class="profile-link" href="."
+				<a class="profile-link" href="/settings/account"
 					><img src="/img/profileContainerIcons/settings_black_24dp.svg" alt="" />
 					<p>Settings</p>
 				</a>

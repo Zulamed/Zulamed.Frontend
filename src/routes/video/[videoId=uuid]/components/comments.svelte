@@ -7,6 +7,9 @@
 	import { melt } from '@melt-ui/svelte';
 	import { user } from '$lib/stores/auth';
 	import SplittedComment from './splittedComment.svelte';
+	import { flyAndScale } from '$lib/animations/flyAndScale';
+
+	let confirmationVisible = false;
 	let textArea: HTMLTextAreaElement;
 	let textAreaHeight = 25;
 	function adjustTextAreaHeight(event: any) {
@@ -42,6 +45,12 @@
 			showMoreCommentsButton = false;
 		}
 	}
+	function openConfirmation() {
+		confirmationVisible = true;
+	}
+	function cancelUnsubscribe() {
+		confirmationVisible = false;
+	}
 	export let videoId: string;
 	export let comments: Comment[];
 	onMount(() => {
@@ -72,7 +81,7 @@
 		return str.split(/\r?\n/);
 	}
 
-    let commentDeleteForm: HTMLFormElement;
+	let commentDeleteForm: HTMLFormElement;
 </script>
 
 <div id="play-video-comments" class="play-video-comments">
@@ -179,40 +188,19 @@
 								/></svg
 							>Edit</button
 						>
-						<form
-							method="post"
-							action="?/deleteComment"
-                            bind:this={commentDeleteForm}
-							use:enhance={() => {
-								return async ({ result, form, formData }) => {
-									if (result.type === 'success') {
-										HTMLFormElement.prototype.reset.call(form);
-										comments = comments.filter((comment) => {
-											return comment.id !== formData.get('commentId');
-										});
-									} else {
-										applyAction(result);
-									}
-								};
-							}}
+
+						<button on:click={openConfirmation} class="dropdown-button" use:melt={item}
+							><svg
+								xmlns="http://www.w3.org/2000/svg"
+								height="24px"
+								viewBox="0 0 24 24"
+								width="24px"
+								fill="#ffffff"
+								><path d="M0 0h24v24H0V0z" fill="none" /><path
+									d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"
+								/></svg
+							>Delete</button
 						>
-							<button
-								class="dropdown-button"
-								use:melt={item}
-								><svg
-									xmlns="http://www.w3.org/2000/svg"
-									height="24px"
-									viewBox="0 0 24 24"
-									width="24px"
-									fill="#ffffff"
-									><path d="M0 0h24v24H0V0z" fill="none" /><path
-										d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"
-									/></svg
-								>Delete</button
-							>
-							<input type="hidden" name="videoId" value={videoId} />
-							<input type="hidden" name="commentId" value={comment.id} />
-						</form>
 					{:else}
 						<button class="dropdown-button" use:melt={item}
 							><svg
@@ -229,47 +217,88 @@
 					{/if}
 				</div>
 			</Dropdown>
+			{#if confirmationVisible}
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<div class="overlay" on:click={cancelUnsubscribe} />
+				<div
+					class="content"
+					transition:flyAndScale={{
+						duration: 150,
+						y: 8,
+						start: 0.96
+					}}
+				>
+					<h1 style="color: #000; font-size: 18px; margin-bottom: 13px; font-weight: 500">
+						Delete comment
+					</h1>
+					<h2 class="comment-delete-title">Delete your comment permanently?</h2>
+					<div class="comment-delete-actions">
+						<button on:click={cancelUnsubscribe} class="delete-cancel"> Cancel </button>
+						<form
+							method="post"
+							action="?/deleteComment"
+							bind:this={commentDeleteForm}
+							use:enhance={() => {
+								return async ({ result, form, formData }) => {
+									if (result.type === 'success') {
+										HTMLFormElement.prototype.reset.call(form);
+										comments = comments.filter((comment) => {
+											return comment.id !== formData.get('commentId');
+										});
+									} else {
+										applyAction(result);
+									}
+								};
+							}}
+						>
+							<button class="delete-accept"> Delete </button>
+							<input type="hidden" name="videoId" value={videoId} />
+							<input type="hidden" name="commentId" value={comment.id} />
+						</form>
+					</div>
+				</div>
+			{/if}
 		</div>
 	{/each}
 
-	<!-- <div class="comment-container"> -->
-	<!-- 	<img src="/img/icons/channel-logo.jpg" alt="" /> -->
-	<!-- 	<div class="user-comment"> -->
-	<!-- 		<a href=".">Lorelai Gilbert <span>1 day ago</span></a> -->
-	<!-- 		<p> -->
-	<!-- 			While the anaesthetic team continue to look after you, the surgical team carry out your -->
-	<!-- 			operation. The surgeon will have at least one assistant – I have known more than ten people -->
-	<!-- 			to be part of this team for major head and neck cancer surgery. While the anaesthetic team -->
-	<!-- 			continue to look after you, the surgical team carry out your operation. While the -->
-	<!-- 			anaesthetic team continue to look after you, the surgical team carry out your operation. The -->
-	<!-- 			surgeon will have at least one assistant – I have known more than ten people to be part of -->
-	<!-- 			this team for major head and neck cancer surgery. While the anaesthetic team continue to -->
-	<!-- 			look after you, the surgical team carry out your operation. -->
-	<!-- 		</p> -->
-	<!-- 	</div> -->
-	<!-- </div> -->
-	<!-- {#if visibility} -->
-	<!-- 	<div class="comment-container"> -->
-	<!-- 		<img src="/img/icons/channel-logo.jpg" alt="" /> -->
-	<!-- 		<div class="user-comment"> -->
-	<!-- 			<a href=".">Lorelai Gilbert <span>1 day ago</span></a> -->
-	<!-- 			<p> -->
-	<!-- 				While the anaesthetic team continue to look after you, the surgical team carry out your -->
-	<!-- 				operation. The surgeon will have at least one assistant -->
-	<!-- 			</p> -->
-	<!-- 		</div> -->
-	<!-- 	</div> -->
-	<!-- 	<div class="comment-container"> -->
-	<!-- 		<img src="/img/icons/channel-logo.jpg" alt="" /> -->
-	<!-- 		<div class="user-comment"> -->
-	<!-- 			<a href=".">Lorelai Gilbert <span>1 day ago</span></a> -->
-	<!-- 			<p> -->
-	<!-- 				While the anaesthetic team continue to look after you, the surgical team carry out your -->
-	<!-- 				operation. The surgeon will have at least one assistant -->
-	<!-- 			</p> -->
-	<!-- 		</div> -->
-	<!-- 	</div> -->
-	<!-- {/if} -->
+	<!-- <div class="comment-container">
+		<img src="/img/icons/channel-logo.jpg" alt="" />
+		<div class="user-comment">
+			<a href=".">Lorelai Gilbert <span>1 day ago</span></a>
+			<p>
+				While the anaesthetic team continue to look after you, the surgical team carry out your
+				operation. The surgeon will have at least one assistant – I have known more than ten people
+				to be part of this team for major head and neck cancer surgery. While the anaesthetic team
+				continue to look after you, the surgical team carry out your operation. While the
+				anaesthetic team continue to look after you, the surgical team carry out your operation. The
+				surgeon will have at least one assistant – I have known more than ten people to be part of
+				this team for major head and neck cancer surgery. While the anaesthetic team continue to
+				look after you, the surgical team carry out your operation.
+			</p>
+		</div>
+	</div>
+	{#if visibility}
+		<div class="comment-container">
+			<img src="/img/icons/channel-logo.jpg" alt="" />
+			<div class="user-comment">
+				<a href=".">Lorelai Gilbert <span>1 day ago</span></a>
+				<p>
+					While the anaesthetic team continue to look after you, the surgical team carry out your
+					operation. The surgeon will have at least one assistant
+				</p>
+			</div>
+		</div>
+		<div class="comment-container">
+			<img src="/img/icons/channel-logo.jpg" alt="" />
+			<div class="user-comment">
+				<a href=".">Lorelai Gilbert <span>1 day ago</span></a>
+				<p>
+					While the anaesthetic team continue to look after you, the surgical team carry out your
+					operation. The surgeon will have at least one assistant
+				</p>
+			</div>
+		</div>
+	{/if} -->
 </div>
 {#if showMoreCommentsButton}
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -287,6 +316,80 @@
 
 <!-- put styles from play-video.css to here --->
 <style>
+	.comment-delete-actions {
+		margin-top: 20px;
+		display: flex;
+		justify-content: end;
+	}
+	.delete-accept,
+	.delete-cancel {
+		all: unset;
+		cursor: pointer;
+		font-size: 14px;
+		font-weight: 600;
+		padding: 7px 17px;
+		border-radius: 20px;
+	}
+	.delete-accept {
+		background-color: transparent;
+		color: var(--btn-color);
+	}
+
+	.delete-cancel {
+		color: #000;
+		background-color: transparent;
+	}
+	.delete-cancel:hover {
+		background-color: #d4d4d4;
+	}
+	.delete-accept:hover {
+		background-color: #95d1c348;
+	}
+	.delete-cancel:active {
+		background-color: #d4d4d4;
+	}
+	.delete-accept:active {
+		background-color: #95d1c348;
+	}
+	.delete-cancel:focus {
+		background-color: #d4d4d4;
+	}
+	.delete-accept:focus {
+		background-color: #95d1c348;
+	}
+	.comment-delete-title {
+		white-space: pre-wrap;
+		color: #616163;
+		font-size: 14px;
+		font-weight: 400;
+	}
+	.overlay {
+		position: fixed;
+		inset: 0;
+		z-index: 40;
+
+		background-color: rgb(0 0 0 / 0.5);
+	}
+	.content {
+		background-color: #fff;
+		position: fixed;
+		left: 50%;
+		top: 50%;
+		z-index: 50;
+		max-height: 85vh;
+		width: auto;
+		max-width: 350px;
+		transform: translate(-50%, -50%);
+		border-radius: 0.375rem;
+		padding: 24px;
+	}
+
+	.content:focus {
+		outline: 2px solid transparent;
+		outline-offset: 2px;
+	}
+
+	/* ====================== */
 	.dropdown-container .dropdown-button {
 		all: unset;
 		cursor: pointer;
@@ -297,6 +400,22 @@
 		align-items: center;
 		justify-content: left;
 		background-color: transparent;
+	}
+	.dropdown-container form .dropdown-button {
+		all: unset;
+		cursor: pointer;
+		min-height: 36px;
+		padding: 0 12px 0 16px;
+		color: #fff;
+		display: flex;
+		align-items: center;
+		justify-content: left;
+		background-color: transparent;
+		width: 150px;
+	}
+	.dropdown-container form {
+		width: 100%;
+		display: flex;
 	}
 	.dropdown-container .dropdown-button:hover {
 		background-color: #449e89;

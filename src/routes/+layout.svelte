@@ -10,6 +10,7 @@
 	import type { LayoutServerData } from './$types';
 	import { user } from '$lib/stores/auth';
 	import ErrorToast from '$lib/components/errorToast.svelte';
+	import Settings from '$lib/components/settings/settings.svelte';
 	let searchbar = $page.url.pathname != '/login';
 	beforeNavigate((aboba) => {
 		if (aboba.to?.url.pathname == '/login') {
@@ -36,5 +37,7 @@
 {:else}
 	<Drawer showSearchbar={searchbar} />
 {/if}
-
+{#if $page.url.pathname.includes('/settings')}
+	<Settings />
+{/if}
 <slot />

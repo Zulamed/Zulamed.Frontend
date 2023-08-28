@@ -181,10 +181,10 @@
 					><img src="/img/profileContainerIcons/translate_black_24dp.svg" alt="" />
 					<p>Language: English</p>
 				</button>
-				<button class="profile-link"
+				<a href="/settings/account" class="profile-link"
 					><img src="/img/profileContainerIcons/settings_black_24dp.svg" alt="" />
 					<p>Settings</p>
-				</button>
+				</a>
 				<button
 					class="profile-link"
 					on:click={async () => {

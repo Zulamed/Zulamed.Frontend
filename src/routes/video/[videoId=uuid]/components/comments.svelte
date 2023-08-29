@@ -10,6 +10,7 @@
 	import { flyAndScale } from '$lib/animations/flyAndScale';
 	import { any } from 'zod';
 	import { addToast } from '$lib/components/errorToast.svelte';
+	import { addNotification } from '$lib/components/notification.svelte';
 	let commentDeletingId = '';
 	let isEditing = false;
 	let editingId = '';
@@ -22,7 +23,7 @@
 	let textAreaHeight = 25;
 	function adjustTextAreaHeight(event: any) {
 		event.target.style.height = '25px';
-		event.target.style.height = `${event.target.scrollHeight}px`;
+		event.target.style.height = `${event.target.scrollHeight + 1}px`;
 	}
 	let editTextArea: HTMLTextAreaElement;
 	let visibility = false;
@@ -125,21 +126,25 @@
 				};
 			}}
 		>
-			<textarea
-				bind:this={textArea}
-				bind:value={inputText}
-				style="height: {textAreaHeight}px; overflow-y: hidden;"
-				placeholder="Add comment..."
-				class="comment-input"
-				name="comment-input"
-				on:click={() => {
-					inputVisibility = true;
-				}}
-				on:input={(e) => {
-					adjustTextAreaHeight(e);
-					currentProps = inputText.length > 0 ? enabledProps : disabledProps;
-				}}
-			/>
+			<div style="position: relative;">
+				<textarea
+					bind:this={textArea}
+					bind:value={inputText}
+					style="height: {textAreaHeight}px; overflow-y: hidden;"
+					placeholder="Add comment..."
+					class="comment-input"
+					name="comment-input"
+					on:click={() => {
+						inputVisibility = true;
+					}}
+					on:input={(e) => {
+						adjustTextAreaHeight(e);
+						currentProps = inputText.length > 0 ? enabledProps : disabledProps;
+					}}
+				/>
+				<div class="comment-input-focus" />
+			</div>
+
 			<input type="hidden" name="videoId" value={videoId} />
 			{#if inputVisibility}
 				<div class="write-comment-buttons" style:display="flex">
@@ -159,7 +164,7 @@
                             color: {currentProps?.color};
                             cursor: {currentProps?.cursor};
                             disabled: {currentProps?.disabled};
-                      ">Send comment</button
+                      ">Comment</button
 					>
 				</div>
 			{/if}
@@ -167,12 +172,14 @@
 	</div>
 	{#each rangeComments as comment}
 		<div class="comment-container">
-			<img src={comment.sentBy.profilePictureUrl ?? '/img/icons/channel-logo.jpg'} alt="" />
+			<a href="/user/{comment.sentBy.id}">
+				<img src={comment.sentBy.profilePictureUrl ?? '/img/icons/channel-logo.jpg'} alt="" />
+			</a>
 			{#if isEditing && comment.id == editingId}
 				<form
 					class="write-comment-input"
-                    method="post"
-                    action="?/editComment"
+					method="post"
+					action="?/editComment"
 					use:enhance={() => {
 						return async ({ result, form }) => {
 							if (result.type === 'success') {
@@ -181,7 +188,7 @@
 								editingId = '';
 								if (result.data) {
 									updateComment(comment, result.data);
-                                    comment = comment;
+									comment = comment;
 								}
 							} else {
 								applyAction(result);
@@ -340,12 +347,11 @@
 										comments = comments.filter((comment) => {
 											return comment.id !== formData.get('commentId');
 										});
-                                        addToast({
-                                            data: {
-                                                error: "Comment deleted successfully",
-                                                fieldName: "comment"
-                                            }
-                                        });
+										addNotification({
+											data: {
+												title: 'Comment deleted successfully.'
+											}
+										});
 									} else {
 										applyAction(result);
 									}
@@ -401,7 +407,7 @@
 		</div>
 	{/if} -->
 </div>
-{#if showMoreCommentsButton}
+{#if showMoreCommentsButton && comments.length > 2}
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div
 		class="more-comments flex-div"
@@ -490,6 +496,18 @@
 		outline-offset: 2px;
 	}
 
+	/* ====================== */
+	/* ====================== */
+	.comment-input-focus {
+		position: absolute;
+		bottom: 0px;
+		width: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		height: 2px;
+		z-index: 2;
+		background-color: #000;
+	}
 	/* ====================== */
 	.dropdown-container .dropdown-button {
 		all: unset;
@@ -584,10 +602,18 @@
 		width: 40px;
 		height: 40px;
 		border-radius: 50%;
+		cursor: auto;
+		-webkit-user-drag: none;
+		user-select: none;
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		pointer-events: none;
+		-ms-user-select: none;
 	}
 
 	.write-comment-input {
 		margin-left: 20px;
+		position: relative;
 	}
 
 	.comment-input {
@@ -605,8 +631,9 @@
 		border-bottom: 1px solid rgb(134, 134, 134);
 	}
 
-	.comment-input:focus {
-		border-bottom: 1px solid rgb(0, 0, 0);
+	.comment-input:focus + .comment-input-focus {
+		width: 100%;
+		transition: width 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
 	}
 
 	.comment-input,
@@ -629,12 +656,12 @@
 		outline: none;
 		background-color: transparent;
 		cursor: pointer;
-		text-transform: uppercase;
+		text-transform: capitalize;
 		font-weight: 500;
-		line-height: 10px;
 		text-align: center;
-		padding: 10px 20px;
+		padding: 13px 14px;
 		border-radius: 24px;
+		font-size: 14px;
 	}
 
 	.cancel-btn {
@@ -643,8 +670,8 @@
 	}
 
 	.cancel-btn:hover {
-		background-color: #cccccc;
-		border: 1px solid #cccccc;
+		background-color: #e5e5e5;
+		border: 1px solid #e5e5e5;
 	}
 
 	.comment {
@@ -694,7 +721,7 @@
 
 	.user-comment :global(.user-comment-text) {
 		display: block;
-		font-weight: 600;
+		font-weight: 400;
 		font-size: 14px;
 		line-height: 17px;
 		color: #000000;

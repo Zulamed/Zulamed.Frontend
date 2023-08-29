@@ -163,7 +163,7 @@
 				</div>
 
 				<!-- Другие элементы контейнера -->
-				<a class="profile-link" href="."
+				<a class="profile-link" href="/user/{$user.id}"
 					><img src="/img/profileContainerIcons/account_box_black_24dp.svg" alt="" />
 					<p>Your channel</p>
 				</a>

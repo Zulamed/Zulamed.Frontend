@@ -10,6 +10,7 @@
 	import type { LayoutServerData } from './$types';
 	import { user } from '$lib/stores/auth';
 	import ErrorToast from '$lib/components/errorToast.svelte';
+	import Notification from '$lib/components/notification.svelte';
 	let searchbar = $page.url.pathname != '/login';
 	beforeNavigate((aboba) => {
 		if (aboba.to?.url.pathname == '/login') {
@@ -30,6 +31,7 @@
 </script>
 
 <ErrorToast />
+<Notification />
 
 {#if $page.url.pathname == '/' || $page.url.pathname.includes('/user')}
 	<SidebarAndNavbar />

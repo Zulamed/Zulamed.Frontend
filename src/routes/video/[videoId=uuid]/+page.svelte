@@ -9,7 +9,28 @@
 	import { viewVideo } from '$backend/video/view/endpoint';
 	import { createTooltip, melt } from '@melt-ui/svelte';
 	import Tooltip from '$lib/components/tooltip.svelte';
+	import { addNotification } from '$lib/components/notification.svelte';
+	import { flyAndScale } from '$lib/animations/flyAndScale';
 
+	let subActive = false;
+	let confirmationVisible = false;
+
+	function toggleSubscription() {
+		if (subActive) {
+			confirmationVisible = true;
+		} else {
+			subActive = !subActive;
+		}
+	}
+
+	function confirmUnsubscribe() {
+		subActive = false;
+		confirmationVisible = false;
+	}
+
+	function cancelUnsubscribe() {
+		confirmationVisible = false;
+	}
 
 	const {
 		elements: { trigger, content, arrow },
@@ -120,6 +141,7 @@
 								slot="button"
 								let:trigger
 								id="follow-btn"
+								on:click={toggleSubscription}
 								class:active={followActive}
 								class="interaction-btn follow-btn">{followActive ? 'FOLLOWED' : 'FOLLOW'}</button
 							>
@@ -182,6 +204,11 @@
 							use:enhance={() => {
 								return async ({ result }) => {
 									if (result.type === 'success') {
+										addNotification({
+											data: {
+												title: 'Feedback shared with the creator.'
+											}
+										});
 										if (likeActive) data.videoInfo.numberOfLikes--;
 										data = data; // make svelte aware that the data has changed
 										dislikeActive = !dislikeActive;

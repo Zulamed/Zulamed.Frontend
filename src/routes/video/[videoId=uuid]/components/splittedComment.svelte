@@ -4,7 +4,7 @@
 	export let commentTextClasses = '';
 	export let showMoreClasses = '';
 	let showToggle = false;
-	let showText = 'Show more';
+	let showText = 'Read more';
 
 	$: spans =
 		commentContents.length > 5 && !showToggle ? commentContents.slice(0, 5) : commentContents;
@@ -19,7 +19,20 @@
 		class={showMoreClasses}
 		on:click={() => {
 			showToggle = !showToggle;
-			showText = showToggle ? 'Show less' : 'Show more';
+			showText = showToggle ? 'Show less' : 'Read more';
 		}}>{showText}</button
 	>
 {/if}
+
+<style>
+	button {
+		all: unset;
+		cursor: pointer;
+		color: #808080;
+		font-size: 14px;
+		font-weight: 600;
+	}
+	button:hover {
+		text-decoration: underline;
+	}
+</style>

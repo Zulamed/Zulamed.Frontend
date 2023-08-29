@@ -9,7 +9,8 @@
 	<title>ZulaMED</title>
 </svelte:head>
 <!-- ------------main--------------- -->
-<div class="container" class:large-container={!$sidebarOpened}>
+
+<div class="container" class:large-container={!$sidebarOpened} style:overflow-y={'hidden'}>
 	<div class="banner">
 		<!-- <div class="searchbar flex-div"> -->
 		<form class="searchbar flex-div" action="">

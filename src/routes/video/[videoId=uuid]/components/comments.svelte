@@ -8,8 +8,6 @@
 	import { user } from '$lib/stores/auth';
 	import SplittedComment from './splittedComment.svelte';
 	import { flyAndScale } from '$lib/animations/flyAndScale';
-	import { any } from 'zod';
-	import { addToast } from '$lib/components/errorToast.svelte';
 	import { addNotification } from '$lib/components/notification.svelte';
 	let commentDeletingId = '';
 	let isEditing = false;

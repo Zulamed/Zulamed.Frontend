@@ -11,7 +11,6 @@ export async function deleteComment(id: string, videoId: string, fetch: FetchCal
         const result = await fetch(`${PUBLIC_BACKEND_URL}/video/${videoId}/comment/${id}`, {
             method: "DELETE",
         });
-        console.log('salam!');
         if (result.status === 404) {
             return { status: "not-found" };
         }

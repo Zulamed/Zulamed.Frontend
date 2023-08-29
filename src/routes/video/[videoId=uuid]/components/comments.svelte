@@ -352,6 +352,7 @@
 												title: 'Comment deleted successfully.'
 											}
 										});
+                                        cancelUnsubscribe();
 									} else {
 										applyAction(result);
 									}

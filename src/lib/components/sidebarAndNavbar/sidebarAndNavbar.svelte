@@ -75,13 +75,7 @@
 <svelte:body on:click={bodyOnClick} on:touchmove={bodyOnTouchMove} />
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 
-<div
-	use:portal
-	class="overlay"
-	on:click={closeMobileSidebar}
-	style:left={overlayLeft}
-	style:overflow-y={overflowY}
-/>
+<div use:portal class="overlay" on:click={closeMobileSidebar} style:left={overlayLeft} />
 <form action="" class="flex-div" id="search-mobile-form">
 	<div class="searchbar-mobile flex-div" style:top={searchbarMobileTop}>
 		<input placeholder="Search..." name="" type="text" />

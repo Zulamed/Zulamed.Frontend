@@ -1,11 +1,25 @@
-<script lang="ts"></script>
+<script lang="ts">
+	import { page } from '$app/stores';
+</script>
 
 <div class="settings-sidebar">
 	<h1 class="sidebar-title">Settings</h1>
 	<div class="sidebar-buttons">
-		<a class="link active" href="/settings/account">Account</a>
-		<a class="link" href="/settings/privacy">Privacy</a>
-		<a class="link" href="/settings/billings">Billing and payments</a>
+		<a
+			class="link"
+			class:active={$page.url.pathname === '/settings/account'}
+			href="/settings/account">Account</a
+		>
+		<a
+			class="link"
+			class:active={$page.url.pathname === '/settings/privacy'}
+			href="/settings/privacy">Privacy</a
+		>
+		<a
+			class="link"
+			class:active={$page.url.pathname === '/settings/billings'}
+			href="/settings/billings">Billing and payments</a
+		>
 	</div>
 </div>
 

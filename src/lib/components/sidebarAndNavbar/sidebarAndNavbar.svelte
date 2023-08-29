@@ -12,6 +12,7 @@
 	let navigationBoxShadow = '0px 0px 0px #00000040';
 	let overlayLeft = '-100%';
 	let shortcutPadding = '7px';
+	let overflowY = 'hidden';
 
 	$: {
 		$sidebarOpened = sidebarOpen;
@@ -73,7 +74,14 @@
 
 <svelte:body on:click={bodyOnClick} on:touchmove={bodyOnTouchMove} />
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div use:portal class="overlay" on:click={closeMobileSidebar} style:left={overlayLeft} />
+
+<div
+	use:portal
+	class="overlay"
+	on:click={closeMobileSidebar}
+	style:left={overlayLeft}
+	style:overflow-y={overflowY}
+/>
 <form action="" class="flex-div" id="search-mobile-form">
 	<div class="searchbar-mobile flex-div" style:top={searchbarMobileTop}>
 		<input placeholder="Search..." name="" type="text" />
@@ -89,7 +97,9 @@
 		<div class="menu-icon-background flex-div" on:click={toggleSidebar}>
 			<img class="menu-icon" src="/img/icons/menu.svg" alt="" />
 		</div>
-		<img class="logo" src="/img/logo-white-theme.png" alt="" />
+		<a href="/" style="display: flex; align-items:center;">
+			<img class="logo" src="/img/logo-white-theme.png" alt="" />
+		</a>
 	</div>
 	<div class="nav-right flex-div">
 		<!-- svelte-ignore a11y-click-events-have-key-events -->

@@ -11,9 +11,6 @@ export const load = (async ({ fetch }) => {
         .with({ tag: "error" }, ({ error }) => { throw err(500, error) })
         .exhaustive();
     const videos = videosResponse.videos;
-    for (let i = 0; i < 5; i++) {
-        videos.push(videos[0]);
-    }
     return {
         videoResponse: videos
     }

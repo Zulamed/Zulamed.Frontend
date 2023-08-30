@@ -1,8 +1,24 @@
 <script lang="ts">
+	import { sendPasswordResetEmail } from 'firebase/auth';
 	import Input from './input.svelte';
+	import { auth } from '$lib/firebase/client';
+	import { FirebaseError } from 'firebase/app';
+
+	let email = '';
+
+	async function sendPasswordReset() {
+		try {
+			sendPasswordResetEmail(auth, email);
+		} catch (error) {
+            if (error instanceof FirebaseError) {
+                console.log(error.code);
+                console.log(error.message);
+            }
+        }
+	}
 </script>
 
-<form action="">
+<form on:submit|preventDefault={sendPasswordReset}>
 	<div class="input-container">
 		<div class="radio-content">
 			<Input
@@ -10,6 +26,7 @@
 				inputPlaceholder=""
 				inputId="forgot-password"
 				inputType="email"
+				bind:value={email}
 			/>
 		</div>
 	</div>

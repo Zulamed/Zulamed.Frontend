@@ -82,7 +82,7 @@
 		<button class="login-btn">Log In</button>
 	</div>
 	<div class="form-link">
-		<a href="/forgotPassword" class="forgot-pass">Forgot password?</a>
+		<a href="/recovery/forgotPassword" class="forgot-pass">Forgot password?</a>
 	</div>
 </form>
 

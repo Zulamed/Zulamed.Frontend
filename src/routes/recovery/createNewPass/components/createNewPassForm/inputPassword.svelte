@@ -2,43 +2,58 @@
 	export let labelText: string | undefined;
 	export let inputPlaceholder: string | undefined;
 	export let inputId: string | undefined;
-	export let inputNote = '';
-	export let inputType = 'text';
+
+	let eyeIcon = 'img/icons/View.svg';
+	let inputPassword: HTMLInputElement;
+	export let password = '';
+	let errorLogin = false;
 </script>
 
 <label for={inputId}>{labelText}</label>
-<p class="input-note">{inputNote}</p>
-<div class="group">
+<div class="group newpass-group">
+	<img class="lock-icon" src="img/icons/Group 8.svg" alt="" />
 	<input
+		bind:this={inputPassword}
 		id={inputId}
 		name={inputId}
-		type={inputType}
+		type="password"
 		placeholder={inputPlaceholder}
 		class="input"
+		class:input-error={errorLogin}
+		bind:value={password}
 	/>
+	<button
+		type="button"
+		class="showpass-btn"
+		on:click={() => {
+			if (eyeIcon == 'img/icons/View.svg') {
+				eyeIcon = 'img/icons/View_hide.svg';
+				inputPassword.type = 'text';
+			} else {
+				eyeIcon = 'img/icons/View.svg';
+				inputPassword.type = 'password';
+			}
+		}}
+	>
+		<img src={eyeIcon} class="eye-icon" alt="" />
+	</button>
 </div>
 
 <style>
-	.input-note {
-		font-size: 12px;
-		color: #585858;
-		font-style: normal;
-		font-weight: 400;
-		margin-top: 10px;
-	}
-	input::-webkit-outer-spin-button,
-	input::-webkit-inner-spin-button {
-		-webkit-appearance: none;
-		margin: 0;
-	}
-	input[type='number'] {
-		-moz-appearance: textfield;
-		appearance: textfield;
+	.lock-icon {
+		position: absolute;
+		top: 50%;
+		left: 14px;
+		transform: translateY(-50%);
 	}
 	.group {
 		position: relative;
-		margin-top: 26px;
+		margin-top: 16px;
 	}
+	.group:first-child {
+		margin-top: 40px;
+	}
+
 	label {
 		color: #000;
 		font-size: 20px;
@@ -46,7 +61,6 @@
 		font-weight: 600;
 		line-height: normal;
 		cursor: pointer;
-		padding-left: 32px;
 	}
 	.input {
 		height: 100%;
@@ -59,7 +73,7 @@
 	.input {
 		height: 60px;
 		outline: none;
-		padding: 0 16px;
+		padding: 0 16px 0 56px;
 		border: 0.5px solid #d2d0d0;
 		background-color: transparent;
 		font-size: 16px;
@@ -69,18 +83,33 @@
 	.input:focus {
 		border: 0.5px solid #00a790;
 	}
+	.showpass-btn {
+		all: unset;
+		position: absolute;
+		top: 50%;
+		right: 10px;
+		transform: translateY(-50%);
+		font-size: 18px;
+		color: #8b8b8b;
+		cursor: pointer;
+		padding: 5px;
+	}
+
 	@media (max-width: 1280px) {
+		.lock-icon {
+			width: 22px;
+			height: 24px;
+		}
 		label {
 			font-size: 15px;
-			padding: 0;
 		}
 		.input {
-			padding: 0 5px 0 12px;
+			padding: 0 5px 0 56px;
 			font-size: 15px;
 			height: 50px;
 		}
 		.group {
-			margin-top: 19px;
+			margin-top: 25px;
 		}
 	}
 	@media (max-width: 1024px) {
@@ -89,7 +118,7 @@
 		}
 		.input {
 			height: 45px;
-			padding: 0 0 0 6px;
+			padding: 0 0 0 56px;
 			font-size: 13px;
 		}
 
@@ -98,13 +127,15 @@
 		}
 	}
 	@media (max-width: 768px) {
+		.lock-icon {
+			width: 19px;
+			height: 21px;
+		}
 		label {
 			font-size: 14px;
-			padding-left: 0;
 		}
-
 		.input {
-			padding: 0 14px 0 14px;
+			padding: 0 14px 0 44px;
 			font-size: 15px;
 			height: 60px;
 		}

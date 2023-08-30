@@ -1,5 +1,8 @@
 <script lang="ts">
-	import CreateNewPassForm from './components/createNewPassForm/createNewPassForm.svelte';
+	import type { PageData } from './$types';
+import CreateNewPassForm from './components/createNewPassForm/createNewPassForm.svelte';
+
+    export let data : PageData
 </script>
 
 <section class="container forms">
@@ -12,7 +15,7 @@
 				Reset
 			</h2>
 		</header>
-		<CreateNewPassForm />
+		<CreateNewPassForm oobCode={data.oobCode} apiKey={data.apiKey}/>
 		<div class="form-link">
 			<a href="/login" class="link signin-link">Click here</a> <span>to go back to Login</span>
 		</div>

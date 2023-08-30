@@ -1,19 +1,42 @@
 <script lang="ts">
+	import { confirmPasswordReset, verifyPasswordResetCode } from 'firebase/auth';
 	import InputPassword from './inputPassword.svelte';
+	import { auth } from '$lib/firebase/client';
+	import { login } from '$lib/stores/auth';
+	import { goto } from '$app/navigation';
+
+	let newPassword = '';
+	let newPasswordRepeat = '';
+
+	export let oobCode: string;
 </script>
 
-<form action="">
+<form
+	on:submit|preventDefault={async () => {
+		try {
+			const email = await verifyPasswordResetCode(auth, oobCode);
+			await confirmPasswordReset(auth, oobCode, newPassword);
+            login(email, newPassword);
+            goto('/');
+		} catch (error) {
+            console.log(typeof error);
+            console.log(error);
+        }
+	}}
+>
 	<div class="input-container">
 		<div class="radio-content">
 			<InputPassword
 				labelText="Enter a new password"
 				inputPlaceholder="New Password"
 				inputId="new-password"
+				bind:password={newPassword}
 			/>
 			<InputPassword
 				labelText=""
 				inputPlaceholder="Repeat a new password"
 				inputId="new-password-repeat"
+				bind:password={newPasswordRepeat}
 			/>
 		</div>
 	</div>

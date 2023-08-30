@@ -126,8 +126,21 @@
 							return async ({ result }) => {
 								if (result.type === 'success') {
 									followActive = !followActive;
-									if (followActive) data.videoInfo.user.subscribers++;
-									else data.videoInfo.user.subscribers--;
+									if (followActive) {
+										data.videoInfo.user.subscribers++;
+										addNotification({
+											data: {
+												title: 'Subscription added.'
+											}
+										});
+									} else {
+										data.videoInfo.user.subscribers--;
+										addNotification({
+											data: {
+												title: 'Subscription removed.'
+											}
+										});
+									}
 									data = data; // make svelte aware that the data has changed
 								} else {
 									applyAction(result);

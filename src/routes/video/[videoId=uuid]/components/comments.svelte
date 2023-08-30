@@ -9,6 +9,7 @@
 	import SplittedComment from './splittedComment.svelte';
 	import { flyAndScale } from '$lib/animations/flyAndScale';
 	import { addNotification } from '$lib/components/notification.svelte';
+
 	let commentDeletingId = '';
 	let isEditing = false;
 	let editingId = '';
@@ -43,6 +44,19 @@
 	};
 	let currentProps: typeof disabledProps = disabledProps;
 
+	let editingDisabledProps = {
+		disabled: true,
+		color: '#FFFFFF',
+		cursor: 'default',
+		background: '#999999'
+	};
+	let editingEnabledProps = {
+		disabled: false,
+		color: '#FFFFFF',
+		cursor: 'pointer',
+		background: '#54B9A2'
+	};
+	let editingProps: typeof editingDisabledProps = editingDisabledProps;
 	let matches600px = false;
 
 	$: {
@@ -110,6 +124,8 @@
 			action="?/comment"
 			class="write-comment-input"
 			use:enhance={() => {
+				currentProps.disabled = true;
+
 				return async ({ result, form }) => {
 					if (result.type === 'success') {
 						HTMLFormElement.prototype.reset.call(form);
@@ -121,6 +137,7 @@
 					} else {
 						applyAction(result);
 					}
+					currentProps.disabled = false;
 				};
 			}}
 		>
@@ -154,6 +171,7 @@
 						}}>cancel</button
 					>
 					<button
+						disabled={currentProps.disabled}
 						type="submit"
 						class="comment-btn comment"
 						style="
@@ -205,7 +223,8 @@
 						}}
 						on:input={(e) => {
 							adjustTextAreaHeight(e);
-							currentProps = inputText.length > 0 ? enabledProps : disabledProps;
+							editingProps =
+								editTextArea.value.length > 0 ? editingEnabledProps : editingDisabledProps;
 						}}
 					/>
 					<div class="write-comment-buttons" style:display="flex">
@@ -221,10 +240,10 @@
 							class="comment-btn comment"
 							style="
 						border: none;
-						background-color: {currentProps?.background};
-						color: {currentProps?.color};
-						cursor: {currentProps?.cursor};
-						disabled: {currentProps?.disabled};
+						background-color: {editingProps?.background};
+						color: {editingProps?.color};
+						cursor: {editingProps?.cursor};
+						disabled: {editingProps?.disabled};
 				  ">Save</button
 						>
 					</div>
@@ -350,7 +369,7 @@
 												title: 'Comment deleted successfully.'
 											}
 										});
-                                        cancelUnsubscribe();
+										cancelUnsubscribe();
 									} else {
 										applyAction(result);
 									}

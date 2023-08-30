@@ -10,7 +10,7 @@
 		states: { toasts },
 		actions: { portal }
 	} = createToaster<ToastData>({
-		closeDelay: 2000
+		closeDelay: 2500
 	});
 
 	export const addNotification = helpers.addToast;
@@ -91,12 +91,14 @@
 	}
 	@media (max-width: 768px) {
 		.toast-container {
-			top: 0;
-			right: 0;
-			height: 83px;
+			bottom: 0;
+			left: 0;
 		}
 		.toast-content {
-			width: 18rem;
+			padding: 14px;
+		}
+		.toast-fieldname {
+			font-size: 14px;
 		}
 	}
 </style>

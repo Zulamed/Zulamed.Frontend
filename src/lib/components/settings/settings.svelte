@@ -87,7 +87,7 @@
 			font-size: 10px;
 			font-style: normal;
 			font-weight: 400;
-			padding: 6px 13px;
+			padding: 6px 17px;
 			margin: 0;
 		}
 		.sidebar-title {

@@ -10,7 +10,7 @@
 		<div class="sector-1">
 			<h4 class="title">Privacy</h4>
 			<h1 class="subtitle">Manage what you share on ZulaMED</h1>
-			<h4 class="more-info">Choose who can see your saved playlists and subscriptions</h4>
+			<h4 class="more-info sec-1">Choose who can see your saved playlists and subscriptions</h4>
 			<hr style="color: #60606049;" />
 		</div>
 		<div class="sector-2">
@@ -33,7 +33,7 @@
 				</form>
 			</div>
 			<div class="sub-setting">
-				<h4 class="more-info playlist-text" style="min-width: 150px">Subscriptions</h4>
+				<h4 class="more-info sub-text" style="min-width: 150px">Subscriptions</h4>
 				<form style="display: flex; gap: 22px; align-items: center;">
 					<button
 						bind:this={subSwitchBtn}
@@ -76,7 +76,7 @@
 		height: 24px;
 		border-radius: 50%;
 		background-color: #000;
-		box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.6);
+		box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.6);
 		transition: all 0.2s ease-in-out;
 	}
 
@@ -133,6 +133,9 @@
 		font-weight: 500;
 		line-height: normal;
 	}
+	.more-info.sub-text {
+		margin-bottom: 0;
+	}
 	@media (max-width: 1280px) {
 		.privacy-settings {
 			width: 100%;
@@ -144,6 +147,9 @@
 		.container {
 			margin-left: 0;
 			margin-top: 54px;
+		}
+		.sector-1 {
+			margin-bottom: 27px;
 		}
 		.privacy-settings {
 			padding: 26px 23px 26px 23px;
@@ -162,13 +168,35 @@
 			font-weight: 500;
 			margin-bottom: 9px;
 		}
+		.more-info.sec-1 {
+			margin-bottom: 13px;
+		}
 		.more-info {
 			max-width: 300px;
 			color: #000;
 			font-size: 10px;
 			font-style: normal;
 			font-weight: 500;
-			margin-bottom: 38px;
+			margin-bottom: 0px;
+		}
+		.sub-setting,
+		.playlist-setting {
+			gap: 23px;
+		}
+		.more-info.sub-text,
+		.more-info.playlist-text {
+			min-width: 100px !important;
+		}
+		.playlist-setting {
+			margin-bottom: 18px;
+		}
+		.switch-button {
+			height: 10px;
+			width: 30px;
+		}
+		.switch-knob {
+			width: 16px;
+			height: 16px;
 		}
 	}
 </style>

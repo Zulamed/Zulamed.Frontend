@@ -161,6 +161,23 @@
 							<p slot="content">Follow</p>
 						</Tooltip>
 						<input name="userId" type="hidden" value={data.videoInfo.user.id} />
+
+						<!-- =============== -->
+						<div class="overlay" on:click={cancelUnsubscribe} />
+						<div
+							class="content"
+							transition:flyAndScale={{
+								duration: 150,
+								y: 8,
+								start: 0.96
+							}}
+						>
+							<h2 class="unsub-title">Unsubscribe from User?</h2>
+							<div class="unsub-actions">
+								<button on:click={cancelUnsubscribe} class="unsub-cancel"> Cancel </button>
+								<button on:click={confirmUnsubscribe} class="unsub-accept"> Unsubscribe </button>
+							</div>
+						</div>
 					</form>
 				</div>
 				<div class="play-video-info-right">
@@ -264,7 +281,7 @@
 			<Description
 				views={data.videoInfo.video.videoViews}
 				textContent={data.videoInfo.video.videoDescription}
-                date={data.videoInfo.video.videoPublishedDate}
+				date={data.videoInfo.video.videoPublishedDate}
 			/>
 			{#if !matches1027px}
 				<Comments bind:comments={data.videoInfo.comments} videoId={data.videoInfo.video.id} />

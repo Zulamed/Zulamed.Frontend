@@ -1,9 +1,11 @@
 <script lang="ts">
-	import { getRelativeTime } from "$lib/utils/relativeTime";
+	import { getRelativeTime } from '$lib/utils/relativeTime';
+	import Tooltip from '$lib/components/tooltip.svelte';
+	import { melt } from '@melt-ui/svelte';
 
 	export let textContent: string;
 	export let views: number;
-    export let date: Date;
+	export let date: Date;
 	const originalText = textContent;
 	let trimmedText = originalText.substring(0, 30) + ' ...more';
 	// textContent = trimmedText;
@@ -20,14 +22,25 @@
 		height = '64px';
 	};
 
+	function tooltipFormatDate(date: any) {
+		const options = { year: 'numeric', month: 'short', day: 'numeric' };
+		const formattedDate = date.toLocaleDateString('en-US', options);
+		return formattedDate;
+	}
+
 	$: text = height === '64px' ? trimmedText : originalText;
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div on:click={showMore} id="play-video-description" class="play-video-description" style:height>
 	<div class="play-video-stats">
-		<p>{views} views</p>
-		<p>{height == '64px' ? getRelativeTime(date) : date.toLocaleDateString()}</p>
+		<Tooltip placement="bottom">
+			<div use:melt={trigger} slot="button" let:trigger style="display: flex;">
+				<p>{views} views</p>
+				<p>{height == '64px' ? getRelativeTime(date) : tooltipFormatDate(date)}</p>
+			</div>
+			<p slot="content">{views} views · {tooltipFormatDate(date)}</p>
+		</Tooltip>
 		<span>#cardio #operation</span>
 	</div>
 

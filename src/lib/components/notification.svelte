@@ -58,7 +58,7 @@
 		margin: 1rem;
 		flex-direction: column;
 		gap: 0.5rem;
-		align-items: flex-end;
+		align-items: flex-start;
 	}
 	.toast-inner {
 		border-radius: 0.5rem;
@@ -74,6 +74,7 @@
 		align-items: center;
 		background: #1b1b1b;
 		border-radius: 10px;
+		min-width: 231px;
 	}
 
 	.toast-fieldname {

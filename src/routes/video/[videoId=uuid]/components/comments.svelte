@@ -252,7 +252,7 @@
 					<input type="hidden" name="commentId" value={comment.id} />
 				</form>
 			{:else}
-                {@const relativeTime = getRelativeTime(comment.sentAt)}
+				{@const relativeTime = getRelativeTime(comment.sentAt)}
 				<div class="user-comment">
 					<a href="/user/{comment.sentBy.id}"
 						>{comment.sentBy.username}<span>{relativeTime}</span></a
@@ -726,6 +726,8 @@
 		line-height: 19px;
 		color: #000000;
 		cursor: pointer;
+		display: flex;
+		align-items: center;
 	}
 
 	.user-comment a span {
@@ -734,6 +736,7 @@
 		line-height: 15px;
 		color: #a1a1a1;
 		margin-left: 16px;
+		cursor: default;
 	}
 	.comment-content {
 		margin-top: 7px;

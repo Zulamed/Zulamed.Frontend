@@ -88,20 +88,19 @@
 	.toast-content {
 		display: flex;
 		position: relative;
-		padding: 1.25rem;
+		padding: 19px;
 		gap: 1rem;
 		justify-content: space-between;
 		align-items: center;
-		width: 24rem;
-		background: #fa000065;
+		background: #b94747;
 		border-radius: 10px;
 	}
 
 	.toast-fieldname {
 		display: flex;
-		gap: 0.5rem;
 		align-items: center;
-		font-weight: 600;
+		font-weight: 500;
+		font-size: 15px;
 	}
 
 	.toast-close-btn {
@@ -109,8 +108,8 @@
 		display: grid;
 		padding: 3px;
 		position: absolute;
-		top: 1rem;
-		right: 1rem;
+		top: 5px;
+		right: 5px;
 		place-items: center;
 		border-radius: 0;
 		cursor: pointer;
@@ -125,10 +124,17 @@
 		.toast-container {
 			top: 0;
 			right: 0;
-			height: 83px;
+			height: fit-content;
 		}
 		.toast-content {
-			width: 18rem;
+			padding: 14px;
+		}
+		.toast-fieldname {
+			font-size: 14px;
+		}
+		.toast-close-btn {
+			top: 0rem;
+			right: 0rem;
 		}
 	}
 </style>

@@ -18,6 +18,9 @@ export async function getComments(videoId: string, fetch: FetchCallbackType = or
             return { status: "error", error: response.statusText }
         }
         const comments = await response.json() as { comments: Comment[] };
+        comments.comments.forEach(comment => {
+            comment.sentAt = new Date(comment.sentAt)
+        });
         return { status: "ok", data: comments }
     } catch (error) {
         return { status: "error", error: (error as Error).message }

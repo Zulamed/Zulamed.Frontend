@@ -1,6 +1,9 @@
 <script lang="ts">
+	import { getRelativeTime } from "$lib/utils/relativeTime";
+
 	export let textContent: string;
 	export let views: number;
+    export let date: Date;
 	const originalText = textContent;
 	let trimmedText = originalText.substring(0, 30) + ' ...more';
 	// textContent = trimmedText;
@@ -24,7 +27,7 @@
 <div on:click={showMore} id="play-video-description" class="play-video-description" style:height>
 	<div class="play-video-stats">
 		<p>{views} views</p>
-		<p>5 days ago</p>
+		<p>{height == '64px' ? getRelativeTime(date) : date.toLocaleDateString()}</p>
 		<span>#cardio #operation</span>
 	</div>
 

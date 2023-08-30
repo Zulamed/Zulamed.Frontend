@@ -15,6 +15,7 @@ export async function getVideoById(id: string, fetch: FetchCallbackType = origFe
             return { tag: "failure", error: "Error while fetching video" };
         }
         const video = await response.json() as {video: Video, user: User, numberOfLikes: number};
+        video.video.videoPublishedDate = new Date(video.video.videoPublishedDate);
         return { tag: "success", response: video};
 
     } catch (error) {

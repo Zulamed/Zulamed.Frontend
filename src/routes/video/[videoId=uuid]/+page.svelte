@@ -264,6 +264,7 @@
 			<Description
 				views={data.videoInfo.video.videoViews}
 				textContent={data.videoInfo.video.videoDescription}
+                date={data.videoInfo.video.videoPublishedDate}
 			/>
 			{#if !matches1027px}
 				<Comments bind:comments={data.videoInfo.comments} videoId={data.videoInfo.video.id} />

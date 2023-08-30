@@ -16,7 +16,7 @@ export async function createComment(videoId: string, comment: string, fetch: Fet
                 "Content-Type": "application/json",
             },
             // subject to change
-            body: JSON.stringify({content: comment}),
+            body: JSON.stringify({ content: comment }),
         });
         if (response.status == 404) {
             return { status: "not-found" };
@@ -25,7 +25,9 @@ export async function createComment(videoId: string, comment: string, fetch: Fet
         if (!response.ok) {
             return { status: "error", message: response.statusText };
         }
-        return { status: "ok", data: await response.json() as Comment };
+        const commentResponse = await response.json() as Comment;
+        commentResponse.sentAt = new Date(commentResponse.sentAt);
+        return { status: "ok", data: commentResponse };
     } catch (error) {
         return { status: "error", message: (error as Error).message };
     }

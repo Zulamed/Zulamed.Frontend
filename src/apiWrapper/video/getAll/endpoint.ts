@@ -12,6 +12,9 @@ export async function getAllVideos(fetchCallback: FetchCallbackType = fetch)
             return { tag: "error", error: response.statusText };
         }
         const data = await response.json() as { videos: { video: Video, user: User }[] };
+        data.videos.forEach(video => {
+            video.video.videoPublishedDate = new Date(video.video.videoPublishedDate);
+        });
         return { tag: "success", data };
     } catch (e) {
         return { tag: "error", error: (e as Error).message };

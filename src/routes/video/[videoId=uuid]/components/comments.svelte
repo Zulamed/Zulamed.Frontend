@@ -9,6 +9,7 @@
 	import SplittedComment from './splittedComment.svelte';
 	import { flyAndScale } from '$lib/animations/flyAndScale';
 	import { addNotification } from '$lib/components/notification.svelte';
+	import { getRelativeTime } from '$lib/utils/relativeTime';
 
 	let commentDeletingId = '';
 	let isEditing = false;
@@ -251,9 +252,10 @@
 					<input type="hidden" name="commentId" value={comment.id} />
 				</form>
 			{:else}
+                {@const relativeTime = getRelativeTime(comment.sentAt)}
 				<div class="user-comment">
 					<a href="/user/{comment.sentBy.id}"
-						>{comment.sentBy.username}<span>{comment.sentAt}</span></a
+						>{comment.sentBy.username}<span>{relativeTime}</span></a
 					>
 					<div class="comment-content">
 						<!-- {#each splitString(comment.content) as commentContent} -->

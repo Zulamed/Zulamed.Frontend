@@ -16,8 +16,9 @@ export const load = (async ({ fetch, params }) => {
     const subscriptionsResult = await getSubscriptions(userId, fetch);
     const subscriptions = match(subscriptionsResult)
         .with({ tag: "success" }, ({ subscriptions }) => subscriptions)
-        .with({ tag: "not found" }, () => { throw error(404, "User not found") })
+        .with({ tag: "not found" }, () => { return [] })
         .with({ tag: "error" }, ({ error: err }) => { throw error(500, err) })
+        .exhaustive();
 
     return { user: user.user, videos: user.videos, numberOfFollowers: user.numberOfFollowers, subscriptions }
 }) satisfies PageServerLoad;

@@ -207,10 +207,20 @@
 		<hr />
 	</div>
 	<div use:melt={$content('tab-1')} class="tab-content-container">
-		<UserHome videos={data.videos} user={data.user} />
+		{#if data.videos.length === 0}
+			<div>no videos</div>
+		{:else}
+			<UserHome videos={data.videos} user={data.user} />
+		{/if}
 	</div>
 	<div use:melt={$content('tab-2')} class="tab-content-container"><UserPlaylist /></div>
-	<div use:melt={$content('tab-3')} class="tab-content-container"><UserChannels /></div>
+	<div use:melt={$content('tab-3')} class="tab-content-container">
+		{#if data.subscriptions}
+			<UserChannels subscriptions={data.subscriptions} />
+		{:else}
+			<div>no subscriptions</div>
+		{/if}
+	</div>
 	<div use:melt={$content('tab-4')} class="tab-content-container"><UserAbout /></div>
 </div>
 

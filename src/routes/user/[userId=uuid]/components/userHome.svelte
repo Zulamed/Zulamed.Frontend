@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { VideoMinimal, User } from '$backend/user/get/types';
 	import { getRelativeTime } from '$lib/utils/relativeTime';
-	import { Thumbnail } from 'vidstack';
 	export let videos: VideoMinimal[];
 	export let user: User;
 </script>

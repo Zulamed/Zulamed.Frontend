@@ -10,7 +10,6 @@ const units : Record<string, number> = {
 const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
 
 export function getRelativeTime(d1: Date, d2: Date = new Date()) {
-    console.log(typeof d1, typeof d2);
     const elapsed = d1.getTime() - d2.getTime()
 
     // "Math.abs" accounts for both "past" & "future" scenarios

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { User } from '$backend/user/get/types';
+	import type { Subscription } from '$backend/user/getSubscriptions';
 	import { flyAndScale } from '$lib/animations/flyAndScale';
 	let subActive = false;
 	let confirmationVisible = false;
@@ -21,7 +21,7 @@
 		confirmationVisible = false;
 	}
 
-	export let subscriptions: User[];
+	export let subscriptions: Subscription[];
 </script>
 
 <h1 class="list-header">Subscriptions</h1>
@@ -29,9 +29,9 @@
 	<!-- =====CHANNELS CONTAINER=====  -->
 	{#each subscriptions as sub}
 		<div class="channel-list">
-			<a href="."><img class="channel-logo" src={sub.profilePictureUrl ?? "/img/channels4_profile.jpg"} alt="" /></a>
-			<a href="."><p class="channel-username">Lorem Ipsum</p></a>
-			<p class="channel-sub-counter">40k subscribers</p>
+			<a href="/user/{sub.user.id}"><img class="channel-logo" src={sub.user.profilePictureUrl ?? "/img/channels4_profile.jpg"} alt="" /></a>
+			<a href="/user/{sub.user.id}"><p class="channel-username">{sub.user.login}</p></a>
+			<p class="channel-sub-counter">{sub.numberOfSubscribers} subscribers</p>
 			<button on:click={toggleSubscription} class:active={subActive} class="channel-subscribe-btn">
 				{#if subActive}Subscribed{:else}Subscribe{/if}</button
 			>

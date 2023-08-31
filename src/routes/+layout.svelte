@@ -11,12 +11,20 @@
 	import { user } from '$lib/stores/auth';
 	import ErrorToast from '$lib/components/errorToast.svelte';
 	import Notification from '$lib/components/notification.svelte';
+
+	let searchbarSidebar = $page.url.pathname == '/subscriptions';
 	let searchbar = $page.url.pathname != '/login';
 	beforeNavigate((aboba) => {
 		if (aboba.to?.url.pathname == '/login') {
 			searchbar = false;
 		}
+		if (aboba.to?.url.pathname == '/subscriptions') {
+			searchbarSidebar = true;
+		} else {
+			searchbarSidebar = false;
+		}
 	});
+
 	NProgress.configure({
 		minimum: 0.16
 	});
@@ -33,8 +41,8 @@
 <ErrorToast />
 <Notification />
 
-{#if $page.url.pathname == '/' || $page.url.pathname.includes('/user')}
-	<SidebarAndNavbar />
+{#if $page.url.pathname == '/' || $page.url.pathname.includes('/user') || $page.url.pathname.includes('/subscriptions')}
+	<SidebarAndNavbar showSearchbar={searchbarSidebar} />
 {:else}
 	<Drawer showSearchbar={searchbar} />
 {/if}

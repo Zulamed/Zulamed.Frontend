@@ -28,8 +28,10 @@
 
 <style>
 	.tooltip {
-		background-color: #49a08c;
+		background-color: #3b3b3bdc;
 		padding: 7px 15px;
 		color: #fff;
+		font-size: 12px;
+		border-radius: 5px;
 	}
 </style>

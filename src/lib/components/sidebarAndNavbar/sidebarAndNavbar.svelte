@@ -3,6 +3,9 @@
 	import { sidebarOpened } from './stores/sidebarOpened';
 	import { logout, user } from '$lib/stores/auth';
 	import { invalidateAll } from '$app/navigation';
+	import { page } from '$app/stores';
+	export let showSearchbar = false;
+
 	let isMobileSearchBarOpen = false;
 	let displayProfileContainer = 'none';
 	let displayLanguageContainer = 'none';
@@ -95,6 +98,18 @@
 			<img class="logo" src="/img/logo-white-theme.png" alt="" />
 		</a>
 	</div>
+	{#if showSearchbar}
+		<div class="nav-center flex-div">
+			<form class="searchbar flex-div" action="">
+				<div class="searchbox">
+					<input type="text" placeholder="Search..." />
+				</div>
+				<button class="search-button" type="submit"
+					><img src="/img/icons/search_white_24dp.svg" alt="" /></button
+				>
+			</form>
+		</div>
+	{/if}
 	<div class="nav-right flex-div">
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div class="flex-div lang-icon" on:click={toggleLanguageContainer}>
@@ -147,17 +162,20 @@
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		{#if $user}
 			<img
+				style="border-radius: 50%;"
 				class="user-icon"
-				src="/img/icons/User_circle.png"
+				src={$user?.profilePictureUrl ?? '/img/icons/channel-logo.jpg'}
 				alt=""
 				on:click={toggleProfileContainer}
 			/>
 			<div class="profile-container" id="profile-container" style:display={displayProfileContainer}>
 				<div class="popup-profile flex-div">
-					<a class="shortcut-link" href="."><img src="/img/icons/user.png" alt="" /></a>
+					<a class="shortcut-link" href="."
+						><img src={$user?.profilePictureUrl ?? '/img/icons/channel-logo.jpg'} alt="" /></a
+					>
 					<div>
 						<a href=".">{$user.name} {$user.surname}</a>
-						<p>{$user.email}</p>
+						<p>@{$user.login}</p>
 						<a href="." class="account-manage">Manage your Account</a>
 					</div>
 				</div>
@@ -204,11 +222,20 @@
 <!-- ------------sidebar------------ -->
 <div class="sidebar" class:small-sidebar={!sidebarOpen}>
 	<div class="shortcut-links" style:display={sidebarOpen ? 'block' : 'flex'}>
-		<a class="shortcut-link active-shortcut" href="." style:padding="12px 0 11px {shortcutPadding}"
+		<a
+			class="shortcut-link"
+			href="."
+			style:padding="12px 0 11px {shortcutPadding}"
+			class:active-shortcut={$page.url.pathname === '/'}
 			><img src="/img/icons/Home_fill.svg" alt="" />
 			<p>Home</p>
 		</a>
-		<a class="shortcut-link" href="." style:padding="12px 0 11px {shortcutPadding}"
+
+		<a
+			class="shortcut-link"
+			href="/subscriptions"
+			style:padding="12px 0 11px {shortcutPadding}"
+			class:active-shortcut={$page.url.pathname === '/subscriptions'}
 			><img src="/img/icons/Video_fill.svg" alt="" />
 			<p>Subsciptions</p>
 		</a>

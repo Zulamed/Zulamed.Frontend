@@ -3,7 +3,7 @@
 	import { user } from '$lib/stores/auth';
 	import { logout } from '$lib/stores/auth';
 	import { portal } from 'svelte-portal';
-
+	import { page } from '$app/stores';
 	let isMobileSearchBarOpen = false;
 	let displayProfileContainer = 'none';
 	let displayLanguageContainer = 'none';
@@ -151,17 +151,20 @@
 
 		{#if $user}
 			<img
+				style="border-radius: 50%;"
 				class="user-icon"
-				src="/img/icons/User_circle.png"
+				src={$user?.profilePictureUrl ?? '/img/icons/channel-logo.jpg'}
 				alt=""
 				on:click={toggleProfileContainer}
 			/>
 			<div class="profile-container" id="profile-container" style:display={displayProfileContainer}>
 				<div class="popup-profile flex-div">
-					<a href="."><img src="/img/icons/user.png" alt="" /></a>
+					<a href="."
+						><img src={$user?.profilePictureUrl ?? '/img/icons/channel-logo.jpg'} alt="" /></a
+					>
 					<div>
 						<a href=".">{$user.name} {$user.surname}</a>
-						<p class="email">{$user.email}</p>
+						<p class="email">@{$user.login}</p>
 						<a href="." class="account-manage">Manage your Account</a>
 					</div>
 				</div>
@@ -208,11 +211,18 @@
 
 <div class="sidebar" class:open={sidebarOpen}>
 	<div class="shortcut-links">
-		<a id="shortcut-link" class="active-shortcut" href="."
+		<a
+			id="shortcut-link"
+			class="active-shortcut"
+			href="."
+			class:active-shortcut={$page.url.pathname === '/'}
 			><img src="/img/icons/Home_fill.svg" alt="" />
 			<p>Home</p>
 		</a>
-		<a id="shortcut-link" href="."
+		<a
+			id="shortcut-link"
+			href="/subscriptions"
+			class:active-shortcut={$page.url.pathname === '/subscriptions'}
 			><img src="/img/icons/Video_fill.svg" alt="" />
 			<p>Subsciptions</p>
 		</a>

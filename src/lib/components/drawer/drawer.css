@@ -74,9 +74,6 @@ a {
 	-webkit-tap-highlight-color: transparent;
 }
 
-.searchbar-mobile {
-	display: none;
-}
 
 #showMoreButton {
 	display: none;
@@ -288,6 +285,10 @@ nav {
 
 .popup-profile img {
 	margin-right: 17px;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	object-fit: cover;
 }
 
 .popup-profile a {

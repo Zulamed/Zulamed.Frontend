@@ -230,6 +230,10 @@ a {
 
 .popup-profile img {
     margin-right: 17px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
 }
 
 .popup-profile a {
@@ -608,6 +612,46 @@ a {
 }
 
 /* ==========SIDEBAR SMALL========== */
+/* ==========NAV CENTER SEARCHBOX========== */
+.searchbar {
+    gap: 4px;
+}
+
+.searchbox {
+    width: 451px;
+    height: 49px;
+    background-color: transparent;
+    border: 1px solid #00d6ba;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchbox input {
+    width: 93%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 16px;
+}
+
+.search-button {
+    width: 58px;
+    height: 49px;
+    background-color: #00d6ba;
+    border: 1px solid #00d6ba;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* ==========NAV CENTER SEARCHBOX========== */
+
 
 @media (max-width: 1440px) {
     .sidebar {
@@ -667,7 +711,11 @@ a {
     }
 }
 
+
 @media (max-width: 900px) {
+    .searchbar {
+        display: none;
+    }
 
     .user-register,
     .user-login {

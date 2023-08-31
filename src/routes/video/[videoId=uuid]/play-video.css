@@ -198,7 +198,9 @@ img {
 
 .channel-info img {
 	width: 48px;
+	height: 48px;
 	margin-right: 17px;
+	border-radius: 50%;
 }
 
 .channel-info div h5 {

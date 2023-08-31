@@ -18,7 +18,7 @@
 				<p>Your channel</p>
 				<div class="channel-main-info">
 					<a href=".">
-						<img src="/img/527ebd1e-e8c6-4f9d-8794-4f0a2da643ec.jpg" alt="" />
+						<img src="/img/icons/channel-logo.jpg" alt="" />
 					</a>
 					<p class="username">Simon Riley</p>
 				</div>

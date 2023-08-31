@@ -7,6 +7,8 @@ export type User = {
     email: string;
     name: string;
     surname: string;
+    profilePictureUrl: string;
+    login: string;
 };
 
 
@@ -14,3 +16,4 @@ export type UserRetrievalResult =
     | { tag: "success", user: UserResponse }
     | { tag: "not found" }
     | { tag: "error", error: string };
+

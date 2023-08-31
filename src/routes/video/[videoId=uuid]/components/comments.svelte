@@ -5,11 +5,11 @@
 	import type { Comment } from '$backend/video/types';
 	import Dropdown from '$lib/components/dropdown.svelte';
 	import { melt } from '@melt-ui/svelte';
-	import { user } from '$lib/stores/auth';
 	import SplittedComment from './splittedComment.svelte';
 	import { flyAndScale } from '$lib/animations/flyAndScale';
 	import { addNotification } from '$lib/components/notification.svelte';
 	import { getRelativeTime } from '$lib/utils/relativeTime';
+	import { user } from '$lib/stores/auth';
 
 	let commentDeletingId = '';
 	let isEditing = false;
@@ -119,7 +119,11 @@
 	<p style="margin-bottom: 69px;">2k comments</p>
 
 	<div class="write-comment">
-		<img class="user-profile-picture" src="/img/icons/channel-logo.jpg" alt="" />
+		<img
+			class="user-profile-picture"
+			src={$user?.profilePictureUrl ?? '/img/icons/channel-logo.jpg'}
+			alt=""
+		/>
 		<form
 			method="post"
 			action="?/comment"
@@ -213,21 +217,25 @@
 						};
 					}}
 				>
-					<textarea
-						bind:this={editTextArea}
-						style="height: {textAreaHeight}px; overflow-y: hidden;"
-						value={comment.content}
-						class="comment-input"
-						name="comment-input"
-						on:click={() => {
-							inputVisibility2 = true;
-						}}
-						on:input={(e) => {
-							adjustTextAreaHeight(e);
-							editingProps =
-								editTextArea.value.length > 0 ? editingEnabledProps : editingDisabledProps;
-						}}
-					/>
+					<div style="position: relative;">
+						<textarea
+							bind:this={editTextArea}
+							style="height: {textAreaHeight}px; overflow-y: hidden;"
+							value={comment.content}
+							class="comment-input"
+							name="comment-input"
+							on:click={() => {
+								inputVisibility2 = true;
+							}}
+							on:input={(e) => {
+								adjustTextAreaHeight(e);
+								editingProps =
+									editTextArea.value.length > 0 ? editingEnabledProps : editingDisabledProps;
+							}}
+						/>
+						<div class="comment-input-focus" />
+					</div>
+
 					<div class="write-comment-buttons" style:display="flex">
 						<button
 							type="button"

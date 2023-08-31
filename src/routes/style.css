@@ -141,6 +141,7 @@ input::-moz-focus-inner {
 
 .vid-list .flex-div img {
 	width: 48px;
+	height: 48px;
 	margin-right: 14px;
 	border-radius: 50%;
 }
@@ -255,18 +256,20 @@ input::-moz-focus-inner {
 
 	.vid-list .flex-div img {
 		width: 34px;
+		height: 34px;
 		margin-right: 14px;
 		border-radius: 50%;
-	}
-
-	.vid-info {
-		margin-top: 2px;
 	}
 
 	.vid-list .flex-div {
 		align-items: flex-start;
 		margin-top: 23px;
 	}
+
+	.vid-info {
+		margin-top: 2px;
+	}
+
 
 	.vid-info p {
 		font-size: 13px;

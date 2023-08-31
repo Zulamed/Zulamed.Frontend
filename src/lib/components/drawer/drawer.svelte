@@ -214,7 +214,7 @@
 		<a
 			id="shortcut-link"
 			class="active-shortcut"
-			href="."
+			href="/"
 			class:active-shortcut={$page.url.pathname === '/'}
 			><img src="/img/icons/Home_fill.svg" alt="" />
 			<p>Home</p>

@@ -13,6 +13,7 @@
 	import { crossfade } from 'svelte/transition';
 
 	import { createDialog } from '@melt-ui/svelte';
+	import type { PageData } from './$types';
 	const {
 		elements: { trigger: triggerDialog, content: contentDialog, overlay, title, close, portalled },
 		states: { open }
@@ -53,6 +54,8 @@
 		// @ts-ignore
 		files.rejected = [...files.rejected, ...fileRejections];
 	}
+
+	export let data: PageData;
 </script>
 
 <div class="container" class:large-container={!$sidebarOpened}>
@@ -60,12 +63,12 @@
 		<img src="." alt="" />
 	</div>
 	<div class="flex-div channel-info">
-		<img src="/img/icons/user-logo160x160.jpg" alt="" />
+		<img src={data.user.profilePictureUrl ?? '/img/icons/user-logo160x160.jpg'} alt="" />
 		<div>
-			<h5>Simon Riley</h5>
+			<h5>{data.user.name} {data.user.surname}</h5>
 			<div class="main-info">
-				<p>@simonriley</p>
-				<p>3K followers</p>
+				<p>@{data.user.login}</p>
+				<p>{data.numberOfFollowers} followers</p>
 			</div>
 			<p style="text-decoration-line: underline;">More about this channel</p>
 		</div>
@@ -203,7 +206,9 @@
 		</div>
 		<hr />
 	</div>
-	<div use:melt={$content('tab-1')} class="tab-content-container"><UserHome /></div>
+	<div use:melt={$content('tab-1')} class="tab-content-container">
+		<UserHome videos={data.videos} user={data.user} />
+	</div>
 	<div use:melt={$content('tab-2')} class="tab-content-container"><UserPlaylist /></div>
 	<div use:melt={$content('tab-3')} class="tab-content-container"><UserChannels /></div>
 	<div use:melt={$content('tab-4')} class="tab-content-container"><UserAbout /></div>

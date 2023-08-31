@@ -203,12 +203,14 @@ img {
 	border-radius: 50%;
 }
 
-.channel-info div h5 {
+.channel-info div a{
 	font-weight: 600;
 	font-size: 20px;
 	line-height: 24px;
 	color: #000000;
+    text-decoration: none;
 }
+
 
 .channel-info div p {
 	font-weight: 500;

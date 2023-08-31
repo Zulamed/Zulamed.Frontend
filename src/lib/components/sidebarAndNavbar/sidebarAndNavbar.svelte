@@ -224,7 +224,7 @@
 	<div class="shortcut-links" style:display={sidebarOpen ? 'block' : 'flex'}>
 		<a
 			class="shortcut-link"
-			href="."
+			href="/"
 			style:padding="12px 0 11px {shortcutPadding}"
 			class:active-shortcut={$page.url.pathname === '/'}
 			><img src="/img/icons/Home_fill.svg" alt="" />

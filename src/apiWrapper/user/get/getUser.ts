@@ -11,7 +11,7 @@ export async function getUser(userId: string, fetch: FetchCallbackType = origFet
             return { tag: "not found" };
         }
         if (!response.ok) {
-            return { tag: "error", "error": "Unknown error" };
+            return { tag: "error", "error": response.statusText };
         }
 
         const user = await response.json() as UserResponse;

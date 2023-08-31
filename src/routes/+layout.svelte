@@ -35,7 +35,7 @@
 		} else NProgress.done();
 	}
 	export let data: LayoutServerData;
-	$user = data.user;
+	$user = data.loggedInUser;
 </script>
 
 <ErrorToast />

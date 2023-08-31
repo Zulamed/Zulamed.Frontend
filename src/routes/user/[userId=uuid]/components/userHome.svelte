@@ -1,20 +1,24 @@
-<script lang="ts"></script>
+<script lang="ts">
+	import type { VideoMinimal, User } from '$backend/user/get/types';
+	import { getRelativeTime } from '$lib/utils/relativeTime';
+	import { Thumbnail } from 'vidstack';
+	export let videos: VideoMinimal[];
+	export let user: User;
+</script>
 
 <div class="last-video">
 	<div class="last-video-content">
-		<a href="." class="small-thumbnail"
-			><img src="/img/videoPreviews/videoPreviewMobile.png" alt="" /></a
+		<a href="/video/{videos[0].id}" class="small-thumbnail"
+			><img src={videos[0].thumbnailUrl ?? '/img/videoPreviews/videoPreviewMobile.png'} alt="" /></a
 		>
 		<div class="vid-info">
-			<a href=".">What happens during surgery?</a>
+			<a href="/video/{videos[0].id}">{videos[0].title}</a>
 			<div style="display: flex; margin-bottom: 28px;">
-				<p>Lorem Ipsum&nbsp;</p>
-				<p class="vid-views">·&nbsp;670k views</p>
+				<p>{user.login}&nbsp;</p>
+				<p class="vid-views">·&nbsp;{videos[0].views} views</p>
 			</div>
 			<p class="vid-description">
-				Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-				laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-				architecto beatae vitae dicta sunt explicabo.
+				{videos[0].description}
 			</p>
 		</div>
 	</div>
@@ -26,150 +30,22 @@
 	Videos
 </h1>
 <div class="list-container">
-	<a href="." class="vid-list">
-		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
-		<div class="flex-div">
-			<div class="list-vid-info">
-				<a href=".">LOREM IPSUM - Lorem ipsum</a>
-				<div style="display: flex; margin-top: 10px;">
-					<p class="vid-views">1K views&nbsp;</p>
-					<p class="vid-views">·&nbsp;7 days ago</p>
+	{#each videos as video}
+		<a href="/video/{video.id}" class="vid-list">
+			<a class="preview" href="/video/{video.id}"
+				><img src={video.thumbnailUrl ?? '/img/videoPreviews/3.png'} class="thumbnail" alt="" /></a
+			>
+			<div class="flex-div">
+				<div class="list-vid-info">
+					<a href=".">{video.title}</a>
+					<div style="display: flex; margin-top: 10px;">
+						<p class="vid-views">{video.views} views&nbsp;</p>
+						<p class="vid-views">·&nbsp;{getRelativeTime(video.createdAt)}</p>
+					</div>
 				</div>
 			</div>
-		</div>
-	</a>
-	<a href="." class="vid-list">
-		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
-		<div class="flex-div">
-			<div class="list-vid-info">
-				<a href=".">LOREM IPSUM - Lorem ipsum</a>
-				<div style="display: flex; margin-top: 10px;">
-					<p class="vid-views">1K views&nbsp;</p>
-					<p class="vid-views">·&nbsp;7 days ago</p>
-				</div>
-			</div>
-		</div>
-	</a>
-	<a href="." class="vid-list">
-		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
-		<div class="flex-div">
-			<div class="list-vid-info">
-				<a href=".">LOREM IPSUM - Lorem ipsum</a>
-				<div style="display: flex; margin-top: 10px;">
-					<p class="vid-views">1K views&nbsp;</p>
-					<p class="vid-views">·&nbsp;7 days ago</p>
-				</div>
-			</div>
-		</div>
-	</a>
-	<a href="." class="vid-list">
-		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
-		<div class="flex-div">
-			<div class="list-vid-info">
-				<a href=".">LOREM IPSUM - Lorem ipsum</a>
-				<div style="display: flex; margin-top: 10px;">
-					<p class="vid-views">1K views&nbsp;</p>
-					<p class="vid-views">·&nbsp;7 days ago</p>
-				</div>
-			</div>
-		</div>
-	</a>
-	<a href="." class="vid-list">
-		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
-		<div class="flex-div">
-			<div class="list-vid-info">
-				<a href=".">LOREM IPSUM - Lorem ipsum</a>
-				<div style="display: flex; margin-top: 10px;">
-					<p class="vid-views">1K views&nbsp;</p>
-					<p class="vid-views">·&nbsp;7 days ago</p>
-				</div>
-			</div>
-		</div>
-	</a>
-	<a href="." class="vid-list">
-		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
-		<div class="flex-div">
-			<div class="list-vid-info">
-				<a href=".">LOREM IPSUM - Lorem ipsum</a>
-				<div style="display: flex; margin-top: 10px;">
-					<p class="vid-views">1K views&nbsp;</p>
-					<p class="vid-views">·&nbsp;7 days ago</p>
-				</div>
-			</div>
-		</div>
-	</a>
-	<a href="." class="vid-list">
-		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
-		<div class="flex-div">
-			<div class="list-vid-info">
-				<a href=".">LOREM IPSUM - Lorem ipsum</a>
-				<div style="display: flex; margin-top: 10px;">
-					<p class="vid-views">1K views&nbsp;</p>
-					<p class="vid-views">·&nbsp;7 days ago</p>
-				</div>
-			</div>
-		</div>
-	</a>
-	<a href="." class="vid-list">
-		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
-		<div class="flex-div">
-			<div class="list-vid-info">
-				<a href=".">LOREM IPSUM - Lorem ipsum</a>
-				<div style="display: flex; margin-top: 10px;">
-					<p class="vid-views">1K views&nbsp;</p>
-					<p class="vid-views">·&nbsp;7 days ago</p>
-				</div>
-			</div>
-		</div>
-	</a>
-	<a href="." class="vid-list">
-		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
-		<div class="flex-div">
-			<div class="list-vid-info">
-				<a href=".">LOREM IPSUM - Lorem ipsum</a>
-				<div style="display: flex; margin-top: 10px;">
-					<p class="vid-views">1K views&nbsp;</p>
-					<p class="vid-views">·&nbsp;7 days ago</p>
-				</div>
-			</div>
-		</div>
-	</a>
-	<a href="." class="vid-list">
-		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
-		<div class="flex-div">
-			<div class="list-vid-info">
-				<a href=".">LOREM IPSUM - Lorem ipsum</a>
-				<div style="display: flex; margin-top: 10px;">
-					<p class="vid-views">1K views&nbsp;</p>
-					<p class="vid-views">·&nbsp;7 days ago</p>
-				</div>
-			</div>
-		</div>
-	</a>
-	<a href="." class="vid-list">
-		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
-		<div class="flex-div">
-			<div class="list-vid-info">
-				<a href=".">LOREM IPSUM - Lorem ipsum</a>
-				<div style="display: flex; margin-top: 10px;">
-					<p class="vid-views">1K views&nbsp;</p>
-					<p class="vid-views">·&nbsp;7 days ago</p>
-				</div>
-			</div>
-		</div>
-	</a>
-	<a href="." class="vid-list">
-		<a class="preview" href="."><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a>
-		<div class="flex-div">
-			<div class="list-vid-info">
-				<a href=".">LOREM IPSUM - Lorem ipsum</a>
-				<div style="display: flex; margin-top: 10px;">
-					<p class="vid-views">1K views&nbsp;</p>
-					<p class="vid-views">·&nbsp;7 days ago</p>
-				</div>
-			</div>
-		</div>
-	</a>
+		</a>
+	{/each}
 </div>
 
 <style>

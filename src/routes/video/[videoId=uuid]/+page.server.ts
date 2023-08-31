@@ -13,10 +13,16 @@ import { subscribe } from '$backend/user/subscribe';
 import { unsubscribe } from '$backend/user/unsubscribe';
 import { deleteComment } from '$backend/video/deleteComment';
 import { editComment } from '$backend/video/editComment';
+import { getAllVideos } from '$backend/video/getAll/endpoint';
 
 export const load = (async ({ params, fetch, locals }) => {
     const videoResult = await getVideoById(params.videoId, fetch);
     const commentResult = await getComments(params.videoId, fetch);
+    const allVideos = await getAllVideos(fetch);
+    let videos = match(allVideos)
+        .with({ tag: "success" }, ({ data }) => data.videos)
+        .with({ tag: "error" }, ({ error }) => { throw err(500, error) })
+        .exhaustive();
     const video = match(videoResult)
         .with({ tag: "success" }, ({ response }) => response)
         .with({ tag: "failure" }, ({ error }) => { throw err(500, error) })
@@ -27,6 +33,9 @@ export const load = (async ({ params, fetch, locals }) => {
         .with({ status: "not-found" }, () => [])
         .with({ status: "error" }, ({ error }) => { throw err(500, error) })
         .exhaustive();
+
+    // videos = videos.filter(v => v.video.id !== video.video.id);
+
     const videoInfo = { ...video, comments };
     let userLiked: boolean | undefined = undefined;
     let userDisliked: boolean | undefined = undefined;
@@ -44,7 +53,7 @@ export const load = (async ({ params, fetch, locals }) => {
             userDisliked = await hasDisliked(params.videoId, fetch);
         }
     }
-    return { videoInfo, userLiked, userDisliked, userFollowed };
+    return { videoInfo, userLiked, userDisliked, userFollowed, sideVideos: videos };
 }) satisfies PageServerLoad;
 
 export const actions = {

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { User } from '$backend/user/get/types';
 	import { flyAndScale } from '$lib/animations/flyAndScale';
 	let subActive = false;
 	let confirmationVisible = false;
@@ -19,37 +20,41 @@
 	function cancelUnsubscribe() {
 		confirmationVisible = false;
 	}
+
+	export let subscriptions: User[];
 </script>
 
 <h1 class="list-header">Subscriptions</h1>
 <div class="list-container">
 	<!-- =====CHANNELS CONTAINER=====  -->
-	<div class="channel-list">
-		<a href="."><img class="channel-logo" src="/img/channels4_profile.jpg" alt="" /></a>
-		<a href="."><p class="channel-username">Lorem Ipsum</p></a>
-		<p class="channel-sub-counter">40k subscribers</p>
-		<button on:click={toggleSubscription} class:active={subActive} class="channel-subscribe-btn">
-			{#if subActive}Subscribed{:else}Subscribe{/if}</button
-		>
-		{#if confirmationVisible}
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<div class="overlay" on:click={cancelUnsubscribe} />
-			<div
-				class="content"
-				transition:flyAndScale={{
-					duration: 150,
-					y: 8,
-					start: 0.96
-				}}
+	{#each subscriptions as sub}
+		<div class="channel-list">
+			<a href="."><img class="channel-logo" src={sub.profilePictureUrl ?? "/img/channels4_profile.jpg"} alt="" /></a>
+			<a href="."><p class="channel-username">Lorem Ipsum</p></a>
+			<p class="channel-sub-counter">40k subscribers</p>
+			<button on:click={toggleSubscription} class:active={subActive} class="channel-subscribe-btn">
+				{#if subActive}Subscribed{:else}Subscribe{/if}</button
 			>
-				<h2 class="unsub-title">Unsubscribe from User?</h2>
-				<div class="unsub-actions">
-					<button on:click={cancelUnsubscribe} class="unsub-cancel"> Cancel </button>
-					<button on:click={confirmUnsubscribe} class="unsub-accept"> Unsubscribe </button>
+			{#if confirmationVisible}
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<div class="overlay" on:click={cancelUnsubscribe} />
+				<div
+					class="content"
+					transition:flyAndScale={{
+						duration: 150,
+						y: 8,
+						start: 0.96
+					}}
+				>
+					<h2 class="unsub-title">Unsubscribe from User?</h2>
+					<div class="unsub-actions">
+						<button on:click={cancelUnsubscribe} class="unsub-cancel"> Cancel </button>
+						<button on:click={confirmUnsubscribe} class="unsub-accept"> Unsubscribe </button>
+					</div>
 				</div>
-			</div>
-		{/if}
-	</div>
+			{/if}
+		</div>
+	{/each}
 	<!-- =====CHANNELS CONTAINER=====  -->
 </div>
 

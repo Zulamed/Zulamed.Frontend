@@ -6,7 +6,7 @@
 	import { page } from '$app/stores';
 	import type { Subscription } from '$backend/user/getSubscriptions';
 	export let showSearchbar = false;
-	export let subscriptions: Subscription[];
+	export let subscriptions: Subscription[] | undefined;
 
 	let isMobileSearchBarOpen = false;
 	let displayProfileContainer = 'none';
@@ -19,9 +19,8 @@
 	let shortcutPadding = '7px';
 	let overflowY = 'hidden';
 	let smotritelSabok = false;
-	$: subscriptionsSlice = !smotritelSabok && $user ? subscriptions.slice(0, 3) : subscriptions;
+	$: subscriptionsSlice = !smotritelSabok && $user && subscriptions ? subscriptions.slice(0, 3) : subscriptions;
 
-	console.log(subscriptions);
 
 	$: {
 		$sidebarOpened = sidebarOpen;
@@ -263,7 +262,7 @@
 			<hr />
 			<p class="sidebar-title">SUBSCRIPTIONS</p>
 
-			{#if subscriptions.length != 0}
+			{#if subscriptionsSlice && subscriptionsSlice.length != 0}
 				{#each subscriptionsSlice as sub}
 					<a
 						class="shortcut-link"
@@ -370,7 +369,7 @@
 			<hr />
 			<p class="sidebar-title">SUBSCRIPTIONS</p>
 
-			{#if subscriptions.length != 0}
+			{#if subscriptionsSlice &&  subscriptionsSlice.length != 0}
 				{#each subscriptionsSlice as sub}
 					<a class="shortcut-link" href="/user/{sub.user.id}"
 						><img

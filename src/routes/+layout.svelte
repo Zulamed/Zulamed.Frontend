@@ -36,7 +36,6 @@
 	}
 	export let data: LayoutServerData;
 	$user = data.loggedInUser;
-    console.log($user);
 </script>
 
 <ErrorToast />

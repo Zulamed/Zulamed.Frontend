@@ -249,34 +249,38 @@
 			</a>
 			<hr />
 			<p class="sidebar-title">SUBSCRIPTIONS</p>
-			{#each subscriptionsSlice as sub}
-				<a class="shortcut-link" href="/user/{sub.user.id}"
-					><img
-						class="subsciption-logo"
-						src={sub.user.profilePictureUrl ?? '/img/icons/user.png'}
-						alt=""
-					/>
-					<p>{sub.user.login}</p>
-				</a>
-			{/each}
-			{#if !smotritelSabok}
-				<button
-					on:click={() => {
-						smotritelSabok = true;
-					}}
-					class="show-more"
-				>
-					<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
-				</button>
+			{#if subscriptions.length !== 0}
+				{#each subscriptionsSlice as sub}
+					<a class="shortcut-link" href="/user/{sub.user.id}"
+						><img
+							class="subsciption-logo"
+							src={sub.user.profilePictureUrl ?? '/img/icons/user.png'}
+							alt=""
+						/>
+						<p>{sub.user.login}</p>
+					</a>
+				{/each}
+				{#if !smotritelSabok}
+					<button
+						on:click={() => {
+							smotritelSabok = true;
+						}}
+						class="show-more"
+					>
+						<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
+					</button>
+				{:else}
+					<button
+						on:click={() => {
+							smotritelSabok = false;
+						}}
+						class="show-less"
+					>
+						<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
+					</button>
+				{/if}
 			{:else}
-				<button
-					on:click={() => {
-						smotritelSabok = false;
-					}}
-					class="show-less"
-				>
-					<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
-				</button>
+				<p style="color: #fff; padding: 0 0 0 16px;">You have no subscriptions</p>
 			{/if}
 
 			<hr />
@@ -350,34 +354,38 @@
 			</a>
 			<hr />
 			<p class="sidebar-title">SUBSCRIPTIONS</p>
-			{#each subscriptionsSlice as sub}
-				<a class="shortcut-link" href="/user/{sub.user.id}"
-					><img
-						class="subsciption-logo"
-						src={sub.user.profilePictureUrl ?? '/img/icons/user.png'}
-						alt=""
-					/>
-					<p>{sub.user.login}</p>
-				</a>
-			{/each}
-			{#if !smotritelSabok}
-				<button
-					on:click={() => {
-						smotritelSabok = true;
-					}}
-					class="show-more"
-				>
-					<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
-				</button>
+			{#if subscriptions.length !== 0}
+				{#each subscriptionsSlice as sub}
+					<a class="shortcut-link" href="/user/{sub.user.id}"
+						><img
+							class="subsciption-logo"
+							src={sub.user.profilePictureUrl ?? '/img/icons/user.png'}
+							alt=""
+						/>
+						<p>{sub.user.login}</p>
+					</a>
+				{/each}
+				{#if !smotritelSabok}
+					<button
+						on:click={() => {
+							smotritelSabok = true;
+						}}
+						class="show-more"
+					>
+						<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
+					</button>
+				{:else}
+					<button
+						on:click={() => {
+							smotritelSabok = false;
+						}}
+						class="show-less"
+					>
+						<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
+					</button>
+				{/if}
 			{:else}
-				<button
-					on:click={() => {
-						smotritelSabok = false;
-					}}
-					class="show-less"
-				>
-					<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
-				</button>
+				<p style="color: #fff; padding: 0 0 0 16px;">You have no subscriptions</p>
 			{/if}
 		{/if}
 

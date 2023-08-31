@@ -14,9 +14,12 @@ export const load: LayoutServerLoad = async ({ locals, fetch }) => {
             .with({ tag: "not found" }, () => { return [] })
             .with({ tag: "error" }, ({ error: err }) => { throw error(500, err) })
             .exhaustive();
-        for (let i = 0; i <= 6; i++) {
-            subscriptions.push(subscriptions[0])
+        if (subscriptions.length > 0) {
+            for (let i = 0; i <= 6; i++) {
+                subscriptions.push(subscriptions[0])
+            }
         }
+
 
     }
     return {

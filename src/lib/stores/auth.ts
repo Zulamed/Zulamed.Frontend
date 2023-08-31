@@ -6,6 +6,7 @@ import { get, writable } from 'svelte/store';
 import type { User } from '$backend/user/get/types';
 import { getUser } from '$backend/user/get/getUser';
 import { match } from 'ts-pattern';
+import { invalidateAll } from '$app/navigation';
 
 export const user = writable<User | undefined>(undefined);
 

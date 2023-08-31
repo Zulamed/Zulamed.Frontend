@@ -4,6 +4,9 @@
 	import { logout } from '$lib/stores/auth';
 	import { portal } from 'svelte-portal';
 	import { page } from '$app/stores';
+	import type { Subscription } from '$backend/user/getSubscriptions';
+	export let subscriptions: Subscription[];
+
 	let isMobileSearchBarOpen = false;
 	let displayProfileContainer = 'none';
 	let displayLanguageContainer = 'none';
@@ -12,6 +15,9 @@
 	let searchbarMobileTop = '0';
 	let navigationBoxShadow = '0px 0px 0px #00000040';
 	let overlayLeft = '-100%';
+
+	let smotritelSabok = false;
+	$: subscriptionsSlice = !smotritelSabok && $user ? subscriptions.slice(0, 3) : subscriptions;
 	export let showSearchbar = true;
 	const toggleProfileContainer = () => {
 		displayProfileContainer = displayProfileContainer === 'none' ? 'block' : 'none';
@@ -219,51 +225,63 @@
 			><img src="/img/icons/Home_fill.svg" alt="" />
 			<p>Home</p>
 		</a>
-		<a
-			id="shortcut-link"
-			href="/subscriptions"
-			class:active-shortcut={$page.url.pathname === '/subscriptions'}
-			><img src="/img/icons/Video_fill.svg" alt="" />
-			<p>Subsciptions</p>
-		</a>
+		{#if $user}
+			<a
+				id="shortcut-link"
+				href="/subscriptions"
+				class:active-shortcut={$page.url.pathname === '/subscriptions'}
+				><img src="/img/icons/Video_fill.svg" alt="" />
+				<p>Subsciptions</p>
+			</a>
 
-		<hr />
-		<a id="shortcut-link" href="."
-			><img src="/img/icons/history_white_24dp.svg" alt="" />
-			<p>History</p>
-		</a>
-		<a id="shortcut-link" href="."
-			><img src="/img/icons/play_arrow_white_48dp(2).svg" alt="" />
-			<p>Your videos</p>
-		</a>
-		<a id="shortcut-link" href="."
-			><img src="/img/icons/liked.svg" alt="" />
-			<p>Liked videos</p>
-		</a>
-		<hr />
-		<p class="sidebar-title">SUBSCRIPTIONS</p>
-		<a href="."
-			><img class="subsciption-logo" src="/img/icons/user.png" alt="" />
-			<p>Lorem Ipsum</p>
-		</a>
-		<a href="."
-			><img class="subsciption-logo" src="/img/icons/user.png" alt="" />
-			<p>Lorem Ipsum</p>
-		</a>
-		<a href="."
-			><img class="subsciption-logo" src="/img/icons/user.png" alt="" />
-			<p>Lorem Ipsum</p>
-		</a>
-		<a href="."
-			><img class="subsciption-logo" src="/img/icons/user.png" alt="" />
-			<p>Lorem Ipsum</p>
-		</a>
+			<hr />
+			<a id="shortcut-link" href="."
+				><img src="/img/icons/history_white_24dp.svg" alt="" />
+				<p>History</p>
+			</a>
+			<a id="shortcut-link" href="."
+				><img src="/img/icons/play_arrow_white_48dp(2).svg" alt="" />
+				<p>Your videos</p>
+			</a>
+			<a id="shortcut-link" href="."
+				><img src="/img/icons/liked.svg" alt="" />
+				<p>Liked videos</p>
+			</a>
+			<hr />
+			<p class="sidebar-title">SUBSCRIPTIONS</p>
+			{#each subscriptionsSlice as sub}
+				<a class="shortcut-link" href="/user/{sub.user.id}"
+					><img
+						class="subsciption-logo"
+						src={sub.user.profilePictureUrl ?? '/img/icons/user.png'}
+						alt=""
+					/>
+					<p>{sub.user.login}</p>
+				</a>
+			{/each}
+			{#if !smotritelSabok}
+				<button
+					on:click={() => {
+						smotritelSabok = true;
+					}}
+					class="show-more"
+				>
+					<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
+				</button>
+			{:else}
+				<button
+					on:click={() => {
+						smotritelSabok = false;
+					}}
+					class="show-less"
+				>
+					<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
+				</button>
+			{/if}
 
-		<div class="show-more">
-			<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
-		</div>
+			<hr />
+		{/if}
 
-		<hr />
 		<a id="shortcut-link" href="."
 			><img src="/img/icons/settings_white_24dp.svg" alt="" />
 			<p>Settings</p>
@@ -311,46 +329,57 @@
 			><img src="/img/icons/Home_fill.svg" alt="" />
 			<p>Home</p>
 		</a>
-		<a id="shortcut-link" href="."
-			><img src="/img/icons/Video_fill.svg" alt="" />
-			<p>Subsciptions</p>
-		</a>
+		{#if $user}
+			<a id="shortcut-link" href="."
+				><img src="/img/icons/Video_fill.svg" alt="" />
+				<p>Subsciptions</p>
+			</a>
 
-		<hr />
-		<a id="shortcut-link" href="."
-			><img src="/img/icons/history_white_24dp.svg" alt="" />
-			<p>History</p>
-		</a>
-		<a id="shortcut-link" href="."
-			><img src="/img/icons/play_arrow_white_48dp(2).svg" alt="" />
-			<p>Your videos</p>
-		</a>
-		<a id="shortcut-link" href="."
-			><img src="/img/icons/liked.svg" alt="" />
-			<p>Liked videos</p>
-		</a>
-		<hr />
-		<p class="sidebar-title">SUBSCRIPTIONS</p>
-		<a href="."
-			><img class="subsciption-logo" src="/img/icons/user.png" alt="" />
-			<p>Lorem Ipsum</p>
-		</a>
-		<a href="."
-			><img class="subsciption-logo" src="/img/icons/user.png" alt="" />
-			<p>Lorem Ipsum</p>
-		</a>
-		<a href="."
-			><img class="subsciption-logo" src="/img/icons/user.png" alt="" />
-			<p>Lorem Ipsum</p>
-		</a>
-		<a href="."
-			><img class="subsciption-logo" src="/img/icons/user.png" alt="" />
-			<p>Lorem Ipsum</p>
-		</a>
-
-		<div class="show-more">
-			<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
-		</div>
+			<hr />
+			<a id="shortcut-link" href="."
+				><img src="/img/icons/history_white_24dp.svg" alt="" />
+				<p>History</p>
+			</a>
+			<a id="shortcut-link" href="."
+				><img src="/img/icons/play_arrow_white_48dp(2).svg" alt="" />
+				<p>Your videos</p>
+			</a>
+			<a id="shortcut-link" href="."
+				><img src="/img/icons/liked.svg" alt="" />
+				<p>Liked videos</p>
+			</a>
+			<hr />
+			<p class="sidebar-title">SUBSCRIPTIONS</p>
+			{#each subscriptionsSlice as sub}
+				<a class="shortcut-link" href="/user/{sub.user.id}"
+					><img
+						class="subsciption-logo"
+						src={sub.user.profilePictureUrl ?? '/img/icons/user.png'}
+						alt=""
+					/>
+					<p>{sub.user.login}</p>
+				</a>
+			{/each}
+			{#if !smotritelSabok}
+				<button
+					on:click={() => {
+						smotritelSabok = true;
+					}}
+					class="show-more"
+				>
+					<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
+				</button>
+			{:else}
+				<button
+					on:click={() => {
+						smotritelSabok = false;
+					}}
+					class="show-less"
+				>
+					<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
+				</button>
+			{/if}
+		{/if}
 
 		<hr />
 		<a id="shortcut-link" href="."

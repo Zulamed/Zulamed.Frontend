@@ -290,10 +290,17 @@
 							<a use:melt={trigger} let:trigger slot="button" href="/video/{amogus.video.id}"
 								>{title.length > 42 ? title.slice(0, 41) + '...' : title}</a
 							>
-                            <p slot="content">{title}</p>
+							<p slot="content">{title}</p>
 						</Tooltip>
 
-						<p>{amogus.user.username}</p>
+						<a
+							style="font-weight: 500;
+						font-size: 15px;
+						line-height: 18px;
+						color: #54b9a2;
+						margin-top: 7px; display: block;"
+							href="/user/{amogus.user.id}">{amogus.user.username}</a
+						>
 						<p class="vid-views">{amogus.video.videoViews} views</p>
 					</div>
 				</div>

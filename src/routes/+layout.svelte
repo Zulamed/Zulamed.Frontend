@@ -42,9 +42,9 @@
 <Notification />
 
 {#if $page.url.pathname == '/' || $page.url.pathname.includes('/user') || $page.url.pathname.includes('/subscriptions')}
-	<SidebarAndNavbar showSearchbar={searchbarSidebar} />
+	<SidebarAndNavbar showSearchbar={searchbarSidebar} subscriptions={data.subscriptions} />
 {:else}
-	<Drawer showSearchbar={searchbar} />
+	<Drawer showSearchbar={searchbar} subscriptions={data.subscriptions} />
 {/if}
 
 <slot />

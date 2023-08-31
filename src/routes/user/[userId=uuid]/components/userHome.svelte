@@ -36,7 +36,7 @@
 			>
 			<div class="flex-div">
 				<div class="list-vid-info">
-					<a href=".">{video.title}</a>
+					<a href="/video/{video.id}">{video.title}</a>
 					<div style="display: flex; margin-top: 10px;">
 						<p class="vid-views">{video.views} views&nbsp;</p>
 						<p class="vid-views">·&nbsp;{getRelativeTime(video.createdAt)}</p>

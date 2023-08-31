@@ -4,7 +4,9 @@
 	import { logout, user } from '$lib/stores/auth';
 	import { invalidateAll } from '$app/navigation';
 	import { page } from '$app/stores';
+	import type { Subscription } from '$backend/user/getSubscriptions';
 	export let showSearchbar = false;
+	export let subscriptions: Subscription[];
 
 	let isMobileSearchBarOpen = false;
 	let displayProfileContainer = 'none';
@@ -16,6 +18,8 @@
 	let overlayLeft = '-100%';
 	let shortcutPadding = '7px';
 	let overflowY = 'hidden';
+	let smotritelSabok = false;
+	$: subscriptionsSlice = !smotritelSabok && $user ? subscriptions.slice(0, 3) : subscriptions;
 
 	$: {
 		$sidebarOpened = sidebarOpen;
@@ -231,52 +235,67 @@
 			<p>Home</p>
 		</a>
 
-		<a
-			class="shortcut-link"
-			href="/subscriptions"
-			style:padding="12px 0 11px {shortcutPadding}"
-			class:active-shortcut={$page.url.pathname === '/subscriptions'}
-			><img src="/img/icons/Video_fill.svg" alt="" />
-			<p>Subsciptions</p>
-		</a>
+		{#if $user}
+			<a
+				class="shortcut-link"
+				href="/subscriptions"
+				style:padding="12px 0 11px {shortcutPadding}"
+				class:active-shortcut={$page.url.pathname === '/subscriptions'}
+				><img src="/img/icons/Video_fill.svg" alt="" />
+				<p>Subsciptions</p>
+			</a>
 
-		<hr />
-		<a class="shortcut-link" href="." style:padding="12px 0 11px {shortcutPadding}"
-			><img src="/img/icons/history_white_24dp.svg" alt="" />
-			<p>History</p>
-		</a>
-		<a class="shortcut-link" href="." style:padding="12px 0 11px {shortcutPadding}"
-			><img src="/img/icons/play_arrow_white_48dp(2).svg" alt="" />
-			<p>Your videos</p>
-		</a>
-		<a class="shortcut-link" href="." style:padding="12px 0 11px {shortcutPadding}"
-			><img src="/img/icons/liked.svg" alt="" />
-			<p>Liked videos</p>
-		</a>
-		<hr />
-		<p class="sidebar-title">SUBSCRIPTIONS</p>
-		<a class="shortcut-link" href="." style:padding="12px 0 11px {shortcutPadding}"
-			><img class="subsciption-logo" src="/img/icons/user.png" alt="" />
-			<p>Lorem Ipsum</p>
-		</a>
-		<a class="shortcut-link" href="." style:padding="12px 0 11px {shortcutPadding}"
-			><img class="subsciption-logo" src="/img/icons/user.png" alt="" />
-			<p>Lorem Ipsum</p>
-		</a>
-		<a class="shortcut-link" href="." style:padding="12px 0 11px {shortcutPadding}"
-			><img class="subsciption-logo" src="/img/icons/user.png" alt="" />
-			<p>Lorem Ipsum</p>
-		</a>
-		<a class="shortcut-link" href="." style:padding="12px 0 11px {shortcutPadding}"
-			><img class="subsciption-logo" src="/img/icons/user.png" alt="" />
-			<p>Lorem Ipsum</p>
-		</a>
+			<hr />
+			<a class="shortcut-link" href="." style:padding="12px 0 11px {shortcutPadding}"
+				><img src="/img/icons/history_white_24dp.svg" alt="" />
+				<p>History</p>
+			</a>
+			<a class="shortcut-link" href="." style:padding="12px 0 11px {shortcutPadding}"
+				><img src="/img/icons/play_arrow_white_48dp(2).svg" alt="" />
+				<p>Your videos</p>
+			</a>
+			<a class="shortcut-link" href="." style:padding="12px 0 11px {shortcutPadding}"
+				><img src="/img/icons/liked.svg" alt="" />
+				<p>Liked videos</p>
+			</a>
+			<hr />
+			<p class="sidebar-title">SUBSCRIPTIONS</p>
 
-		<button class="show-more">
-			<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
-		</button>
+			{#each subscriptionsSlice as sub}
+				<a
+					class="shortcut-link"
+					href="/user/{sub.user.id}"
+					style:padding="12px 0 11px {shortcutPadding}"
+					><img
+						class="subsciption-logo"
+						src={sub.user.profilePictureUrl ?? '/img/icons/user.png'}
+						alt=""
+					/>
+					<p>{sub.user.login}</p>
+				</a>
+			{/each}
+			{#if !smotritelSabok}
+				<button
+					on:click={() => {
+						smotritelSabok = true;
+					}}
+					class="show-more"
+				>
+					<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
+				</button>
+			{:else}
+				<button
+					on:click={() => {
+						smotritelSabok = false;
+					}}
+					class="show-less"
+				>
+					<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
+				</button>
+			{/if}
 
-		<hr />
+			<hr />
+		{/if}
 		<a class="shortcut-link" href="." style:padding="12px 0 11px {shortcutPadding}"
 			><img src="/img/icons/settings_white_24dp.svg" alt="" />
 			<p>Settings</p>
@@ -323,46 +342,58 @@
 			><img src="/img/icons/Home_fill.svg" alt="" />
 			<p>Home</p>
 		</a>
-		<a class="shortcut-link" href="."
-			><img src="/img/icons/Video_fill.svg" alt="" />
-			<p>Subsciptions</p>
-		</a>
+		{#if $user}
+			<a class="shortcut-link" href="."
+				><img src="/img/icons/Video_fill.svg" alt="" />
+				<p>Subsciptions</p>
+			</a>
 
-		<hr />
-		<a class="shortcut-link" href="."
-			><img src="/img/icons/history_white_24dp.svg" alt="" />
-			<p>History</p>
-		</a>
-		<a class="shortcut-link" href="."
-			><img src="/img/icons/play_arrow_white_48dp(2).svg" alt="" />
-			<p>Your videos</p>
-		</a>
-		<a class="shortcut-link" href="."
-			><img src="/img/icons/liked.svg" alt="" />
-			<p>Liked videos</p>
-		</a>
-		<hr />
-		<p class="sidebar-title">SUBSCRIPTIONS</p>
-		<a class="shortcut-link" href="."
-			><img class="subsciption-logo" src="/img/icons/user.png" alt="" />
-			<p>Lorem Ipsum</p>
-		</a>
-		<a class="shortcut-link" href="."
-			><img class="subsciption-logo" src="/img/icons/user.png" alt="" />
-			<p>Lorem Ipsum</p>
-		</a>
-		<a class="shortcut-link" href="."
-			><img class="subsciption-logo" src="/img/icons/user.png" alt="" />
-			<p>Lorem Ipsum</p>
-		</a>
-		<a class="shortcut-link" href="."
-			><img class="subsciption-logo" src="/img/icons/user.png" alt="" />
-			<p>Lorem Ipsum</p>
-		</a>
+			<hr />
+			<a class="shortcut-link" href="."
+				><img src="/img/icons/history_white_24dp.svg" alt="" />
+				<p>History</p>
+			</a>
+			<a class="shortcut-link" href="."
+				><img src="/img/icons/play_arrow_white_48dp(2).svg" alt="" />
+				<p>Your videos</p>
+			</a>
+			<a class="shortcut-link" href="."
+				><img src="/img/icons/liked.svg" alt="" />
+				<p>Liked videos</p>
+			</a>
+			<hr />
+			<p class="sidebar-title">SUBSCRIPTIONS</p>
 
-		<button type="button" class="show-more">
-			<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
-		</button>
+			{#each subscriptionsSlice as sub}
+				<a class="shortcut-link" href="/user/{sub.user.id}"
+					><img
+						class="subsciption-logo"
+						src={sub.user.profilePictureUrl ?? '/img/icons/user.png'}
+						alt=""
+					/>
+					<p>{sub.user.login}</p>
+				</a>
+			{/each}
+			{#if !smotritelSabok}
+				<button
+					on:click={() => {
+						smotritelSabok = true;
+					}}
+					class="show-more"
+				>
+					<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
+				</button>
+			{:else}
+				<button
+					on:click={() => {
+						smotritelSabok = false;
+					}}
+					class="show-less"
+				>
+					<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
+				</button>
+			{/if}
+		{/if}
 
 		<hr />
 		<a class="shortcut-link" href="."

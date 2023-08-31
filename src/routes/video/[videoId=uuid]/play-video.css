@@ -162,6 +162,7 @@ img {
 .play-video {
 	flex-basis: 78%;
 	margin-right: 25px;
+	padding-bottom: 25px;
 }
 
 .video-container {
@@ -203,12 +204,12 @@ img {
 	border-radius: 50%;
 }
 
-.channel-info div a{
+.channel-info div a {
 	font-weight: 600;
 	font-size: 20px;
 	line-height: 24px;
 	color: #000000;
-    text-decoration: none;
+	text-decoration: none;
 }
 
 
@@ -571,14 +572,6 @@ img {
 .side-video-list:hover .vid-info a {
 	color: var(--primary-color);
 
-}
-
-.vid-info p {
-	font-weight: 500;
-	font-size: 15px;
-	line-height: 18px;
-	color: #54b9a2;
-	margin-top: 7px;
 }
 
 .vid-views {

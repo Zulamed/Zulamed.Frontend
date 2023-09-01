@@ -5,9 +5,8 @@ import { error } from '@sveltejs/kit';
 export const load: LayoutServerLoad = async ({ locals, fetch }) => {
     let subscriptions: Subscription[] | undefined;
     if (!locals.user) {
-        subscriptions = undefined;
+        subscriptions = [];
     } else {
-
         const result = await getSubscriptions(locals.user?.id, fetch)
         subscriptions = match(result)
             .with({ tag: "success" }, ({ subscriptions }) => subscriptions)
@@ -19,8 +18,6 @@ export const load: LayoutServerLoad = async ({ locals, fetch }) => {
                 subscriptions.push(subscriptions[0])
             }
         }
-
-
     }
     return {
         loggedInUser: locals.user, subscriptions

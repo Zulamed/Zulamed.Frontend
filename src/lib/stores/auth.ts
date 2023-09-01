@@ -27,6 +27,7 @@ export async function login(email: string, password: string) {
     const { user: newUser } = await signInWithEmailAndPassword(auth, email, password);
     const jwtToken = await newUser?.getIdTokenResult();
     fetchUser(jwtToken);
+    invalidateAll();
 }
 
 
@@ -52,6 +53,7 @@ if (browser) {
             if (!jwtToken)
                 return;
             fetchUser(jwtToken);
+            invalidateAll();
         }
     });
 }

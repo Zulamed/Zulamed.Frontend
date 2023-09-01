@@ -5,7 +5,7 @@
 	import { portal } from 'svelte-portal';
 	import { page } from '$app/stores';
 	import type { Subscription } from '$backend/user/getSubscriptions';
-	export let subscriptions: Subscription[] | undefined = undefined;
+	export let subscriptions: Subscription[];
 
 	let isMobileSearchBarOpen = false;
 	let displayProfileContainer = 'none';
@@ -17,8 +17,7 @@
 	let overlayLeft = '-100%';
 
 	let smotritelSabok = false;
-	$: subscriptionsSlice =
-		!smotritelSabok && $user && subscriptions ? subscriptions.slice(0, 3) : subscriptions;
+	$: subscriptionsSlice = !smotritelSabok && $user ? subscriptions.slice(0, 3) : subscriptions;
 	export let showSearchbar = true;
 	const toggleProfileContainer = () => {
 		displayProfileContainer = displayProfileContainer === 'none' ? 'block' : 'none';
@@ -250,7 +249,7 @@
 			</a>
 			<hr />
 			<p class="sidebar-title">SUBSCRIPTIONS</p>
-			{#if subscriptionsSlice && subscriptionsSlice.length !== 0}
+			{#if subscriptionsSlice.length !== 0}
 				{#each subscriptionsSlice as sub}
 					<a class="shortcut-link" href="/user/{sub.user.id}"
 						><img
@@ -355,7 +354,7 @@
 			</a>
 			<hr />
 			<p class="sidebar-title">SUBSCRIPTIONS</p>
-			{#if subscriptionsSlice && subscriptionsSlice.length !== 0}
+			{#if subscriptionsSlice.length !== 0}
 				{#each subscriptionsSlice as sub}
 					<a class="shortcut-link" href="/user/{sub.user.id}"
 						><img

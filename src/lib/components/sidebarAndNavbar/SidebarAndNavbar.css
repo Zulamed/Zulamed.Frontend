@@ -316,8 +316,16 @@ a {
     padding-bottom: 0;
 }
 
+.small-sidebar .shortcut-link {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
 .small-sidebar a p {
-    display: none;
+    display: flex;
+    font-size: 10px;
+    text-align: center;
 }
 
 .small-sidebar .sidebar-title {
@@ -325,7 +333,7 @@ a {
 }
 
 .small-sidebar .shortcut-links a:hover {
-    background-color: transparent;
+    background-color: #9b9b9b5b;
 }
 
 .small-sidebar .shortcut-links a img {
@@ -333,11 +341,11 @@ a {
 }
 
 .small-sidebar .active-shortcut {
-    background-color: transparent;
+    background-color: #d9d9d9b5;
 }
 
 .small-sidebar .active-shortcut:hover {
-    background-color: transparent !important;
+    background-color: #d9d9d9b5 !important;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -355,8 +363,18 @@ a {
     align-items: center;
 }
 
+.small-sidebar .shortcut-links {
+    width: 100%;
+}
+
 .small-sidebar .shortcut-link {
-    padding: 12px 0 11px 0px;
+    width: 90%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+
 }
 
 .shortcut-links a {
@@ -369,7 +387,7 @@ a {
 }
 
 .shortcut-links a:hover {
-    background-color: #d9d9d95b;
+    background-color: #9b9b9b5b;
 }
 
 .shortcut-links a p {
@@ -404,9 +422,6 @@ a {
     width: 100%;
 }
 
-.small-sidebar .shortcut-links a {
-    width: fit-content;
-}
 
 .small-sidebar .subsciption-logo {
     width: 30px !important;
@@ -523,7 +538,7 @@ a {
 }
 
 .shortcut-links a:hover {
-    background-color: #d9d9d95b;
+    background-color: #9b9b9b5b;
 }
 
 .shortcut-links a p {
@@ -703,6 +718,14 @@ a {
         font-size: 14px !important;
         line-height: 18px;
         color: #ffffff;
+    }
+
+    .small-sidebar .shortcut-link p {
+        font-size: 10px;
+    }
+
+    .small-sidebar .shortcut-link img {
+        width: 30px;
     }
 }
 

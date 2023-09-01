@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { sidebarOpened } from '$lib/components/sidebarAndNavbar/stores/sidebarOpened';
+	import Tooltip from '$lib/components/tooltip.svelte';
 	import { user } from '$lib/stores/auth';
+	import { melt } from '@melt-ui/svelte';
 	import type { PageData } from './$types';
 	export let data: PageData;
 </script>
@@ -25,6 +27,7 @@
 	</div>
 	<div class="list-container">
 		{#each data.videoResponse as response}
+			{@const title = response.video.videoTitle}
 			<div class="vid-list">
 				<a class="preview" href="/video/{response.video.id}"
 					><img src={response.video.videoThumbnail} class="thumbnail" alt="" /></a
@@ -32,7 +35,13 @@
 				<div class="flex-div">
 					<img src={response.user.profilePictureUrl ?? '/img/icons/user.png'} alt="" />
 					<div class="vid-info">
-						<a href="/video/{response.video.id}">{response.video.videoTitle}</a>
+						<Tooltip placement="bottom">
+							<a use:melt={trigger} let:trigger slot="button" href="/video/{response.video.id}"
+								>{title.length > 70 ? title.slice(0, 70) + '...' : title}</a
+							>
+							<p slot="content">{title}</p>
+						</Tooltip>
+
 						<a class="channel-name" href="/user/{response.user.id}">{response.user.username}</a>
 						<p class="vid-views">{response.video.videoViews} views</p>
 					</div>

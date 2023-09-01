@@ -12,7 +12,6 @@
 
 	// let text: string;
 	let height = '64px';
-
 	const showMore = () => {
 		if (height === 'auto') return;
 		height = 'auto';
@@ -80,7 +79,9 @@
 		cursor: pointer;
 		margin-bottom: 14px;
 	}
-
+	.play-video-description:hover {
+		background: #ccddd9;
+	}
 	.play-video-stats {
 		width: 100%;
 		display: flex;
@@ -111,6 +112,9 @@
 		.play-video-stats span {
 			font-size: 13px;
 			line-height: 16px;
+		}
+		.play-video-description:hover {
+			background: #ebf8f5;
 		}
 	}
 

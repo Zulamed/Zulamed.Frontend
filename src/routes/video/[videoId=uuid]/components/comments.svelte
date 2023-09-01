@@ -162,7 +162,7 @@
 						currentProps = inputText.length > 0 ? enabledProps : disabledProps;
 					}}
 				/>
-				<div class="comment-input-focus" />
+				<!-- <div class="comment-input-focus" /> -->
 			</div>
 
 			<input type="hidden" name="videoId" value={videoId} />
@@ -233,7 +233,7 @@
 									editTextArea.value.length > 0 ? editingEnabledProps : editingDisabledProps;
 							}}
 						/>
-						<div class="comment-input-focus" />
+						<!-- <div class="comment-input-focus" /> -->
 					</div>
 
 					<div class="write-comment-buttons" style:display="flex">
@@ -779,7 +779,15 @@
 		cursor: pointer;
 	}
 
+	/* @media (max-width: 1280px) {
+		.comment-input-focus {
+			bottom: 3px;
+		}
+	} */
 	@media (max-width: 1027px) {
+		.comment-input-focus {
+			display: none;
+		}
 		.play-video-comments {
 			height: auto;
 		}

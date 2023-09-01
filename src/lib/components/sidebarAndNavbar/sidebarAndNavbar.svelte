@@ -19,8 +19,8 @@
 	let shortcutPadding = '7px';
 	let overflowY = 'hidden';
 	let smotritelSabok = false;
-	$: subscriptionsSlice = !smotritelSabok && $user && subscriptions ? subscriptions.slice(0, 3) : subscriptions;
-
+	$: subscriptionsSlice =
+		!smotritelSabok && $user && subscriptions ? subscriptions.slice(0, 3) : subscriptions;
 
 	$: {
 		$sidebarOpened = sidebarOpen;
@@ -227,11 +227,7 @@
 <!-- ------------sidebar------------ -->
 <div class="sidebar" class:small-sidebar={!sidebarOpen}>
 	<div class="shortcut-links" style:display={sidebarOpen ? 'block' : 'flex'}>
-		<a
-			class="shortcut-link"
-			href="/"
-			style:padding="12px 0 11px {shortcutPadding}"
-			class:active-shortcut={$page.url.pathname === '/'}
+		<a class="shortcut-link" href="/" class:active-shortcut={$page.url.pathname === '/'}
 			><img src="/img/icons/Home_fill.svg" alt="" />
 			<p>Home</p>
 		</a>
@@ -240,34 +236,33 @@
 			<a
 				class="shortcut-link"
 				href="/subscriptions"
-				style:padding="12px 0 11px {shortcutPadding}"
 				class:active-shortcut={$page.url.pathname === '/subscriptions'}
-				><img src="/img/icons/Video_fill.svg" alt="" />
+				><img src="/img/icons/subscriptions_white_24dp.svg" alt="" />
 				<p>Subsciptions</p>
 			</a>
 
 			<hr />
-			<a class="shortcut-link" href="." style:padding="12px 0 11px {shortcutPadding}"
+			<a class="shortcut-link" href="."
 				><img src="/img/icons/history_white_24dp.svg" alt="" />
 				<p>History</p>
 			</a>
-			<a class="shortcut-link" href="." style:padding="12px 0 11px {shortcutPadding}"
+			<a class="shortcut-link" href="."
 				><img src="/img/icons/play_arrow_white_48dp(2).svg" alt="" />
 				<p>Your videos</p>
 			</a>
-			<a class="shortcut-link" href="." style:padding="12px 0 11px {shortcutPadding}"
+			<a class="shortcut-link" href="."
 				><img src="/img/icons/liked.svg" alt="" />
 				<p>Liked videos</p>
 			</a>
-			<hr />
-			<p class="sidebar-title">SUBSCRIPTIONS</p>
+			<hr style:display={sidebarOpen ? 'flex' : 'none'} />
+			<p class="sidebar-title" style:display={sidebarOpen ? 'flex' : 'none'}>SUBSCRIPTIONS</p>
 
 			{#if subscriptionsSlice && subscriptionsSlice.length != 0}
 				{#each subscriptionsSlice as sub}
 					<a
 						class="shortcut-link"
 						href="/user/{sub.user.id}"
-						style:padding="12px 0 11px {shortcutPadding}"
+						style:display={sidebarOpen ? 'flex' : 'none'}
 						><img
 							class="subsciption-logo"
 							src={sub.user.profilePictureUrl ?? '/img/icons/user.png'}
@@ -299,21 +294,21 @@
 				<p style="color: #fff; padding: 0 0 0 16px;">You have no subscriptions</p>
 			{/if}
 
-			<hr />
+			<hr style:display={sidebarOpen ? 'flex' : 'none'} />
 		{/if}
-		<a class="shortcut-link" href="." style:padding="12px 0 11px {shortcutPadding}"
+		<a class="shortcut-link" href="." style:display={sidebarOpen ? 'flex' : 'none'}
 			><img src="/img/icons/settings_white_24dp.svg" alt="" />
 			<p>Settings</p>
 		</a>
-		<a class="shortcut-link" href="." style:padding="12px 0 11px {shortcutPadding}"
+		<a class="shortcut-link" href="." style:display={sidebarOpen ? 'flex' : 'none'}
 			><img src="/img/icons/flag_white_24dp.svg" alt="" />
 			<p>Report History</p>
 		</a>
-		<a class="shortcut-link" href="." style:padding="12px 0 11px {shortcutPadding}"
+		<a class="shortcut-link" href="." style:display={sidebarOpen ? 'flex' : 'none'}
 			><img src="/img/icons/help_outline_white_24dp.svg" alt="" />
 			<p>Help</p>
 		</a>
-		<a class="shortcut-link" href="." style:padding="12px 0 11px {shortcutPadding}"
+		<a class="shortcut-link" href="." style:display={sidebarOpen ? 'flex' : 'none'}
 			><img src="/img/icons/info_white_24dp.svg" alt="" />
 			<p>Send Feedback</p>
 		</a>
@@ -343,13 +338,21 @@
 
 <div class="sidebar-mobile" style:left={sidebarMobileLeft}>
 	<div class="shortcut-links">
-		<a class="shortcut-link active-shortcut" href="."
+		<a
+			class="shortcut-link"
+			href="/"
+			class:active-shortcut={$page.url.pathname === '/'}
+			on:click={closeMobileSidebar}
 			><img src="/img/icons/Home_fill.svg" alt="" />
 			<p>Home</p>
 		</a>
 		{#if $user}
-			<a class="shortcut-link" href="."
-				><img src="/img/icons/Video_fill.svg" alt="" />
+			<a
+				class="shortcut-link"
+				href="/subscriptions"
+				class:active-shortcut={$page.url.pathname === '/subscriptions'}
+				on:click={closeMobileSidebar}
+				><img src="/img/icons/subscriptions_white_24dp.svg" alt="" />
 				<p>Subsciptions</p>
 			</a>
 
@@ -369,7 +372,7 @@
 			<hr />
 			<p class="sidebar-title">SUBSCRIPTIONS</p>
 
-			{#if subscriptionsSlice &&  subscriptionsSlice.length != 0}
+			{#if subscriptionsSlice && subscriptionsSlice.length != 0}
 				{#each subscriptionsSlice as sub}
 					<a class="shortcut-link" href="/user/{sub.user.id}"
 						><img

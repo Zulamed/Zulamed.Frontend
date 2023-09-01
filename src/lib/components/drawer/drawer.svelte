@@ -17,7 +17,8 @@
 	let overlayLeft = '-100%';
 
 	let smotritelSabok = false;
-	$: subscriptionsSlice = !smotritelSabok && $user && subscriptions ? subscriptions.slice(0, 3) : subscriptions;
+	$: subscriptionsSlice =
+		!smotritelSabok && $user && subscriptions ? subscriptions.slice(0, 3) : subscriptions;
 	export let showSearchbar = true;
 	const toggleProfileContainer = () => {
 		displayProfileContainer = displayProfileContainer === 'none' ? 'block' : 'none';
@@ -230,7 +231,7 @@
 				id="shortcut-link"
 				href="/subscriptions"
 				class:active-shortcut={$page.url.pathname === '/subscriptions'}
-				><img src="/img/icons/Video_fill.svg" alt="" />
+				><img src="/img/icons/subscriptions_white_24dp.svg" alt="" />
 				<p>Subsciptions</p>
 			</a>
 
@@ -335,7 +336,7 @@
 		</a>
 		{#if $user}
 			<a id="shortcut-link" href="."
-				><img src="/img/icons/Video_fill.svg" alt="" />
+				><img src="/img/icons/subscriptions_white_24dp.svg" alt="" />
 				<p>Subsciptions</p>
 			</a>
 

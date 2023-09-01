@@ -288,7 +288,7 @@
 					<div class="vid-info">
 						<Tooltip placement="bottom">
 							<a use:melt={trigger} let:trigger slot="button" href="/video/{amogus.video.id}"
-								>{title.length > 42 ? title.slice(0, 41) + '...' : title}</a
+								>{title.length > 34 ? title.slice(0, 34) + '...' : title}</a
 							>
 							<p slot="content">{title}</p>
 						</Tooltip>

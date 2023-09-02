@@ -3,6 +3,8 @@
 	import { getRelativeTime } from '$lib/utils/relativeTime';
 	export let videos: VideoMinimal[];
 	export let user: User;
+
+	const title = videos[0].description;
 </script>
 
 <div class="last-video">
@@ -17,7 +19,7 @@
 				<p class="vid-views">·&nbsp;{videos[0].views} views</p>
 			</div>
 			<p class="vid-description">
-				{videos[0].description}
+				{title.length > 215 ? title.slice(0, 215) + '...' : title}
 			</p>
 		</div>
 	</div>

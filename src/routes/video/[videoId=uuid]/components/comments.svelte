@@ -23,7 +23,7 @@
 	let textAreaHeight = 25;
 	function adjustTextAreaHeight(event: any) {
 		event.target.style.height = '25px';
-		event.target.style.height = `${event.target.scrollHeight + 1}px`;
+		event.target.style.height = `${event.target.scrollHeight}px`;
 	}
 	let editTextArea: HTMLTextAreaElement;
 	let visibility = false;
@@ -162,7 +162,8 @@
 						currentProps = inputText.length > 0 ? enabledProps : disabledProps;
 					}}
 				/>
-				<!-- <div class="comment-input-focus" /> -->
+				<div class="comment-input-unfocus" />
+				<div class="comment-input-focus" />
 			</div>
 
 			<input type="hidden" name="videoId" value={videoId} />
@@ -233,7 +234,8 @@
 									editTextArea.value.length > 0 ? editingEnabledProps : editingDisabledProps;
 							}}
 						/>
-						<!-- <div class="comment-input-focus" /> -->
+						<div class="comment-input-unfocus" />
+						<div class="comment-input-focus" />
 					</div>
 
 					<div class="write-comment-buttons" style:display="flex">
@@ -526,6 +528,16 @@
 
 	/* ====================== */
 	/* ====================== */
+	.comment-input-unfocus {
+		position: absolute;
+		bottom: 0px;
+		width: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+		height: 1px;
+		z-index: 1;
+		background-color: rgb(134, 134, 134);
+	}
 	.comment-input-focus {
 		position: absolute;
 		bottom: 0px;
@@ -656,10 +668,9 @@
 		-webkit-box-shadow: none;
 		-moz-box-shadow: none;
 		box-shadow: none;
-		border-bottom: 1px solid rgb(134, 134, 134);
 	}
 
-	.comment-input:focus + .comment-input-focus {
+	.comment-input:focus ~ .comment-input-focus {
 		width: 100%;
 		transition: width 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
 	}

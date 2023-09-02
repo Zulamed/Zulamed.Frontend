@@ -19,8 +19,7 @@
 	let shortcutPadding = '7px';
 	let overflowY = 'hidden';
 	let smotritelSabok = false;
-	$: subscriptionsSlice =
-		!smotritelSabok && $user ? subscriptions.slice(0, 3) : subscriptions;
+	$: subscriptionsSlice = !smotritelSabok && $user ? subscriptions.slice(0, 3) : subscriptions;
 
 	$: {
 		$sidebarOpened = sidebarOpen;
@@ -254,10 +253,10 @@
 				><img src="/img/icons/liked.svg" alt="" />
 				<p>Liked videos</p>
 			</a>
-			<hr style:display={sidebarOpen ? 'flex' : 'none'} />
-			<p class="sidebar-title" style:display={sidebarOpen ? 'flex' : 'none'}>SUBSCRIPTIONS</p>
-
 			{#if subscriptionsSlice.length != 0}
+				<hr style:display={sidebarOpen ? 'flex' : 'none'} />
+				<p class="sidebar-title" style:display={sidebarOpen ? 'flex' : 'none'}>SUBSCRIPTIONS</p>
+
 				{#each subscriptionsSlice as sub}
 					<a
 						class="shortcut-link"
@@ -290,8 +289,6 @@
 						<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
 					</button>
 				{/if}
-			{:else}
-				<p style="color: #fff; padding: 0 0 0 16px;">You have no subscriptions</p>
 			{/if}
 
 			<hr style:display={sidebarOpen ? 'flex' : 'none'} />

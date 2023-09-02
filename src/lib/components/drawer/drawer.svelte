@@ -15,6 +15,7 @@
 	let searchbarMobileTop = '0';
 	let navigationBoxShadow = '0px 0px 0px #00000040';
 	let overlayLeft = '-100%';
+	let drawerOverlay: HTMLDivElement;
 
 	let smotritelSabok = false;
 	$: subscriptionsSlice = !smotritelSabok && $user ? subscriptions.slice(0, 3) : subscriptions;
@@ -33,6 +34,13 @@
 
 	const toggleSidebar = () => {
 		sidebarOpen = !sidebarOpen;
+		if (sidebarOpen) {
+			drawerOverlay.style.visibility = 'visible';
+			drawerOverlay.style.opacity = '1';
+		} else {
+			drawerOverlay.style.visibility = 'hidden';
+			drawerOverlay.style.opacity = '0';
+		}
 	};
 
 	const openMobileSidebar = () => {
@@ -174,10 +182,10 @@
 						<a href="." class="account-manage">Manage your Account</a>
 					</div>
 				</div>
-				<button class="profile-link"
+				<a href="/user/{$user.id}" class="profile-link"
 					><img src="/img/profileContainerIcons/account_box_black_24dp.svg" alt="" />
 					<p>Your channel</p>
-				</button>
+				</a>
 				<button class="profile-link"
 					><img src="/img/profileContainerIcons/groups_black_24dp.svg" alt="" />
 					<p>Switch account</p>
@@ -214,7 +222,8 @@
 
 <!-- ============NAVIGATION END============ -->
 <!-- ============SIDEBAR============ -->
-
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div use:portal bind:this={drawerOverlay} on:click={toggleSidebar} class="drawer-overlay" />
 <div class="sidebar" class:open={sidebarOpen}>
 	<div class="shortcut-links">
 		<a
@@ -352,9 +361,9 @@
 				><img src="/img/icons/liked.svg" alt="" />
 				<p>Liked videos</p>
 			</a>
-			<hr />
-			<p class="sidebar-title">SUBSCRIPTIONS</p>
 			{#if subscriptionsSlice.length !== 0}
+				<hr />
+				<p class="sidebar-title">SUBSCRIPTIONS</p>
 				{#each subscriptionsSlice as sub}
 					<a class="shortcut-link" href="/user/{sub.user.id}"
 						><img
@@ -384,8 +393,6 @@
 						<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
 					</button>
 				{/if}
-			{:else}
-				<p style="color: #fff; padding: 0 0 0 16px;">You have no subscriptions</p>
 			{/if}
 		{/if}
 

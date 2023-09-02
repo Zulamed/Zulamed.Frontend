@@ -74,10 +74,7 @@
 	}
 </script>
 
-<form
-	method="post"
-	bind:this={formElement}
->
+<form method="post" bind:this={formElement}>
 	{#if step > 0 && prevStep}
 		<div class="prev" style="width: 100%; display: flex; align-items: start;">
 			<button
@@ -231,12 +228,12 @@
 	div.radio-content > label > img {
 		width: 35px;
 		height: 35px;
-		content: url(../img/icons/Check_ring.svg);
+		content: url(/img/icons/Check_ring.svg);
 		border: none;
 		pointer-events: none;
 	}
 	div.radio-content > label > input:checked + img {
-		content: url(../img/icons/Check_fill.svg);
+		content: url(/img/icons/Check_fill.svg);
 	}
 	.input-container {
 		width: 100%;

@@ -37,7 +37,7 @@
 	color: #000000;
 }
 
-.channel-info div p {
+.channel-info div a {
 	color: #616163;
 	font-size: 18px;
 	font-style: normal;
@@ -124,6 +124,7 @@ hr {
 	color: #000;
 }
 
+
 .subheader-btn {
 	border-radius: 23.5px;
 	background: #54B9A2;
@@ -137,6 +138,14 @@ hr {
 	font-weight: 600;
 	cursor: pointer;
 	transition: all .2s ease;
+}
+
+.subheader-btn.active {
+	background-color: #999;
+}
+
+.subheader-btn.active:hover {
+	background-color: #7c7c7c;
 }
 
 .subheader-btn:hover {
@@ -412,7 +421,71 @@ fieldset input {
 }
 
 /* ================================= */
-/* ================================= */
+
+/* ============NO VIDEOS USER================= */
+
+.user-no-videos {
+	width: 100%;
+	min-height: 800px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 22px;
+	justify-content: center;
+
+}
+
+.user-no-videos img {
+	user-select: none;
+	pointer-events: none;
+}
+
+.no-videos-title {
+	color: #000;
+	text-align: center;
+	font-size: 28px;
+	font-style: normal;
+	font-weight: 400;
+}
+
+.no-videos-subtitle {
+	color: #616163;
+	text-align: center;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 400;
+}
+
+.interaction-btn {
+	height: 47px;
+	cursor: pointer;
+	border: none;
+	outline: none;
+	border-radius: 23.5px;
+	background-color: #54b9a2;
+	font-weight: 500;
+	font-size: 15px;
+	line-height: 18px;
+	text-align: center;
+	color: #ffffff;
+	transition: background 0.1s ease;
+}
+
+.follow-btn {
+	width: 147px;
+}
+
+.interaction-btn.active {
+	background-color: #3c947f;
+	color: #ffffff;
+}
+
+.interaction-btn:hover {
+	background-color: #49a08c;
+}
+
+
+/* ============NO VIDEOS USER================= */
 
 @media (max-width: 1440px) {
 	.large-container {

@@ -99,7 +99,9 @@
 				<p>@{data.user.login}</p>
 				<p>{data.numberOfFollowers} followers</p>
 			</div>
-			<a href="" style="text-decoration-line: underline;">More about this channel</a>
+			<a use:melt={$trigger('tab-4')} style="text-decoration-line: underline; cursor: pointer;"
+				>More about this channel</a
+			>
 		</div>
 	</div>
 	<div class="subheader">
@@ -175,7 +177,7 @@
 									on:drop={handleFilesSelect}
 									accept={['video/*']}
 									inputElement={inputFile}
-									containerStyles="height:100%; width:100%; justify-content: center; background-color: #FFF; border-color: #54B9A2;"
+									containerStyles="height:100%; width:100%; justify-content: center; background-color: #FFF; border-color: transparent;"
 								>
 									<div class="upload-icon">
 										<svg
@@ -289,8 +291,8 @@
 				<img src="/img/icons/upload-a-video.svg" alt="" />
 				<h1 class="no-videos-title">Upload a video to get started</h1>
 				<p class="no-videos-subtitle">
-					Start sharing your story and connecting with viewers. Videos that you upload<br />will
-					show up here
+					Start sharing your story and connecting with viewers. Videos that you upload will show up
+					here
 				</p>
 				<button use:melt={$triggerDialog} class="subheader-btn">Upload video</button>
 			</div>

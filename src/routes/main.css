@@ -16,6 +16,10 @@
     --disabled-btn-hover: #7c7c7c;
 }
 
+*::selection {
+    background-color: #42b398;
+}
+
 input,
 div,
 textarea,

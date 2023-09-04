@@ -244,7 +244,10 @@
 			</a>
 
 			<hr />
-			<a id="shortcut-link" href="."
+			<a
+				id="shortcut-link"
+				href="/history"
+				class:active-shortcut={$page.url.pathname === '/history'}
 				><img src="/img/icons/history_white_24dp.svg" alt="" />
 				<p>History</p>
 			</a>
@@ -252,7 +255,10 @@
 				><img src="/img/icons/play_arrow_white_48dp(2).svg" alt="" />
 				<p>Your videos</p>
 			</a>
-			<a id="shortcut-link" href="."
+			<a
+				id="shortcut-link"
+				href="/liked-videos"
+				class:active-shortcut={$page.url.pathname === '/liked-videos'}
 				><img src="/img/icons/liked.svg" alt="" />
 				<p>Liked videos</p>
 			</a>
@@ -343,13 +349,19 @@
 			<p>Home</p>
 		</a>
 		{#if $user}
-			<a id="shortcut-link" href="."
+			<a
+				id="shortcut-link"
+				href="/subscriptions"
+				class:active-shortcut={$page.url.pathname === '/subscriptions'}
 				><img src="/img/icons/subscriptions_white_24dp.svg" alt="" />
 				<p>Subsciptions</p>
 			</a>
 
 			<hr />
-			<a id="shortcut-link" href="."
+			<a
+				id="shortcut-link"
+				href="/history"
+				class:active-shortcut={$page.url.pathname === '/history'}
 				><img src="/img/icons/history_white_24dp.svg" alt="" />
 				<p>History</p>
 			</a>

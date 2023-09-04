@@ -528,8 +528,40 @@ fieldset input {
 }
 
 @media (max-width: 900px) {
+	.user-no-videos {
+		justify-content: flex-start;
+		padding: 68px 20px;
+	}
+
+	.user-no-videos img {
+		width: 152px;
+	}
+
+	.no-videos-title {
+		color: #000;
+		text-align: center;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 400;
+	}
+
+	.user-no-videos .subheader-btn {
+		text-align: center;
+		font-size: 12px;
+		font-weight: 600;
+		padding: 12px 16px;
+	}
+
+	.no-videos-subtitle {
+		color: #616163;
+		text-align: center;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 400;
+	}
+
 	.content {
-		max-width: 320px;
+		max-width: 394px;
 		max-height: 493px;
 	}
 

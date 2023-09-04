@@ -109,7 +109,7 @@
 					<input type="text" placeholder="Search..." />
 				</div>
 				<button class="search-button" type="submit"
-					><img src="/img/icons/search_white_24dp.svg" alt="" /></button
+					><img src="/img/icons/search_white_4dp.svg" alt="" /></button
 				>
 			</form>
 		</div>
@@ -241,7 +241,10 @@
 			</a>
 
 			<hr />
-			<a class="shortcut-link" href="."
+			<a
+				class="shortcut-link"
+				href="/history"
+				class:active-shortcut={$page.url.pathname === '/history'}
 				><img src="/img/icons/history_white_24dp.svg" alt="" />
 				<p>History</p>
 			</a>
@@ -249,7 +252,11 @@
 				><img src="/img/icons/play_arrow_white_48dp(2).svg" alt="" />
 				<p>Your videos</p>
 			</a>
-			<a class="shortcut-link" href="."
+			<a
+				class="shortcut-link"
+				href="/liked-videos"
+				on:click={closeMobileSidebar}
+				class:active-shortcut={$page.url.pathname === '/liked-videos'}
 				><img src="/img/icons/liked.svg" alt="" />
 				<p>Liked videos</p>
 			</a>
@@ -354,7 +361,11 @@
 			</a>
 
 			<hr />
-			<a class="shortcut-link" href="."
+			<a
+				class="shortcut-link"
+				href="/history"
+				class:active-shortcut={$page.url.pathname === '/history'}
+				on:click={closeMobileSidebar}
 				><img src="/img/icons/history_white_24dp.svg" alt="" />
 				<p>History</p>
 			</a>
@@ -362,7 +373,11 @@
 				><img src="/img/icons/play_arrow_white_48dp(2).svg" alt="" />
 				<p>Your videos</p>
 			</a>
-			<a class="shortcut-link" href="."
+			<a
+				class="shortcut-link"
+				href="/liked-videos"
+				on:click={closeMobileSidebar}
+				class:active-shortcut={$page.url.pathname === '/liked-videos'}
 				><img src="/img/icons/liked.svg" alt="" />
 				<p>Liked videos</p>
 			</a>

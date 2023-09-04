@@ -41,7 +41,7 @@
 <ErrorToast />
 <Notification />
 
-{#if $page.url.pathname == '/' || $page.url.pathname.includes('/user') || $page.url.pathname.includes('/subscriptions')}
+{#if $page.url.pathname == '/' || $page.url.pathname.includes('/user') || $page.url.pathname.includes('/subscriptions') || $page.url.pathname.includes('/history') || $page.url.pathname.includes('/liked-videos')}
 	<SidebarAndNavbar showSearchbar={searchbarSidebar} subscriptions={data.subscriptions} />
 {:else}
 	<Drawer showSearchbar={searchbar} subscriptions={data.subscriptions} />

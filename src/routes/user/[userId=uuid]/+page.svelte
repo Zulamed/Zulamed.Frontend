@@ -92,15 +92,44 @@
 		<img src="." alt="" />
 	</div>
 	<div class="flex-div channel-info">
-		<img src={data.user.profilePictureUrl ?? '/img/icons/user-logo160x160.jpg'} alt="" />
+		{#if data.user.id === $user?.id}
+			<Tooltip placement="bottom">
+				<a
+					use:melt={trigger}
+					slot="button"
+					let:trigger
+					href="."
+					style="position: relative; margin-right:32px"
+				>
+					<img
+						class="user-profile-picture"
+						src={data.user.profilePictureUrl ?? '/img/icons/user-logo160x160.jpg'}
+						alt=""
+					/>
+					<img class="camera-icon" src="/img/icons/photo_camera_white_24dp.svg" alt="" />
+				</a>
+				<p slot="content">Edit profile picture</p>
+			</Tooltip>
+		{:else}
+			<div>
+				<img
+					class="user-profile-picture"
+					src={data.user.profilePictureUrl ?? '/img/icons/user-logo160x160.jpg'}
+					alt=""
+				/>
+			</div>
+		{/if}
+
 		<div>
 			<h5>{data.user.name} {data.user.surname}</h5>
 			<div class="main-info">
 				<p>@{data.user.login}</p>
 				<p>{data.numberOfFollowers} followers</p>
 			</div>
-			<a use:melt={$trigger('tab-4')} style="text-decoration-line: underline; cursor: pointer;"
-				>More about this channel</a
+			<a
+				href="."
+				use:melt={$trigger('tab-4')}
+				style="text-decoration-line: underline; cursor: pointer;">More about this channel</a
 			>
 		</div>
 	</div>

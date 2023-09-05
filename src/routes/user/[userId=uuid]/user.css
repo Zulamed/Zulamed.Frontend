@@ -23,11 +23,11 @@
 	white-space: nowrap;
 }
 
-.channel-info img {
+.channel-info .user-profile-picture {
 	border-radius: 100%;
 	width: 160px;
 	height: 160px;
-	margin-right: 32px;
+	filter: brightness(0.95);
 }
 
 .channel-info div h5 {
@@ -42,6 +42,10 @@
 	font-size: 18px;
 	font-style: normal;
 	font-weight: 400;
+}
+
+.channel-info div a:hover {
+	color: #3c947f;
 }
 
 .channel-info div {
@@ -482,6 +486,43 @@ fieldset input {
 
 .interaction-btn:hover {
 	background-color: #49a08c;
+}
+
+.channel-info a {
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.channel-info div {
+	border-radius: 50%;
+	cursor: default;
+	position: relative;
+	margin-right: 32px;
+}
+
+.camera-icon {
+	position: absolute;
+	width: 70px;
+	height: 70px;
+	background-color: rgba(0, 0, 0, 0.589);
+	border-radius: 50%;
+	padding: 20px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	opacity: 0;
+}
+
+.channel-info a:hover .camera-icon {
+	opacity: 1;
+}
+
+.channel-info a:hover .user-profile-picture {
+	filter: brightness(1);
+}
+
+.channel-info div:hover .user-profile-picture {
+	filter: brightness(1);
 }
 
 

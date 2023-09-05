@@ -33,7 +33,7 @@
 					><img src={response.video.videoThumbnail} class="thumbnail" alt="" /></a
 				>
 				<div class="flex-div">
-					<img src={response.user.profilePictureUrl ?? '/img/icons/user.png'} alt="" />
+					<img class="" src={response.user.profilePictureUrl ?? '/img/icons/user.png'} alt="" />
 					<div class="vid-info">
 						<Tooltip placement="bottom">
 							<a use:melt={trigger} let:trigger slot="button" href="/video/{response.video.id}"
@@ -52,7 +52,7 @@
 	<!-- <div class="livelist-container m-b-84px"> -->
 	<!-- 	<div class="live-list"> -->
 	<!-- 		<a class="preview" href="."> -->
-	<!-- 			<img src="/img/videoPreviews/live-skeleton.png" class="thumbnail" alt="" /> -->
+	<!-- 			<img src="/img/videoPreviews/live-.png" class="thumbnail" alt="" /> -->
 	<!-- 			<img class="live-icon" src="/img/icons/live.png" alt="" /> -->
 	<!-- 		</a> -->
 	<!-- 		<div class="flex-div"> -->

@@ -17,8 +17,6 @@ import { getAllVideos } from '$backend/video/getAll/endpoint';
 
 export const load = (async ({ params, fetch, locals }) => {
     const videoResult = await getVideoById(params.videoId, fetch);
-    const commentResult = getComments(params.videoId, fetch);
-    const allVideos = getAllVideos(fetch);
     // let videos = match(allVideos)
     //     .with({ tag: "success" }, ({ data }) => data.videos)
     //     .with({ tag: "error" }, ({ error }) => { throw err(500, error) })
@@ -46,8 +44,8 @@ export const load = (async ({ params, fetch, locals }) => {
         }
     }
     return { videoInfo, userLiked, userDisliked, userFollowed, streamed: {
-        comments: commentResult,
-        sideVideos: allVideos
+        comments: getComments(params.videoId, fetch),
+        sideVideos: getAllVideos(fetch)
     } };
 }) satisfies PageServerLoad;
 

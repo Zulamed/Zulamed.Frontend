@@ -684,33 +684,33 @@ img {
 }
 
 @media (max-width: 1200px) {
-	.side-video-list .small-thumbnail {
-		flex-basis: 37%;
-		border-radius: 17px;
-		display: flex;
-		align-items: center;
-	}
+	/* .side-video-list .small-thumbnail { */
+	/* 	flex-basis: 37%; */
+	/* 	border-radius: 17px; */
+	/* 	display: flex; */
+	/* 	align-items: center; */
+	/* } */
 
 	.container {
 		margin-top: 38px;
 		padding-left: 3%;
 		padding-right: 3%;
 	}
-
-	.vid-info p {
-		line-height: 18px;
-		margin-top: 2px;
-	}
-
-	.side-video-list .vid-info {
-		flex-basis: 59%;
-	}
-
-	.side-video-list {
-		display: flex;
-		justify-content: space-between;
-		margin-bottom: 6px;
-	}
+	/**/
+	/* .vid-info p { */
+	/* 	line-height: 18px; */
+	/* 	margin-top: 2px; */
+	/* } */
+	/**/
+	/* .side-video-list .vid-info { */
+	/* 	flex-basis: 59%; */
+	/* } */
+	/**/
+	/* .side-video-list { */
+	/* 	display: flex; */
+	/* 	justify-content: space-between; */
+	/* 	margin-bottom: 6px; */
+	/* } */
 
 	.right-videolist {
 		flex-basis: 20%;
@@ -722,12 +722,12 @@ img {
 		margin-right: 17px;
 	}
 
-	.vid-info a {
-		font-weight: 600;
-		font-size: 17px;
-		line-height: 20px;
-		color: #000000;
-	}
+	/* .vid-info a { */
+	/* 	font-weight: 600; */
+	/* 	font-size: 17px; */
+	/* 	line-height: 20px; */
+	/* 	color: #000000; */
+	/* } */
 
 	.play-video h3 {
 		font-weight: 600;
@@ -889,9 +889,9 @@ img {
 
 /* ============================= */
 @media (max-width: 600px) {
-	.side-video-list .small-thumbnail {
-		margin-bottom: 29px;
-	}
+	/* .side-video-list .small-thumbnail { */
+	/* 	margin-bottom: 29px; */
+	/* } */
 
 	.follow-btn {
 		width: 107px;
@@ -945,18 +945,18 @@ img {
 		display: block;
 	}
 
-	.side-video-list .small-thumbnail img {
-		border-radius: 0px;
-	}
+	/* .side-video-list .small-thumbnail img { */
+	/* 	border-radius: 0px; */
+	/* } */
 
 	/* .play-video-description { */
 	/* 	margin-bottom: 37px; */
 	/* } */
 
-	.side-video-list {
-		display: flex;
-		flex-direction: column;
-	}
+	/* .side-video-list { */
+	/* 	display: flex; */
+	/* 	flex-direction: column; */
+	/* } */
 
 	.play-video-info-right {
 		justify-content: start;

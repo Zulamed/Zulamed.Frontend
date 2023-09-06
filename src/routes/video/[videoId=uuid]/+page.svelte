@@ -7,41 +7,12 @@
 	import Comments from './components/comments.svelte';
 	import { applyAction, enhance } from '$app/forms';
 	import { viewVideo } from '$backend/video/view/endpoint';
-	import { createTooltip, melt } from '@melt-ui/svelte';
+	import { melt } from '@melt-ui/svelte';
 	import Tooltip from '$lib/components/tooltip.svelte';
 	import { addNotification } from '$lib/components/notification.svelte';
+	import SideVideos from './components/sideVideos.svelte';
 
-	let subActive = false;
-	let confirmationVisible = false;
 
-	function toggleSubscription() {
-		if (subActive) {
-			confirmationVisible = true;
-		} else {
-			subActive = !subActive;
-		}
-	}
-
-	function confirmUnsubscribe() {
-		subActive = false;
-		confirmationVisible = false;
-	}
-
-	function cancelUnsubscribe() {
-		confirmationVisible = false;
-	}
-
-	const {
-		elements: { trigger, content, arrow },
-		states: { open }
-	} = createTooltip({
-		positioning: {
-			placement: 'bottom'
-		},
-		openDelay: 1,
-		closeOnPointerDown: false,
-		forceVisible: true
-	});
 
 	let showMoreVideosButton = false;
 	let videoVisibility = true;
@@ -153,7 +124,6 @@
 								slot="button"
 								let:trigger
 								id="follow-btn"
-								on:click={toggleSubscription}
 								class:active={followActive}
 								class="interaction-btn follow-btn">{followActive ? 'FOLLOWED' : 'FOLLOW'}</button
 							>
@@ -285,35 +255,37 @@
 			{:then value}
 				{#if value.tag == 'success'}
 					<Chips />
-					{#each value.data.videos as amogus}
-						{@const title = amogus.video.videoTitle}
-						<div class="side-video-list">
-							<a href="/video/{amogus.video.id}" class="small-thumbnail"
-								><img
-									src={amogus.video.videoThumbnail ?? '/img/videoPreviews/videoPreviewMobile.png'}
-									alt=""
-								/></a
-							>
-							<div class="vid-info">
-								<Tooltip placement="bottom">
-									<a use:melt={trigger} let:trigger slot="button" href="/video/{amogus.video.id}"
-										>{title.length > 34 ? title.slice(0, 34) + '...' : title}</a
-									>
-									<p slot="content">{title}</p>
-								</Tooltip>
-
-								<a
-									style="font-weight: 500;
-						font-size: 15px;
-						line-height: 18px;
-						color: #54b9a2;
-						margin-top: 7px; display: block;"
-									href="/user/{amogus.user.id}">{amogus.user.username}</a
-								>
-								<p class="vid-views">{amogus.video.videoViews} views</p>
-							</div>
-						</div>
-					{/each}
+					<!-- {#each value.data.videos as amogus} -->
+					<!-- 	{@const title = amogus.video.videoTitle} -->
+					<!-- 	<div class="side-video-list"> -->
+					<!-- 		<a href="/video/{amogus.video.id}" class="small-thumbnail" -->
+					<!-- 			><img -->
+					<!-- 				src={amogus.video.videoThumbnail ?? '/img/videoPreviews/videoPreviewMobile.png'} -->
+					<!-- 				alt="" -->
+					<!-- 			/></a -->
+					<!-- 		> -->
+					<!-- 		<div class="vid-info"> -->
+					<!-- 			<Tooltip placement="bottom"> -->
+					<!-- 				<a use:melt={trigger} let:trigger slot="button" href="/video/{amogus.video.id}" -->
+					<!-- 					>{title.length > 34 ? title.slice(0, 34) + '...' : title}</a -->
+					<!-- 				> -->
+					<!-- 				<p slot="content">{title}</p> -->
+					<!-- 			</Tooltip> -->
+					<!---->
+					<!-- 			<a -->
+					<!-- 				style="font-weight: 500; -->
+					<!-- 	font-size: 15px; -->
+					<!-- 	line-height: 18px; -->
+					<!-- 	color: #54b9a2; -->
+					<!-- 	margin-top: 7px; display: block;" -->
+					<!-- 				href="/user/{amogus.user.id}">{amogus.user.username}</a -->
+					<!-- 			> -->
+					<!-- 			<p class="vid-views">{amogus.video.videoViews} views</p> -->
+					<!-- 		</div> -->
+					<!-- 	</div> -->
+					<!-- {/each} -->
+                    <!-- {@const filtered = value.data.videos.filter((video) => video.video.id != data.videoInfo.video.id)} -->
+                    <SideVideos videos={value.data.videos} showMore={videoVisibility} />
 				{/if}
 			{/await}
 			{#if showMoreVideosButton}

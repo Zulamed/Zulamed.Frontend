@@ -17,26 +17,18 @@ import { getAllVideos } from '$backend/video/getAll/endpoint';
 
 export const load = (async ({ params, fetch, locals }) => {
     const videoResult = await getVideoById(params.videoId, fetch);
-    const commentResult = await getComments(params.videoId, fetch);
-    const allVideos = await getAllVideos(fetch);
-    let videos = match(allVideos)
-        .with({ tag: "success" }, ({ data }) => data.videos)
-        .with({ tag: "error" }, ({ error }) => { throw err(500, error) })
-        .exhaustive();
+    const commentResult = getComments(params.videoId, fetch);
+    const allVideos = getAllVideos(fetch);
+    // let videos = match(allVideos)
+    //     .with({ tag: "success" }, ({ data }) => data.videos)
+    //     .with({ tag: "error" }, ({ error }) => { throw err(500, error) })
+    //     .exhaustive();
     const video = match(videoResult)
         .with({ tag: "success" }, ({ response }) => response)
         .with({ tag: "failure" }, ({ error }) => { throw err(500, error) })
         .with({ tag: "not-found" }, () => { throw err(404, "Video not found") })
         .exhaustive();
-    const comments = match(commentResult)
-        .with({ status: "ok" }, ({ data }) => data.comments)
-        .with({ status: "not-found" }, () => [])
-        .with({ status: "error" }, ({ error }) => { throw err(500, error) })
-        .exhaustive();
-
-    // videos = videos.filter(v => v.video.id !== video.video.id);
-
-    const videoInfo = { ...video, comments };
+    const videoInfo = { ...video };
     let userLiked: boolean | undefined = undefined;
     let userDisliked: boolean | undefined = undefined;
     let userFollowed: boolean | undefined = undefined;
@@ -53,7 +45,10 @@ export const load = (async ({ params, fetch, locals }) => {
             userDisliked = await hasDisliked(params.videoId, fetch);
         }
     }
-    return { videoInfo, userLiked, userDisliked, userFollowed, sideVideos: videos };
+    return { videoInfo, userLiked, userDisliked, userFollowed, streamed: {
+        comments: commentResult,
+        sideVideos: allVideos
+    } };
 }) satisfies PageServerLoad;
 
 export const actions = {

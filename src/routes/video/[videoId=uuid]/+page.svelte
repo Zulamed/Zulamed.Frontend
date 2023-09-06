@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, setContext } from 'svelte';
+	import { onMount } from 'svelte';
 	import VideoPlayer from './components/videoPlayer/videoPlayer.svelte';
 	import type { PageData } from './$types';
 	import Chips from './components/chips.svelte';
@@ -10,7 +10,6 @@
 	import { createTooltip, melt } from '@melt-ui/svelte';
 	import Tooltip from '$lib/components/tooltip.svelte';
 	import { addNotification } from '$lib/components/notification.svelte';
-	import { flyAndScale } from '$lib/animations/flyAndScale';
 
 	let subActive = false;
 	let confirmationVisible = false;
@@ -74,8 +73,6 @@
 			matches600px = media600px.matches;
 		};
 		match600px();
-		// i originally used <svelte:window> to bind the event listener but sometimes it didn't work need to investigate
-		window.addEventListener('resize', match600px);
 		match1027px();
 		media1027px.addEventListener('change', match1027px);
 		media600px.addEventListener('change', match600px);
@@ -89,7 +86,7 @@
 	dislikeActive = data.userDisliked ?? false;
 	followActive = data.userFollowed ?? false;
 
-	$: sideVideos = videoVisibility ? data.sideVideos : data.sideVideos.slice(0, 1);
+	// $: sideVideos = videoVisibility ? data.sideVideos : data.sideVideos.slice(0, 1);
 </script>
 
 <svelte:head>
@@ -269,42 +266,56 @@
 				date={data.videoInfo.video.videoPublishedDate}
 			/>
 			{#if !matches1027px}
-				<Comments bind:comments={data.videoInfo.comments} videoId={data.videoInfo.video.id} />
+				{#await data.streamed.comments}
+					Loading....
+				{:then value}
+					{#if value.status == 'ok'}
+						<Comments
+							comments={value.data.comments}
+							videoId={data.videoInfo.video.id}
+						/>
+					{/if}
+				{/await}
 			{/if}
 		</div>
 
 		<div id="right-videolist" class="right-videolist">
-			<Chips />
-
-			{#each sideVideos as amogus}
-				{@const title = amogus.video.videoTitle}
-				<div class="side-video-list">
-					<a href="/video/{amogus.video.id}" class="small-thumbnail"
-						><img
-							src={amogus.video.videoThumbnail ?? '/img/videoPreviews/videoPreviewMobile.png'}
-							alt=""
-						/></a
-					>
-					<div class="vid-info">
-						<Tooltip placement="bottom">
-							<a use:melt={trigger} let:trigger slot="button" href="/video/{amogus.video.id}"
-								>{title.length > 34 ? title.slice(0, 34) + '...' : title}</a
+			{#await data.streamed.sideVideos}
+				<div>Loading...</div>
+			{:then value}
+				{#if value.tag == 'success'}
+					<Chips />
+					{#each value.data.videos as amogus}
+						{@const title = amogus.video.videoTitle}
+						<div class="side-video-list">
+							<a href="/video/{amogus.video.id}" class="small-thumbnail"
+								><img
+									src={amogus.video.videoThumbnail ?? '/img/videoPreviews/videoPreviewMobile.png'}
+									alt=""
+								/></a
 							>
-							<p slot="content">{title}</p>
-						</Tooltip>
+							<div class="vid-info">
+								<Tooltip placement="bottom">
+									<a use:melt={trigger} let:trigger slot="button" href="/video/{amogus.video.id}"
+										>{title.length > 34 ? title.slice(0, 34) + '...' : title}</a
+									>
+									<p slot="content">{title}</p>
+								</Tooltip>
 
-						<a
-							style="font-weight: 500;
+								<a
+									style="font-weight: 500;
 						font-size: 15px;
 						line-height: 18px;
 						color: #54b9a2;
 						margin-top: 7px; display: block;"
-							href="/user/{amogus.user.id}">{amogus.user.username}</a
-						>
-						<p class="vid-views">{amogus.video.videoViews} views</p>
-					</div>
-				</div>
-			{/each}
+									href="/user/{amogus.user.id}">{amogus.user.username}</a
+								>
+								<p class="vid-views">{amogus.video.videoViews} views</p>
+							</div>
+						</div>
+					{/each}
+				{/if}
+			{/await}
 			{#if showMoreVideosButton}
 				<button
 					id="showMoreButton"
@@ -316,7 +327,16 @@
 			{/if}
 		</div>
 		{#if matches1027px}
-			<Comments bind:comments={data.videoInfo.comments} videoId={data.videoInfo.video.id} />
+			{#await data.streamed.comments}
+				Loading....
+			{:then value}
+				{#if value.status == 'ok' && matches1027px}
+					<Comments
+						comments={value.data.comments}
+						videoId={data.videoInfo.video.id}
+					/>
+				{/if}
+			{/await}
 		{/if}
 	</div>
 

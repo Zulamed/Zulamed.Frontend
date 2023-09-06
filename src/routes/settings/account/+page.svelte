@@ -1,11 +1,14 @@
-<script lang="ts"></script>
+<script lang="ts">
+	import { user } from "$lib/stores/auth";
+
+</script>
 
 <div class="container">
 	<div class="account-settings">
 		<div class="sector-1">
 			<h4 class="title">Account</h4>
 			<h1 class="subtitle">Choose how you appear and what you see on ZulaMED</h1>
-			<h4 class="more-info">Signed in as simon.riley@gmail.com</h4>
+			<h4 class="more-info">Signed in as {$user?.email}</h4>
 			<hr style="color: #60606049;" />
 		</div>
 		<div class="sector-2">
@@ -17,10 +20,10 @@
 			<div class="your-channel">
 				<p>Your channel</p>
 				<div class="channel-main-info">
-					<a href=".">
-						<img src="/img/icons/channel-logo.jpg" alt="" />
+					<a href="/user/{$user?.id}">
+						<img src={$user?.profilePictureUrl ?? "/img/icons/channel-logo.jpg"} alt="" />
 					</a>
-					<p class="username">Simon Riley</p>
+					<p class="username">{$user?.login}</p>
 				</div>
 			</div>
 			<hr style="color: #60606049;" />

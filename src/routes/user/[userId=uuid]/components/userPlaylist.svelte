@@ -220,7 +220,7 @@
 	}
 	.list-vid-info a {
 		color: #000;
-		font-size: 17px;
+		font-size: 18px;
 		font-style: normal;
 		font-weight: 400;
 		text-decoration: none;
@@ -256,7 +256,7 @@
 	}
 	.playlist-list .flex-div {
 		align-items: flex-start;
-		margin-top: 23px;
+		margin-top: 10px;
 	}
 
 	.playlist-list .flex-div img {

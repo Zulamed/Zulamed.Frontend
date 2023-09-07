@@ -57,8 +57,13 @@
 		display: flex;
 		justify-content: space-between;
 		margin-bottom: 5px;
+		padding: 0 2px;
+		border-radius: 5px;
+		background-color: transparent;
 	}
-
+	.side-video-list:active {
+		background-color: #f1f1f1;
+	}
 	.side-video-list img {
 		width: 100%;
 		aspect-ratio: 16 / 9;

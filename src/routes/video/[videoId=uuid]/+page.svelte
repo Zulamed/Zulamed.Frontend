@@ -11,8 +11,7 @@
 	import Tooltip from '$lib/components/tooltip.svelte';
 	import { addNotification } from '$lib/components/notification.svelte';
 	import SideVideos from './components/sideVideos.svelte';
-
-
+	import Spinner from '$lib/components/spinner.svelte';
 
 	let showMoreVideosButton = false;
 	let videoVisibility = true;
@@ -237,13 +236,10 @@
 			/>
 			{#if !matches1027px}
 				{#await data.streamed.comments}
-					Loading....
+					<Spinner />
 				{:then value}
 					{#if value.status == 'ok'}
-						<Comments
-							comments={value.data.comments}
-							videoId={data.videoInfo.video.id}
-						/>
+						<Comments comments={value.data.comments} videoId={data.videoInfo.video.id} />
 					{/if}
 				{/await}
 			{/if}
@@ -251,41 +247,11 @@
 
 		<div id="right-videolist" class="right-videolist">
 			{#await data.streamed.sideVideos}
-				<div>Loading...</div>
+				<Spinner />
 			{:then value}
 				{#if value.tag == 'success'}
 					<Chips />
-					<!-- {#each value.data.videos as amogus} -->
-					<!-- 	{@const title = amogus.video.videoTitle} -->
-					<!-- 	<div class="side-video-list"> -->
-					<!-- 		<a href="/video/{amogus.video.id}" class="small-thumbnail" -->
-					<!-- 			><img -->
-					<!-- 				src={amogus.video.videoThumbnail ?? '/img/videoPreviews/videoPreviewMobile.png'} -->
-					<!-- 				alt="" -->
-					<!-- 			/></a -->
-					<!-- 		> -->
-					<!-- 		<div class="vid-info"> -->
-					<!-- 			<Tooltip placement="bottom"> -->
-					<!-- 				<a use:melt={trigger} let:trigger slot="button" href="/video/{amogus.video.id}" -->
-					<!-- 					>{title.length > 34 ? title.slice(0, 34) + '...' : title}</a -->
-					<!-- 				> -->
-					<!-- 				<p slot="content">{title}</p> -->
-					<!-- 			</Tooltip> -->
-					<!---->
-					<!-- 			<a -->
-					<!-- 				style="font-weight: 500; -->
-					<!-- 	font-size: 15px; -->
-					<!-- 	line-height: 18px; -->
-					<!-- 	color: #54b9a2; -->
-					<!-- 	margin-top: 7px; display: block;" -->
-					<!-- 				href="/user/{amogus.user.id}">{amogus.user.username}</a -->
-					<!-- 			> -->
-					<!-- 			<p class="vid-views">{amogus.video.videoViews} views</p> -->
-					<!-- 		</div> -->
-					<!-- 	</div> -->
-					<!-- {/each} -->
-                    <!-- {@const filtered = value.data.videos.filter((video) => video.video.id != data.videoInfo.video.id)} -->
-                    <SideVideos videos={value.data.videos} showMore={videoVisibility} />
+					<SideVideos videos={value.data.videos} showMore={videoVisibility} />
 				{/if}
 			{/await}
 			{#if showMoreVideosButton}
@@ -300,13 +266,10 @@
 		</div>
 		{#if matches1027px}
 			{#await data.streamed.comments}
-				Loading....
+				<Spinner />
 			{:then value}
 				{#if value.status == 'ok' && matches1027px}
-					<Comments
-						comments={value.data.comments}
-						videoId={data.videoInfo.video.id}
-					/>
+					<Comments comments={value.data.comments} videoId={data.videoInfo.video.id} />
 				{/if}
 			{/await}
 		{/if}

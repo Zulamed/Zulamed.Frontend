@@ -29,7 +29,13 @@
 	<!-- =====CHANNELS CONTAINER=====  -->
 	{#each subscriptions as sub}
 		<div class="channel-list">
-			<a href="/user/{sub.user.id}"><img class="channel-logo" src={sub.user.profilePictureUrl ?? "/img/channels4_profile.jpg"} alt="" /></a>
+			<a href="/user/{sub.user.id}"
+				><img
+					class="channel-logo"
+					src={sub.user.profilePictureUrl ?? '/img/channels4_profile.jpg'}
+					alt=""
+				/></a
+			>
 			<a href="/user/{sub.user.id}"><p class="channel-username">{sub.user.login}</p></a>
 			<p class="channel-sub-counter">{sub.numberOfSubscribers} subscribers</p>
 			<button on:click={toggleSubscription} class:active={subActive} class="channel-subscribe-btn">
@@ -161,7 +167,7 @@
 		font-style: normal;
 		font-weight: 400;
 		line-height: normal;
-		margin-bottom: 18px;
+		margin-bottom: 11px;
 	}
 
 	.channel-subscribe-btn {

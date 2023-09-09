@@ -282,9 +282,19 @@ input::-moz-focus-inner {
 		margin-right: 14px;
 	}
 
+
+	.container {
+		padding-left: 20%;
+	}
+
 	.large-container {
 		padding-left: 6%;
 	}
+
+	.list-container {
+		padding: 0 64px;
+	}
+
 }
 
 /* @media (max-width: 1271px) {
@@ -301,16 +311,21 @@ input::-moz-focus-inner {
 } */
 
 @media (max-width: 1238px) {
+	.container {
+		padding-left: 27%;
+	}
+
 	.large-container {
 		padding-left: 8%;
 	}
 
+
 	.list-container {
-		padding: 0 104px 0 134px;
+		padding: 0 64px 0 64px;
 	}
 
 	.livelist-container {
-		padding: 0 104px 0 134px;
+		padding: 0 64px 0 64px;
 	}
 
 	.sidebar {

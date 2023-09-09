@@ -66,13 +66,12 @@
 <div class="container">
 	<div id="row" class="row">
 		<div id="play-video" class="play-video">
-			<div class="video-container">
+			<div class="video-container skeleton">
 				<VideoPlayer
 					src="{data.videoInfo.video.videoUrl}/master.m3u8"
 					poster={data.videoInfo.video.videoThumbnail}
 				/>
 			</div>
-
 			<h3>{data.videoInfo.video.videoTitle}</h3>
 
 			<div class="play-video-info">

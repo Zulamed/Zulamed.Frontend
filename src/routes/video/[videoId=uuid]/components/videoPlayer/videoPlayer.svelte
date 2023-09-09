@@ -17,6 +17,7 @@
 
 	let player: MediaPlayerElement;
 
+
 	let initPlayer = async () => {
 		await defineCustomElements();
 
@@ -26,6 +27,7 @@
 				(provider as HLSProvider).library = Hls;
 			}
 		});
+        $playerLoaded = true;
 	};
 
 
@@ -67,7 +69,7 @@
 	user-idle-delay="1000"
 	playsinline
 	webkit-playsinline
-	on:attached|once={playerAttached}
+	on:attached={playerAttached}
 >
 	<media-outlet />
 	<media-community-skin />

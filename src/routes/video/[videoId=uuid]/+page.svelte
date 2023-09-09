@@ -12,6 +12,7 @@
 	import { addNotification } from '$lib/components/notification.svelte';
 	import SideVideos from './components/sideVideos.svelte';
 	import Spinner from '$lib/components/spinner.svelte';
+	import { playerLoaded } from './components/videoPlayer/playerStore';
 
 	let showMoreVideosButton = false;
 	let videoVisibility = true;
@@ -66,7 +67,7 @@
 <div class="container">
 	<div id="row" class="row">
 		<div id="play-video" class="play-video">
-			<div class="video-container skeleton">
+			<div class="video-container" class:skeleton={!$playerLoaded}>
 				<VideoPlayer
 					src="{data.videoInfo.video.videoUrl}/master.m3u8"
 					poster={data.videoInfo.video.videoThumbnail}

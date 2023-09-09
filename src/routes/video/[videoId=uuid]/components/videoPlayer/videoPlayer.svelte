@@ -6,10 +6,11 @@
 	import 'vidstack/styles/defaults.css';
 	import 'vidstack/styles/community-skin/video.css';
 	import { playerVolume } from '../../stores/video-sound-store';
+    import { playerLoaded } from './playerStore';
 
-	export let src: string;
 	export let poster = '/img/videoPreviews/2.png';
 
+    export let src: string;
 	if (!poster) {
 		poster = '/img/videoPreviews/2.png';
 	}
@@ -27,17 +28,16 @@
 		});
 	};
 
-	let loaded = false;
 
 	let destroy: () => void | undefined;
 
 	function playerAttached() {
 		destroy = player.subscribe(({ volume }) => {
-			if (loaded) {
+			if ($playerLoaded) {
 				$playerVolume = volume;
 			}
 		});
-		loaded = true;
+		$playerLoaded = true;
 	}
 
 	onMount(async () => {
@@ -48,6 +48,7 @@
 	onDestroy(async () => {
 		player?.destroy();
 		destroy?.();
+        $playerLoaded = false;
 	});
 </script>
 

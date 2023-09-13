@@ -8,16 +8,16 @@ type Response =
     | { status: "not-found" }
     | { status: "error", error: string }
 
-export async function getComments(videoId: string, fetch: FetchCallbackType = originalFetch): Promise<Response> {
+export async function getComments(videoId: string, fetch: FetchCallbackType = originalFetch, pageNo = 1, pageSize = 10, ): Promise<Response> {
     try {
-        const response = await fetch(`${PUBLIC_BACKEND_URL}/video/${videoId}/comment`);
+        const response = await fetch(`${PUBLIC_BACKEND_URL}/video/${videoId}/comment?page=${pageNo}&pageSize=${pageSize}`);
         if (response.status === 404) {
             return { status: "not-found" }
         }
         if (!response.ok) {
             return { status: "error", error: response.statusText }
         }
-        const comments = await response.json() as { comments: Comment[] };
+        const comments = await response.json() as { comments: Comment[], total: number };
         comments.comments.forEach(comment => {
             comment.sentAt = new Date(comment.sentAt)
         });

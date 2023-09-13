@@ -10,6 +10,8 @@
 	import { addNotification } from '$lib/components/notification.svelte';
 	import { getRelativeTime } from '$lib/utils/relativeTime';
 	import { user } from '$lib/stores/auth';
+	import IntersectionObserver from 'svelte-intersection-observer';
+	import Spinner from '$lib/components/spinner.svelte';
 
 	let commentDeletingId = '';
 	let isEditing = false;
@@ -113,330 +115,310 @@
 	}
 
 	let commentDeleteForm: HTMLFormElement;
+	let commentContainer: HTMLDivElement;
+	let additionalCommentLoading = false;
+	async function wait(ms: number) {
+		return new Promise((resolve) => {
+			setTimeout(resolve, ms);
+		});
+	}
 </script>
 
-<div id="play-video-comments" class="play-video-comments">
-	<p style="margin-bottom: 69px;">2k comments</p>
+<IntersectionObserver
+	element={commentContainer}
+	on:intersect={async (e) => {
+		if (!visibility) return;
+		additionalCommentLoading = true;
+		await wait(1000);
+		comments.push(comments[1]);
+		comments = comments;
+        additionalCommentLoading = false;
+	}}
+>
+	<div id="play-video-comments" class="play-video-comments" bind:this={commentContainer}>
+		<p style="margin-bottom: 69px;">2k comments</p>
 
-	<div class="write-comment">
-		<img
-			class="user-profile-picture"
-			src={$user?.profilePictureUrl ?? '/img/icons/channel-logo.jpg'}
-			alt=""
-		/>
-		<form
-			method="post"
-			action="?/comment"
-			class="write-comment-input"
-			use:enhance={() => {
-				currentProps.disabled = true;
+		<div class="write-comment">
+			<img
+				class="user-profile-picture"
+				src={$user?.profilePictureUrl ?? '/img/icons/channel-logo.jpg'}
+				alt=""
+			/>
+			<form
+				method="post"
+				action="?/comment"
+				class="write-comment-input"
+				use:enhance={() => {
+					currentProps.disabled = true;
 
-				return async ({ result, form }) => {
-					if (result.type === 'success') {
-						HTMLFormElement.prototype.reset.call(form);
-						visibility = true;
-						textArea.style.height = '25px';
-						if (result.data) {
-							iNeedAutoComplete(result.data); // i'm addicted
+					return async ({ result, form }) => {
+						if (result.type === 'success') {
+							HTMLFormElement.prototype.reset.call(form);
+							visibility = true;
+							textArea.style.height = '25px';
+							if (result.data) {
+								iNeedAutoComplete(result.data); // i'm addicted
+							}
+						} else {
+							applyAction(result);
 						}
-					} else {
-						applyAction(result);
-					}
-					currentProps.disabled = false;
-				};
-			}}
-		>
-			<div style="position: relative;">
-				<textarea
-					bind:this={textArea}
-					bind:value={inputText}
-					style="height: {textAreaHeight}px; overflow-y: hidden;"
-					placeholder="Add comment..."
-					class="comment-input"
-					name="comment-input"
-					on:click={() => {
-						inputVisibility = true;
-					}}
-					on:input={(e) => {
-						adjustTextAreaHeight(e);
-						currentProps = inputText.length > 0 ? enabledProps : disabledProps;
-					}}
-				/>
-				<div class="comment-input-unfocus" />
-				<div class="comment-input-focus" />
-			</div>
-
-			<input type="hidden" name="videoId" value={videoId} />
-			{#if inputVisibility}
-				<div class="write-comment-buttons" style:display="flex">
-					<button
-						type="button"
-						class="comment-btn cancel-btn"
+						currentProps.disabled = false;
+					};
+				}}
+			>
+				<div style="position: relative;">
+					<textarea
+						bind:this={textArea}
+						bind:value={inputText}
+						style="height: {textAreaHeight}px; overflow-y: hidden;"
+						placeholder="Add comment..."
+						class="comment-input"
+						name="comment-input"
 						on:click={() => {
-							inputVisibility = false;
-						}}>cancel</button
-					>
-					<button
-						disabled={currentProps.disabled}
-						type="submit"
-						class="comment-btn comment"
-						style="
+							inputVisibility = true;
+						}}
+						on:input={(e) => {
+							adjustTextAreaHeight(e);
+							currentProps = inputText.length > 0 ? enabledProps : disabledProps;
+						}}
+					/>
+					<div class="comment-input-unfocus" />
+					<div class="comment-input-focus" />
+				</div>
+
+				<input type="hidden" name="videoId" value={videoId} />
+				{#if inputVisibility}
+					<div class="write-comment-buttons" style:display="flex">
+						<button
+							type="button"
+							class="comment-btn cancel-btn"
+							on:click={() => {
+								inputVisibility = false;
+							}}>cancel</button
+						>
+						<button
+							disabled={currentProps.disabled}
+							type="submit"
+							class="comment-btn comment"
+							style="
 							border: none;
                             background-color: {currentProps?.background};
                             color: {currentProps?.color};
                             cursor: {currentProps?.cursor};
                             disabled: {currentProps?.disabled};
                       ">Comment</button
-					>
-				</div>
-			{/if}
-		</form>
-	</div>
-	{#each rangeComments as comment}
-		<div class="comment-container">
-			<a href="/user/{comment.sentBy.id}">
-				<img src={comment.sentBy.profilePictureUrl ?? '/img/icons/channel-logo.jpg'} alt="" />
-			</a>
-			{#if isEditing && comment.id == editingId}
-				<form
-					class="write-comment-input"
-					method="post"
-					action="?/editComment"
-					use:enhance={() => {
-						return async ({ result, form }) => {
-							if (result.type === 'success') {
-								HTMLFormElement.prototype.reset.call(form);
-								isEditing = false;
-								editingId = '';
-								if (result.data) {
-									updateComment(comment, result.data);
-									comment = comment;
-								}
-							} else {
-								applyAction(result);
-							}
-						};
-					}}
-				>
-					<div style="position: relative;">
-						<textarea
-							bind:this={editTextArea}
-							style="height: {textAreaHeight}px; overflow-y: hidden;"
-							value={comment.content}
-							class="comment-input"
-							name="comment-input"
-							on:click={() => {
-								inputVisibility2 = true;
-							}}
-							on:input={(e) => {
-								adjustTextAreaHeight(e);
-								editingProps =
-									editTextArea.value.length > 0 ? editingEnabledProps : editingDisabledProps;
-							}}
-						/>
-						<div class="comment-input-unfocus" />
-						<div class="comment-input-focus" />
-					</div>
-
-					<div class="write-comment-buttons" style:display="flex">
-						<button
-							type="button"
-							class="comment-btn cancel-btn"
-							on:click={() => {
-								isEditing = false;
-							}}>cancel</button
 						>
-						<button
-							type="submit"
-							class="comment-btn comment"
-							style="
+					</div>
+				{/if}
+			</form>
+		</div>
+		{#each rangeComments as comment}
+			<div class="comment-container">
+				<a href="/user/{comment.sentBy.id}">
+					<img src={comment.sentBy.profilePictureUrl ?? '/img/icons/channel-logo.jpg'} alt="" />
+				</a>
+				{#if isEditing && comment.id == editingId}
+					<form
+						class="write-comment-input"
+						method="post"
+						action="?/editComment"
+						use:enhance={() => {
+							return async ({ result, form }) => {
+								if (result.type === 'success') {
+									HTMLFormElement.prototype.reset.call(form);
+									isEditing = false;
+									editingId = '';
+									if (result.data) {
+										updateComment(comment, result.data);
+										comment = comment;
+									}
+								} else {
+									applyAction(result);
+								}
+							};
+						}}
+					>
+						<div style="position: relative;">
+							<textarea
+								bind:this={editTextArea}
+								style="height: {textAreaHeight}px; overflow-y: hidden;"
+								value={comment.content}
+								class="comment-input"
+								name="comment-input"
+								on:click={() => {
+									inputVisibility2 = true;
+								}}
+								on:input={(e) => {
+									adjustTextAreaHeight(e);
+									editingProps =
+										editTextArea.value.length > 0 ? editingEnabledProps : editingDisabledProps;
+								}}
+							/>
+							<div class="comment-input-unfocus" />
+							<div class="comment-input-focus" />
+						</div>
+
+						<div class="write-comment-buttons" style:display="flex">
+							<button
+								type="button"
+								class="comment-btn cancel-btn"
+								on:click={() => {
+									isEditing = false;
+								}}>cancel</button
+							>
+							<button
+								type="submit"
+								class="comment-btn comment"
+								style="
 						border: none;
 						background-color: {editingProps?.background};
 						color: {editingProps?.color};
 						cursor: {editingProps?.cursor};
 						disabled: {editingProps?.disabled};
 				  ">Save</button
+							>
+						</div>
+						<input type="hidden" name="videoId" value={videoId} />
+						<input type="hidden" name="commentId" value={comment.id} />
+					</form>
+				{:else}
+					{@const relativeTime = getRelativeTime(comment.sentAt)}
+					<div class="user-comment">
+						<a href="/user/{comment.sentBy.id}"
+							>{comment.sentBy.username}<span>{relativeTime}</span></a
 						>
+						<div class="comment-content">
+							<!-- {#each splitString(comment.content) as commentContent} -->
+							<!-- 	<span class="user-comment-text">{commentContent}</span> -->
+							<!-- {/each} -->
+
+							<SplittedComment
+								commentTextClasses="user-comment-text"
+								commentContents={splitString(comment.content)}
+							/>
+						</div>
 					</div>
-					<input type="hidden" name="videoId" value={videoId} />
-					<input type="hidden" name="commentId" value={comment.id} />
-				</form>
-			{:else}
-				{@const relativeTime = getRelativeTime(comment.sentAt)}
-				<div class="user-comment">
-					<a href="/user/{comment.sentBy.id}"
-						>{comment.sentBy.username}<span>{relativeTime}</span></a
+				{/if}
+				<Dropdown>
+					<button
+						use:melt={trigger}
+						slot="button"
+						let:trigger
+						class="dots-vertical"
+						style:display={isEditing && comment.id == editingId ? 'none' : 'block'}
 					>
-					<div class="comment-content">
-						<!-- {#each splitString(comment.content) as commentContent} -->
-						<!-- 	<span class="user-comment-text">{commentContent}</span> -->
-						<!-- {/each} -->
+						<svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30"
+							><path
+								d="M479.858-160Q460-160 446-174.142q-14-14.141-14-34Q432-228 446.142-242q14.141-14 34-14Q500-256 514-241.858q14 14.141 14 34Q528-188 513.858-174q-14.141 14-34 14Zm0-272Q460-432 446-446.142q-14-14.141-14-34Q432-500 446.142-514q14.141-14 34-14Q500-528 514-513.858q14 14.141 14 34Q528-460 513.858-446q-14.141 14-34 14Zm0-272Q460-704 446-718.142q-14-14.141-14-34Q432-772 446.142-786q14.141-14 34-14Q500-800 514-785.858q14 14.141 14 34Q528-732 513.858-718q-14.141 14-34 14Z"
+							/></svg
+						>
+					</button>
+					<div class="dropdown-container" slot="item" let:item>
+						{#if $user?.id == comment.sentBy.id}
+							<button
+								class="dropdown-button"
+								use:melt={item}
+								on:click={async () => {
+									startEditing(comment.id);
+									await tick();
+									editTextArea.style.height = `${editTextArea.scrollHeight}px`;
+								}}
+								><svg
+									xmlns="http://www.w3.org/2000/svg"
+									height="24px"
+									viewBox="0 0 24 24"
+									width="24px"
+									fill="#ffffff"
+									><path d="M0 0h24v24H0V0z" fill="none" /><path
+										d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"
+									/></svg
+								>Edit</button
+							>
 
-						<SplittedComment
-							commentTextClasses="user-comment-text"
-							commentContents={splitString(comment.content)}
-						/>
+							<button
+								on:click={() => {
+									openConfirmation(comment.id);
+								}}
+								class="dropdown-button"
+								use:melt={item}
+								><svg
+									xmlns="http://www.w3.org/2000/svg"
+									height="24px"
+									viewBox="0 0 24 24"
+									width="24px"
+									fill="#ffffff"
+									><path d="M0 0h24v24H0V0z" fill="none" /><path
+										d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"
+									/></svg
+								>Delete</button
+							>
+						{:else}
+							<button class="dropdown-button" use:melt={item}
+								><svg
+									xmlns="http://www.w3.org/2000/svg"
+									height="24px"
+									viewBox="0 0 24 24"
+									width="24px"
+									fill="#ffffff"
+									><path d="M0 0h24v24H0V0z" fill="none" /><path
+										d="M12.36 6l.4 2H18v6h-3.36l-.4-2H7V6h5.36M14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6L14 4z"
+									/></svg
+								>Report</button
+							>
+						{/if}
 					</div>
-				</div>
-			{/if}
-			<Dropdown>
-				<button
-					use:melt={trigger}
-					slot="button"
-					let:trigger
-					class="dots-vertical"
-					style:display={isEditing && comment.id == editingId ? 'none' : 'block'}
-				>
-					<svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30"
-						><path
-							d="M479.858-160Q460-160 446-174.142q-14-14.141-14-34Q432-228 446.142-242q14.141-14 34-14Q500-256 514-241.858q14 14.141 14 34Q528-188 513.858-174q-14.141 14-34 14Zm0-272Q460-432 446-446.142q-14-14.141-14-34Q432-500 446.142-514q14.141-14 34-14Q500-528 514-513.858q14 14.141 14 34Q528-460 513.858-446q-14.141 14-34 14Zm0-272Q460-704 446-718.142q-14-14.141-14-34Q432-772 446.142-786q14.141-14 34-14Q500-800 514-785.858q14 14.141 14 34Q528-732 513.858-718q-14.141 14-34 14Z"
-						/></svg
+				</Dropdown>
+				{#if confirmationVisible && comment.id == commentDeletingId}
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<div class="overlay" on:click={cancelUnsubscribe} />
+					<div
+						class="content"
+						transition:flyAndScale={{
+							duration: 150,
+							y: 8,
+							start: 0.96
+						}}
 					>
-				</button>
-				<div class="dropdown-container" slot="item" let:item>
-					{#if $user?.id == comment.sentBy.id}
-						<button
-							class="dropdown-button"
-							use:melt={item}
-							on:click={async () => {
-								startEditing(comment.id);
-								await tick();
-								editTextArea.style.height = `${editTextArea.scrollHeight}px`;
-							}}
-							><svg
-								xmlns="http://www.w3.org/2000/svg"
-								height="24px"
-								viewBox="0 0 24 24"
-								width="24px"
-								fill="#ffffff"
-								><path d="M0 0h24v24H0V0z" fill="none" /><path
-									d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"
-								/></svg
-							>Edit</button
-						>
-
-						<button
-							on:click={() => {
-								openConfirmation(comment.id);
-							}}
-							class="dropdown-button"
-							use:melt={item}
-							><svg
-								xmlns="http://www.w3.org/2000/svg"
-								height="24px"
-								viewBox="0 0 24 24"
-								width="24px"
-								fill="#ffffff"
-								><path d="M0 0h24v24H0V0z" fill="none" /><path
-									d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"
-								/></svg
-							>Delete</button
-						>
-					{:else}
-						<button class="dropdown-button" use:melt={item}
-							><svg
-								xmlns="http://www.w3.org/2000/svg"
-								height="24px"
-								viewBox="0 0 24 24"
-								width="24px"
-								fill="#ffffff"
-								><path d="M0 0h24v24H0V0z" fill="none" /><path
-									d="M12.36 6l.4 2H18v6h-3.36l-.4-2H7V6h5.36M14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6L14 4z"
-								/></svg
-							>Report</button
-						>
-					{/if}
-				</div>
-			</Dropdown>
-			{#if confirmationVisible && comment.id == commentDeletingId}
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<div class="overlay" on:click={cancelUnsubscribe} />
-				<div
-					class="content"
-					transition:flyAndScale={{
-						duration: 150,
-						y: 8,
-						start: 0.96
-					}}
-				>
-					<h1 style="color: #000; font-size: 18px; margin-bottom: 13px; font-weight: 500">
-						Delete comment
-					</h1>
-					<h2 class="comment-delete-title">Delete your comment permanently?</h2>
-					<div class="comment-delete-actions">
-						<button on:click={cancelUnsubscribe} class="delete-cancel"> Cancel </button>
-						<form
-							method="post"
-							action="?/deleteComment"
-							bind:this={commentDeleteForm}
-							use:enhance={() => {
-								return async ({ result, form, formData }) => {
-									if (result.type === 'success') {
-										HTMLFormElement.prototype.reset.call(form);
-										comments = comments.filter((comment) => {
-											return comment.id !== formData.get('commentId');
-										});
-										addNotification({
-											data: {
-												title: 'Comment deleted successfully.'
-											}
-										});
-										cancelUnsubscribe();
-									} else {
-										applyAction(result);
-									}
-								};
-							}}
-						>
-							<button class="delete-accept"> Delete </button>
-							<input type="hidden" name="videoId" value={videoId} />
-							<input type="hidden" name="commentId" value={comment.id} />
-						</form>
+						<h1 style="color: #000; font-size: 18px; margin-bottom: 13px; font-weight: 500">
+							Delete comment
+						</h1>
+						<h2 class="comment-delete-title">Delete your comment permanently?</h2>
+						<div class="comment-delete-actions">
+							<button on:click={cancelUnsubscribe} class="delete-cancel"> Cancel </button>
+							<form
+								method="post"
+								action="?/deleteComment"
+								bind:this={commentDeleteForm}
+								use:enhance={() => {
+									return async ({ result, form, formData }) => {
+										if (result.type === 'success') {
+											HTMLFormElement.prototype.reset.call(form);
+											comments = comments.filter((comment) => {
+												return comment.id !== formData.get('commentId');
+											});
+											addNotification({
+												data: {
+													title: 'Comment deleted successfully.'
+												}
+											});
+											cancelUnsubscribe();
+										} else {
+											applyAction(result);
+										}
+									};
+								}}
+							>
+								<button class="delete-accept"> Delete </button>
+								<input type="hidden" name="videoId" value={videoId} />
+								<input type="hidden" name="commentId" value={comment.id} />
+							</form>
+						</div>
 					</div>
-				</div>
-			{/if}
-		</div>
-	{/each}
-
-	<!-- <div class="comment-container">
-		<img src="/img/icons/channel-logo.jpg" alt="" />
-		<div class="user-comment">
-			<a href=".">Lorelai Gilbert <span>1 day ago</span></a>
-			<p>
-				While the anaesthetic team continue to look after you, the surgical team carry out your
-				operation. The surgeon will have at least one assistant – I have known more than ten people
-				to be part of this team for major head and neck cancer surgery. While the anaesthetic team
-				continue to look after you, the surgical team carry out your operation. While the
-				anaesthetic team continue to look after you, the surgical team carry out your operation. The
-				surgeon will have at least one assistant – I have known more than ten people to be part of
-				this team for major head and neck cancer surgery. While the anaesthetic team continue to
-				look after you, the surgical team carry out your operation.
-			</p>
-		</div>
+				{/if}
+			</div>
+		{/each}
 	</div>
-	{#if visibility}
-		<div class="comment-container">
-			<img src="/img/icons/channel-logo.jpg" alt="" />
-			<div class="user-comment">
-				<a href=".">Lorelai Gilbert <span>1 day ago</span></a>
-				<p>
-					While the anaesthetic team continue to look after you, the surgical team carry out your
-					operation. The surgeon will have at least one assistant
-				</p>
-			</div>
-		</div>
-		<div class="comment-container">
-			<img src="/img/icons/channel-logo.jpg" alt="" />
-			<div class="user-comment">
-				<a href=".">Lorelai Gilbert <span>1 day ago</span></a>
-				<p>
-					While the anaesthetic team continue to look after you, the surgical team carry out your
-					operation. The surgeon will have at least one assistant
-				</p>
-			</div>
-		</div>
-	{/if} -->
-</div>
+</IntersectionObserver>
 {#if showMoreCommentsButton && comments.length > 2}
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div
@@ -449,6 +431,9 @@
 	>
 		<img id="more-comments-icon" width="30px" src="/img/icons/expand_more_black_24dp.svg" alt="" />
 	</div>
+{/if}
+{#if additionalCommentLoading}
+    <Spinner/>
 {/if}
 
 <!-- put styles from play-video.css to here --->

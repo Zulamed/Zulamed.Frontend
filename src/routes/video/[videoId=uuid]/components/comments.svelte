@@ -12,6 +12,8 @@
 	import { user } from '$lib/stores/auth';
 	import IntersectionObserver from 'svelte-intersection-observer';
 	import Spinner from '$lib/components/spinner.svelte';
+	import { getComments } from '$backend/video/getCommentsForAVideo/endpoint';
+	import { match } from 'ts-pattern';
 
 	let commentDeletingId = '';
 	let isEditing = false;
@@ -117,22 +119,26 @@
 	let commentDeleteForm: HTMLFormElement;
 	let commentContainer: HTMLDivElement;
 	let additionalCommentLoading = false;
+	export let page = 1;
+	export let totalComments: number;
 	async function wait(ms: number) {
-		return new Promise((resolve) => {
-			setTimeout(resolve, ms);
-		});
+		return new Promise((resolve) => setTimeout(resolve, ms));
 	}
 </script>
 
 <IntersectionObserver
 	element={commentContainer}
-	on:intersect={async (e) => {
+	on:intersect={async () => {
 		if (!visibility) return;
+		if (comments.length >= totalComments) return;
 		additionalCommentLoading = true;
-		await wait(1000);
-		comments.push(comments[1]);
-		comments = comments;
-        additionalCommentLoading = false;
+		await wait(200); // for smoothness(and testing), needs to be removed in the future TODO
+		let response = await getComments(videoId, fetch, ++page, 10);
+		match(response).with({ status: 'ok' }, ({ data }) => {
+			comments = [...comments, ...data.comments];
+		});
+
+		additionalCommentLoading = false;
 	}}
 >
 	<div id="play-video-comments" class="play-video-comments" bind:this={commentContainer}>
@@ -417,6 +423,9 @@
 				{/if}
 			</div>
 		{/each}
+		{#if additionalCommentLoading}
+			<Spinner />
+		{/if}
 	</div>
 </IntersectionObserver>
 {#if showMoreCommentsButton && comments.length > 2}
@@ -431,9 +440,6 @@
 	>
 		<img id="more-comments-icon" width="30px" src="/img/icons/expand_more_black_24dp.svg" alt="" />
 	</div>
-{/if}
-{#if additionalCommentLoading}
-    <Spinner/>
 {/if}
 
 <!-- put styles from play-video.css to here --->

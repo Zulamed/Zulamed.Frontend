@@ -239,7 +239,7 @@
 					<Spinner />
 				{:then value}
 					{#if value.status == 'ok'}
-						<Comments comments={value.data.comments} videoId={data.videoInfo.video.id} />
+						<Comments totalComments={value.data.total} comments={value.data.comments} videoId={data.videoInfo.video.id} />
 					{/if}
 				{/await}
 			{/if}
@@ -269,7 +269,7 @@
 				<Spinner />
 			{:then value}
 				{#if value.status == 'ok' && matches1027px}
-					<Comments comments={value.data.comments} videoId={data.videoInfo.video.id} />
+					<Comments totalComments={value.data.total} comments={value.data.comments} videoId={data.videoInfo.video.id} />
 				{/if}
 			{/await}
 		{/if}

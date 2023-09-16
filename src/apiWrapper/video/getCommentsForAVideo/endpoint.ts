@@ -4,7 +4,7 @@ import type { Comment } from "../types";
 
 
 type Response =
-    | { status: "ok", data: { comments: Comment[] } }
+    | { status: "ok", data: { comments: Comment[], total: number } }
     | { status: "not-found" }
     | { status: "error", error: string }
 

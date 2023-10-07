@@ -43,6 +43,7 @@ export const load = (async ({ params, fetch, locals }) => {
             userDisliked = await hasDisliked(params.videoId, fetch);
         }
     }
+
     return {
         videoInfo, userLiked, userDisliked, userFollowed, streamed: {
             comments: getComments(params.videoId, fetch),

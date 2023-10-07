@@ -1,57 +1,67 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import Hls from 'hls.js';
-	import { defineCustomElements } from 'vidstack/elements';
-	import type { HLSProvider, MediaPlayerElement, MediaProviderChangeEvent } from 'vidstack';
-	import 'vidstack/styles/defaults.css';
-	import 'vidstack/styles/community-skin/video.css';
-	import { playerVolume } from '../../stores/video-sound-store';
-    import { playerLoaded } from './playerStore';
+    import {onMount} from 'svelte';
+    import Hls from 'hls.js';
+    import 'vidstack/player/styles/default/theme.css';
+    import 'vidstack/player/styles/default/layouts/video.css';
+    import 'vidstack/player';
+    import 'vidstack/player/layouts';
+    import 'vidstack/player/ui';
 
-	export let poster = '/img/videoPreviews/2.png';
+
+    import {isHLSProvider, type MediaCanPlayEvent, type MediaProviderChangeEvent} from 'vidstack';
+    import {playerVolume} from '../../stores/video-sound-store';
+    import {playerLoaded} from './playerStore';
+
+    import type {MediaPlayerElement} from "vidstack/elements";
+
+    export let poster = '/img/videoPreviews/2.png';
 
     export let src: string;
-	if (!poster) {
-		poster = '/img/videoPreviews/2.png';
+    if (!poster) {
+        poster = '/img/videoPreviews/2.png';
+    }
+
+    let player: MediaPlayerElement;
+
+	function onProviderChange(event: MediaProviderChangeEvent) {
+		const provider = event.detail;
+		if (isHLSProvider(provider)){
+			provider.library = Hls;
+		}
 	}
 
-	let player: MediaPlayerElement;
-
-
-	let initPlayer = async () => {
-		await defineCustomElements();
-
-		player.addEventListener('provider-change', (event: MediaProviderChangeEvent) => {
-			const provider = event.detail;
-			if (provider?.type === 'hls' && !Hls.isSupported()) {
-				(provider as HLSProvider).library = Hls;
-			}
-		});
+    function onCanPlay(event: MediaCanPlayEvent) {
         $playerLoaded = true;
-	};
+    }
 
 
-	let destroy: () => void | undefined;
+    // let destroy: () => void | undefined;
 
-	function playerAttached() {
-		destroy = player.subscribe(({ volume }) => {
-			if ($playerLoaded) {
-				$playerVolume = volume;
-			}
-		});
-		$playerLoaded = true;
-	}
+    // function playerAttached() {
+    // 	destroy = player.subscribe(({ volume }) => {
+    // 		if ($playerLoaded) {
+    // 			$playerVolume = volume;
+    // 		}
+    // 	});
+    // 	$playerLoaded = true;
+    // }
 
-	onMount(async () => {
-		await initPlayer();
-		player.volume = $playerVolume as number;
-	});
+    onMount(async () => {
+        player.volume = $playerVolume as number;
+        player.playsinline = true;
 
-	onDestroy(async () => {
-		player?.destroy();
-		destroy?.();
-        $playerLoaded = false;
-	});
+        let destroy = player.subscribe(({volume}) => {
+            if ($playerLoaded) {
+                $playerVolume = volume;
+            }
+        });
+
+
+        return () => {
+            $playerLoaded = false;
+            destroy();
+        };
+    });
 </script>
 
 <!-- <svelte:head> -->
@@ -60,18 +70,22 @@
 <!-- </svelte:head> -->
 
 <media-player
-	bind:this={player}
-	id="video"
-	{src}
-	{poster}
-	aspect-ratio="16/9"
-	crossorigin
-	user-idle-delay="1000"
-	playsinline
-	webkit-playsinline
-	on:attached={playerAttached}
+        bind:this={player}
+        class="player"
+        id="video"
+        {src}
+        crossorigin
+        playsinline
+        on:provider-change={onProviderChange}
+        on:can-play={onCanPlay}
 >
-	<media-outlet />
-	<media-community-skin />
-	<media-poster alt="Preview." />
+    <media-provider>
+        <media-poster class="vds-poster"
+		src={poster}/>
+    </media-provider>
+	<media-video-layout/>
 </media-player>
+
+
+<style>
+</style>

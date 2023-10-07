@@ -52,19 +52,20 @@
 	border-radius: 0 !important;
 }
 
-:global(:where(media-outlet)) {
+:global(:where(media-provider)) {
 	background-color: transparent !important;
 }
 
 :global(media-player) {
 	height: 100%;
+    z-index: 0;
 }
 
-:global(media-outlet) {
+:global(media-provider) {
 	height: 100%;
 }
 
-:global(media-outlet video) {
+:global(media-provider video) {
 	height: 100%;
 }
 

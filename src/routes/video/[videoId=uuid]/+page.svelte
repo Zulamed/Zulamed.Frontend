@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import VideoPlayer from './components/videoPlayer/videoPlayer.svelte';
 	import type { PageData } from './$types';
 	import Chips from './components/chips.svelte';
 	import Description from './components/description.svelte';
@@ -68,10 +67,13 @@
 	<div id="row" class="row">
 		<div id="play-video" class="play-video">
 			<div class="video-container" class:skeleton={!$playerLoaded}>
-				<VideoPlayer
-					src="{data.videoInfo.video.videoUrl}/master.m3u8"
-					poster={data.videoInfo.video.videoThumbnail}
-				/>
+				{#await import('./components/videoPlayer/videoPlayer.svelte') then { default: Player }}
+					<svelte:component
+						this={Player}
+						src="https://stream.mux.com/01WUcoZ2N3hTdGfVjHLTmneAhwl5DGngQlQtjDhLk5CA.m3u8"
+						poster="{data.videoInfo.video.videoThumbnail}"
+					/>
+				{/await}
 			</div>
 			<h3>{data.videoInfo.video.videoTitle}</h3>
 
@@ -139,8 +141,9 @@
 							let:trigger
 							type="button"
 							class="message-btn"
-							class:active={messageActive}>CHAT</button
-						>
+							class:active={messageActive}
+							>CHAT
+						</button>
 						<p slot="content">Chat</p>
 					</Tooltip>
 
@@ -223,8 +226,8 @@
 							let:trigger
 							type="button"
 							class="interaction-btn share-btn"
-							><img src="/img/icons/send_white_24dp.svg" alt="" />SHARE</button
-						>
+							><img src="/img/icons/send_white_24dp.svg" alt="" />SHARE
+						</button>
 						<p slot="content">Share</p>
 					</Tooltip>
 				</div>
@@ -239,7 +242,11 @@
 					<Spinner />
 				{:then value}
 					{#if value.status == 'ok'}
-						<Comments totalComments={value.data.total} comments={value.data.comments} videoId={data.videoInfo.video.id} />
+						<Comments
+							totalComments={value.data.total}
+							comments={value.data.comments}
+							videoId={data.videoInfo.video.id}
+						/>
 					{/if}
 				{/await}
 			{/if}
@@ -260,8 +267,9 @@
 					on:click={() => {
 						videoVisibility = true;
 						showMoreVideosButton = false;
-					}}>show more</button
-				>
+					}}
+					>show more
+				</button>
 			{/if}
 		</div>
 		{#if matches1027px}
@@ -269,7 +277,11 @@
 				<Spinner />
 			{:then value}
 				{#if value.status == 'ok' && matches1027px}
-					<Comments totalComments={value.data.total} comments={value.data.comments} videoId={data.videoInfo.video.id} />
+					<Comments
+						totalComments={value.data.total}
+						comments={value.data.comments}
+						videoId={data.videoInfo.video.id}
+					/>
 				{/if}
 			{/await}
 		{/if}

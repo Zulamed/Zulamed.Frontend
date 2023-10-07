@@ -158,12 +158,12 @@
 					currentProps.disabled = true;
 
 					return async ({ result, form }) => {
-						if (result.type === 'success') {
+						if (result.type === 'success'){
 							HTMLFormElement.prototype.reset.call(form);
 							visibility = true;
 							textArea.style.height = '25px';
-							if (result.data) {
-								iNeedAutoComplete(result.data); // i'm addicted
+							if (result.data){
+								iNeedAutoComplete(result.data);
 							}
 						} else {
 							applyAction(result);

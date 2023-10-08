@@ -33,8 +33,10 @@
 		}
 	}
 
-	afterNavigate(() => {
-		$playerLoaded = false;
+	afterNavigate(({to, from}) => {
+        if (to?.url.pathname !== from?.url.pathname) {
+            $playerLoaded = false;
+        }
 		likeActive = data.userLiked ?? false;
 		dislikeActive = data.userDisliked ?? false;
 		followActive = data.userFollowed ?? false;

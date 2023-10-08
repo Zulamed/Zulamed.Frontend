@@ -25,7 +25,7 @@
 
 	function onProviderChange(event: MediaProviderChangeEvent) {
 		const provider = event.detail;
-		if (isHLSProvider(provider)){
+		if (isHLSProvider(provider) && Hls.isSupported()){
 			provider.library = Hls;
 		}
 	}

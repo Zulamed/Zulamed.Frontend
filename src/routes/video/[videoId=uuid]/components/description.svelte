@@ -24,10 +24,6 @@
 	}
 
 	$: text = height === '64px' ? textContent.substring(0,30) + ' ...more': textContent;
-    $: {
-        console.log(`salam: ${text}`);
-        console.log(`textContent: ${textContent}`);
-    }
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->

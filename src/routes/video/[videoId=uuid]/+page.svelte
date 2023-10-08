@@ -12,6 +12,7 @@
 	import SideVideos from './components/sideVideos.svelte';
 	import Spinner from '$lib/components/spinner.svelte';
 	import { playerLoaded } from './components/videoPlayer/playerStore';
+	import { afterNavigate } from '$app/navigation';
 
 	let showMoreVideosButton = false;
 	let videoVisibility = true;
@@ -31,6 +32,13 @@
 			showMoreVideosButton = false;
 		}
 	}
+
+	afterNavigate(() => {
+		$playerLoaded = false;
+		likeActive = data.userLiked ?? false;
+		dislikeActive = data.userDisliked ?? false;
+		followActive = data.userFollowed ?? false;
+	});
 
 	onMount(async () => {
 		await viewVideo(data.videoInfo.video.id);
@@ -52,11 +60,6 @@
 		};
 	});
 	export let data: PageData;
-	likeActive = data.userLiked ?? false;
-	dislikeActive = data.userDisliked ?? false;
-	followActive = data.userFollowed ?? false;
-
-	// $: sideVideos = videoVisibility ? data.sideVideos : data.sideVideos.slice(0, 1);
 </script>
 
 <svelte:head>
@@ -70,8 +73,8 @@
 				{#await import('./components/videoPlayer/videoPlayer.svelte') then { default: Player }}
 					<svelte:component
 						this={Player}
-						src="{data.videoInfo.video.videoUrl}"
-						poster="{data.videoInfo.video.videoThumbnail}"
+						src={data.videoInfo.video.videoUrl}
+						poster={data.videoInfo.video.videoThumbnail}
 					/>
 				{/await}
 			</div>

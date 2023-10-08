@@ -6,11 +6,7 @@
 	export let textContent: string;
 	export let views: number;
 	export let date: Date;
-	const originalText = textContent;
-	let trimmedText = originalText.substring(0, 30) + ' ...more';
-	// textContent = trimmedText;
 
-	// let text: string;
 	let height = '64px';
 	const showMore = () => {
 		if (height === 'auto') return;
@@ -27,7 +23,11 @@
 		return formattedDate;
 	}
 
-	$: text = height === '64px' ? trimmedText : originalText;
+	$: text = height === '64px' ? textContent.substring(0,30) + ' ...more': textContent;
+    $: {
+        console.log(`salam: ${text}`);
+        console.log(`textContent: ${textContent}`);
+    }
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->

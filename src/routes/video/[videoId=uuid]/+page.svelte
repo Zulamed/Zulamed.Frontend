@@ -70,7 +70,7 @@
 				{#await import('./components/videoPlayer/videoPlayer.svelte') then { default: Player }}
 					<svelte:component
 						this={Player}
-						src="https://stream.mux.com/01WUcoZ2N3hTdGfVjHLTmneAhwl5DGngQlQtjDhLk5CA.m3u8"
+						src="{data.videoInfo.video.videoUrl}"
 						poster="{data.videoInfo.video.videoThumbnail}"
 					/>
 				{/await}

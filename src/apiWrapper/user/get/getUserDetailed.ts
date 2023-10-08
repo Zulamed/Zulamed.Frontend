@@ -13,6 +13,7 @@ export async function getUserDetailed(userId: string, fetch: FetchCallbackType =
         }
 
         const user = await response.json() as UserDetailedResponse;
+        console.log(user);
         user.videos.forEach(video => {
             video.createdAt = new Date(video.createdAt);
         });

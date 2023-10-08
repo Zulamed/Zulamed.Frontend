@@ -4,7 +4,7 @@
 	export let videos: VideoMinimal[];
 	export let user: User;
 
-	const title = videos[0].description;
+	const title = videos[0].description ?? 'No description';
 </script>
 
 <div class="last-video">

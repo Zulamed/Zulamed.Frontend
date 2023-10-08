@@ -3,7 +3,7 @@
 	import Tooltip from '$lib/components/tooltip.svelte';
 	import { melt } from '@melt-ui/svelte';
 
-	export let textContent: string;
+	export let textContent: string | null;
 	export let views: number;
 	export let date: Date;
 
@@ -23,7 +23,7 @@
 		return formattedDate;
 	}
 
-	$: text = height === '64px' ? textContent.substring(0,30) + ' ...more': textContent;
+	$: text = height === '64px' ? textContent?.substring(0,30) ?? 'No description' + ' ...more': textContent;
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -40,7 +40,11 @@
 	</div>
 
 	<p class="description-text">
-		{text}
+        {#if text}
+            {text}
+        {:else}
+            No description
+        {/if}
 	</p>
 	<br />
 	{#if height === 'auto'}

@@ -77,6 +77,7 @@
 						this={Player}
 						src={data.videoInfo.video.videoUrl}
 						poster={data.videoInfo.video.videoThumbnail}
+                        timelineThumbnails={data.videoInfo.video.videoTimelineThumbnail}
 					/>
 				{/await}
 			</div>

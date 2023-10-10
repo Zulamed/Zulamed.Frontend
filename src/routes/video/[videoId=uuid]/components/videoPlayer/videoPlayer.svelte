@@ -13,6 +13,9 @@
 
 	import type { MediaPlayerElement } from 'vidstack/elements';
 
+
+    export let timelineThumbnails : string;
+
 	export let poster = '/img/videoPreviews/2.png';
 
 	export let src: string;
@@ -59,6 +62,7 @@
 			destroy();
 		};
 	});
+
 </script>
 
 <media-player
@@ -74,7 +78,10 @@
 	<media-provider>
 		<media-poster class="vds-poster" src={poster} />
 	</media-provider>
-	<media-video-layout />
+
+	<media-thumbnail />
+
+	<media-video-layout thumbnails={timelineThumbnails} />
 </media-player>
 
 <style>

@@ -4,73 +4,18 @@
 	export let inputPlaceholder: string;
 	export let obligatoryField = false;
 	export let inputNote = '';
-	interface Book {
-		author: string;
-		title: string;
-		disabled: boolean;
+    export let name = "";
+	interface Data {
+        title: string;
+        subtitle?: string;
 	}
-
-	let books: Book[] = [
-		{
-			author: 'Harper Lee',
-			title: 'To Kill a Mockingbird',
-			disabled: false
-		},
-		{
-			author: 'Lev Tolstoy',
-			title: 'War and Peace',
-			disabled: false
-		},
-		{
-			author: 'Fyodor Dostoyevsy',
-			title: 'The Idiot',
-			disabled: true
-		},
-		{
-			author: 'Oscar Wilde',
-			title: 'A Picture of Dorian Gray',
-			disabled: false
-		},
-		{
-			author: 'George Orwell',
-			title: '1984',
-			disabled: false
-		},
-		{
-			author: 'Jane Austen',
-			title: 'Pride and Prejudice',
-			disabled: false
-		},
-		{
-			author: 'Marcus Aurelius',
-			title: 'Meditations',
-			disabled: false
-		},
-		{
-			author: 'Fyodor Dostoevsky',
-			title: 'The Brothers Karamazov',
-			disabled: false
-		},
-		{
-			author: 'Lev Tolstoy',
-			title: 'Anna Karenina',
-			disabled: false
-		},
-		{
-			author: 'Fyodor Dostoevsky',
-			title: 'Crime and Punishment',
-			disabled: false
-		}
-	];
-
-	const filterFunction: ComboboxFilterFunction<Book> = ({ itemValue, input }) => {
+	const filterFunction: ComboboxFilterFunction<Data> = ({ itemValue, input }) => {
 		// Example string normalization function. Replace as needed.
 		const normalize = (str: string) => str.normalize().toLowerCase();
 		const normalizedInput = normalize(input);
 		return (
 			normalizedInput === '' ||
-			normalize(itemValue.title).includes(normalizedInput) ||
-			normalize(itemValue.author).includes(normalizedInput)
+			normalize(itemValue.title).includes(normalizedInput)
 		);
 	};
 
@@ -85,7 +30,8 @@
 	// i don't know why but isEmpty is always true when the input is empty when first rendered
 	$: emptyBug = $isEmpty && $inputValue.value === '';
 
-	export let customOption = false;
+	export let customOption = true;
+    export let data: Data[] = [];
 </script>
 
 <!-- eslint-disable-next-line svelte/valid-compile -->
@@ -97,7 +43,7 @@
 </label>
 <p class="input-note">{inputNote}</p>
 <div class="group-less">
-	<input class="input" use:melt={$input} placeholder={inputPlaceholder} />
+	<input {name} class="input" use:melt={$input} placeholder={inputPlaceholder} />
 	<div class="chevron-wrapper">
 		{#if $open}
 			<img class="chevron" src="img/icons/Expand_up.png" alt="" />
@@ -114,9 +60,7 @@
 				<li
 					use:melt={$option({
 						value: {
-							author: $inputValue.value,
-							title: 'custom',
-							disabled: false
+							title: $inputValue.value,
 						},
 						label: $inputValue.value,
 						disabled: false
@@ -125,22 +69,22 @@
 				>
 					<div>
 						<span>{$inputValue.value}</span>
-						<span class="author">Custom</span>
 					</div>
 				</li>
 			{/if}
-			{#each books as book, index (index)}
+			{#each data as book, index (index)}
 				<li
 					use:melt={$option({
 						value: book,
 						label: book.title,
-						disabled: book.disabled
 					})}
 					class="item"
 				>
 					<div>
 						<span>{book.title}</span>
-						<span class="author">{book.author}</span>
+                        {#if book.subtitle}
+                            <span class="author">{book.subtitle}</span>
+                        {/if}
 					</div>
 				</li>
 			{/each}

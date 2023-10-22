@@ -39,8 +39,8 @@ dependencies:
     specifier: ^5.0.4
     version: 5.0.4
   vidstack:
-    specifier: ^1.1.11
-    version: 1.1.11
+    specifier: ^1.3.0
+    version: 1.3.0
   zod:
     specifier: ^3.21.4
     version: 3.21.4
@@ -8524,8 +8524,8 @@ packages:
     engines: {node: '>= 0.8'}
     dev: false
 
-  /vidstack@1.1.11:
-    resolution: {integrity: sha512-+jfjo7On8salsrF1+5Vx7w1jKuPWs+3bsd0JVawPJtcrsNVkA68/m3jqmQQUEr27PL/rrGr33+K8ycX03kuSaQ==}
+  /vidstack@1.3.0:
+    resolution: {integrity: sha512-lab27hk+xESgU9Aarp1Y10qXD82Yw6i25+ceBb1uNqAumAu6uzY/keuzjRFc06TP1ctKqYgUPquhp/El+8SmAw==}
     engines: {node: '>=18'}
     dependencies:
       media-captions: 1.0.0

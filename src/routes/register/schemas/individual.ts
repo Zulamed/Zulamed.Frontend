@@ -30,25 +30,25 @@ const IndividualSecondStep = z.object({
 type IndividualSecondStep = z.infer<typeof IndividualSecondStep>;
 
 const IndividualThirdStep = z.object({
-    stageInCareer: z.string(),
-    profession: z.string(),
-    speciality: z.string(),
-    placeOfWork: z.string()
+    stageInCareer: z.string().nonempty(),
+    profession: z.string().nonempty(),
+    speciality: z.string().nonempty(),
+    placeOfWork: z.string().nonempty()
 });
 
 type IndividualThirdStep = z.infer<typeof IndividualThirdStep>;
 
 const IndividualFourthStep = z.object({
-    country: z.string(),
-    city: z.string(),
-    institution: z.string(),
-    department: z.string(),
+    country: z.string().nonempty(),
+    city: z.string().nonempty(),
+    institution: z.string().nonempty(),
+    department: z.string().nonempty(),
 });
 
 type IndividualFourthStep = z.infer<typeof IndividualFourthStep>;
 
 const IndividualFifthStep = z.object({
-    username: z.string(),
+    username: z.string().nonempty(),
 });
 
 type IndividualFifthStep = z.infer<typeof IndividualFifthStep>;

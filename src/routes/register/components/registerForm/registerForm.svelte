@@ -6,22 +6,46 @@
 	import University from './university.svelte';
 	import { validateIndividual, type IndividualData } from '../../schemas/individual';
 	import { addToast } from '$lib/components/errorToast.svelte';
+	import type { HospitalData } from '../../schemas/hospital';
+    import { validateHospital } from '../../schemas/hospital';
+
+    type DataUnion = {
+            type: "individual",
+            data: IndividualData
+        } | {type: "hospital", data: HospitalData}
+
 	function increaseStep() {
 		let formData = new FormData(formElement);
-		let data = { ...Object.fromEntries(formData), step: step } as IndividualData;
+		let data = { ...Object.fromEntries(formData), step: step };
 
-		if (!validateStep(data)) {
+        let union : DataUnion | undefined = undefined;
+
+
+
+        if (radioValue == 'individual') {
+            union = {type: "individual", data: data as IndividualData}
+        } else if (radioValue == 'hospital') {
+            union = {type: "hospital", data: data as HospitalData}
+        }
+
+        if (!union) {
+            return;
+        }
+
+		if (!validateStep(union)) {
 			return;
 		}
 		step += 1;
 		dispatch('stepChanged', { step, branch: radioValue });
 	}
-	function validateStep(values: IndividualData) {
+
+
+	function validateStep(values: DataUnion) {
 		if (step == 0) {
 			return true;
 		}
-		if (radioValue == 'individual' && step >= 1) {
-			let result = validateIndividual(values);
+		if (values.type == 'individual' && step >= 1) {
+			let result = validateIndividual(values.data);
 			if (result.success) {
 				return true;
 			} else {
@@ -36,6 +60,26 @@
 				return false;
 			}
 		}
+        if (values.type == 'hospital' && step >= 1) {
+            let result = validateHospital(values.data);
+            if (result.success) {
+                return true;
+            } else {
+                result.error.errors.forEach((error) => {
+                    addToast({
+                        data: {
+                            fieldName: error.path[0].toString(),
+                            error: error.message
+                        }
+                    });
+                });
+                return false;
+            }
+        }
+        // if (values.type == 'university' && step >= 1) {
+        //
+        // }
+        return true;
 	}
 
 	let formElement: HTMLFormElement;

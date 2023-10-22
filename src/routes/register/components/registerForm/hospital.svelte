@@ -11,20 +11,20 @@
 	<div class="input-container">
 		<div class="radio-content">
 			<div class="field input-field">
-				<Combobox obligatoryField={false} labelText="Hospital Name" inputPlaceholder="" />
+				<Combobox name="hospitalName" obligatoryField={false} labelText="Hospital Name" inputPlaceholder="" />
 			</div>
 			<div class="field input-field">
 				<Input
 					labelText="First name(s) (Responsible person)"
 					inputPlaceholder=""
-					inputId="first-name"
+					inputId="firstName"
 				/>
 			</div>
 			<div class="field input-field">
 				<Input
 					labelText="Family name(s) (Responsible person)"
 					inputPlaceholder=""
-					inputId="last-name"
+					inputId="lastName"
 				/>
 			</div>
 		</div>
@@ -42,7 +42,7 @@
 			</div>
 
 			<div class="field input-field">
-				<Input labelText="Repeat email" inputPlaceholder="Repeat email" inputId="repeat-email" />
+				<Input labelText="Repeat email" inputPlaceholder="Repeat email" inputId="confirmEmail" />
 			</div>
 
 			<div class="field input-field">
@@ -53,7 +53,7 @@
 				<InputPassword
 					labelText="Re-type password"
 					inputPlaceholder="Re-type password"
-					inputId="repeat-password"
+					inputId="confirmPassword"
 				/>
 			</div>
 		</div>
@@ -66,18 +66,18 @@
 			</div>
 
 			<div class="field input-field">
-				<Input labelText="Post code / Zip" inputPlaceholder="Post code / Zip" inputId="post-code" />
+				<Input labelText="Post code / Zip" inputPlaceholder="Post code / Zip" inputId="zipCode" />
 			</div>
 
 			<div class="field input-field">
-				<Combobox labelText="Country" inputPlaceholder="Select a country" />
+				<Combobox labelText="Country" inputPlaceholder="Select a country" name="country"/>
 			</div>
 
 			<div class="field input-field">
-				<Combobox labelText="City" inputPlaceholder="Select a city" />
+				<Combobox labelText="City" inputPlaceholder="Select a city" name="city"/>
 			</div>
 			<div class="field input-field">
-				<Input labelText="Phone" inputPlaceholder="Phone" inputId="post-code" inputType="number" />
+				<Input labelText="Phone" inputPlaceholder="Phone" inputId="phoneNumber" inputType="number"/>
 			</div>
 		</div>
 	</div>

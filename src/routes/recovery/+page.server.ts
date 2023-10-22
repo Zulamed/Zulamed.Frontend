@@ -28,7 +28,6 @@ function hasFirebaseKeys(url: URL, keys: string[]): HasKeys {
 }
 
 export const load = (async ({ url }) => {
-    console.log('test!');
     const result = hasFirebaseKeys(url, ["mode", "oobCode", "apiKey"]);
 
     if (!result.success) {

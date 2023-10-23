@@ -2,7 +2,6 @@
 	export let labelText: string | undefined;
 	export let inputPlaceholder = '';
 	export let inputId: string | undefined;
-	export let inputType = 'text';
 	let usernameError = false;
 	function preventDeletion(event: KeyboardEvent) {
 		const input = document.getElementById('username') as HTMLInputElement;
@@ -20,6 +19,7 @@
 			input.value = '@';
 		}
 	}
+    export let value = "@";
 </script>
 
 <label class="large-label" for={inputId}>{labelText}</label>
@@ -27,10 +27,10 @@
 	<input
 		on:keydown={preventDeletion}
 		on:input={preventInsertion}
-		value="@"
+        {value}
 		id={inputId}
 		name={inputId}
-		type={inputType}
+        type="text"
 		placeholder={inputPlaceholder}
 		class="input"
 	/>

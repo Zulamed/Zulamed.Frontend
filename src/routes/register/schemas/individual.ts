@@ -1,3 +1,4 @@
+import { writable } from "svelte/store";
 import { match } from "ts-pattern";
 import { z } from "zod";
 
@@ -43,6 +44,7 @@ const IndividualFourthStep = z.object({
     city: z.string().nonempty(),
     institution: z.string().nonempty(),
     department: z.string().nonempty(),
+    role: z.string().nonempty()
 });
 
 type IndividualFourthStep = z.infer<typeof IndividualFourthStep>;
@@ -77,6 +79,29 @@ const Data = z.discriminatedUnion("step", [
 ]);
 
 export type IndividualData = z.infer<typeof Data>;
+
+export type IndividualFullData = IndividualFirstStep & IndividualSecondStep & IndividualThirdStep & IndividualFourthStep & IndividualFifthStep;
+
+export const individualData = writable<IndividualFullData>({
+    "birthday-date": "",
+    city: "",
+    confirmEmail: "",
+    confirmPassword: "",
+    country: "",
+    department: "",
+    email: "",
+    gender: "Male",
+    institution: "",
+    name: "",
+    password: "",
+    placeOfWork: "",
+    profession: "",
+    speciality: "",
+    stageInCareer: "",
+    surname: "",
+    title: "",
+    username: ""
+});
 
 export function validateIndividual(data: IndividualData) {
     return match(data)

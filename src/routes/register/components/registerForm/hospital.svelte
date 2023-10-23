@@ -1,4 +1,6 @@
 <script lang="ts">
+	import {hospitalData} from "../../schemas/hospital";
+
 	export let step: number;
 	import Combobox from './combobox.svelte';
 	import Input from './input.svelte';
@@ -11,13 +13,14 @@
 	<div class="input-container">
 		<div class="radio-content">
 			<div class="field input-field">
-				<Combobox name="hospitalName" obligatoryField={false} labelText="Hospital Name" inputPlaceholder="" />
+				<Combobox name="hospitalName" obligatoryField={false} labelText="Hospital Name" inputPlaceholder="" bind:value={$hospitalData.hospitalName}/>
 			</div>
 			<div class="field input-field">
 				<Input
 					labelText="First name(s) (Responsible person)"
 					inputPlaceholder=""
 					inputId="firstName"
+					bind:value={$hospitalData.firstName}
 				/>
 			</div>
 			<div class="field input-field">
@@ -25,6 +28,7 @@
 					labelText="Family name(s) (Responsible person)"
 					inputPlaceholder=""
 					inputId="lastName"
+					bind:value={$hospitalData.lastName}
 				/>
 			</div>
 		</div>
@@ -38,15 +42,16 @@
 					inputPlaceholder="Email"
 					inputId="email"
 					inputNote="*For immediate verification please use your professional email if possible."
+					bind:value={$hospitalData.email}
 				/>
 			</div>
 
 			<div class="field input-field">
-				<Input labelText="Repeat email" inputPlaceholder="Repeat email" inputId="confirmEmail" />
+				<Input labelText="Repeat email" inputPlaceholder="Repeat email" inputId="confirmEmail" bind:value={$hospitalData.confirmEmail}/>
 			</div>
 
 			<div class="field input-field">
-				<InputPassword labelText="Password" inputPlaceholder="Password" inputId="password" />
+				<InputPassword labelText="Password" inputPlaceholder="Password" inputId="password" bind:password={$hospitalData.password}/>
 			</div>
 
 			<div class="field input-field">
@@ -54,6 +59,7 @@
 					labelText="Re-type password"
 					inputPlaceholder="Re-type password"
 					inputId="confirmPassword"
+					bind:password={$hospitalData.confirmPassword}
 				/>
 			</div>
 		</div>
@@ -62,22 +68,22 @@
 	<div class="input-container">
 		<div class="radio-content step-3-overflow">
 			<div class="field input-field">
-				<Input labelText="Address" inputPlaceholder="Address" inputId="address" />
+				<Input labelText="Address" inputPlaceholder="Address" inputId="address" bind:value={$hospitalData.address}/>
 			</div>
 
 			<div class="field input-field">
-				<Input labelText="Post code / Zip" inputPlaceholder="Post code / Zip" inputId="zipCode" />
+				<Input labelText="Post code / Zip" inputPlaceholder="Post code / Zip" inputId="zipCode" bind:value={$hospitalData.zipCode}/>
 			</div>
 
 			<div class="field input-field">
-				<Combobox labelText="Country" inputPlaceholder="Select a country" name="country"/>
+				<Combobox labelText="Country" inputPlaceholder="Select a country" name="country" bind:value={$hospitalData.country}/>
 			</div>
 
 			<div class="field input-field">
-				<Combobox labelText="City" inputPlaceholder="Select a city" name="city"/>
+				<Combobox labelText="City" inputPlaceholder="Select a city" name="city" bind:value={$hospitalData.city}/>
 			</div>
 			<div class="field input-field">
-				<Input labelText="Phone" inputPlaceholder="Phone" inputId="phoneNumber" inputType="number"/>
+				<Input labelText="Phone" inputPlaceholder="Phone" inputId="phoneNumber" inputType="number" bind:value={$hospitalData.phoneNumber}/>
 			</div>
 		</div>
 	</div>
@@ -86,7 +92,7 @@
 		Please note that your username is very important. It helps others find you.
 	</p>
 	<div class="field input-field username-field">
-		<UsernameForm labelText="Your username" inputId="username" />
+		<UsernameForm labelText="Your username" inputId="username" value={$hospitalData.username}/>
 	</div>
 	<div class="field input-field username-type-field">
 		<UsernameAuto />

@@ -4,12 +4,8 @@
 	export let inputId: string | undefined;
 
 	let eyeIcon = 'img/icons/View.svg';
-	let eyeIconRepeat = 'img/icons/View.svg';
 	let inputPassword: HTMLInputElement;
-	let repeatPassword: HTMLInputElement;
-	let email = '';
-	let password = '';
-	let passwordrepeat = '';
+	export let password = '';
 	let errorLogin = false;
 </script>
 

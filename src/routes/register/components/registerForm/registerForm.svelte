@@ -4,15 +4,31 @@
 	import Hospital from './hospital.svelte';
 	import Individual from './individual.svelte';
 	import University from './university.svelte';
-	import { validateIndividual, type IndividualData } from '../../schemas/individual';
+	import { validateIndividual, type IndividualData, individualData } from '../../schemas/individual';
 	import { addToast } from '$lib/components/errorToast.svelte';
-	import type { HospitalData } from '../../schemas/hospital';
+	import { type HospitalData, hospitalData } from '../../schemas/hospital';
     import { validateHospital } from '../../schemas/hospital';
+    import {replacePropertyValueIfSame} from "$lib/utils/replaceProps"
 
     type DataUnion = {
             type: "individual",
             data: IndividualData
         } | {type: "hospital", data: HospitalData}
+
+
+
+
+    function mapToStore(unionData: DataUnion){
+        switch(unionData.type){
+            case "individual":
+                replacePropertyValueIfSame(unionData.data, $individualData);
+                break;
+            case "hospital":
+                replacePropertyValueIfSame(unionData.data, $hospitalData);
+                break;
+        }
+    }
+
 
 	function increaseStep() {
 		let formData = new FormData(formElement);
@@ -35,6 +51,7 @@
 		if (!validateStep(union)) {
 			return;
 		}
+        mapToStore(union);
 		step += 1;
 		dispatch('stepChanged', { step, branch: radioValue });
 	}
@@ -76,9 +93,6 @@
                 return false;
             }
         }
-        // if (values.type == 'university' && step >= 1) {
-        //
-        // }
         return true;
 	}
 

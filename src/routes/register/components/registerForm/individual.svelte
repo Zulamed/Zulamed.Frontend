@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Combobox from './combobox.svelte';
+	import { individualData } from '../../schemas/individual';
 
 	export let step: number;
 	let eyeIcon = 'img/icons/View.svg';
@@ -10,6 +11,10 @@
 	let password = '';
 	let passwordrepeat = '';
 	let errorLogin = false;
+	let username = '@';
+	$: {
+		$individualData.username = username;
+	}
 	function preventDeletion(event: KeyboardEvent) {
 		const input = document.getElementById('username') as HTMLInputElement;
 		const inputValue = input.value;
@@ -34,13 +39,27 @@
 			<div class="field input-field">
 				<label for="title">Title</label>
 				<div class="group">
-					<input id="title" name="title" type="text" placeholder="Your title" class="input" />
+					<input
+						id="title"
+						name="title"
+						type="text"
+						placeholder="Your title"
+						class="input"
+						bind:value={$individualData.title}
+					/>
 				</div>
 			</div>
 			<div class="field input-field">
 				<label for="name">First name(s)</label>
 				<div class="group">
-					<input id="name" name="name" type="text" placeholder="Your first name(s)" class="input" />
+					<input
+						id="name"
+						name="name"
+						type="text"
+						placeholder="Your first name(s)"
+						class="input"
+						bind:value={$individualData.name}
+					/>
 				</div>
 			</div>
 			<div class="field input-field">
@@ -52,9 +71,10 @@
 						type="text"
 						placeholder="Your family name(s)"
 						class="input"
+						bind:value={$individualData.surname}
 					/>
+				</div>
 			</div>
-            </div>
 			<div class="inputs-group">
 				<div class="field g input-field">
 					<label for="gender">Gender</label>
@@ -95,13 +115,27 @@
 			<div class="field input-field">
 				<label for="email">Email</label>
 				<div class="email-group">
-					<input id="email" name="email" type="email" placeholder="Email" class="input" />
+					<input
+						id="email"
+						name="email"
+						type="email"
+						placeholder="Email"
+						class="input"
+						bind:value={$individualData.email}
+					/>
 				</div>
 			</div>
 			<div class="field input-field">
 				<label for="repeat-email">Repeat email</label>
 				<div class="email-group">
-					<input id="repeat-email" name="confirmEmail" type="email" placeholder="Email" class="input" />
+					<input
+						id="repeat-email"
+						name="confirmEmail"
+						type="email"
+						placeholder="Email"
+						class="input"
+						bind:value={$individualData.confirmEmail}
+					/>
 				</div>
 			</div>
 			<div class="field input-field">
@@ -115,7 +149,7 @@
 						placeholder="*********"
 						class="password"
 						class:input-error={errorLogin}
-						bind:value={password}
+						bind:value={$individualData.password}
 					/>
 					<button
 						type="button"
@@ -145,7 +179,7 @@
 						placeholder="*********"
 						class="password"
 						class:input-error={errorLogin}
-						bind:value={passwordrepeat}
+						bind:value={$individualData.confirmPassword}
 					/>
 
 					<button
@@ -175,6 +209,7 @@
 					obligatoryField={true}
 					labelText="Stage in career:"
 					inputPlaceholder="Select a stage in career"
+					bind:value={$individualData.stageInCareer}
 				/>
 			</div>
 			<div class="field input-field">
@@ -182,13 +217,22 @@
 					obligatoryField={true}
 					labelText="Professional Activity:"
 					inputPlaceholder="Select a Profession"
+					bind:value={$individualData.profession}
 				/>
 			</div>
 			<div class="field input-field">
-				<Combobox labelText="Please specify" inputPlaceholder="Select a speciality" />
+				<Combobox
+					labelText="Please specify"
+					inputPlaceholder="Select a speciality"
+					bind:value={$individualData.speciality}
+				/>
 			</div>
 			<div class="field input-field">
-				<Combobox labelText="My Place(s) of work" inputPlaceholder="Select your place(s) of work" />
+				<Combobox
+					labelText="My Place(s) of work"
+					inputPlaceholder="Select your place(s) of work"
+					bind:value={$individualData.placeOfWork}
+				/>
 			</div>
 		</div>
 	</div>
@@ -196,17 +240,26 @@
 	<div class="input-container">
 		<div class="radio-content step-4-overflow">
 			<div class="field input-field country">
-				<Combobox labelText="Country:" inputPlaceholder="Select a country" />
+				<Combobox
+					labelText="Country:"
+					inputPlaceholder="Select a country"
+					bind:value={$individualData.country}
+				/>
 				<p class="error-message">Error message</p>
 			</div>
 			<div class="field input-field city">
-				<Combobox labelText="City:" inputPlaceholder="Select a city" />
+				<Combobox
+					labelText="City:"
+					inputPlaceholder="Select a city"
+					bind:value={$individualData.city}
+				/>
 			</div>
 			<div class="field input-field institute">
 				<Combobox
 					inputNote="Please select the name of your institute, if it does not exist, simply type a new institute name in English, using only latin characters without special characters or accents."
 					labelText="Institute"
 					inputPlaceholder="Select an institute"
+					bind:value={$individualData.institution}
 				/>
 			</div>
 			<div class="field input-field department">
@@ -222,11 +275,16 @@
 						type="text"
 						placeholder=""
 						class="input input-department"
+						bind:value={$individualData.department}
 					/>
 				</div>
 			</div>
 			<div class="field input-field role">
-				<Combobox labelText="Role" inputPlaceholder="Select a role" />
+				<Combobox
+					labelText="Role"
+					inputPlaceholder="Select a role"
+					bind:value={$individualData.role}
+				/>
 			</div>
 		</div>
 	</div>
@@ -240,7 +298,7 @@
 			<input
 				on:keydown={preventDeletion}
 				on:input={preventInsertion}
-				value="@"
+				bind:value={username}
 				id="username"
 				name="username"
 				type="text"

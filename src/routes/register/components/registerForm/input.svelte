@@ -4,6 +4,13 @@
 	export let inputId: string | undefined;
 	export let inputNote = '';
 	export let inputType = 'text';
+
+	export let value: string = "";
+
+	function onChange(e: Event){
+		let target = e.target as HTMLInputElement
+		value = target.value;
+	}
 </script>
 
 <label for={inputId}>{labelText}</label>
@@ -15,6 +22,8 @@
 		type={inputType}
 		placeholder={inputPlaceholder}
 		class="input"
+		on:input={onChange}
+		{value}
 	/>
 </div>
 

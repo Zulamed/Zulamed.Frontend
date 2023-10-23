@@ -5,6 +5,8 @@
 	export let obligatoryField = false;
 	export let inputNote = '';
     export let name = "";
+
+	export let value = "";
 	interface Data {
         title: string;
         subtitle?: string;

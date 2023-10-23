@@ -1,3 +1,4 @@
+import { writable } from "svelte/store";
 import { match } from "ts-pattern";
 import { z } from "zod";
 
@@ -68,6 +69,23 @@ const Data = z.discriminatedUnion("step", [
 
 export type HospitalData = z.infer<typeof Data>;
 
+export type HospitalFullData = HospitalFirstStep & HospitalSecondStep & HospitalThirdStep & HospitalFourthStep;
+
+export const hospitalData = writable<HospitalFullData>({
+    hospitalName: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    confirmEmail: "",
+    password: "",
+    confirmPassword: "",
+    address: "",
+    city: "",
+    country: "",
+    zipCode: "",
+    phoneNumber: "",
+    username: ""
+});
 
 export function validateHospital(data: HospitalData) {
     return match(data)

@@ -100,7 +100,8 @@ export const individualData = writable<IndividualFullData>({
     stageInCareer: "",
     surname: "",
     title: "",
-    username: ""
+    username: "",
+    role: ""
 });
 
 export function validateIndividual(data: IndividualData) {

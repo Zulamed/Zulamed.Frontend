@@ -38,7 +38,6 @@
 			$playerLoaded = false;
 			// await viewVideo(data.videoInfo.video.id);
             var videoId = data.videoInfo.video.id;
-            console.log(videoId);
 			await fetch(`${videoId}/view`, {
                 method: "POST"
             });

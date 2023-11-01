@@ -17,10 +17,6 @@ import { getAllVideos } from '$backend/video/getAll/endpoint';
 
 export const load = (async ({ params, fetch, locals }) => {
     const videoResult = await getVideoById(params.videoId, fetch);
-    // let videos = match(allVideos)
-    //     .with({ tag: "success" }, ({ data }) => data.videos)
-    //     .with({ tag: "error" }, ({ error }) => { throw err(500, error) })
-    //     .exhaustive();
     const video = match(videoResult)
         .with({ tag: "success" }, ({ response }) => response)
         .with({ tag: "failure" }, ({ error }) => { throw err(500, error) })

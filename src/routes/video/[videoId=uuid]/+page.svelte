@@ -33,10 +33,16 @@
 		}
 	}
 
-	afterNavigate(({to, from}) => {
-        if (to?.url.pathname !== from?.url.pathname) {
-            $playerLoaded = false;
-        }
+	afterNavigate(async ({ to, from }) => {
+		if (to?.url.pathname !== from?.url.pathname) {
+			$playerLoaded = false;
+			// await viewVideo(data.videoInfo.video.id);
+            var videoId = data.videoInfo.video.id;
+            console.log(videoId);
+			await fetch(`${videoId}/view`, {
+                method: "POST"
+            });
+		}
 		likeActive = data.userLiked ?? false;
 		dislikeActive = data.userDisliked ?? false;
 		followActive = data.userFollowed ?? false;
@@ -77,7 +83,7 @@
 						this={Player}
 						src={data.videoInfo.video.videoUrl}
 						poster={data.videoInfo.video.videoThumbnail}
-                        timelineThumbnails={data.videoInfo.video.videoTimelineThumbnail}
+						timelineThumbnails={data.videoInfo.video.videoTimelineThumbnail}
 					/>
 				{/await}
 			</div>

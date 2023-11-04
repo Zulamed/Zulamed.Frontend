@@ -5,7 +5,6 @@
 	import Description from './components/description.svelte';
 	import Comments from './components/comments.svelte';
 	import { applyAction, enhance } from '$app/forms';
-	import { viewVideo } from '$backend/video/view/endpoint';
 	import { melt } from '@melt-ui/svelte';
 	import Tooltip from '$lib/components/tooltip.svelte';
 	import { addNotification } from '$lib/components/notification.svelte';
@@ -48,7 +47,6 @@
 	});
 
 	onMount(async () => {
-		await viewVideo(data.videoInfo.video.id);
 		let media1027px = window.matchMedia('(max-width:1027px)');
 		let media600px = window.matchMedia('(max-width:600px)');
 		const match1027px = () => {

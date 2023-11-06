@@ -7,7 +7,7 @@ export type ViewResponse =
     | { status: "ok" }
     | { status: "error", message: string };
 
-export async function viewVideo(id: string, fetch: FetchCallbackType = globalFetch) {
+export async function viewVideo(id: string, fetch: FetchCallbackType = globalFetch) : Promise<ViewResponse> {
     try {
         const response = await fetch(`${PUBLIC_BACKEND_URL}/video/${id}/view`, {
             method: "POST"
@@ -17,8 +17,6 @@ export async function viewVideo(id: string, fetch: FetchCallbackType = globalFet
         }
         return { status: "ok" };
     } catch (error) {
-        if (error instanceof Error) {
-            return { status: "error", message: error.message };
-        }
+        return { status: "error", message: (error as Error).message };
     }
 }

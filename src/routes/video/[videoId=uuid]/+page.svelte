@@ -5,7 +5,6 @@
 	import Description from './components/description.svelte';
 	import Comments from './components/comments.svelte';
 	import { applyAction, enhance } from '$app/forms';
-	import { viewVideo } from '$backend/video/view/endpoint';
 	import { melt } from '@melt-ui/svelte';
 	import Tooltip from '$lib/components/tooltip.svelte';
 	import { addNotification } from '$lib/components/notification.svelte';
@@ -33,17 +32,21 @@
 		}
 	}
 
-	afterNavigate(({to, from}) => {
-        if (to?.url.pathname !== from?.url.pathname) {
-            $playerLoaded = false;
-        }
+	afterNavigate(async ({ to, from }) => {
+		if (to?.url.pathname !== from?.url.pathname) {
+			$playerLoaded = false;
+			// await viewVideo(data.videoInfo.video.id);
+            var videoId = data.videoInfo.video.id;
+			await fetch(`${videoId}/view`, {
+                method: "POST"
+            });
+		}
 		likeActive = data.userLiked ?? false;
 		dislikeActive = data.userDisliked ?? false;
 		followActive = data.userFollowed ?? false;
 	});
 
 	onMount(async () => {
-		await viewVideo(data.videoInfo.video.id);
 		let media1027px = window.matchMedia('(max-width:1027px)');
 		let media600px = window.matchMedia('(max-width:600px)');
 		const match1027px = () => {
@@ -77,7 +80,7 @@
 						this={Player}
 						src={data.videoInfo.video.videoUrl}
 						poster={data.videoInfo.video.videoThumbnail}
-                        timelineThumbnails={data.videoInfo.video.videoTimelineThumbnail}
+						timelineThumbnails={data.videoInfo.video.videoTimelineThumbnail}
 					/>
 				{/await}
 			</div>

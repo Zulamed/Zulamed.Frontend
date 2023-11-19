@@ -10,7 +10,7 @@
 	import { addNotification } from '$lib/components/notification.svelte';
 	import SideVideos from './components/sideVideos.svelte';
 	import Spinner from '$lib/components/spinner.svelte';
-	import { playerLoaded } from './components/videoPlayer/playerStore';
+	import { playerLoaded } from '../../../lib/components/videoPlayer/playerStore';
 	import { afterNavigate } from '$app/navigation';
 
 	let showMoreVideosButton = false;
@@ -36,10 +36,10 @@
 		if (to?.url.pathname !== from?.url.pathname) {
 			$playerLoaded = false;
 			// await viewVideo(data.videoInfo.video.id);
-            var videoId = data.videoInfo.video.id;
+			var videoId = data.videoInfo.video.id;
 			await fetch(`${videoId}/view`, {
-                method: "POST"
-            });
+				method: 'POST'
+			});
 		}
 		likeActive = data.userLiked ?? false;
 		dislikeActive = data.userDisliked ?? false;
@@ -75,7 +75,7 @@
 	<div id="row" class="row">
 		<div id="play-video" class="play-video">
 			<div class="video-container" class:skeleton={!$playerLoaded}>
-				{#await import('./components/videoPlayer/videoPlayer.svelte') then { default: Player }}
+				{#await import('../../../lib/components/videoPlayer/videoPlayer.svelte') then { default: Player }}
 					<svelte:component
 						this={Player}
 						src={data.videoInfo.video.videoUrl}

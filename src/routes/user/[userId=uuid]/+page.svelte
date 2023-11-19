@@ -44,7 +44,9 @@
 	const {
 		elements: { trigger: triggerDialog, content: contentDialog, overlay, title, close, portalled },
 		states: { open }
-	} = createDialog();
+	} = createDialog({
+		closeOnOutsideClick: false
+	});
 
 	const {
 		elements: { root, list, content, trigger },

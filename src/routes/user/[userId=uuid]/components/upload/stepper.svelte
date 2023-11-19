@@ -3,6 +3,8 @@
 	import { cubicInOut } from 'svelte/easing';
 	import { crossfade } from 'svelte/transition';
 	import VideoInformation from './videoInformation.svelte';
+	import VideoAccess from './previewPlayer.svelte';
+	import AccessInformation from './accessInformation.svelte';
 	const {
 		elements: { root, list, content, trigger },
 		states: { value }
@@ -45,11 +47,16 @@
 <div class="container">
 	<ul class="progressbar">
 		{#each triggers as triggerItem}
-			<li bind:this={uploadTab} use:melt={$trigger(triggerItem.id)}>
+			<li
+				bind:this={uploadTab}
+				class:active={$value == triggerItem.id}
+				class={$value == triggerItem.id ? 'filled' : 'empty'}
+				use:melt={$trigger(triggerItem.id)}
+			>
 				{triggerItem.title}
-				{#if $value === triggerItem.id}
+				<!-- {#if $value === triggerItem.id}
 					<div in:send={{ key: 'trigger' }} out:receive={{ key: 'trigger' }} />
-				{/if}
+				{/if} -->
 			</li>
 		{/each}
 	</ul>
@@ -57,7 +64,7 @@
 
 <div use:melt={$content('tab-1')} class="tab-content-container"><VideoInformation /></div>
 <div use:melt={$content('tab-2')} class="tab-content-container">Test</div>
-<div use:melt={$content('tab-3')} class="tab-content-container">Test</div>
+<div use:melt={$content('tab-3')} class="tab-content-container"><AccessInformation /></div>
 
 <style>
 	.container {
@@ -80,11 +87,17 @@
 		font-style: normal;
 		font-weight: 500;
 	}
+
+	.progressbar .active {
+		color: #54b9a2;
+	}
+
 	.progressbar li:hover {
 		background-color: #54b9a16b;
 		border-radius: 14px;
 	}
-	.progressbar li:before {
+
+	.progressbar .empty:before {
 		content: '';
 		width: 20px;
 		height: 20px;
@@ -96,6 +109,20 @@
 		margin: 0 auto 10px auto;
 		background-color: #fff;
 	}
+
+	.progressbar .filled:before {
+		content: '';
+		width: 20px;
+		height: 20px;
+		line-height: 30px;
+		border: 2px solid #54b9a2;
+		border-radius: 100%;
+		display: flex;
+		text-align: center;
+		margin: 0 auto 10px auto;
+		background-color: #54b9a2;
+	}
+
 	.progressbar li:after {
 		content: '';
 		position: absolute;

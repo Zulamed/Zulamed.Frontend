@@ -54,7 +54,7 @@
 		position: fixed;
 		left: 0;
 		bottom: 0;
-		z-index: 3;
+		z-index: 100;
 		margin: 1rem;
 		flex-direction: column;
 		gap: 0.5rem;

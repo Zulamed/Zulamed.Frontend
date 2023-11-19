@@ -8,17 +8,16 @@
 	import 'vidstack/player/ui';
 
 	import { isHLSProvider, type MediaCanPlayEvent, type MediaProviderChangeEvent } from 'vidstack';
-	import { playerVolume } from '../../stores/video-sound-store';
+	import { playerVolume } from '../../../routes/video/[videoId=uuid]/stores/video-sound-store';
 	import { playerLoaded } from './playerStore';
 
 	import type { MediaPlayerElement } from 'vidstack/elements';
 
-
-    export let timelineThumbnails : string;
+	export let timelineThumbnails = '';
 
 	export let poster = '/img/videoPreviews/2.png';
 
-	export let src: string;
+	export let src = '';
 	if (!poster) {
 		poster = '/img/videoPreviews/2.png';
 	}
@@ -62,7 +61,6 @@
 			destroy();
 		};
 	});
-
 </script>
 
 <media-player

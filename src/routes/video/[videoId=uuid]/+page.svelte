@@ -130,10 +130,10 @@
 					>
 						<Tooltip placement="bottom">
 							<button
-								use:melt={trigger}
 								slot="button"
 								let:trigger
 								id="follow-btn"
+                                use:melt={trigger}
 								class:active={followActive}
 								class="interaction-btn follow-btn">{followActive ? 'FOLLOWED' : 'FOLLOW'}</button
 							>
@@ -176,10 +176,10 @@
 						>
 							<Tooltip placement="bottom">
 								<button
-									use:melt={trigger}
 									slot="button"
 									let:trigger
 									id="like-btn"
+                                    use:melt={trigger}
 									class="interaction-btn like-btn"
 									class:active={likeActive}
 									><img src="/img/icons/thumb_up_white_24dp.svg" alt="" />
@@ -214,10 +214,10 @@
 						>
 							<Tooltip placement="bottom">
 								<button
-									use:melt={trigger}
 									slot="button"
 									let:trigger
 									id="dislike-btn"
+                                    use:melt={trigger}
 									class="interaction-btn dislike-btn"
 									class:active={dislikeActive}
 									><img src="/img/icons/thumb_down_white_24dp.svg" alt="" /></button

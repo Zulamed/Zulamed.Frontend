@@ -1,42 +1,54 @@
 <script lang="ts">
-	import { createCombobox, melt, type ComboboxFilterFunction } from '@melt-ui/svelte';
+	import { createCombobox, melt, type ComboboxOptionProps } from '@melt-ui/svelte';
 	export let labelText: string;
 	export let inputPlaceholder: string;
 	export let obligatoryField = false;
 	export let inputNote = '';
-    export let name = "";
+	export let name = '';
 
-	export let value = "";
+	export let value = '';
 	interface Data {
-        title: string;
-        subtitle?: string;
+		title: string;
+		subtitle?: string;
 	}
-	const filterFunction: ComboboxFilterFunction<Data> = ({ itemValue, input }) => {
-		// Example string normalization function. Replace as needed.
-		const normalize = (str: string) => str.normalize().toLowerCase();
-		const normalizedInput = normalize(input);
-		return (
-			normalizedInput === '' ||
-			normalize(itemValue.title).includes(normalizedInput)
-		);
-	};
 
 	const {
-		elements: { input, menu, option, label },
-		states: { open, inputValue, isEmpty }
-	} = createCombobox({
-		filterFunction,
+		elements: { menu, input, option, label },
+		states: { open, inputValue, touchedInput, selected },
+		helpers: { isSelected }
+	} = createCombobox<Data>({
 		forceVisible: true
 	});
 
-	// i don't know why but isEmpty is always true when the input is empty when first rendered
-	$: emptyBug = $isEmpty && $inputValue.value === '';
+	$: if (!$open) {
+		$inputValue = $selected?.label ?? '';
+	}
+
+	$: {
+		value = $inputValue;
+	}
+
+	const toOption = (data: Data): ComboboxOptionProps<Data> => ({
+		value: data,
+		label: data.title,
+		disabled: false
+	});
+
+	$: filteredMangas = $touchedInput
+		? data.filter(({ title, subtitle }) => {
+				const normalizedInput = $inputValue.toLowerCase();
+				return (
+					title.toLowerCase().includes(normalizedInput) ||
+					subtitle?.toLowerCase().includes(normalizedInput)
+				);
+		  })
+		: data;
 
 	export let customOption = true;
-    export let data: Data[] = [];
+	export let data: Data[] = [];
 </script>
 
-<!-- eslint-disable-next-line svelte/valid-compile -->
+<!-- svelte-ignore a11y-label-has-associated-control -->
 <label use:melt={$label}
 	>{labelText}
 	{#if obligatoryField == true}
@@ -58,41 +70,36 @@
 <div class="menu-container" use:melt={$menu}>
 	{#if $open}
 		<ul class="menu">
-			{#if $inputValue.value !== '' && customOption}
+			{#if $inputValue !== '' && customOption}
 				<li
 					use:melt={$option({
 						value: {
-							title: $inputValue.value,
+							title: $inputValue
 						},
-						label: $inputValue.value,
+						label: $inputValue,
 						disabled: false
 					})}
 					class="item"
 				>
 					<div>
-						<span>{$inputValue.value}</span>
+						<span>{$inputValue}</span>
 					</div>
 				</li>
 			{/if}
-			{#each data as book, index (index)}
-				<li
-					use:melt={$option({
-						value: book,
-						label: book.title,
-					})}
-					class="item"
-				>
+			{#each filteredMangas as book, index (index)}
+				<li use:melt={$option(toOption(book))} class="item">
 					<div>
 						<span>{book.title}</span>
-                        {#if book.subtitle}
-                            <span class="author">{book.subtitle}</span>
-                        {/if}
+						{#if book.subtitle}
+							<span class="author">{book.subtitle}</span>
+						{/if}
 					</div>
 				</li>
+			{:else}
+				{#if !customOption}
+					<li class="item">No results found</li>
+				{/if}
 			{/each}
-			{#if $isEmpty && !emptyBug}
-				<li class="item">No results found</li>
-			{/if}
 		</ul>
 	{/if}
 </div>

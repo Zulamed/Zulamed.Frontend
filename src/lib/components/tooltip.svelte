@@ -1,9 +1,22 @@
 <script lang="ts">
 	import { createTooltip, melt } from '@melt-ui/svelte';
-	import type { FloatingConfig } from '@melt-ui/svelte/internal/actions';
 	import { fade } from 'svelte/transition';
 
-	export let placement: FloatingConfig['placement'] = 'top';
+	type Position =
+		| 'top'
+		| 'top-start'
+		| 'top-end'
+		| 'right'
+		| 'right-start'
+		| 'right-end'
+		| 'bottom'
+		| 'bottom-start'
+		| 'bottom-end'
+		| 'left'
+		| 'left-start'
+		| 'left-end';
+
+	export let placement: Position = 'top';
 
 	const {
 		elements: { trigger, content, arrow },

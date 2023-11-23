@@ -9,6 +9,7 @@
 	import { type HospitalData, hospitalData } from '../../schemas/hospital';
     import { validateHospital } from '../../schemas/hospital';
     import {replacePropertyValueIfSame} from "$lib/utils/replaceProps"
+	import { match } from 'ts-pattern';
 
     type DataUnion = {
             type: "individual",
@@ -34,6 +35,8 @@
 		let formData = new FormData(formElement);
 		let data = { ...Object.fromEntries(formData), step: step };
 
+        console.log(data);
+
         let union : DataUnion | undefined = undefined;
 
 
@@ -58,42 +61,28 @@
 
 
 	function validateStep(values: DataUnion) {
-		if (step == 0) {
+		if (step <=  0) {
 			return true;
 		}
-		if (values.type == 'individual' && step >= 1) {
-			let result = validateIndividual(values.data);
-			if (result.success) {
-				return true;
-			} else {
-				result.error.errors.forEach((error) => {
-					addToast({
-						data: {
-							fieldName: error.path[0].toString(),
-							error: error.message
-						}
-					});
-				});
-				return false;
-			}
-		}
-        if (values.type == 'hospital' && step >= 1) {
-            let result = validateHospital(values.data);
-            if (result.success) {
-                return true;
-            } else {
-                result.error.errors.forEach((error) => {
-                    addToast({
-                        data: {
-                            fieldName: error.path[0].toString(),
-                            error: error.message
-                        }
-                    });
+
+        let result = match(values)
+            .with({type: "individual"}, ({data}) => validateIndividual(data))
+            .with({type: "hospital"}, ({data}) => validateHospital(data))
+            .exhaustive();
+
+        if (result.success)
+            return true;
+        else {
+            result.error.errors.forEach((error) => {
+                addToast({
+                    data: {
+                        fieldName: error.path[0].toString(),
+                        error: error.message
+                    }
                 });
-                return false;
-            }
+            });
+            return false;
         }
-        return true;
 	}
 
 	let formElement: HTMLFormElement;

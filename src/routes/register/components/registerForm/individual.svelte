@@ -210,6 +210,7 @@
 					labelText="Stage in career:"
 					inputPlaceholder="Select a stage in career"
 					bind:value={$individualData.stageInCareer}
+                    name="stageInCareer"
 				/>
 			</div>
 			<div class="field input-field">
@@ -218,6 +219,7 @@
 					labelText="Professional Activity:"
 					inputPlaceholder="Select a Profession"
 					bind:value={$individualData.profession}
+                    name="profession"
 				/>
 			</div>
 			<div class="field input-field">
@@ -225,6 +227,7 @@
 					labelText="Please specify"
 					inputPlaceholder="Select a speciality"
 					bind:value={$individualData.speciality}
+                    name="speciality"
 				/>
 			</div>
 			<div class="field input-field">
@@ -232,6 +235,7 @@
 					labelText="My Place(s) of work"
 					inputPlaceholder="Select your place(s) of work"
 					bind:value={$individualData.placeOfWork}
+                    name="placeOfWork"
 				/>
 			</div>
 		</div>
@@ -244,6 +248,7 @@
 					labelText="Country:"
 					inputPlaceholder="Select a country"
 					bind:value={$individualData.country}
+                    name="country"
 				/>
 				<p class="error-message">Error message</p>
 			</div>
@@ -252,6 +257,7 @@
 					labelText="City:"
 					inputPlaceholder="Select a city"
 					bind:value={$individualData.city}
+                    name="city"
 				/>
 			</div>
 			<div class="field input-field institute">
@@ -260,6 +266,7 @@
 					labelText="Institute"
 					inputPlaceholder="Select an institute"
 					bind:value={$individualData.institution}
+                    name="institution"
 				/>
 			</div>
 			<div class="field input-field department">
@@ -284,6 +291,7 @@
 					labelText="Role"
 					inputPlaceholder="Select a role"
 					bind:value={$individualData.role}
+                    name="role"
 				/>
 			</div>
 		</div>

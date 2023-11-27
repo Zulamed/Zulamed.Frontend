@@ -3,7 +3,7 @@ import { PUBLIC_BACKEND_URL } from "$env/static/public";
 import type { Video } from "$lib/models/video";
 import type { User } from "../getAll/types";
 
-type Data = { videos: { id: string, video: Video, user: User, time: Date }[] }
+export type Data = { viewHistories: { viewHistoryId: string, viewedVideo: Video, viewedBy: User, viewedAt: Date }[] }
 
 
 type Response =
@@ -16,8 +16,8 @@ export async function getVideosByHistory(fetch: FetchCallbackType = originalFetc
             return {status: 'error', message: await result.text()}
         }
         const body = await result.json() as Data;
-        body.videos.forEach(video => {
-            video.video.videoPublishedDate = new Date(video.video.videoPublishedDate);
+        body.viewHistories.forEach(video => {
+            video.viewedVideo.videoPublishedDate = new Date(video.viewedVideo.videoPublishedDate);
         });
         return {status: 'ok', data: body};
     } catch (error) {

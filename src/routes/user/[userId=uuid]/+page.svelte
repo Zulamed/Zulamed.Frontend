@@ -17,7 +17,6 @@
 	import type { PageData } from './$types';
 	import { user } from '$lib/stores/auth';
 	import Tooltip from '$lib/components/tooltip.svelte';
-	import { subscribe } from 'svelte/internal';
 	import { invalidateAll } from '$app/navigation';
 	import Upload from './components/upload/upload.svelte';
 	import Stepper from './components/upload/stepper.svelte';
@@ -31,14 +30,6 @@
 		} else {
 			subActive = !subActive;
 		}
-	}
-	function confirmUnsubscribe() {
-		subActive = false;
-		confirmationVisible = false;
-	}
-
-	function cancelUnsubscribe() {
-		confirmationVisible = false;
 	}
 
 	const {
@@ -183,7 +174,8 @@
 									/>
 								</svg>
 							</button>
-							<Stepper />
+							<!-- <Stepper /> -->
+                            <Upload />
 						</div>
 					{/if}
 				</div>

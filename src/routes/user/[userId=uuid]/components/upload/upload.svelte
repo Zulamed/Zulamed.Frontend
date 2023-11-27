@@ -1,21 +1,73 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+	import * as UpChunk from '@mux/upchunk';
+	import { createEventDispatcher } from 'svelte';
+
 	import Dropzone from 'svelte-file-dropzone/Dropzone.svelte';
+	import type { CreateUploadUrlResponse } from '../../createUploadUrl/+server';
 
 	let files = {
 		accepted: [],
 		rejected: []
 	};
+
 	let inputFile: HTMLInputElement;
-	function handleFilesSelect(e: CustomEvent<any>) {
-		const { acceptedFiles, fileRejections } = e.detail;
 
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
-		files.accepted = [...files.accepted, ...acceptedFiles];
+	const fileUploadedEventDispatch = createEventDispatcher<{
+		fileUploaded: { uploadObject: UpChunk.UpChunk };
+	}>();
 
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
-		files.rejected = [...files.rejected, ...fileRejections];
+	async function fileInputChanged(e: Event) {
+		const target = e.target as HTMLInputElement;
+		if (!target || !target.files || target.files.length === 0) {
+			return;
+		}
+
+		const file = target.files[0];
+
+		if (!file) {
+			return;
+		}
+
+		const uploadObject = await createMuxUploadObject(file);
+
+		fileUploadedEventDispatch('fileUploaded', { uploadObject });
+	}
+
+	async function createMuxUploadObject(file: File) {
+		const uploadUrlObject = await getUploadUrl();
+		const upload = UpChunk.createUpload({
+			endpoint: uploadUrlObject.uploadUrl,
+			file,
+			chunkSize: 5120
+		});
+
+		return upload;
+	}
+
+	async function handleFilesSelect(e: CustomEvent<unknown>) {
+		const { acceptedFiles } = e.detail as { acceptedFiles: never[] };
+
+		files.accepted = [...acceptedFiles];
+
+		if (files.accepted.length === 0) {
+			return;
+		}
+
+        // accept only one file
+		const file = files.accepted[0] as File;
+		const uploadObject = await createMuxUploadObject(file);
+
+		fileUploadedEventDispatch('fileUploaded', { uploadObject });
+	}
+
+	async function getUploadUrl() {
+		const response = await fetch($page.params.userId, {
+			method: 'POST'
+		});
+		const uploadUrlObject = await response.json() as CreateUploadUrlResponse;
+
+        return uploadUrlObject;
 	}
 </script>
 
@@ -74,7 +126,14 @@
 		<form action="">
 			<div class="file-upload">
 				<label for="upload" class="file-upload__label">SELECT FILES</label>
-				<input id="upload" class="file-upload__input" type="file" name="file-upload" />
+				<input
+					id="upload"
+					class="file-upload__input"
+					type="file"
+					name="file-upload"
+					accept="video/*"
+					on:change={fileInputChanged}
+				/>
 			</div>
 		</form>
 	</Dropzone>

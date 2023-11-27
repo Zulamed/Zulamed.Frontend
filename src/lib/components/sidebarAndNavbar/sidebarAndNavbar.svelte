@@ -193,7 +193,7 @@
 					><img src="/img/profileContainerIcons/groups_black_24dp.svg" alt="" />
 					<p>Switch account</p>
 				</a>
-				<a class="profile-link" href="."
+				<a class="profile-link" href="/membership"
 					><img src="/img/profileContainerIcons/wallet_black_24dp.svg" alt="" />
 					<p>Purchases and membership</p>
 				</a>

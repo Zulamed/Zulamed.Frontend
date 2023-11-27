@@ -21,7 +21,7 @@
 				</li>
 			</ul>
 		</div>
-		<div class="card shadow active">
+		<div class="card active shadow">
 			<ul>
 				<li class="pack">Premium account</li>
 				<li id="basic" class="price bottom-bar">Price on <br /> request</li>
@@ -90,11 +90,11 @@
 		color: hsl(232, 13%, 33%);
 		display: flex;
 		align-items: center;
-		transform: scale(1.1);
+		transform: scale(1.01);
 		z-index: 0;
 	}
 	ul {
-		margin: 2.6rem;
+		margin: 2.6rem 4.5rem;
 		display: flex;
 		justify-content: center;
 		flex-direction: column;
@@ -105,7 +105,7 @@
 		display: flex;
 		justify-content: center;
 		width: 100%;
-		padding: 1rem 0;
+		padding: 0.8rem 0;
 		text-align: center;
 	}
 	ul li.price {
@@ -142,10 +142,39 @@
 	.bottom-bar {
 		border-bottom: 2px solid hsl(240, 8%, 85%, 0.583);
 	}
-	.card.card.active .bottom-bar {
+	.cards .card.active .bottom-bar {
 		border-bottom: 2px solid hsla(240, 1%, 43%, 0.253);
 	}
 	.pack {
 		font-size: 1.1rem;
+	}
+	@media (max-width: 1440px) {
+		ul li {
+			padding: 0.6rem 0;
+			text-align: center;
+			font-size: 15px;
+		}
+		ul li.price {
+			font-size: 2.3rem;
+			color: hsl(232, 13%, 33%);
+			font-weight: bold;
+			padding-bottom: 2rem;
+		}
+	}
+	@media (max-width: 900px) {
+		.cards {
+			width: 100%;
+			gap: 20px;
+		}
+		.card,
+		.card.active {
+			width: 100%;
+		}
+
+		.cards .card.active {
+			transform: scale(1);
+			align-items: center;
+			justify-content: center;
+		}
 	}
 </style>

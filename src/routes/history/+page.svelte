@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { sidebarOpened } from '$lib/components/sidebarAndNavbar/stores/sidebarOpened';
+	import type {PageData} from './$types'
 
 	let displaySettingsContainer = 'none';
 
 	const toggleSettingsDropdown = () => {
 		displaySettingsContainer = displaySettingsContainer === 'none' ? 'flex' : 'none';
 	};
+	export let data: PageData;
 </script>
 
 <svelte:head>
@@ -176,27 +178,7 @@
 
 	<h1 class="list-header">Today</h1>
 	<div class="list-container">
-		<a href="." class="vid-list">
-			<a class="preview" href="."><img src="/img/videoPreviews/7.png" class="thumbnail" alt="" /></a
-			>
-			<div class="flex-div">
-				<img class="channel-logo" src="/img/icons/channel-logo.jpg" alt="" />
-				<div class="list-vid-info">
-					<a class="video-title" href=".">What happens during surgery?</a>
-					<div style="display: flex; margin-top: 12px;">
-						<a href="." class="vid-channel">Lorem Ipsum&nbsp;</a><span class="betweenDot"
-							>·&nbsp;</span
-						>
-						<p id="viewsText" class="vid-views">43K views</p>
-					</div>
-					<p class="vid-description">
-						Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-						laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-						architecto beatae vitae dicta sunt explicabo.
-					</p>
-				</div>
-			</div>
-		</a>
+		{#each data.videoData.video as videoInfo}
 		<a href="." class="vid-list">
 			<a class="preview" href="."><img src="/img/videoPreviews/7.png" class="thumbnail" alt="" /></a
 			>

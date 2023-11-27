@@ -5,6 +5,7 @@
 	import VideoInformation from './videoInformation.svelte';
 	import VideoAccess from './previewPlayer.svelte';
 	import AccessInformation from './accessInformation.svelte';
+    import type * as UpChunk from "@mux/upchunk";
 	const {
 		elements: { root, list, content, trigger },
 		states: { value }
@@ -22,6 +23,14 @@
 		duration: 250,
 		easing: cubicInOut
 	});
+
+    export let uploadObject : UpChunk.UpChunk;
+    let uploadProgress = 0;
+
+    uploadObject.on('progress', (progress) => {
+        uploadProgress = progress.detail;
+    });
+
 </script>
 
 <!-- <div class="tabs-container">

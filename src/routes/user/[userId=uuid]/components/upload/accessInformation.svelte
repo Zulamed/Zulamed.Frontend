@@ -23,7 +23,7 @@
 		</div>
 		<div class="date-container">
 			<div class="radio-button">
-				<input id="radio-8" class="radio-custom" name="date-group" type="radio" />
+				<input id="radio-8" class="radio-custom" name="date-group" type="radio" checked />
 				<label for="radio-8" class="radio-custom-label">Now</label>
 			</div>
 			<div class="radio-button">
@@ -131,32 +131,7 @@
 		font-style: normal;
 		font-weight: 500;
 	}
-	.input-label {
-		color: #a1a1a1;
-		font-size: 14px;
-		font-style: normal;
-		font-weight: 500;
-		margin-bottom: 16px;
-	}
-	.title-input {
-		border: none;
-		outline: none;
-		font-size: 19px;
-		font-style: normal;
-		font-weight: 500;
-	}
-	.vid-inf {
-		margin-top: 26px;
-	}
-	.video-title {
-		display: flex;
-		flex-direction: column;
-		position: relative;
-		border-radius: 23px;
-		border: 1px solid #54b9a2;
-		width: 100%;
-		padding: 20px 40px 28px 40px;
-	}
+
 	.row {
 		position: relative;
 		margin-top: 26px;

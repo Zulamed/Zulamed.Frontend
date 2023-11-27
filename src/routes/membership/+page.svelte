@@ -1,141 +1,151 @@
 <script lang="ts"></script>
 
 <div class="container">
-	<div class="container-overlay" />
-	<h1 class="title">A membership for everyone.</h1>
-	<p class="subtitle">
-		Submit videos and get more access to our video content library with one of our ZulaMED
-		memberships
-	</p>
-	<div class="parent">
-		<div class="div1">
-			<div class="section">Compare Memberships</div>
-			<div class="section">Compare Memberships</div>
-			<div class="section">Compare Memberships</div>
-			<div class="section">Compare Memberships</div>
-			<div class="section">Compare Memberships</div>
-			<div class="section">&nbsp;</div>
+	<header>
+		<h1>A membership for everyone.</h1>
+	</header>
+
+	<!-- ====cards==== -->
+	<div class="cards">
+		<div class="card shadow">
+			<ul>
+				<li class="pack">Personal account</li>
+				<li id="basic" class="price bottom-bar">&euro;9.99</li>
+				<li class="bottom-bar">Compare membership</li>
+				<li class="bottom-bar">Compare membership</li>
+				<li class="bottom-bar">Compare membership</li>
+				<li class="bottom-bar">Compare membership</li>
+				<li class="bottom-bar">Compare membership</li>
+				<li>
+					<button class="btn">Learn More</button>
+				</li>
+			</ul>
 		</div>
-		<div class="div2">
-			<div class="section">Preview</div>
-			<div class="section">&nbsp;</div>
-			<div class="section">&nbsp;</div>
-			<div class="section">&nbsp;</div>
-			<div class="section">&nbsp;</div>
-			<div class="section">FREE</div>
+		<div class="card shadow active">
+			<ul>
+				<li class="pack">Premium account</li>
+				<li id="basic" class="price bottom-bar">Price on <br /> request</li>
+				<li class="bottom-bar">Compare membership</li>
+				<li class="bottom-bar">Compare membership</li>
+				<li class="bottom-bar">Compare membership</li>
+				<li class="bottom-bar">Compare membership</li>
+				<li class="bottom-bar">Compare membership</li>
+				<li>
+					<button class="btn active-btn">Learn More</button>
+				</li>
+			</ul>
 		</div>
-		<div class="div3">
-			<div class="section">Explorer</div>
-			<div class="section">&nbsp;</div>
-			<div class="section">&nbsp;</div>
-			<div class="section">&nbsp;</div>
-			<div class="section">&nbsp;</div>
-			<div class="section">FREE</div>
-		</div>
-		<div class="div4">
-			<div class="section">Professional</div>
-			<div class="section">&nbsp;</div>
-			<div class="section">&nbsp;</div>
-			<div class="section">&nbsp;</div>
-			<div class="section">&nbsp;</div>
-			<div class="section">$10.00/Month</div>
+		<div class="card shadow">
+			<ul>
+				<li class="pack">Professional account</li>
+				<li id="basic" class="price bottom-bar">&euro;59.99</li>
+				<li class="bottom-bar">Compare membership</li>
+				<li class="bottom-bar">Compare membership</li>
+				<li class="bottom-bar">Compare membership</li>
+				<li class="bottom-bar">Compare membership</li>
+				<li class="bottom-bar">Compare membership</li>
+				<li>
+					<button class="btn">Learn More</button>
+				</li>
+			</ul>
 		</div>
 	</div>
 </div>
 
 <style>
 	.container {
-		position: relative;
 		width: 100%;
 		height: 100%;
-		background-image: url(/img/main-background-mobile.png);
-		background-repeat: no-repeat;
-		background-size: cover;
-		background-position: top center;
-		padding: 94px 235px;
-	}
-	.container-overlay {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		left: 0;
-		background-color: white;
-		opacity: 0.7;
-	}
-	.parent {
-		position: relative;
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		grid-template-rows: repeat(6, 1fr);
-		grid-column-gap: 0px;
-		grid-row-gap: 0px;
-	}
-	.title {
-		position: relative;
-		color: #000;
-		font-size: 78px;
-		font-style: normal;
-		font-weight: 400;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		text-align: center;
-		margin-bottom: 56px;
+		padding: 0 15px 40px 15px;
 	}
-	.subtitle {
-		margin-bottom: 136px;
-		position: relative;
-		color: #000;
-		text-align: center;
-		font-size: 28px;
-		font-style: normal;
-		font-weight: 400;
+	header {
+		color: hsl(232, 13%, 33%);
+		margin: 3.3rem 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 	}
-	.div2 .section,
-	.div3 .section,
-	.div4 .section {
-		padding: 171px 124px 0 124px;
-		color: #000;
-		font-size: 24px;
-		font-style: normal;
-		font-weight: 600;
-		line-height: normal;
-		letter-spacing: 3.12px;
-	}
-	.div1 .section {
-		padding: 90px 29px 0 29px;
-		color: #000;
-		font-size: 24px;
-		font-style: normal;
-		font-weight: 600;
-		line-height: normal;
-		letter-spacing: 3.12px;
-	}
-	.section {
-		border-bottom: 1px solid #000000;
 
+	/* =====cards==== */
+
+	.cards {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+	}
+	.card {
+		background-color: #fff;
+		color: hsl(233, 13%, 49%);
+		border-radius: 0.8rem;
+	}
+	.cards .card.active {
+		background: linear-gradient(135deg, rgb(112, 214, 186, 1) 0%, rgb(0, 168, 146) 100%);
+		color: hsl(232, 13%, 33%);
+		display: flex;
+		align-items: center;
+		transform: scale(1.1);
+		z-index: 0;
+	}
+	ul {
+		margin: 2.6rem;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		align-items: center;
+	}
+	ul li {
+		list-style-type: none;
+		display: flex;
+		justify-content: center;
 		width: 100%;
-		height: 281.6px;
+		padding: 1rem 0;
+		text-align: center;
 	}
-	.div1,
-	.div2,
-	.div3,
-	.div4 {
-		height: 1690px;
-		width: 360px;
+	ul li.price {
+		font-size: 3rem;
+		color: hsl(232, 13%, 33%);
+		font-weight: bold;
+		padding-bottom: 2rem;
 	}
-	.div1 {
-		grid-area: 1 / 1 / 7 / 1;
-		background-color: #ffffff;
+	.shadow {
+		box-shadow: -5px 5px 15px 1px rgba(0, 0, 0, 0.1);
 	}
-	.div2 {
-		grid-area: 1 / 2 / 7 / 2;
-		background-color: #f1f1f1;
+	.card.active .price {
+		color: hsl(232, 13%, 33%);
 	}
-	.div3 {
-		grid-area: 1 / 3 / 7 / 3;
-		background-color: #00d6ba;
+	.btn {
+		margin-top: 1rem;
+		height: 2.6rem;
+		width: 13.3rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 4px;
+		color: hsl(232, 13%, 33%);
+		background: linear-gradient(135deg, rgb(0, 214, 186, 1) 0%, rgb(0, 168, 146) 100%);
+		outline: none;
+		border: 0;
+		font-weight: bold;
+		cursor: pointer;
 	}
-	.div4 {
-		background-color: #71cac8;
-		grid-area: 1 / 4 / 7 / 4;
+	.btn.active-btn {
+		background: #fff;
+		color: hsl(232, 13%, 33%);
+	}
+	.bottom-bar {
+		border-bottom: 2px solid hsl(240, 8%, 85%, 0.583);
+	}
+	.card.card.active .bottom-bar {
+		border-bottom: 2px solid hsla(240, 1%, 43%, 0.253);
+	}
+	.pack {
+		font-size: 1.1rem;
 	}
 </style>

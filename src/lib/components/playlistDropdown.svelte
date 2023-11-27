@@ -22,7 +22,7 @@
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
 				>
-					<circle cx="10" cy="10" r="9" fill="white" stroke="#54B9A2" stroke-width="2" />
+					<circle cx="10" cy="10" r="9" fill="#54B9A2" stroke="#54B9A2" stroke-width="2" />
 				</svg> Playlist 1
 			</div>
 			<div class="playlist-item" use:melt={$item}>
@@ -33,7 +33,7 @@
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
 				>
-					<circle cx="10" cy="10" r="9" fill="white" stroke="#54B9A2" stroke-width="2" />
+					<circle cx="10" cy="10" r="9" fill="#54B9A2" stroke="#54B9A2" stroke-width="2" />
 				</svg> Playlist 2
 			</div>
 			<div class="playlist-item" use:melt={$item}>
@@ -44,7 +44,7 @@
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
 				>
-					<circle cx="10" cy="10" r="9" fill="white" stroke="#54B9A2" stroke-width="2" />
+					<circle cx="10" cy="10" r="9" fill="#54B9A2" stroke="#54B9A2" stroke-width="2" />
 				</svg> Playlist 3
 			</div>
 			<Dialog>

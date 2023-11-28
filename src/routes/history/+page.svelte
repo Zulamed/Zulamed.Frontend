@@ -183,11 +183,11 @@
 			<a class="preview" href="/video/{videoInfo.viewedVideo.id}"><img src={videoInfo.viewedVideo.videoThumbnail ?? "/img/videoPreviews/7.png"} class="thumbnail" alt="" /></a
 			>
 			<div class="flex-div">
-				<img class="channel-logo" src="{videoInfo.viewedBy.profilePictureUrl ?? '/img/icons/channel-logo.jpg'}" alt="" />
+				<img class="channel-logo" src="{videoInfo.owner.profilePictureUrl ?? '/img/icons/channel-logo.jpg'}" alt="" />
 				<div class="list-vid-info">
 					<a class="video-title" href="/video/{videoInfo.viewedVideo.id}">{videoInfo.viewedVideo.videoTitle}</a>
 					<div style="display: flex; margin-top: 12px;">
-						<a href="/user/{videoInfo.viewedBy.id}" class="vid-channel">{videoInfo.viewedVideo.}</a><span class="betweenDot"
+						<a href="/user/{videoInfo.owner.id}" class="vid-channel">{videoInfo.owner.username}</a><span class="betweenDot"
 							>·&nbsp;</span
 						>
 						<p id="viewsText" class="vid-views">{videoInfo.viewedVideo.videoViews} views</p>

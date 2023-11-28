@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { sidebarOpened } from '$lib/components/sidebarAndNavbar/stores/sidebarOpened';
+	import type {PageData} from './$types'
 
 	let displaySettingsContainer = 'none';
 
 	const toggleSettingsDropdown = () => {
 		displaySettingsContainer = displaySettingsContainer === 'none' ? 'flex' : 'none';
 	};
+	export let data: PageData;
 </script>
 
 <svelte:head>
@@ -176,48 +178,25 @@
 
 	<h1 class="list-header">Today</h1>
 	<div class="list-container">
-		<a href="." class="vid-list">
-			<a class="preview" href="."><img src="/img/videoPreviews/7.png" class="thumbnail" alt="" /></a
+		{#each data.videoData.viewHistories as videoInfo}
+		<a href="/video/{videoInfo.viewedVideo.id}" class="vid-list">
+			<a class="preview" href="/video/{videoInfo.viewedVideo.id}"><img src={videoInfo.viewedVideo.videoThumbnail ?? "/img/videoPreviews/7.png"} class="thumbnail" alt="" /></a
 			>
 			<div class="flex-div">
-				<img class="channel-logo" src="/img/icons/channel-logo.jpg" alt="" />
+				<img class="channel-logo" src="{videoInfo.owner.profilePictureUrl ?? '/img/icons/channel-logo.jpg'}" alt="" />
 				<div class="list-vid-info">
-					<a class="video-title" href=".">What happens during surgery?</a>
+					<a class="video-title" href="/video/{videoInfo.viewedVideo.id}">{videoInfo.viewedVideo.videoTitle}</a>
 					<div style="display: flex; margin-top: 12px;">
-						<a href="." class="vid-channel">Lorem Ipsum&nbsp;</a><span class="betweenDot"
+						<a href="/user/{videoInfo.owner.id}" class="vid-channel">{videoInfo.owner.username}</a><span class="betweenDot"
 							>·&nbsp;</span
 						>
-						<p id="viewsText" class="vid-views">43K views</p>
+						<p id="viewsText" class="vid-views">{videoInfo.viewedVideo.videoViews} views</p>
 					</div>
-					<p class="vid-description">
-						Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-						laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-						architecto beatae vitae dicta sunt explicabo.
-					</p>
+					<p class="vid-description">{videoInfo.viewedVideo.videoDescription ?? "No description provided"}</p>
 				</div>
 			</div>
 		</a>
-		<a href="." class="vid-list">
-			<a class="preview" href="."><img src="/img/videoPreviews/7.png" class="thumbnail" alt="" /></a
-			>
-			<div class="flex-div">
-				<img class="channel-logo" src="/img/icons/channel-logo.jpg" alt="" />
-				<div class="list-vid-info">
-					<a class="video-title" href=".">What happens during surgery?</a>
-					<div style="display: flex; margin-top: 12px;">
-						<a href="." class="vid-channel">Lorem Ipsum&nbsp;</a><span class="betweenDot"
-							>·&nbsp;</span
-						>
-						<p id="viewsText" class="vid-views">43K views</p>
-					</div>
-					<p class="vid-description">
-						Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-						laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-						architecto beatae vitae dicta sunt explicabo.
-					</p>
-				</div>
-			</div>
-		</a>
+		{/each}
 	</div>
 	<h1 class="list-header">Yesterday</h1>
 	<div class="list-container">

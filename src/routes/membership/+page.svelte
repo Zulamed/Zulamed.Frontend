@@ -10,21 +10,21 @@
 		<div class="card shadow">
 			<ul>
 				<li class="pack">Personal account</li>
-				<li id="basic" class="price bottom-bar">&euro;9.99</li>
+				<li id="personal-account" class="price bottom-bar">&euro;9.99</li>
 				<li class="bottom-bar">Compare membership</li>
 				<li class="bottom-bar">Compare membership</li>
 				<li class="bottom-bar">Compare membership</li>
 				<li class="bottom-bar">Compare membership</li>
 				<li class="bottom-bar">Compare membership</li>
 				<li>
-					<button class="btn">Learn More</button>
+					<button class="btn btn-hover">Learn More</button>
 				</li>
 			</ul>
 		</div>
 		<div class="card active shadow">
 			<ul>
-				<li class="pack">Premium account</li>
-				<li id="basic" class="price bottom-bar">Price on <br /> request</li>
+				<li class="pack">Professional account</li>
+				<li id="professional-account" class="price bottom-bar">&euro;59.99</li>
 				<li class="bottom-bar">Compare membership</li>
 				<li class="bottom-bar">Compare membership</li>
 				<li class="bottom-bar">Compare membership</li>
@@ -37,15 +37,15 @@
 		</div>
 		<div class="card shadow">
 			<ul>
-				<li class="pack">Professional account</li>
-				<li id="basic" class="price bottom-bar">&euro;59.99</li>
+				<li class="pack">Premium account</li>
+				<li id="premium-account" class="price bottom-bar">Price on<br />request</li>
 				<li class="bottom-bar">Compare membership</li>
 				<li class="bottom-bar">Compare membership</li>
 				<li class="bottom-bar">Compare membership</li>
 				<li class="bottom-bar">Compare membership</li>
 				<li class="bottom-bar">Compare membership</li>
 				<li>
-					<button class="btn">Learn More</button>
+					<button class="btn btn-hover">Learn More</button>
 				</li>
 			</ul>
 		</div>
@@ -73,7 +73,9 @@
 	}
 
 	/* =====cards==== */
-
+	#premium-account {
+		font-size: 1.517rem !important;
+	}
 	.cards {
 		display: flex;
 		justify-content: center;
@@ -87,10 +89,10 @@
 	}
 	.cards .card.active {
 		background: linear-gradient(135deg, rgb(112, 214, 186, 1) 0%, rgb(0, 168, 146) 100%);
-		color: hsl(232, 13%, 33%);
+		color: #fff;
 		display: flex;
 		align-items: center;
-		transform: scale(1.01);
+		transform: scale(1.1);
 		z-index: 0;
 	}
 	ul {
@@ -118,9 +120,10 @@
 		box-shadow: -5px 5px 15px 1px rgba(0, 0, 0, 0.1);
 	}
 	.card.active .price {
-		color: hsl(232, 13%, 33%);
+		color: #fff;
 	}
 	.btn {
+		position: relative;
 		margin-top: 1rem;
 		height: 2.6rem;
 		width: 13.3rem;
@@ -128,17 +131,39 @@
 		justify-content: center;
 		align-items: center;
 		border-radius: 4px;
-		color: hsl(232, 13%, 33%);
-		background: linear-gradient(135deg, rgb(0, 214, 186, 1) 0%, rgb(0, 168, 146) 100%);
+		color: #fff;
 		outline: none;
 		border: 0;
 		font-weight: bold;
 		cursor: pointer;
+		/* background: linear-gradient(to right, rgb(0, 214, 186, 1), rgb(0, 168, 146, 1)); */
+		background-size: 300% 100%;
+		moz-transition: all 0.2s ease-in-out;
+		-o-transition: all 0.2s ease-in-out;
+		-webkit-transition: all 0.2s ease-in-out;
+		transition: all 0.2s ease-in-out;
+	}
+
+	.btn:hover {
+		background-position: 100% 0;
+		moz-transition: all 0.2s ease-in-out;
+		-o-transition: all 0.2s ease-in-out;
+		-webkit-transition: all 0.2s ease-in-out;
+		transition: all 0.2s ease-in-out;
+	}
+	.btn.btn-hover {
+		background-image: linear-gradient(
+			to right,
+			rgb(0, 214, 186, 1),
+			rgb(0, 168, 146, 1),
+			rgb(0, 214, 186, 1)
+		);
 	}
 	.btn.active-btn {
 		background: #fff;
 		color: hsl(232, 13%, 33%);
 	}
+
 	.bottom-bar {
 		border-bottom: 2px solid hsl(240, 8%, 85%, 0.583);
 	}

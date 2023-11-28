@@ -4,7 +4,7 @@
 	import { createEventDispatcher } from 'svelte';
 
 	import Dropzone from 'svelte-file-dropzone/Dropzone.svelte';
-	import type { CreateUploadUrlResponse } from '../../createUploadUrl/+server';
+	import type { CreateUploadUrlResponse } from '../../upload/+server';
 
 	let files = {
 		accepted: [],
@@ -62,7 +62,7 @@
 	}
 
 	async function getUploadUrl() {
-		const response = await fetch($page.params.userId, {
+		const response = await fetch(`${$page.params.userId}/upload`, {
 			method: 'POST'
 		});
 		const uploadUrlObject = await response.json() as CreateUploadUrlResponse;

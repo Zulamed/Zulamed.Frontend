@@ -20,6 +20,7 @@
 	import { invalidateAll } from '$app/navigation';
 	import Upload from './components/upload/upload.svelte';
 	import Stepper from './components/upload/stepper.svelte';
+	import CreateVideo from './components/upload/createVideo.svelte';
 
 	let subActive = false;
 	let confirmationVisible = false;
@@ -174,8 +175,7 @@
 									/>
 								</svg>
 							</button>
-							<!-- <Stepper /> -->
-                            <Upload />
+                            <CreateVideo />
 						</div>
 					{/if}
 				</div>

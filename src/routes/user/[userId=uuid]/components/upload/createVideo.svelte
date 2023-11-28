@@ -10,17 +10,23 @@
 
     function fileUploaded(e: CustomEvent<{uploadObject: UpChunk.UpChunk}>) {
         step = 2;
+        console.log("test!");
         uploadObject = e.detail.uploadObject;
     }
 
+    $: {
+        console.log(uploadObject);
+    }
 
 
 </script>
 
 
-{#if step == 1}
-    <Upload on:fileUploaded={fileUploaded}></Upload>
-{:else if step == 2}
-    <Stepper></Stepper>
+{#if step == 1 && !uploadObject}
+    <Upload on:fileUploaded={(e) => {
+        fileUploaded(e);
+    }}></Upload>
+{:else if step == 2 && uploadObject}
+    <Stepper uploadObject={uploadObject}></Stepper>
 {/if}
 

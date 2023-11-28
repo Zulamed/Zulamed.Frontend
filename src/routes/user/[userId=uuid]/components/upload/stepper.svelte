@@ -25,11 +25,17 @@
 	});
 
     export let uploadObject : UpChunk.UpChunk;
-    let uploadProgress = 0;
+    let uploadProgress : number | string = 0;
 
     uploadObject.on('progress', (progress) => {
         uploadProgress = progress.detail;
     });
+
+    uploadObject.on('success', (progress) => {
+        uploadProgress = 'done';
+    });
+
+    $: progress = Math.trunc(uploadProgress as number);
 
 </script>
 
@@ -69,6 +75,11 @@
 			</li>
 		{/each}
 	</ul>
+    {#if uploadProgress === 'done'}
+        <div>Upload finished! Being processed...</div>
+    {:else}
+        <div>Upload progress: {progress}</div>
+    {/if}
 </div>
 
 <div use:melt={$content('tab-1')} class="tab-content-container"><VideoInformation /></div>

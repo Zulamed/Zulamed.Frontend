@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { addNotification } from '$lib/components/notification.svelte';
 	import PlaylistDropdown from '$lib/components/playlistDropdown.svelte';
-	import VideoPlayer from '$lib/components/videoPlayer/videoPlayer.svelte';
 	import PreviewPlayer from './previewPlayer.svelte';
 
 	let inputValue = '';

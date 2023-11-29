@@ -64,6 +64,7 @@
 			media600px.removeEventListener('change', match600px);
 		};
 	});
+
 	export let data: PageData;
 </script>
 
@@ -267,7 +268,7 @@
 			{:then value}
 				{#if value.tag == 'success'}
 					<Chips />
-					<SideVideos videos={value.data.videos} showMore={videoVisibility} />
+					<SideVideos videos={value.data.videos.filter(x => x.video.id != data.videoInfo.video.id)} showMore={videoVisibility} />
 				{/if}
 			{/await}
 			{#if showMoreVideosButton}

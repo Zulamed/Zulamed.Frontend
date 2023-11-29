@@ -16,9 +16,9 @@ export async function getVideosByHistory(fetch: FetchCallbackType = originalFetc
             return {status: 'error', message: await result.text()}
         }
         const body = await result.json() as Data;
-        body.viewHistories.forEach(video => {
-            video.viewedVideo.videoPublishedDate = new Date(video.viewedVideo.videoPublishedDate);
-        });
+        // body.viewHistories.forEach(video => {
+        //     video.viewedVideo.videoPublishedDate = new Date(video.viewedVideo.videoPublishedDate);
+        // });
         return {status: 'ok', data: body};
     } catch (error) {
         return {status: 'error', message: (error as Error).message};

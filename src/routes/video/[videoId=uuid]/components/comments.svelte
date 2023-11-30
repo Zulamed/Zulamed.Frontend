@@ -142,7 +142,7 @@
 	}}
 >
 	<div id="play-video-comments" class="play-video-comments" bind:this={commentContainer}>
-		<p style="margin-bottom: 69px;">2k comments</p>
+		<p style="margin-top: 20px ;margin-bottom: 69px;">{totalComments} comment(s)</p>
 
 		<div class="write-comment">
 			<img
@@ -158,11 +158,12 @@
 					currentProps.disabled = true;
 
 					return async ({ result, form }) => {
-						if (result.type === 'success'){
+						if (result.type === 'success') {
 							HTMLFormElement.prototype.reset.call(form);
 							visibility = true;
+							totalComments += 1;
 							textArea.style.height = '25px';
-							if (result.data){
+							if (result.data) {
 								iNeedAutoComplete(result.data);
 							}
 						} else {
@@ -399,6 +400,7 @@
 									return async ({ result, form, formData }) => {
 										if (result.type === 'success') {
 											HTMLFormElement.prototype.reset.call(form);
+											totalComments--;
 											comments = comments.filter((comment) => {
 												return comment.id !== formData.get('commentId');
 											});

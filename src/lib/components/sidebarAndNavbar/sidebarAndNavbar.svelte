@@ -109,7 +109,7 @@
 					<input type="text" placeholder="Search..." />
 				</div>
 				<button class="search-button" type="submit"
-					><img src="/img/icons/search_white_4dp.svg" alt="" /></button
+					><img src="/img/icons/search_white_24dp.svg" alt="" /></button
 				>
 			</form>
 		</div>

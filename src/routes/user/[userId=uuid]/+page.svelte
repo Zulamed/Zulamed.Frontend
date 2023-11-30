@@ -106,6 +106,7 @@
 				<p>{data.numberOfFollowers} followers</p>
 			</div>
 			<a
+				class="more-about"
 				href="."
 				use:melt={$trigger('tab-4')}
 				style="text-decoration-line: underline; cursor: pointer;">More about this channel</a
@@ -175,7 +176,7 @@
 									/>
 								</svg>
 							</button>
-                            <CreateVideo />
+							<CreateVideo />
 						</div>
 					{/if}
 				</div>

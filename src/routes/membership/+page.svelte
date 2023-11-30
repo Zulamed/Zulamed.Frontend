@@ -1,4 +1,5 @@
-<script lang="ts"></script>
+<script lang="ts">
+</script>
 
 <div class="container">
 	<header>
@@ -136,7 +137,6 @@
 		border: 0;
 		font-weight: bold;
 		cursor: pointer;
-		/* background: linear-gradient(to right, rgb(0, 214, 186, 1), rgb(0, 168, 146, 1)); */
 		background-size: 300% 100%;
 		moz-transition: all 0.2s ease-in-out;
 		-o-transition: all 0.2s ease-in-out;
@@ -152,15 +152,10 @@
 		transition: all 0.2s ease-in-out;
 	}
 	.btn.btn-hover {
-		background-image: linear-gradient(
-			to right,
-			rgb(0, 214, 186, 1),
-			rgb(0, 168, 146, 1),
-			rgb(0, 214, 186, 1)
-		);
+		background-image: linear-gradient(to right, rgb(0, 214, 186, 1), rgb(0, 168, 146, 1));
 	}
 	.btn.active-btn {
-		background: #fff;
+		background-image: linear-gradient(to right, rgb(255, 255, 255), rgb(223, 223, 223));
 		color: hsl(232, 13%, 33%);
 	}
 
@@ -168,7 +163,7 @@
 		border-bottom: 2px solid hsl(240, 8%, 85%, 0.583);
 	}
 	.cards .card.active .bottom-bar {
-		border-bottom: 2px solid hsla(240, 1%, 43%, 0.253);
+		border-bottom: 2px solid hsla(0, 0%, 100%, 0.253);
 	}
 	.pack {
 		font-size: 1.1rem;

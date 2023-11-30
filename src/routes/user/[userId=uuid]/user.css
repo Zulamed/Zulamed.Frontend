@@ -620,3 +620,13 @@ fieldset input {
 		padding: 9px 14px;
 	}
 }
+
+@media (max-width: 411px) {
+	.more-about {
+		font-size: 12px !important;
+	}
+
+	.channel-info div {
+		margin-right: 15px;
+	}
+}

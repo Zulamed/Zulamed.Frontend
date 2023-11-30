@@ -25,6 +25,7 @@ export type User = {
     surname: string;
     profilePictureUrl: string;
     login: string;
+    historyPaused: boolean;
 };
 
 

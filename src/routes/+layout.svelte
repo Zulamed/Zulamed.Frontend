@@ -12,13 +12,14 @@
 	import ErrorToast from '$lib/components/errorToast.svelte';
 	import Notification from '$lib/components/notification.svelte';
 
-	let searchbarSidebar = $page.url.pathname == '/subscriptions';
+	let searchbarSidebar =
+		$page.url.pathname == '/subscriptions' || $page.url.pathname == '/searchResult';
 	let searchbar = $page.url.pathname != '/login';
 	beforeNavigate((aboba) => {
 		if (aboba.to?.url.pathname == '/login') {
 			searchbar = false;
 		}
-		if (aboba.to?.url.pathname == '/subscriptions') {
+		if (aboba.to?.url.pathname == '/subscriptions' || aboba.to?.url.pathname == '/searchResult') {
 			searchbarSidebar = true;
 		} else {
 			searchbarSidebar = false;
@@ -41,7 +42,7 @@
 <ErrorToast />
 <Notification />
 
-{#if $page.url.pathname == '/' || $page.url.pathname.includes('/user') || $page.url.pathname.includes('/subscriptions') || $page.url.pathname.includes('/history') || $page.url.pathname.includes('/liked-videos')}
+{#if $page.url.pathname == '/' || $page.url.pathname.includes('/user') || $page.url.pathname.includes('/subscriptions') || $page.url.pathname.includes('/history') || $page.url.pathname.includes('/liked-videos') || $page.url.pathname.includes('/searchResult')}
 	<SidebarAndNavbar showSearchbar={searchbarSidebar} subscriptions={data.subscriptions} />
 {:else}
 	<Drawer showSearchbar={searchbar} subscriptions={data.subscriptions} />

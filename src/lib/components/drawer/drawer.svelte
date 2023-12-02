@@ -370,7 +370,7 @@
 				><img src="/img/icons/play_arrow_white_48dp(2).svg" alt="" />
 				<p>Your videos</p>
 			</a>
-			<a id="shortcut-link" href="."
+			<a id="shortcut-link" href="/likedVideos"
 				><img src="/img/icons/liked.svg" alt="" />
 				<p>Liked videos</p>
 			</a>

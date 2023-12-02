@@ -45,7 +45,7 @@ export const load = (async ({ fetch, params, locals }) => {
         .with({ tag: "error" }, ({ error: err }) => { throw error(500, err) })
         .exhaustive();
 
-    const userFollowed: boolean | undefined = undefined;
+    let userFollowed: boolean | undefined = undefined;
 
     if (locals.user && locals.user.id === userId) {
         const isFollowing = await hasSubscribedTo(userId, fetch);

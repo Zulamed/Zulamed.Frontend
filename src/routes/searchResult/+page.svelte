@@ -1,12 +1,18 @@
 <script lang="ts">
+	import { afterNavigate } from '$app/navigation';
 	import { sidebarOpened } from '$lib/components/sidebarAndNavbar/stores/sidebarOpened';
+	import { searchQuery } from '$lib/stores/search';
 	import type { PageData } from './$types';
 
+	let query = $searchQuery;
+	afterNavigate(() => {
+		query = $searchQuery;
+	});
 	export let data: PageData;
 </script>
 
 <svelte:head>
-	<title>Liked Videos - ZulaMED</title>
+	<title>{query} - ZulaMED</title>
 </svelte:head>
 
 <div class="container" class:large-container={!$sidebarOpened}>

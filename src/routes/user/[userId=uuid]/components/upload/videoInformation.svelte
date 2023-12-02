@@ -1,6 +1,7 @@
 <script lang="ts">
 	import PlaylistDropdown from '$lib/components/playlistDropdown.svelte';
 	import PreviewPlayer from './previewPlayer.svelte';
+	import Upload from './upload.svelte';
 
 	let inputValue = '';
 	let charCount = 0;
@@ -17,6 +18,7 @@
 		textarea.style.height = textarea.scrollHeight + 'px';
 		description = textarea.value;
 	}
+	export let uploadProgress: number | string = 0;
 </script>
 
 <div class="row">
@@ -104,7 +106,7 @@
 		</div>
 	</form>
 
-	<PreviewPlayer />
+	<PreviewPlayer {uploadProgress} />
 </div>
 
 <style>

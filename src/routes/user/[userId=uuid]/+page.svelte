@@ -21,6 +21,7 @@
 	import Upload from './components/upload/upload.svelte';
 	import Stepper from './components/upload/stepper.svelte';
 	import CreateVideo from './components/upload/createVideo.svelte';
+	import { onMount } from 'svelte';
 
 	let subActive = false;
 	let confirmationVisible = false;
@@ -32,6 +33,18 @@
 			subActive = !subActive;
 		}
 	}
+	let matches900px = false;
+	onMount(() => {
+		let mediaQuery = window.matchMedia('(max-width: 900px)');
+		const match900px = () => {
+			matches900px = mediaQuery.matches;
+		};
+		match900px();
+		mediaQuery.addEventListener('change', match900px);
+		return () => {
+			mediaQuery.removeEventListener('change', match900px);
+		};
+	});
 
 	const {
 		elements: { trigger: triggerDialog, content: contentDialog, overlay, title, close, portalled },
@@ -137,7 +150,10 @@
 		{#if data.user.id === $user?.id}
 			<div class="btns-container">
 				<button class="subheader-btn">Customise channel</button>
-				<button use:melt={$triggerDialog} class="subheader-btn">Upload video</button>
+				{#if !matches900px}
+					<button use:melt={$triggerDialog} class="subheader-btn">Upload video</button>
+				{/if}
+
 				<div use:melt={$portalled}>
 					{#if $open}
 						<div use:melt={$overlay} class="overlay" />
@@ -176,6 +192,7 @@
 									/>
 								</svg>
 							</button>
+
 							<CreateVideo />
 						</div>
 					{/if}
@@ -226,7 +243,7 @@
 		<hr />
 	</div>
 	<div use:melt={$content('tab-1')} class="tab-content-container">
-		{#if data.videos.length === 0 && data.user.id === $user?.id}
+		{#if data.videos.length === 0 && data.user.id === $user?.id && !matches900px}
 			<div class="user-no-videos">
 				<img src="/img/icons/upload-a-video.svg" alt="" />
 				<h1 class="no-videos-title">Upload a video to get started</h1>
@@ -237,7 +254,9 @@
 				<button use:melt={$triggerDialog} class="subheader-btn">Upload video</button>
 			</div>
 		{:else if data.videos.length === 0}
-			<div style="width: 100%; text-align: center;">There is nothing here yet.</div>
+			<div style="width: 100%; text-align: center; margin-top: 20px">
+				There is nothing here yet.
+			</div>
 		{:else}
 			<UserHome videos={data.videos} user={data.user} />
 		{/if}

@@ -2,7 +2,7 @@
 	import { createTabs, melt } from '@melt-ui/svelte';
 	import VideoInformation from './videoInformation.svelte';
 	import AccessInformation from './accessInformation.svelte';
-    import type * as UpChunk from "@mux/upchunk";
+	import type * as UpChunk from '@mux/upchunk';
 	const {
 		elements: { root, list, content, trigger },
 		states: { value }
@@ -10,25 +10,20 @@
 		defaultValue: 'tab-1'
 	});
 	let uploadTab;
-	const triggers = [
-		{ id: 'tab-1', title: 'Information' },
-		{ id: 'tab-2', title: 'Addition' },
-		{ id: 'tab-3', title: 'Access' }
-	];
+	const triggers = [{ id: 'tab-1', title: 'Information' }];
 
-    export let uploadObject : UpChunk.UpChunk;
-    let uploadProgress : number | string = 0;
+	export let uploadObject: UpChunk.UpChunk;
+	let uploadProgress: number | string = 0;
 
-    uploadObject.on('progress', (progress) => {
-        uploadProgress = progress.detail;
-    });
+	uploadObject.on('progress', (progress) => {
+		uploadProgress = progress.detail;
+	});
 
-    uploadObject.on('success', () => {
-        uploadProgress = 'done';
-    });
+	uploadObject.on('success', () => {
+		uploadProgress = 'done';
+	});
 
-    $: progress = Math.trunc(uploadProgress as number);
-
+	$: progress = Math.trunc(uploadProgress as number);
 </script>
 
 <!-- <div class="tabs-container">
@@ -67,14 +62,16 @@
 			</li>
 		{/each}
 	</ul>
-    {#if uploadProgress === 'done'}
-        <div>Upload finished! Being processed...</div>
-    {:else}
-        <div>Upload progress: {progress}</div>
-    {/if}
+	<!-- {#if uploadProgress === 'done'}
+		<div style="margin-top: 15px;">Upload finished! Being processed...</div>
+	{:else}
+		<div style="margin-top: 15px;">Upload progress: {progress}%</div>
+	{/if} -->
 </div>
 
-<div use:melt={$content('tab-1')} class="tab-content-container"><VideoInformation /></div>
+<div use:melt={$content('tab-1')} class="tab-content-container">
+	<VideoInformation {uploadProgress} />
+</div>
 <div use:melt={$content('tab-2')} class="tab-content-container">Test</div>
 <div use:melt={$content('tab-3')} class="tab-content-container"><AccessInformation /></div>
 

@@ -63,22 +63,19 @@
 			</svg>
 		</button>
 		<div class="settings-dropdown-buttons" style:display={displaySettingsContainer}>
-			<form
-				method="post"
-				class="settings-form"
-				action="?/clearHistory"
-				use:enhance={() => {
-					return async ({ result }) => {
-						if (result.type === 'success') {
-							data.videoData.viewHistories = [];
-						} else {
-							applyAction(result);
-						}
-					};
-				}}
+			<MainDialog
+				titleText="Clear browsing history"
+				appealText=""
+				dialogStore={clearDialogStore}
+				descriptionText="Are you sure you want to clear your browsing history?"
 			>
-				<button class="settings-button clear-history" type="submit">
-					<svg
+				<button
+					let:trigger
+					use:melt={trigger}
+					slot="button"
+					type="button"
+					class="settings-button clear-history"
+					><svg
 						width="34"
 						height="34"
 						viewBox="0 0 24 24"
@@ -99,25 +96,105 @@
 						/>
 					</svg>Clear browsing history</button
 				>
-			</form>
-
-			<button class="settings-button save-history"
-				><svg
-					width="34"
-					height="34"
-					viewBox="0 0 24 24"
-					fill="none"
-					xmlns="http://www.w3.org/2000/svg"
+				<form
+					slot="ok"
+					method="post"
+					class="settings-form"
+					action="?/clearHistory"
+					use:enhance={() => {
+						return async ({ result }) => {
+							if (result.type === 'success') {
+								data.videoData.viewHistories = [];
+								$clearDialogStore = false;
+							} else {
+								applyAction(result);
+							}
+						};
+					}}
 				>
-					<path
-						d="M16.2111 11.1056L9.73666 7.86833C8.93878 7.46939 8 8.04958 8 8.94164V15.0584C8 15.9504 8.93878 16.5306 9.73666 16.1317L16.2111 12.8944C16.9482 12.5259 16.9482 11.4741 16.2111 11.1056Z"
-						stroke="#00D6BA"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					/>
-				</svg>Save browsing history</button
+					<button type="submit" class="dg-btn">Clear</button>
+				</form>
+			</MainDialog>
+
+			<MainDialog
+				titleText={browsingHistoryState ? pause.title : resume.title}
+				dialogStore={saveDialogStore}
+				appealText="{data.loggedInUser?.name} {data.loggedInUser?.surname} ({data.loggedInUser
+					?.email})"
+				descriptionText={browsingHistoryState ? pause.description : resume.description}
 			>
-			<button class="settings-button comment-history"
+				<button
+					let:trigger
+					use:melt={trigger}
+					slot="button"
+					type="button"
+					class="settings-button save-history"
+				>
+					{#if !browsingHistoryState}
+						<svg
+							width="34"
+							height="34"
+							viewBox="0 0 24 24"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								d="M16.2111 11.1056L9.73666 7.86833C8.93878 7.46939 8 8.04958 8 8.94164V15.0584C8 15.9504 8.93878 16.5306 9.73666 16.1317L16.2111 12.8944C16.9482 12.5259 16.9482 11.4741 16.2111 11.1056Z"
+								stroke="#00D6BA"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							/>
+						</svg>
+					{:else}
+						<svg
+							width="34"
+							height="34"
+							viewBox="0 0 24 24"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<rect
+								x="6"
+								y="5"
+								width="4"
+								height="14"
+								rx="1"
+								stroke="#00D6BA"
+								stroke-linecap="round"
+							/>
+							<rect
+								x="14"
+								y="5"
+								width="4"
+								height="14"
+								rx="1"
+								stroke="#00D6BA"
+								stroke-linecap="round"
+							/>
+						</svg>
+					{/if}
+
+					{browsingHistoryState ? "Don't save browsing history" : 'Save browsing history'}
+				</button>
+				<form
+					slot="ok"
+					method="post"
+					action="?/toggleHistory"
+					use:enhance={() => {
+						return async ({ result }) => {
+							if (result.type === 'success') {
+								$saveDialogStore = false;
+								browsingHistoryState = !browsingHistoryState;
+							} else {
+								applyAction(result);
+							}
+						};
+					}}
+				>
+					<button type="submit" class="dg-btn">{browsingHistoryState ? 'Pause' : 'Resume'}</button>
+				</form>
+			</MainDialog>
+			<button class="settings-button comment-history disabled-btn"
 				><svg
 					width="34"
 					height="34"

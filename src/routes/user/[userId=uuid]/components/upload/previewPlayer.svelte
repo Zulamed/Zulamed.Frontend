@@ -22,6 +22,8 @@
 				});
 		}
 	}
+	export let uploadProgress: number | string = 0;
+	$: progress = Math.trunc(uploadProgress as number);
 </script>
 
 <div class="preview-player">
@@ -38,6 +40,11 @@
 			/>
 		</svg>
 	</button>
+	{#if uploadProgress === 'done'}
+		<div style="margin-top: 15px;">Upload finished! Being processed...</div>
+	{:else}
+		<div style="margin-top: 15px;">Upload progress: {progress}%</div>
+	{/if}
 	<button class="next-btn">Next</button>
 </div>
 

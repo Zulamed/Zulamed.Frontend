@@ -47,7 +47,7 @@ export const load = (async ({ fetch, params, locals }) => {
 
     let userFollowed: boolean | undefined = undefined;
 
-    if (locals.user && locals.user.id === userId) {
+    if (locals.user && locals.user.id !== userId) {
         const isFollowing = await hasSubscribedTo(userId, fetch);
         userFollowed = match(isFollowing)
             .with({ status: "ok" }, () => true)

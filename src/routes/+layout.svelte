@@ -11,6 +11,7 @@
 	import { user } from '$lib/stores/auth';
 	import ErrorToast from '$lib/components/errorToast.svelte';
 	import Notification from '$lib/components/notification.svelte';
+	import { subscriptions } from '$lib/stores/subscriptions';
 
 	let searchbarSidebar =
 		$page.url.pathname == '/subscriptions' || $page.url.pathname == '/searchResult';
@@ -37,15 +38,20 @@
 	}
 	export let data: LayoutServerData;
 	$user = data.loggedInUser;
+    $subscriptions = data.subscriptions;
+
+    $: {
+        console.log($subscriptions)
+    }
 </script>
 
 <ErrorToast />
 <Notification />
 
 {#if $page.url.pathname == '/' || $page.url.pathname.includes('/user') || $page.url.pathname.includes('/subscriptions') || $page.url.pathname.includes('/history') || $page.url.pathname.includes('/liked-videos') || $page.url.pathname.includes('/searchResult')}
-	<SidebarAndNavbar showSearchbar={searchbarSidebar} subscriptions={data.subscriptions} />
+	<SidebarAndNavbar showSearchbar={searchbarSidebar} subscriptions={$subscriptions}/>
 {:else}
-	<Drawer showSearchbar={searchbar} subscriptions={data.subscriptions} />
+	<Drawer showSearchbar={searchbar} subscriptions={$subscriptions} />
 {/if}
 
 <slot />

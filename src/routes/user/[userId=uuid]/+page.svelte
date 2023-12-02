@@ -22,6 +22,7 @@
 	import Stepper from './components/upload/stepper.svelte';
 	import CreateVideo from './components/upload/createVideo.svelte';
 	import { onMount } from 'svelte';
+	import { subscriptions } from '$lib/stores/subscriptions';
 
 	let subActive = false;
 	let confirmationVisible = false;
@@ -207,16 +208,23 @@
 				use:enhance={() => {
 					return async ({ result }) => {
 						if (result.type === 'success') {
-							invalidateAll();
 							followActive = !followActive;
 							if (followActive) {
 								data.numberOfFollowers++;
+								$subscriptions.push({
+									user: data.user,
+									numberOfSubscribers: data.numberOfFollowers
+								});
+                                $subscriptions = $subscriptions;
 								addNotification({
 									data: {
 										title: 'Subscription added.'
 									}
 								});
 							} else {
+								let toBeRemoved = $subscriptions.findIndex((sub) => sub.user.id === data.user.id);
+								$subscriptions.splice(toBeRemoved, 1);
+                                $subscriptions = $subscriptions;
 								data.numberOfFollowers--;
 								addNotification({
 									data: {

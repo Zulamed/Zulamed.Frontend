@@ -14,20 +14,35 @@
 		{#each data.videoResponse.videos as videoInfo}
 			<a href="/video/{videoInfo.video.id}" class="vid-list">
 				<a class="preview" href="/video/{videoInfo.video.id}"
-					><img src={videoInfo.video.videoThumbnail ?? "/img/videoPreviews/7.png"} class="thumbnail" alt="" /></a
+					><img
+						src={videoInfo.video.videoThumbnail ?? '/img/videoPreviews/7.png'}
+						class="thumbnail"
+						alt=""
+					/></a
 				>
 				<div class="flex-div">
-					<img class="channel-logo" src="{videoInfo.user.profilePictureUrl ?? '/img/icons/channel-logo.jpg'}" alt="" />
+					<img
+						class="channel-logo"
+						src={videoInfo.user.profilePictureUrl ?? '/img/icons/channel-logo.jpg'}
+						alt=""
+					/>
 					<div class="list-vid-info">
-						<a class="video-title" href="/video/{videoInfo.video.id}">{videoInfo.video.videoTitle}</a>
+						<a class="video-title" href="/video/{videoInfo.video.id}"
+							>{videoInfo.video.videoTitle}</a
+						>
 						<div style="display: flex; margin-top: 12px;">
-							<a href="/user/{videoInfo.user.id}" class="vid-channel">{videoInfo.user.username}</a><span class="betweenDot">·&nbsp;</span>
+							<a href="/user/{videoInfo.user.id}" class="vid-channel">{videoInfo.user.username}</a
+							><span class="betweenDot">·&nbsp;</span>
 							<p id="viewsText" class="vid-views">{videoInfo.video.videoViews} views</p>
 						</div>
-						<p class="vid-description">{videoInfo.video.videoDescription ?? "No description provided"}</p>
+						<p class="vid-description">
+							{videoInfo.video.videoDescription ?? 'No description provided'}
+						</p>
 					</div>
 				</div>
 			</a>
+		{:else}
+			<p>No videos found</p>
 		{/each}
 	</div>
 </div>

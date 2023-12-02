@@ -1,9 +1,6 @@
 <script lang="ts">
 	import { createTabs, melt } from '@melt-ui/svelte';
-	import { cubicInOut } from 'svelte/easing';
-	import { crossfade } from 'svelte/transition';
 	import VideoInformation from './videoInformation.svelte';
-	import VideoAccess from './previewPlayer.svelte';
 	import AccessInformation from './accessInformation.svelte';
     import type * as UpChunk from "@mux/upchunk";
 	const {
@@ -19,11 +16,6 @@
 		{ id: 'tab-3', title: 'Access' }
 	];
 
-	const [send, receive] = crossfade({
-		duration: 250,
-		easing: cubicInOut
-	});
-
     export let uploadObject : UpChunk.UpChunk;
     let uploadProgress : number | string = 0;
 
@@ -31,7 +23,7 @@
         uploadProgress = progress.detail;
     });
 
-    uploadObject.on('success', (progress) => {
+    uploadObject.on('success', () => {
         uploadProgress = 'done';
     });
 

@@ -89,21 +89,31 @@
 				<div class="field bd input-field">
 					<label for="birthday-date">Date of birth</label>
 					<div class="birthday-date">
-						<div class="date-group">
-							<select class="date-select" name="birthday-date" id="birthday-date">
-								<option value="1">1</option>
-							</select>
-						</div>
-						<div class="date-group">
-							<select class="date-select" name="birthday-date">
-								<option value="December">December</option>
-							</select>
-						</div>
-						<div class="date-group">
-							<select class="date-select" name="birthday-date">
-								<option value="1990">1990</option>
-							</select>
-						</div>
+						<!-- <div class="date-group"> -->
+						<!-- 	<select class="date-select" name="birthday-date" id="birthday-date"> -->
+						<!-- 		<option value="1">1</option> -->
+						<!-- 	</select> -->
+						<!-- </div> -->
+						<!-- <div class="date-group"> -->
+						<!-- 	<select class="date-select" name="birthday-date"> -->
+						<!-- 		<option value="December">December</option> -->
+						<!-- 	</select> -->
+						<!-- </div> -->
+						<!-- <div class="date-group"> -->
+						<!-- 	<select class="date-select" name="birthday-date"> -->
+						<!-- 		<option value="1990">1990</option> -->
+						<!-- 	</select> -->
+						<!-- </div> -->
+                        <div class="date-group">
+                            <input
+                                id="birthday-date"
+                                name="birthday-date"
+                                type="date"
+                                placeholder="Your date of birth"
+                                class="input date-select"
+                                bind:value={$individualData["birthday-date"]}
+                            />
+                        </div>
 					</div>
 				</div>
 			</div>

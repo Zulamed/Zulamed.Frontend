@@ -83,7 +83,7 @@
 				<Combobox labelText="City" inputPlaceholder="Select a city" name="city" bind:value={$hospitalData.city}/>
 			</div>
 			<div class="field input-field">
-				<Input labelText="Phone" inputPlaceholder="Phone" inputId="phoneNumber" inputType="number" bind:value={$hospitalData.phoneNumber}/>
+				<Input labelText="Phone" inputPlaceholder="Phone" inputId="phoneNumber" bind:value={$hospitalData.phoneNumber}/>
 			</div>
 		</div>
 	</div>

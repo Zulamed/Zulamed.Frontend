@@ -5,6 +5,7 @@
 	import { invalidateAll } from '$app/navigation';
 	import { page } from '$app/stores';
 	import type { Subscription } from '$backend/user/getSubscriptions';
+	import { searchQuery } from '$lib/stores/search';
 	export let showSearchbar = false;
 	export let subscriptions: Subscription[];
 
@@ -83,9 +84,9 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 
 <div use:portal class="overlay" on:click={closeMobileSidebar} style:left={overlayLeft} />
-<form action="" class="flex-div" id="search-mobile-form">
+<form action="/searchResult" class="flex-div" id="search-mobile-form" method="get">
 	<div class="searchbar-mobile flex-div" style:top={searchbarMobileTop}>
-		<input placeholder="Search..." name="" type="text" />
+		<input bind:value={$searchQuery} name="q" placeholder="Search..." type="text" />
 	</div>
 </form>
 <nav class="flex-div" id="navigation" style:box-shadow={navigationBoxShadow}>
@@ -104,9 +105,9 @@
 	</div>
 	{#if showSearchbar}
 		<div class="nav-center flex-div">
-			<form class="searchbar flex-div" action="">
+			<form class="searchbar flex-div" action="/searchResult" method="get">
 				<div class="searchbox">
-					<input type="text" placeholder="Search..." />
+					<input type="text" bind:value={$searchQuery} name="q" placeholder="Search..." />
 				</div>
 				<button class="search-button" type="submit"
 					><img src="/img/icons/search_white_24dp.svg" alt="" /></button

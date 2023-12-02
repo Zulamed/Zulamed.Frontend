@@ -2,6 +2,7 @@
 	import { sidebarOpened } from '$lib/components/sidebarAndNavbar/stores/sidebarOpened';
 	import Tooltip from '$lib/components/tooltip.svelte';
 	import { user } from '$lib/stores/auth';
+    import {searchQuery} from '$lib/stores/search';
 	import { melt } from '@melt-ui/svelte';
 	import type { PageData } from './$types';
 	export let data: PageData;
@@ -15,9 +16,9 @@
 <div class="container" class:large-container={!$sidebarOpened}>
 	<div class="banner">
 		<!-- <div class="searchbar flex-div"> -->
-		<form class="searchbar flex-div" action="">
+		<form class="searchbar flex-div" action="/searchResult" method="get">
 			<div class="searchbox">
-				<input type="text" placeholder="Search..." />
+				<input bind:value={$searchQuery} type="text" name="q" placeholder="Search..." />
 			</div>
 			<button class="search-button" type="submit">
 				<img src="/img/icons/search_white_24dp.svg" alt="" />

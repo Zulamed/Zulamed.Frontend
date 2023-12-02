@@ -4,85 +4,113 @@
 	import Hospital from './hospital.svelte';
 	import Individual from './individual.svelte';
 	import University from './university.svelte';
-	import { validateIndividual, type IndividualData, individualData } from '../../schemas/individual';
+	import {
+		validateIndividual,
+		type IndividualData,
+		individualData
+	} from '../../schemas/individual';
 	import { addToast } from '$lib/components/errorToast.svelte';
 	import { type HospitalData, hospitalData } from '../../schemas/hospital';
-    import { validateHospital } from '../../schemas/hospital';
-    import {replacePropertyValueIfSame} from "$lib/utils/replaceProps"
+	import { validateHospital } from '../../schemas/hospital';
+	import { replacePropertyValueIfSame } from '$lib/utils/replaceProps';
 	import { match } from 'ts-pattern';
+	import type { FullDataUnion } from '$backend/user/register';
+	import { login } from '$lib/stores/auth';
 
-    type DataUnion = {
-            type: "individual",
-            data: IndividualData
-        } | {type: "hospital", data: HospitalData}
-
-
-
-
-    function mapToStore(unionData: DataUnion){
-        switch(unionData.type){
-            case "individual":
-                replacePropertyValueIfSame(unionData.data, $individualData);
-                break;
-            case "hospital":
-                replacePropertyValueIfSame(unionData.data, $hospitalData);
-                break;
-        }
-    }
+    type DataUnion =
+    | { type: "individual", data: IndividualData}
+    | { type: "hospital", data: HospitalData}
 
 
-	function increaseStep() {
+	function mapToStore(unionData: DataUnion) {
+		switch (unionData.type) {
+			case 'individual':
+				replacePropertyValueIfSame(unionData.data, $individualData);
+				break;
+			case 'hospital':
+				replacePropertyValueIfSame(unionData.data, $hospitalData);
+				break;
+		}
+	}
+
+	async function increaseStep() {
 		let formData = new FormData(formElement);
 		let data = { ...Object.fromEntries(formData), step: step };
 
-        console.log(data);
+		console.log(data);
 
-        let union : DataUnion | undefined = undefined;
+		let union: DataUnion | undefined = undefined;
 
+		if (radioValue == 'individual') {
+			union = { type: 'individual', data: data as IndividualData };
+		} else if (radioValue == 'hospital') {
+			union = { type: 'hospital', data: data as HospitalData };
+		}
 
-
-        if (radioValue == 'individual') {
-            union = {type: "individual", data: data as IndividualData}
-        } else if (radioValue == 'hospital') {
-            union = {type: "hospital", data: data as HospitalData}
-        }
-
-        if (!union) {
-            return;
-        }
+		if (!union) {
+			return;
+		}
 
 		if (!validateStep(union)) {
 			return;
 		}
-        mapToStore(union);
+		mapToStore(union);
+        console.log(union);
+		if (step == 4 || (step == 5 && radioValue == 'individual')) {
+            console.log('test!');
+            let fullUnion: FullDataUnion | undefined = undefined;
+            if (radioValue == 'individual') {
+                fullUnion = { type: 'individual', data: $individualData };
+            } else if (radioValue == 'hospital') {
+                fullUnion = { type: 'hospital', data: $hospitalData };
+            }
+
+
+            let response = await fetch("/register/submit", {
+                method: "POST",
+                body: JSON.stringify(fullUnion),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            if (response.ok){
+                switch (radioValue) {
+                    case 'individual':
+                        await login($individualData.email, $individualData.password);
+                        break;
+                    case 'hospital':
+                        await login($hospitalData.email, $hospitalData.password);
+                        break;
+                }
+            }
+			return;
+		}
 		step += 1;
 		dispatch('stepChanged', { step, branch: radioValue });
 	}
 
-
 	function validateStep(values: DataUnion) {
-		if (step <=  0) {
+		if (step <= 0) {
 			return true;
 		}
 
-        let result = match(values)
-            .with({type: "individual"}, ({data}) => validateIndividual(data))
-            .with({type: "hospital"}, ({data}) => validateHospital(data))
-            .exhaustive();
+		let result = match(values)
+			.with({ type: 'individual' }, ({ data }) => validateIndividual(data))
+			.with({ type: 'hospital' }, ({ data }) => validateHospital(data))
+			.exhaustive();
 
-        if (result.success)
-            return true;
-        else {
-            result.error.errors.forEach((error) => {
-                addToast({
-                    data: {
-                        fieldName: error.path[0].toString(),
-                        error: error.message
-                    }
-                });
-            });
-            return false;
-        }
+		if (result.success) return true;
+		else {
+			result.error.errors.forEach((error) => {
+				addToast({
+					data: {
+						fieldName: error.path[0].toString(),
+						error: error.message
+					}
+				});
+			});
+			return false;
+		}
 	}
 
 	let formElement: HTMLFormElement;

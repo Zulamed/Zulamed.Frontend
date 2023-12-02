@@ -5,6 +5,7 @@
 	import { portal } from 'svelte-portal';
 	import { page } from '$app/stores';
 	import type { Subscription } from '$backend/user/getSubscriptions';
+	import { searchQuery } from '$lib/stores/search';
 	export let subscriptions: Subscription[];
 
 	let isMobileSearchBarOpen = false;
@@ -82,9 +83,9 @@
 <svelte:body on:click={bodyOnClick} on:touchmove={bodyOnTouchMove} />
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div use:portal class="overlay" on:click={closeMobileSidebar} style:left={overlayLeft} />
-<form action="" class="flex-div" id="search-mobile-form">
+<form action="/searchResult" class="flex-div" id="search-mobile-form" method="get">
 	<div class="searchbar-mobile flex-div" style:top={searchbarMobileTop}>
-		<input placeholder="Search..." name="" type="text" />
+		<input bind:value={$searchQuery} placeholder="Search..." name="q" type="text" />
 	</div>
 </form>
 <nav class="flex-div" id="navigation" style:box-shadow={navigationBoxShadow}>
@@ -101,9 +102,9 @@
 	</div>
 	{#if showSearchbar}
 		<div class="nav-center flex-div">
-			<form class="searchbar flex-div" action="">
+			<form class="searchbar flex-div" action="/searchResult" method="get">
 				<div class="searchbox">
-					<input type="text" placeholder="Search..." />
+					<input bind:value={$searchQuery} name="q" type="text" placeholder="Search..." />
 				</div>
 				<button class="search-button" type="submit"
 					><img src="/img/icons/search_white_24dp.svg" alt="" /></button

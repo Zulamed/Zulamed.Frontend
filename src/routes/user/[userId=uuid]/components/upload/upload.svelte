@@ -14,7 +14,7 @@
 	let inputFile: HTMLInputElement;
 
 	const fileUploadedEventDispatch = createEventDispatcher<{
-		fileUploaded: { uploadObject: UpChunk.UpChunk };
+		fileUploaded: { uploadObject: UpChunk.UpChunk, videoId: string };
 	}>();
 
 	async function fileInputChanged(e: Event) {
@@ -31,7 +31,7 @@
 
 		const uploadObject = await createMuxUploadObject(file);
 
-		fileUploadedEventDispatch('fileUploaded', { uploadObject });
+		fileUploadedEventDispatch('fileUploaded', { uploadObject: uploadObject.upload, videoId: uploadObject.videoId });
 	}
 
 	async function createMuxUploadObject(file: File) {
@@ -42,7 +42,7 @@
 			chunkSize: 5120
 		});
 
-		return upload;
+		return {upload, videoId: uploadUrlObject.id};
 	}
 
 	async function handleFilesSelect(e: CustomEvent<unknown>) {
@@ -58,7 +58,7 @@
 		const file = files.accepted[0] as File;
 		const uploadObject = await createMuxUploadObject(file);
 
-		fileUploadedEventDispatch('fileUploaded', { uploadObject });
+		fileUploadedEventDispatch('fileUploaded', { uploadObject: uploadObject.upload, videoId: uploadObject.videoId });
 	}
 
 	async function getUploadUrl() {
@@ -66,6 +66,8 @@
 			method: 'POST'
 		});
 		const uploadUrlObject = await response.json() as CreateUploadUrlResponse;
+
+        console.log(uploadUrlObject);
 
         return uploadUrlObject;
 	}

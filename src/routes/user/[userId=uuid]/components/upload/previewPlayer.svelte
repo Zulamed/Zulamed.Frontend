@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { invalidateAll } from '$app/navigation';
+	import { addToast } from '$lib/components/errorToast.svelte';
 	import { addNotification } from '$lib/components/notification.svelte';
 	import VideoPlayer from '$lib/components/videoPlayer/videoPlayer.svelte';
 
@@ -23,6 +25,41 @@
 		}
 	}
 	export let uploadProgress: number | string = 0;
+	export let videoId: string;
+	export let inputValue: string;
+	export let description: string;
+
+	async function upload() {
+        if (!inputValue) {
+            addNotification({
+                data: {
+                    title: 'Please enter a title.'
+                }
+            });
+            return;
+        }
+		let response = await fetch('/api/updateVideo', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				id: videoId,
+				videoTitle: inputValue,
+				videoDescription: description
+			})
+		});
+		if (response.ok) {
+			addNotification({
+				data: {
+					title:
+						'Video uploaded successfully.(Wait for the video to be processed if not available yet)'
+				}
+			});
+		}
+        invalidateAll();
+	}
+
 	$: progress = Math.trunc(uploadProgress as number);
 </script>
 
@@ -45,7 +82,7 @@
 	{:else}
 		<div style="margin-top: 15px;">Upload progress: {progress}%</div>
 	{/if}
-	<button class="next-btn">Next</button>
+	<button on:click={upload} class="next-btn">Upload</button>
 </div>
 
 <style>

@@ -28,7 +28,8 @@ export const actions = ({
         return { isSubscribed: !isSubscribed };
     },
 }) satisfies Actions;
-export const load = (async ({ fetch, params }) => {
+
+export const load = (async ({ fetch, params, locals }) => {
     const { userId } = params;
     const response = await getUserDetailed(userId, fetch);
     const user = match(response)
@@ -44,5 +45,16 @@ export const load = (async ({ fetch, params }) => {
         .with({ tag: "error" }, ({ error: err }) => { throw error(500, err) })
         .exhaustive();
 
-    return { user: user.user, videos: user.videos, numberOfFollowers: user.numberOfFollowers, subscriptions }
+    const userFollowed: boolean | undefined = undefined;
+
+    if (locals.user && locals.user.id === userId) {
+        const isFollowing = await hasSubscribedTo(userId, fetch);
+        userFollowed = match(isFollowing)
+            .with({ status: "ok" }, () => true)
+            .with({ status: "not-found" }, () => false)
+            .with({ status: "error" }, ({ message }) => { throw error(500, message) })
+            .exhaustive();
+    }
+
+    return { user: user.user, videos: user.videos, numberOfFollowers: user.numberOfFollowers, subscriptions, userFollowed }
 }) satisfies PageServerLoad;

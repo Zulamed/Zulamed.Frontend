@@ -25,7 +25,6 @@
 
 	let subActive = false;
 	let confirmationVisible = false;
-	let followActive = false;
 	function toggleSubscription() {
 		if (subActive) {
 			confirmationVisible = true;
@@ -74,6 +73,8 @@
 	// =====tabs======
 
 	export let data: PageData;
+
+	let followActive = data.userFollowed;
 </script>
 
 <svelte:head>

@@ -13,6 +13,7 @@
 	const triggers = [{ id: 'tab-1', title: 'Information' }];
 
 	export let uploadObject: UpChunk.UpChunk;
+	export let videoId: string;
 	let uploadProgress: number | string = 0;
 
 	uploadObject.on('progress', (progress) => {
@@ -70,7 +71,7 @@
 </div>
 
 <div use:melt={$content('tab-1')} class="tab-content-container">
-	<VideoInformation {uploadProgress} />
+	<VideoInformation {uploadProgress} {videoId} />
 </div>
 <div use:melt={$content('tab-2')} class="tab-content-container">Test</div>
 <div use:melt={$content('tab-3')} class="tab-content-container"><AccessInformation /></div>

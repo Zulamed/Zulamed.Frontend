@@ -19,6 +19,8 @@
 		description = textarea.value;
 	}
 	export let uploadProgress: number | string = 0;
+    export let videoId: string;
+
 </script>
 
 <div class="row">
@@ -106,7 +108,7 @@
 		</div>
 	</form>
 
-	<PreviewPlayer {uploadProgress} />
+	<PreviewPlayer {description} {inputValue} {uploadProgress} {videoId}/>
 </div>
 
 <style>

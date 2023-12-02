@@ -6,19 +6,15 @@
     let step = 1;
 
     let uploadObject: UpChunk.UpChunk;
+    let videoId: string;
 
 
-    function fileUploaded(e: CustomEvent<{uploadObject: UpChunk.UpChunk}>) {
+
+    function fileUploaded(e: CustomEvent<{uploadObject: UpChunk.UpChunk, videoId: string}>) {
         step = 2;
-        console.log("test!");
         uploadObject = e.detail.uploadObject;
+        videoId = e.detail.videoId;
     }
-
-    $: {
-        console.log(uploadObject);
-    }
-
-
 </script>
 
 
@@ -27,6 +23,6 @@
         fileUploaded(e);
     }}></Upload>
 {:else if step == 2 && uploadObject}
-    <Stepper uploadObject={uploadObject}></Stepper>
+    <Stepper uploadObject={uploadObject} {videoId}></Stepper>
 {/if}
 

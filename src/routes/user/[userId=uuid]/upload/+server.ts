@@ -3,7 +3,7 @@ import { PUBLIC_BACKEND_URL } from "$env/static/public"
 import { json } from "@sveltejs/kit"
 
 export type CreateUploadUrlResponse = {
-    videoId : string,
+    id: string,
     uploadUrl: string
 }
 

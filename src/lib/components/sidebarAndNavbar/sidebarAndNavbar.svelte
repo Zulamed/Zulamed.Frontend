@@ -249,7 +249,10 @@
 				><img src="/img/icons/history_white_24dp.svg" alt="" />
 				<p>History</p>
 			</a>
-			<a class="shortcut-link" href="."
+			<a
+				class="shortcut-link"
+				href="/yourVideos"
+				class:active-shortcut={$page.url.pathname === '/yourVideos'}
 				><img src="/img/icons/play_arrow_white_48dp(2).svg" alt="" />
 				<p>Your videos</p>
 			</a>
@@ -370,7 +373,11 @@
 				><img src="/img/icons/history_white_24dp.svg" alt="" />
 				<p>History</p>
 			</a>
-			<a class="shortcut-link" href="."
+			<a
+				class="shortcut-link"
+				href="/yourVideos"
+				class:active-shortcut={$page.url.pathname === '/yourVideo'}
+				on:click={closeMobileSidebar}
 				><img src="/img/icons/play_arrow_white_48dp(2).svg" alt="" />
 				<p>Your videos</p>
 			</a>

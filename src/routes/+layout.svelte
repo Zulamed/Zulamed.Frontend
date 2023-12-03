@@ -38,18 +38,18 @@
 	}
 	export let data: LayoutServerData;
 	$user = data.loggedInUser;
-    $subscriptions = data.subscriptions;
+	$subscriptions = data.subscriptions;
 
-    $: {
-        console.log($subscriptions)
-    }
+	$: {
+		console.log($subscriptions);
+	}
 </script>
 
 <ErrorToast />
 <Notification />
 
-{#if $page.url.pathname == '/' || $page.url.pathname.includes('/user') || $page.url.pathname.includes('/subscriptions') || $page.url.pathname.includes('/history') || $page.url.pathname.includes('/liked-videos') || $page.url.pathname.includes('/searchResult')}
-	<SidebarAndNavbar showSearchbar={searchbarSidebar} subscriptions={$subscriptions}/>
+{#if $page.url.pathname == '/' || $page.url.pathname.includes('/user') || $page.url.pathname.includes('/subscriptions') || $page.url.pathname.includes('/history') || $page.url.pathname.includes('/liked-videos') || $page.url.pathname.includes('/searchResult') || $page.url.pathname.includes('/yourVideos')}
+	<SidebarAndNavbar showSearchbar={searchbarSidebar} subscriptions={$subscriptions} />
 {:else}
 	<Drawer showSearchbar={searchbar} subscriptions={$subscriptions} />
 {/if}

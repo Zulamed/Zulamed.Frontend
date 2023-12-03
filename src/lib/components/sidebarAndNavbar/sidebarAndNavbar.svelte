@@ -175,13 +175,13 @@
 			/>
 			<div class="profile-container" id="profile-container" style:display={displayProfileContainer}>
 				<div class="popup-profile flex-div">
-					<a class="shortcut-link" href="."
+					<a class="shortcut-link" href="/user/{$user.id}"
 						><img src={$user?.profilePictureUrl ?? '/img/icons/channel-logo.jpg'} alt="" /></a
 					>
 					<div>
-						<a href=".">{$user.name} {$user.surname}</a>
+						<a href="/user/{$user.id}">{$user.name} {$user.surname}</a>
 						<p>@{$user.login}</p>
-						<a href="." class="account-manage">Manage your Account</a>
+						<a href="/user/{$user.id}" class="account-manage">Manage your Account</a>
 					</div>
 				</div>
 

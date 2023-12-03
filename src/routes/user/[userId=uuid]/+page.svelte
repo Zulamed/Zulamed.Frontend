@@ -215,7 +215,7 @@
 									user: data.user,
 									numberOfSubscribers: data.numberOfFollowers
 								});
-                                $subscriptions = $subscriptions;
+								$subscriptions = $subscriptions;
 								addNotification({
 									data: {
 										title: 'Subscription added.'
@@ -224,7 +224,7 @@
 							} else {
 								let toBeRemoved = $subscriptions.findIndex((sub) => sub.user.id === data.user.id);
 								$subscriptions.splice(toBeRemoved, 1);
-                                $subscriptions = $subscriptions;
+								$subscriptions = $subscriptions;
 								data.numberOfFollowers--;
 								addNotification({
 									data: {

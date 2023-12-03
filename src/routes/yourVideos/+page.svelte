@@ -2,10 +2,6 @@
 	import Dropdown from '$lib/components/dropdown.svelte';
 	import { sidebarOpened } from '$lib/components/sidebarAndNavbar/stores/sidebarOpened';
 	import { melt } from '@melt-ui/svelte';
-
-	import type { VideoMinimal } from '$backend/user/get/types';
-	import { getRelativeTime } from '$lib/utils/relativeTime';
-	export let videos: VideoMinimal[];
 </script>
 
 <svelte:head>
@@ -19,53 +15,191 @@
 		Your videos
 	</h1>
 	<div class="list-container">
-		{#each videos as video}
-			<a href="/video/{video.id}" class="vid-list">
-				<a class="preview" href="/video/{video.id}"
-					><img
-						src={video.thumbnailUrl ?? '/img/videoPreviews/3.png'}
-						class="thumbnail"
-						alt=""
-					/></a
-				>
-				<div class="flex-div">
-					<div class="list-vid-info">
-						<a href="/video/{video.id}">{video.title}</a>
-						<div style="display: flex; margin-top: 10px;">
-							<p class="vid-views">{video.views} views&nbsp;</p>
-							<p class="vid-views">·&nbsp;{getRelativeTime(video.createdAt)}</p>
-						</div>
+		<!-- =====1 VIDEO===== -->
+
+		<a href="/" class="vid-list">
+			<a class="preview" href="/"><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a
+			>
+			<div class="flex-div">
+				<div class="list-vid-info">
+					<a href="/">Video Title</a>
+					<div style="display: flex; margin-top: 10px;">
+						<p class="vid-views">119 views&nbsp;</p>
+						<p class="vid-views">·&nbsp;9 hours ago</p>
 					</div>
-					<Dropdown>
-						<button use:melt={trigger} slot="button" let:trigger class="dots-vertical">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								height="30"
-								viewBox="0 -960 960 960"
-								width="30"
-								><path
-									d="M479.858-160Q460-160 446-174.142q-14-14.141-14-34Q432-228 446.142-242q14.141-14 34-14Q500-256 514-241.858q14 14.141 14 34Q528-188 513.858-174q-14.141 14-34 14Zm0-272Q460-432 446-446.142q-14-14.141-14-34Q432-500 446.142-514q14.141-14 34-14Q500-528 514-513.858q14 14.141 14 34Q528-460 513.858-446q-14.141 14-34 14Zm0-272Q460-704 446-718.142q-14-14.141-14-34Q432-772 446.142-786q14.141-14 34-14Q500-800 514-785.858q14 14.141 14 34Q528-732 513.858-718q-14.141 14-34 14Z"
-								/></svg
-							>
-						</button>
-						<div class="dropdown-container" slot="item" let:item>
-							<button class="dropdown-button"
-								><svg
-									xmlns="http://www.w3.org/2000/svg"
-									height="24px"
-									viewBox="0 0 24 24"
-									width="24px"
-									fill="#ffffff"
-									><path d="M0 0h24v24H0V0z" fill="none" /><path
-										d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"
-									/></svg
-								>Delete</button
-							>
-						</div>
-					</Dropdown>
 				</div>
-			</a>
-		{/each}
+				<Dropdown>
+					<button use:melt={trigger} slot="button" let:trigger class="dots-vertical">
+						<svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30"
+							><path
+								d="M479.858-160Q460-160 446-174.142q-14-14.141-14-34Q432-228 446.142-242q14.141-14 34-14Q500-256 514-241.858q14 14.141 14 34Q528-188 513.858-174q-14.141 14-34 14Zm0-272Q460-432 446-446.142q-14-14.141-14-34Q432-500 446.142-514q14.141-14 34-14Q500-528 514-513.858q14 14.141 14 34Q528-460 513.858-446q-14.141 14-34 14Zm0-272Q460-704 446-718.142q-14-14.141-14-34Q432-772 446.142-786q14.141-14 34-14Q500-800 514-785.858q14 14.141 14 34Q528-732 513.858-718q-14.141 14-34 14Z"
+							/></svg
+						>
+					</button>
+					<div class="dropdown-container" slot="item" let:item>
+						<button class="dropdown-button"
+							><svg
+								xmlns="http://www.w3.org/2000/svg"
+								height="24px"
+								viewBox="0 0 24 24"
+								width="24px"
+								fill="#ffffff"
+								><path d="M0 0h24v24H0V0z" fill="none" /><path
+									d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"
+								/></svg
+							>Delete</button
+						>
+					</div>
+				</Dropdown>
+			</div>
+		</a>
+
+		<!-- =====1 VIDEO===== -->
+
+		<a href="/" class="vid-list">
+			<a class="preview" href="/"><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a
+			>
+			<div class="flex-div">
+				<div class="list-vid-info">
+					<a href="/">Video Title</a>
+					<div style="display: flex; margin-top: 10px;">
+						<p class="vid-views">119 views&nbsp;</p>
+						<p class="vid-views">·&nbsp;9 hours ago</p>
+					</div>
+				</div>
+				<Dropdown>
+					<button use:melt={trigger} slot="button" let:trigger class="dots-vertical">
+						<svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30"
+							><path
+								d="M479.858-160Q460-160 446-174.142q-14-14.141-14-34Q432-228 446.142-242q14.141-14 34-14Q500-256 514-241.858q14 14.141 14 34Q528-188 513.858-174q-14.141 14-34 14Zm0-272Q460-432 446-446.142q-14-14.141-14-34Q432-500 446.142-514q14.141-14 34-14Q500-528 514-513.858q14 14.141 14 34Q528-460 513.858-446q-14.141 14-34 14Zm0-272Q460-704 446-718.142q-14-14.141-14-34Q432-772 446.142-786q14.141-14 34-14Q500-800 514-785.858q14 14.141 14 34Q528-732 513.858-718q-14.141 14-34 14Z"
+							/></svg
+						>
+					</button>
+					<div class="dropdown-container" slot="item" let:item>
+						<button class="dropdown-button"
+							><svg
+								xmlns="http://www.w3.org/2000/svg"
+								height="24px"
+								viewBox="0 0 24 24"
+								width="24px"
+								fill="#ffffff"
+								><path d="M0 0h24v24H0V0z" fill="none" /><path
+									d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"
+								/></svg
+							>Delete</button
+						>
+					</div>
+				</Dropdown>
+			</div>
+		</a>
+		<a href="/" class="vid-list">
+			<a class="preview" href="/"><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a
+			>
+			<div class="flex-div">
+				<div class="list-vid-info">
+					<a href="/">Video Title</a>
+					<div style="display: flex; margin-top: 10px;">
+						<p class="vid-views">119 views&nbsp;</p>
+						<p class="vid-views">·&nbsp;9 hours ago</p>
+					</div>
+				</div>
+				<Dropdown>
+					<button use:melt={trigger} slot="button" let:trigger class="dots-vertical">
+						<svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30"
+							><path
+								d="M479.858-160Q460-160 446-174.142q-14-14.141-14-34Q432-228 446.142-242q14.141-14 34-14Q500-256 514-241.858q14 14.141 14 34Q528-188 513.858-174q-14.141 14-34 14Zm0-272Q460-432 446-446.142q-14-14.141-14-34Q432-500 446.142-514q14.141-14 34-14Q500-528 514-513.858q14 14.141 14 34Q528-460 513.858-446q-14.141 14-34 14Zm0-272Q460-704 446-718.142q-14-14.141-14-34Q432-772 446.142-786q14.141-14 34-14Q500-800 514-785.858q14 14.141 14 34Q528-732 513.858-718q-14.141 14-34 14Z"
+							/></svg
+						>
+					</button>
+					<div class="dropdown-container" slot="item" let:item>
+						<button class="dropdown-button"
+							><svg
+								xmlns="http://www.w3.org/2000/svg"
+								height="24px"
+								viewBox="0 0 24 24"
+								width="24px"
+								fill="#ffffff"
+								><path d="M0 0h24v24H0V0z" fill="none" /><path
+									d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"
+								/></svg
+							>Delete</button
+						>
+					</div>
+				</Dropdown>
+			</div>
+		</a>
+		<a href="/" class="vid-list">
+			<a class="preview" href="/"><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a
+			>
+			<div class="flex-div">
+				<div class="list-vid-info">
+					<a href="/">Video Title</a>
+					<div style="display: flex; margin-top: 10px;">
+						<p class="vid-views">119 views&nbsp;</p>
+						<p class="vid-views">·&nbsp;9 hours ago</p>
+					</div>
+				</div>
+				<Dropdown>
+					<button use:melt={trigger} slot="button" let:trigger class="dots-vertical">
+						<svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30"
+							><path
+								d="M479.858-160Q460-160 446-174.142q-14-14.141-14-34Q432-228 446.142-242q14.141-14 34-14Q500-256 514-241.858q14 14.141 14 34Q528-188 513.858-174q-14.141 14-34 14Zm0-272Q460-432 446-446.142q-14-14.141-14-34Q432-500 446.142-514q14.141-14 34-14Q500-528 514-513.858q14 14.141 14 34Q528-460 513.858-446q-14.141 14-34 14Zm0-272Q460-704 446-718.142q-14-14.141-14-34Q432-772 446.142-786q14.141-14 34-14Q500-800 514-785.858q14 14.141 14 34Q528-732 513.858-718q-14.141 14-34 14Z"
+							/></svg
+						>
+					</button>
+					<div class="dropdown-container" slot="item" let:item>
+						<button class="dropdown-button"
+							><svg
+								xmlns="http://www.w3.org/2000/svg"
+								height="24px"
+								viewBox="0 0 24 24"
+								width="24px"
+								fill="#ffffff"
+								><path d="M0 0h24v24H0V0z" fill="none" /><path
+									d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"
+								/></svg
+							>Delete</button
+						>
+					</div>
+				</Dropdown>
+			</div>
+		</a>
+		<a href="/" class="vid-list">
+			<a class="preview" href="/"><img src="/img/videoPreviews/3.png" class="thumbnail" alt="" /></a
+			>
+			<div class="flex-div">
+				<div class="list-vid-info">
+					<a href="/">Video Title</a>
+					<div style="display: flex; margin-top: 10px;">
+						<p class="vid-views">119 views&nbsp;</p>
+						<p class="vid-views">·&nbsp;9 hours ago</p>
+					</div>
+				</div>
+				<Dropdown>
+					<button use:melt={trigger} slot="button" let:trigger class="dots-vertical">
+						<svg xmlns="http://www.w3.org/2000/svg" height="30" viewBox="0 -960 960 960" width="30"
+							><path
+								d="M479.858-160Q460-160 446-174.142q-14-14.141-14-34Q432-228 446.142-242q14.141-14 34-14Q500-256 514-241.858q14 14.141 14 34Q528-188 513.858-174q-14.141 14-34 14Zm0-272Q460-432 446-446.142q-14-14.141-14-34Q432-500 446.142-514q14.141-14 34-14Q500-528 514-513.858q14 14.141 14 34Q528-460 513.858-446q-14.141 14-34 14Zm0-272Q460-704 446-718.142q-14-14.141-14-34Q432-772 446.142-786q14.141-14 34-14Q500-800 514-785.858q14 14.141 14 34Q528-732 513.858-718q-14.141 14-34 14Z"
+							/></svg
+						>
+					</button>
+					<div class="dropdown-container" slot="item" let:item>
+						<button class="dropdown-button"
+							><svg
+								xmlns="http://www.w3.org/2000/svg"
+								height="24px"
+								viewBox="0 0 24 24"
+								width="24px"
+								fill="#ffffff"
+								><path d="M0 0h24v24H0V0z" fill="none" /><path
+									d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"
+								/></svg
+							>Delete</button
+						>
+					</div>
+				</Dropdown>
+			</div>
+		</a>
 	</div>
 </div>
 
@@ -176,7 +310,8 @@
 		width: 100%;
 		border-radius: 16px;
 		aspect-ratio: 16 / 9;
-		object-fit: cover;
+		background-color: #000;
+		object-fit: contain;
 	}
 	.flex-div {
 		display: flex;

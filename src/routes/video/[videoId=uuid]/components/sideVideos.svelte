@@ -67,6 +67,8 @@
 	.side-video-list img {
 		width: 100%;
 		aspect-ratio: 16 / 9;
+		background-color: #000;
+		object-fit: contain;
 	}
 
 	.side-video-list .small-thumbnail {

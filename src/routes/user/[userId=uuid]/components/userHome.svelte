@@ -61,6 +61,8 @@
 	.last-video-content img {
 		width: 100%;
 		aspect-ratio: 16 / 9;
+		object-fit: contain;
+		background-color: #000;
 	}
 
 	.last-video-content .small-thumbnail {
@@ -134,7 +136,8 @@
 		width: 100%;
 		border-radius: 16px;
 		aspect-ratio: 16 / 9;
-		object-fit: cover;
+		background-color: #000;
+		object-fit: contain;
 	}
 	.flex-div {
 		display: flex;

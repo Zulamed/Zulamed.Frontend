@@ -39,10 +39,6 @@
 	export let data: LayoutServerData;
 	$user = data.loggedInUser;
 	$subscriptions = data.subscriptions;
-
-	$: {
-		console.log($subscriptions);
-	}
 </script>
 
 <ErrorToast />

@@ -17,8 +17,6 @@ export const load = (async ({ url }) => {
         .with({ tag: "error" }, ({ error }) => { throw err(500, error) })
         .exhaustive();
 
-    console.log(videos);
-
 
     return {
         videoResponse : videos

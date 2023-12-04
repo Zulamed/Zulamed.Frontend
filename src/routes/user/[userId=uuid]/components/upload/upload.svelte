@@ -67,8 +67,6 @@
 		});
 		const uploadUrlObject = await response.json() as CreateUploadUrlResponse;
 
-        console.log(uploadUrlObject);
-
         return uploadUrlObject;
 	}
 </script>

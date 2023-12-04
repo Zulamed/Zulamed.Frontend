@@ -37,8 +37,6 @@
 		let formData = new FormData(formElement);
 		let data = { ...Object.fromEntries(formData), step: step };
 
-		console.log(data);
-
 		let union: DataUnion | undefined = undefined;
 
 		if (radioValue == 'individual') {
@@ -55,9 +53,7 @@
 			return;
 		}
 		mapToStore(union);
-        console.log(union);
 		if (step == 4 || (step == 5 && radioValue == 'individual')) {
-            console.log('test!');
             let fullUnion: FullDataUnion | undefined = undefined;
             if (radioValue == 'individual') {
                 fullUnion = { type: 'individual', data: $individualData };

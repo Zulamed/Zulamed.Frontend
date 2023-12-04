@@ -10,7 +10,6 @@ export async function toggleHistory(fetch: FetchCallbackType = originalFetch): P
         const result = await fetch(`${PUBLIC_BACKEND_URL}/viewHistory`, {
             method: "PUT",
         });
-        console.log(result);
         if (result.status === 404) {
             return { status: "not-found" };
         }

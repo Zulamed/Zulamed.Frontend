@@ -305,7 +305,10 @@
 			<hr />
 		{/if}
 
-		<a id="shortcut-link" href="."
+		<a
+			id="shortcut-link"
+			href="/settings/account"
+			class:active-shortcut={$page.url.pathname === '/settings'}
 			><img src="/img/icons/settings_white_24dp.svg" alt="" />
 			<p>Settings</p>
 		</a>
@@ -416,7 +419,10 @@
 		{/if}
 
 		<hr />
-		<a id="shortcut-link" href="."
+		<a
+			id="shortcut-link"
+			href="/settings/account"
+			class:active-shortcut={$page.url.pathname === '/settings'}
 			><img src="/img/icons/settings_white_24dp.svg" alt="" />
 			<p>Settings</p>
 		</a>

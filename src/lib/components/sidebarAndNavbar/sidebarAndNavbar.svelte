@@ -304,7 +304,11 @@
 
 			<hr style:display={sidebarOpen ? 'flex' : 'none'} />
 		{/if}
-		<a class="shortcut-link" href="." style:display={sidebarOpen ? 'flex' : 'none'}
+		<a
+			id="shortcut-link"
+			href="/settings/account"
+			class:active-shortcut={$page.url.pathname === '/settings'}
+			style:display={sidebarOpen ? 'flex' : 'none'}
 			><img src="/img/icons/settings_white_24dp.svg" alt="" />
 			<p>Settings</p>
 		</a>
@@ -428,7 +432,10 @@
 		{/if}
 
 		<hr />
-		<a class="shortcut-link" href="."
+		<a
+			id="shortcut-link"
+			href="/settings/account"
+			class:active-shortcut={$page.url.pathname === '/settings'}
 			><img src="/img/icons/settings_white_24dp.svg" alt="" />
 			<p>Settings</p>
 		</a>

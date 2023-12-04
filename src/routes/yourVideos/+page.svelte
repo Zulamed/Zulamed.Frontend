@@ -52,8 +52,9 @@
 						</button>
 						<div class="dropdown-container" slot="item" let:item>
 							<form
+								style="display: flex; align-items: center; justify-content: center;"
 								method="post"
-                                action="?/delete"
+								action="?/delete"
 								use:enhance={() => {
 									return async ({ result }) => {
 										if (result.type === 'success') {

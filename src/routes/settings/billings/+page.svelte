@@ -6,7 +6,7 @@
 			<h4 class="title">Billing and payments</h4>
 			<h1 class="subtitle">Choose how you make purchases on ZulaMED</h1>
 			<h4 class="more-info">
-				<a class="more-info" href=".">Click here</a> to choose your membership plan
+				<a class="more-info" href="/membership">Click here</a> to choose your membership plan
 			</h4>
 		</div>
 	</div>

@@ -10,7 +10,7 @@
 		states: { toasts },
 		actions: { portal }
 	} = createToaster<ToastData>({
-		closeDelay: 2000
+		closeDelay: 3500
 	});
 
 	export const addToast = helpers.addToast;
@@ -27,58 +27,41 @@
 		<div
 			use:melt={$content(id)}
 			animate:flip={{ duration: 500 }}
-			in:fly={{ duration: 150, x: '100%' }}
-			out:fly={{ duration: 150, x: '100%' }}
+			in:fly={{ duration: 150, y: '100%' }}
+			out:fly={{ duration: 150, y: '100%' }}
 			class="toast-inner"
 		>
 			<div class="toast-content">
 				<div>
 					<h3 use:melt={$title(id)} class="toast-fieldname">
 						{data.fieldName}
-						<span />
 					</h3>
-					<div use:melt={$description(id)}>
+					<div class="error-message" use:melt={$description(id)}>
 						{data.error}
 					</div>
 				</div>
-				<button use:melt={$close(id)} class="toast-close-btn">
-					<svg
-						width="25"
-						height="25"
-						viewBox="0 0 18 18"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path
-							d="M13.5 4.5L4.5 13.5"
-							stroke="#ffffff"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-						/>
-						<path
-							d="M4.5 4.5L13.5 13.5"
-							stroke="#ffffff"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-						/>
-					</svg>
-				</button>
 			</div>
 		</div>
 	{/each}
 </div>
 
 <style>
+	.error-message {
+		font-size: 12px;
+	}
+	h3.toast-fieldname {
+		text-transform: capitalize;
+	}
 	.toast-container {
 		display: flex;
 		position: fixed;
-		right: 0;
+		left: 0;
 		bottom: 0;
-		z-index: 3;
+		z-index: 100;
 		margin: 1rem;
 		flex-direction: column;
 		gap: 0.5rem;
-		align-items: flex-end;
+		align-items: flex-start;
 	}
 	.toast-inner {
 		border-radius: 0.5rem;
@@ -92,8 +75,9 @@
 		gap: 1rem;
 		justify-content: space-between;
 		align-items: center;
-		background: #b94747;
+		background: #1b1b1b;
 		border-radius: 10px;
+		min-width: 231px;
 	}
 
 	.toast-fieldname {
@@ -103,17 +87,6 @@
 		font-size: 15px;
 	}
 
-	.toast-close-btn {
-		all: unset;
-		display: grid;
-		padding: 3px;
-		position: absolute;
-		top: 5px;
-		right: 5px;
-		place-items: center;
-		border-radius: 0;
-		cursor: pointer;
-	}
 	.toast-close-btn:hover {
 		background-color: #b4b4b469;
 	}
@@ -122,19 +95,14 @@
 	}
 	@media (max-width: 768px) {
 		.toast-container {
-			top: 0;
-			right: 0;
-			height: fit-content;
+			bottom: 0;
+			left: 0;
 		}
 		.toast-content {
 			padding: 14px;
 		}
 		.toast-fieldname {
 			font-size: 14px;
-		}
-		.toast-close-btn {
-			top: 0rem;
-			right: 0rem;
 		}
 	}
 </style>

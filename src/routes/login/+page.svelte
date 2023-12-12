@@ -35,6 +35,7 @@
 		width: 100%;
 		background: #018b7b;
 		display: grid;
+		margin-top: 0px !important;
 	}
 	.container-img {
 		width: 100%;

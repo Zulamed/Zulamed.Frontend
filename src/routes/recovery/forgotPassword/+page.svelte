@@ -3,7 +3,7 @@
 </script>
 
 <section class="container forms">
-	<img class="container-img" src="img/main-background-mobile.png" alt="" />
+	<img class="container-img" src="/img/main-background-mobile.png" alt="" />
 	<div class="container-overlay" />
 	<div class="form register">
 		<header>

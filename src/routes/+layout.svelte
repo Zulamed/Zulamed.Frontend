@@ -12,6 +12,7 @@
 	import ErrorToast from '$lib/components/errorToast.svelte';
 	import Notification from '$lib/components/notification.svelte';
 	import { subscriptions } from '$lib/stores/subscriptions';
+	import { searchQuery } from '$lib/stores/search';
 
 	let searchbarSidebar =
 		$page.url.pathname == '/subscriptions' || $page.url.pathname == '/searchResult';
@@ -24,6 +25,10 @@
 			searchbarSidebar = true;
 		} else {
 			searchbarSidebar = false;
+		}
+
+		if (aboba.to?.url.pathname != '/searchResult') {
+			$searchQuery = '';
 		}
 	});
 

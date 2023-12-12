@@ -12,9 +12,16 @@
 }
 
 .channel-banner {
+	position: relative;
 	width: 100%;
 	height: 285px;
 	background-color: #DFE8E6;
+}
+
+.channel-banner img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 .channel-info {
@@ -432,6 +439,8 @@ fieldset input {
 	margin-right: 32px;
 }
 
+
+
 .camera-icon {
 	position: absolute;
 	width: 70px;
@@ -443,6 +452,10 @@ fieldset input {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	opacity: 0;
+}
+
+.channel-banner:hover .camera-icon {
+	opacity: 1;
 }
 
 .channel-info a:hover .camera-icon {
@@ -518,12 +531,7 @@ fieldset input {
 		font-weight: 400;
 	}
 
-	.user-no-videos .subheader-btn {
-		text-align: center;
-		font-size: 12px;
-		font-weight: 600;
-		padding: 12px 16px;
-	}
+
 
 	.no-videos-subtitle {
 		color: #616163;
@@ -616,9 +624,12 @@ fieldset input {
 	}
 
 	.subheader-btn {
-		font-size: 8px;
+		text-align: center;
+		font-size: 12px;
+		font-weight: 600;
 		padding: 9px 14px;
 	}
+
 }
 
 @media (max-width: 411px) {

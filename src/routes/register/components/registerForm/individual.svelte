@@ -104,16 +104,16 @@
 						<!-- 		<option value="1990">1990</option> -->
 						<!-- 	</select> -->
 						<!-- </div> -->
-                        <div class="date-group">
-                            <input
-                                id="birthday-date"
-                                name="birthday-date"
-                                type="date"
-                                placeholder="Your date of birth"
-                                class="input date-select"
-                                bind:value={$individualData["birthday-date"]}
-                            />
-                        </div>
+						<div class="date-group">
+							<input
+								id="birthday-date"
+								name="birthday-date"
+								type="date"
+								placeholder="Your date of birth"
+								class="input date-select"
+								bind:value={$individualData['birthday-date']}
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -220,7 +220,7 @@
 					labelText="Stage in career:"
 					inputPlaceholder="Select a stage in career"
 					bind:value={$individualData.stageInCareer}
-                    name="stageInCareer"
+					name="stageInCareer"
 				/>
 			</div>
 			<div class="field input-field">
@@ -229,7 +229,7 @@
 					labelText="Professional Activity:"
 					inputPlaceholder="Select a Profession"
 					bind:value={$individualData.profession}
-                    name="profession"
+					name="profession"
 				/>
 			</div>
 			<div class="field input-field">
@@ -237,7 +237,7 @@
 					labelText="Please specify"
 					inputPlaceholder="Select a speciality"
 					bind:value={$individualData.speciality}
-                    name="speciality"
+					name="speciality"
 				/>
 			</div>
 			<div class="field input-field">
@@ -245,7 +245,7 @@
 					labelText="My Place(s) of work"
 					inputPlaceholder="Select your place(s) of work"
 					bind:value={$individualData.placeOfWork}
-                    name="placeOfWork"
+					name="placeOfWork"
 				/>
 			</div>
 		</div>
@@ -258,16 +258,16 @@
 					labelText="Country:"
 					inputPlaceholder="Select a country"
 					bind:value={$individualData.country}
-                    name="country"
+					name="country"
 				/>
-				<p class="error-message">Error message</p>
+				<!-- <p class="error-message">Error message</p> -->
 			</div>
 			<div class="field input-field city">
 				<Combobox
 					labelText="City:"
 					inputPlaceholder="Select a city"
 					bind:value={$individualData.city}
-                    name="city"
+					name="city"
 				/>
 			</div>
 			<div class="field input-field institute">
@@ -276,7 +276,7 @@
 					labelText="Institute"
 					inputPlaceholder="Select an institute"
 					bind:value={$individualData.institution}
-                    name="institution"
+					name="institution"
 				/>
 			</div>
 			<div class="field input-field department">
@@ -301,7 +301,7 @@
 					labelText="Role"
 					inputPlaceholder="Select a role"
 					bind:value={$individualData.role}
-                    name="role"
+					name="role"
 				/>
 			</div>
 		</div>
@@ -486,7 +486,7 @@
 		position: relative;
 	}
 	.input-field:last-child {
-		margin-bottom: 40px;
+		margin-bottom: 21px;
 	}
 	.input-field.role {
 		margin-bottom: 19px;

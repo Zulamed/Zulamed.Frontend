@@ -20,6 +20,11 @@
 	let shortcutPadding = '7px';
 	let overflowY = 'hidden';
 	let smotritelSabok = false;
+	let isLanguageListVisible = 'none';
+
+	const toggleLanguageList = () => {
+		isLanguageListVisible = isLanguageListVisible === 'none' ? 'block' : 'none';
+	};
 	$: subscriptionsSlice = !smotritelSabok && $user ? subscriptions.slice(0, 3) : subscriptions;
 
 	$: {
@@ -33,9 +38,11 @@
 	const toggleLanguageContainer = () => {
 		displayLanguageContainer = displayLanguageContainer === 'none' ? 'block' : 'none';
 	};
-
 	const closeLanguageContainer = () => {
 		displayLanguageContainer = 'none';
+	};
+	const closeProfileContainer = () => {
+		displayProfileContainer = 'none';
 	};
 
 	const toggleSidebar = () => {
@@ -72,6 +79,9 @@
 		if (isMobileSearchBarOpen && !target.closest('#search-mobile-form')) {
 			closeSearchbarMobile();
 		}
+		if (displayProfileContainer === 'block' && !target.closest('#profile-container')) {
+			closeProfileContainer();
+		}
 	}
 
 	function bodyOnTouchMove() {
@@ -81,8 +91,8 @@
 </script>
 
 <svelte:body on:click={bodyOnClick} on:touchmove={bodyOnTouchMove} />
-<!-- svelte-ignore a11y-click-events-have-key-events -->
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div use:portal class="overlay" on:click={closeMobileSidebar} style:left={overlayLeft} />
 <form action="/searchResult" class="flex-div" id="search-mobile-form" method="get">
 	<div class="searchbar-mobile flex-div" style:top={searchbarMobileTop}>
@@ -117,10 +127,6 @@
 	{/if}
 	<div class="nav-right flex-div">
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<div class="flex-div lang-icon" on:click={toggleLanguageContainer}>
-			<img width="20px" src="/img/flagIcons/az.svg" alt="" />
-			<img width="20px" src="/img/icons/dropdown.svg" alt="" />
-		</div>
 
 		<button
 			form="search-mobile-form"
@@ -132,7 +138,7 @@
 			<img src="/img/icons/Search_light.svg" alt="" />
 		</button>
 
-		<div
+		<!-- <div
 			class="language-container"
 			id="language-container"
 			style:display={displayLanguageContainer}
@@ -140,7 +146,7 @@
 			<div style="padding-left: 8px; height: 40px" class="flex-div">
 				<h5>Choose your language</h5>
 				&nbsp;&nbsp;&nbsp;
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				svelte-ignore a11y-click-events-have-key-events
 				<img
 					id="lang-close-icon"
 					width="18px"
@@ -162,60 +168,82 @@
 			<a class="lang-link" href=".">
 				<p>Russian</p>
 			</a>
+		</div> -->
+		<div class="language-container">
+			<div
+				class="language-button"
+				style="display: flex; align-items:center; justify-content:space-between"
+			>
+				<span>EN</span><img
+					class="arrow-down"
+					style="width: 15px; height: 15px;"
+					src="/img/icons/down-arrow.png"
+					alt=""
+				/>
+			</div>
+			<div class="language-list">
+				<div class="language-item selected-language">EN</div>
+				<div class="language-item">DE</div>
+			</div>
 		</div>
-
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		{#if $user}
-			<img
-				style="border-radius: 50%;"
-				class="user-icon"
-				src={$user?.profilePictureUrl ?? '/img/icons/channel-logo.jpg'}
-				alt=""
-				on:click={toggleProfileContainer}
-			/>
-			<div class="profile-container" id="profile-container" style:display={displayProfileContainer}>
-				<div class="popup-profile flex-div">
-					<a class="shortcut-link" href="/user/{$user.id}"
-						><img src={$user?.profilePictureUrl ?? '/img/icons/channel-logo.jpg'} alt="" /></a
-					>
-					<div>
-						<a href="/user/{$user.id}">{$user.name} {$user.surname}</a>
-						<p>@{$user.login}</p>
-						<a href="/user/{$user.id}" class="account-manage">Manage your Account</a>
+			<div style="position: relative; height: fit-content">
+				<img
+					style="border-radius: 50%;"
+					class="user-icon"
+					src={$user?.profilePictureUrl ?? '/img/icons/channel-logo.jpg'}
+					alt=""
+					on:click|stopPropagation={toggleProfileContainer}
+				/>
+				<div
+					class="profile-container"
+					id="profile-container"
+					style:display={displayProfileContainer}
+				>
+					<div class="popup-profile flex-div">
+						<a class="shortcut-link" href="/user/{$user.id}"
+							><img src={$user?.profilePictureUrl ?? '/img/icons/channel-logo.jpg'} alt="" /></a
+						>
+						<div>
+							<a href="/user/{$user.id}">{$user.name} {$user.surname}</a>
+							<p>@{$user.login}</p>
+							<a href="/user/{$user.id}" class="account-manage">Manage your Account</a>
+						</div>
 					</div>
-				</div>
 
-				<!-- Другие элементы контейнера -->
-				<a class="profile-link" href="/user/{$user.id}"
-					><img src="/img/profileContainerIcons/account_box_black_24dp.svg" alt="" />
-					<p>Your channel</p>
-				</a>
-				<a class="profile-link" href="."
-					><img src="/img/profileContainerIcons/groups_black_24dp.svg" alt="" />
-					<p>Switch account</p>
-				</a>
-				<a class="profile-link" href="/membership"
-					><img src="/img/profileContainerIcons/wallet_black_24dp.svg" alt="" />
-					<p>Purchases and membership</p>
-				</a>
-				<a class="profile-link" href="."
-					><img src="/img/profileContainerIcons/translate_black_24dp.svg" alt="" />
-					<p>Language: English</p>
-				</a>
-				<a class="profile-link" href="/settings/account"
-					><img src="/img/profileContainerIcons/settings_black_24dp.svg" alt="" />
-					<p>Settings</p>
-				</a>
-				<button
-					style="all: unset; cursor: pointer;"
-					class="profile-link"
-					on:click={async () => {
-						await logout();
-						await invalidateAll();
-					}}
-					><img src="/img/profileContainerIcons/logout_black_24dp.svg" alt="" />
-					<p>Sign out</p>
-				</button>
+					<!-- Другие элементы контейнера -->
+					<a class="profile-link" href="/user/{$user.id}"
+						><img src="/img/profileContainerIcons/account_box_black_24dp.svg" alt="" />
+						<p>Your channel</p>
+					</a>
+					<a class="profile-link" href="."
+						><img src="/img/profileContainerIcons/groups_black_24dp.svg" alt="" />
+						<p>Switch account</p>
+					</a>
+					<a class="profile-link" href="/membership"
+						><img src="/img/profileContainerIcons/wallet_black_24dp.svg" alt="" />
+						<p>Purchases and membership</p>
+					</a>
+					<a class="profile-link" href="."
+						><img src="/img/profileContainerIcons/translate_black_24dp.svg" alt="" />
+						<p>Language: English</p>
+					</a>
+					<a class="profile-link" href="/settings/account"
+						><img src="/img/profileContainerIcons/settings_black_24dp.svg" alt="" />
+						<p>Settings</p>
+					</a>
+					<button
+						style="all: unset; cursor: pointer;"
+						class="profile-link"
+						on:click={async () => {
+							await logout();
+							await invalidateAll();
+						}}
+						><img src="/img/profileContainerIcons/logout_black_24dp.svg" alt="" />
+						<p>Sign out</p>
+					</button>
+				</div>
 			</div>
 		{/if}
 		{#if !$user}
@@ -304,25 +332,9 @@
 
 			<hr style:display={sidebarOpen ? 'flex' : 'none'} />
 		{/if}
-		<a
-			id="shortcut-link"
-			href="/settings/account"
-			class:active-shortcut={$page.url.pathname === '/settings'}
-			style:display={sidebarOpen ? 'flex' : 'none'}
+		<a id="shortcut-link" href="/settings/account" style:display={sidebarOpen ? 'flex' : 'none'}
 			><img src="/img/icons/settings_white_24dp.svg" alt="" />
 			<p>Settings</p>
-		</a>
-		<a class="shortcut-link" href="." style:display={sidebarOpen ? 'flex' : 'none'}
-			><img src="/img/icons/flag_white_24dp.svg" alt="" />
-			<p>Report History</p>
-		</a>
-		<a class="shortcut-link" href="." style:display={sidebarOpen ? 'flex' : 'none'}
-			><img src="/img/icons/help_outline_white_24dp.svg" alt="" />
-			<p>Help</p>
-		</a>
-		<a class="shortcut-link" href="." style:display={sidebarOpen ? 'flex' : 'none'}
-			><img src="/img/icons/info_white_24dp.svg" alt="" />
-			<p>Send Feedback</p>
 		</a>
 	</div>
 	<div class="about-container">
@@ -334,12 +346,21 @@
 			voluptatum <br />
 			deleniti atque corrupti quos
 		</p>
-		<a class="about-link" href="."> Our channels </a>
-		<a class="about-link" href="."> Twitter </a>
-		<a class="about-link" href=".">
-			Connect &nbsp;<img src="/img/icons/insta_fill.svg" alt="" />
-			<img src="/img/icons/comment_fill.svg" alt="" />
+		<!-- ====social media==== -->
+		<a target="_blank" class="about-link" href="https://www.linkedin.com/company/zulamed">
+			<img class="social-media-icon" src="/img/icons/linkedin-48.png" alt="" />
+			<span>LinkedIn</span>
 		</a>
+		<a target="_blank" class="about-link" href="https://www.facebook.com/zulamed.de">
+			<img class="social-media-icon" src="/img/icons/facebook-48.png" alt="" />
+			<span>Facebook</span>
+		</a>
+		<a target="_blank" class="about-link" href="https://www.instagram.com/zulamed.de/">
+			<img class="social-media-icon" src="/img/icons/instagram-48.png" alt="" />
+			<span>Instagram</span>
+		</a>
+		<!-- ====social media==== -->
+
 		<a class="about-link" href=".">
 			About &nbsp;<span style="font-weight: 700">ZULA</span>MED
 		</a>
@@ -439,18 +460,6 @@
 			><img src="/img/icons/settings_white_24dp.svg" alt="" />
 			<p>Settings</p>
 		</a>
-		<a class="shortcut-link" href="."
-			><img src="/img/icons/flag_white_24dp.svg" alt="" />
-			<p>Report History</p>
-		</a>
-		<a class="shortcut-link" href="."
-			><img src="/img/icons/help_outline_white_24dp.svg" alt="" />
-			<p>Help</p>
-		</a>
-		<a class="shortcut-link" href="."
-			><img src="/img/icons/info_white_24dp.svg" alt="" />
-			<p>Send Feedback</p>
-		</a>
 	</div>
 	<div class="about-container">
 		<a class="about-logo" href=".">
@@ -461,9 +470,20 @@
 			voluptatum <br />
 			deleniti atque corrupti quos
 		</p>
-		<a class="about-link" href="."> Our channels </a>
-		<a class="about-link" href="."> Twitter </a>
-		<a class="about-link" href="."> Connect </a>
+		<!-- ====social media==== -->
+		<a target="_blank" class="about-link" href="https://www.linkedin.com/company/zulamed">
+			<img class="social-media-icon" src="/img/icons/linkedin-48.png" alt="" />
+			<span>LinkedIn</span>
+		</a>
+		<a target="_blank" class="about-link" href="https://www.facebook.com/zulamed.de">
+			<img class="social-media-icon" src="/img/icons/facebook-48.png" alt="" />
+			<span>Facebook</span>
+		</a>
+		<a target="_blank" class="about-link" href="https://www.instagram.com/zulamed.de/">
+			<img class="social-media-icon" src="/img/icons/instagram-48.png" alt="" />
+			<span>Instagram</span>
+		</a>
+		<!-- ====social media==== -->
 		<a class="about-link" href=".">
 			About &nbsp;<span style="font-weight: 700">ZULA</span>MED
 		</a>

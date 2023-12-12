@@ -10,7 +10,7 @@
 		states: { toasts },
 		actions: { portal }
 	} = createToaster<ToastData>({
-		closeDelay: 100000
+		closeDelay: 2000
 	});
 
 	export const addToast = helpers.addToast;

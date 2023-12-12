@@ -48,7 +48,7 @@
 	</div>
 </div> -->
 <div class="container">
-	<ul class="progressbar">
+	<!-- <ul class="progressbar">
 		{#each triggers as triggerItem}
 			<li
 				bind:this={uploadTab}
@@ -57,12 +57,12 @@
 				use:melt={$trigger(triggerItem.id)}
 			>
 				{triggerItem.title}
-				<!-- {#if $value === triggerItem.id}
+				{#if $value === triggerItem.id}
 					<div in:send={{ key: 'trigger' }} out:receive={{ key: 'trigger' }} />
-				{/if} -->
+				{/if}
 			</li>
 		{/each}
-	</ul>
+	</ul> -->
 	<!-- {#if uploadProgress === 'done'}
 		<div style="margin-top: 15px;">Upload finished! Being processed...</div>
 	{:else}
@@ -73,8 +73,9 @@
 <div use:melt={$content('tab-1')} class="tab-content-container">
 	<VideoInformation {uploadProgress} {videoId} />
 </div>
-<div use:melt={$content('tab-2')} class="tab-content-container">Test</div>
-<div use:melt={$content('tab-3')} class="tab-content-container"><AccessInformation /></div>
+
+<!-- <div use:melt={$content('tab-2')} class="tab-content-container">Test</div> -->
+<!-- <div use:melt={$content('tab-3')} class="tab-content-container"><AccessInformation /></div> -->
 
 <style>
 	.container {

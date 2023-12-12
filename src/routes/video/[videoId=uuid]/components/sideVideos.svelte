@@ -135,11 +135,7 @@
 
 	@media (max-width: 600px) {
 		.side-video-list .small-thumbnail {
-			margin-bottom: 29px;
-		}
-
-		.side-video-list .small-thumbnail {
-			margin-bottom: 29px;
+			margin-bottom: 13px;
 		}
 
 		.side-video-list .small-thumbnail img {
@@ -149,6 +145,7 @@
 		.side-video-list {
 			display: flex;
 			flex-direction: column;
+			margin-bottom: 29px;
 		}
 	}
 </style>

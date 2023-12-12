@@ -161,7 +161,7 @@
 			margin-top: 22px;
 		}
 		h2 {
-			font-size: 28px;
+			font-size: 23px;
 		}
 	}
 	@media (max-width: 1024px) {

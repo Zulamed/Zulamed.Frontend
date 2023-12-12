@@ -64,6 +64,7 @@
 
 	.container {
 		padding-left: 16.77%;
+		margin-top: 80px;
 	}
 
 	.large-container {

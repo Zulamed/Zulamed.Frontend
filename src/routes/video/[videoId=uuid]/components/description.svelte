@@ -23,7 +23,10 @@
 		return formattedDate;
 	}
 
-	$: text = height === '64px' ? textContent?.substring(0,30) ?? 'No description' + ' ...more': textContent;
+	$: text =
+		height === '64px'
+			? textContent?.substring(0, 30) ?? 'No description' + ' ...more'
+			: textContent;
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -40,11 +43,11 @@
 	</div>
 
 	<p class="description-text">
-        {#if text}
-            {text}
-        {:else}
-            No description
-        {/if}
+		{#if text}
+			{text}
+		{:else}
+			No description
+		{/if}
 	</p>
 	<br />
 	{#if height === 'auto'}
@@ -106,7 +109,7 @@
 
 	@media (max-width: 600px) {
 		.play-video-description {
-			margin-bottom: 37px;
+			margin-bottom: 0px;
 		}
 		.play-video-stats p,
 		.play-video-stats span {

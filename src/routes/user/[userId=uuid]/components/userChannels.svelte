@@ -1,27 +1,13 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import type { Subscription } from '$backend/user/getSubscriptions';
-	import { flyAndScale } from '$lib/animations/flyAndScale';
-	let subActive = false;
-	let confirmationVisible = false;
-
-	function toggleSubscription() {
-		if (subActive) {
-			confirmationVisible = true;
-		} else {
-			subActive = !subActive;
-		}
-	}
-
-	function confirmUnsubscribe() {
-		subActive = false;
-		confirmationVisible = false;
-	}
-
-	function cancelUnsubscribe() {
-		confirmationVisible = false;
-	}
+	import { user } from '$lib/stores/auth';
+	import { subscriptions as subs } from '$lib/stores/subscriptions';
 
 	export let subscriptions: Subscription[];
+
+	console.log($user?.id);
+	console.log(subscriptions);
 </script>
 
 <h1 class="list-header">Subscriptions</h1>
@@ -38,26 +24,12 @@
 			>
 			<a href="/user/{sub.user.id}"><p class="channel-username">{sub.user.login}</p></a>
 			<p class="channel-sub-counter">{sub.numberOfSubscribers} subscribers</p>
-			<button on:click={toggleSubscription} class:active={subActive} class="channel-subscribe-btn">
-				{#if subActive}Subscribed{:else}Subscribe{/if}</button
-			>
-			{#if confirmationVisible}
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<div class="overlay" on:click={cancelUnsubscribe} />
-				<div
-					class="content"
-					transition:flyAndScale={{
-						duration: 150,
-						y: 8,
-						start: 0.96
-					}}
+
+			{#if $page.data.user.id !== $user?.id && sub.user.id != $user?.id}
+				{@const subActive = $subs.some((s) => s.user.id == sub.user.id)}
+				<button class:active={subActive} class="channel-subscribe-btn">
+					{#if subActive}Subscribed{:else}Subscribe{/if}</button
 				>
-					<h2 class="unsub-title">Unsubscribe from User?</h2>
-					<div class="unsub-actions">
-						<button on:click={cancelUnsubscribe} class="unsub-cancel"> Cancel </button>
-						<button on:click={confirmUnsubscribe} class="unsub-accept"> Unsubscribe </button>
-					</div>
-				</div>
 			{/if}
 		</div>
 	{/each}

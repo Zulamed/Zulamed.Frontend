@@ -14,13 +14,86 @@ nav {
     height: 74px;
     padding: 10px 3% 10px 2%;
     justify-content: space-between;
-    position: sticky;
+    position: fixed;
+    width: 100%;
     top: 0;
     z-index: 3;
 }
 
+.social-media-icon {
+    width: 30px;
+    margin-right: 5px;
+}
+
+/* ==========language========== */
+.language-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Стили для кнопки выбора языка */
+.language-button {
+    padding: 5px 15px;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Стили для выпадающего списка языков */
+.language-list {
+    font-size: 14px;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Стили для элементов списка языков */
+.language-item {
+    padding: 5px 30px 5px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+}
+
+.language-item:hover {
+    background-color: #00d6ba;
+}
+
+/* Стили для последнего элемента списка (убираем border-bottom) */
+.language-item:last-child {
+    border-bottom: none;
+}
+
+.language-container .arrow-down {
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+}
+
+.language-container:hover .arrow-down {
+    transform: rotate(-180deg);
+}
+
+/* Показываем список языков при наведении на кнопку */
+.language-container:hover .language-list {
+    display: block;
+}
+
+/* ==========language========== */
+.nav-right {
+    position: relative;
+    gap: 10px;
+}
+
 .nav-right .user-icon {
     width: 35px;
+    height: 35px;
     cursor: pointer;
 }
 
@@ -115,12 +188,8 @@ a {
 
 /* ==========LANGUAGE DROPDOWN============ */
 
-.lang-icon {
-    margin-right: 8px;
-    cursor: pointer;
-}
 
-.language-container {
+/* .language-container {
     display: none;
     flex-direction: column;
     justify-content: space-evenly;
@@ -176,7 +245,7 @@ a {
 
 .language-container a.active {
     background-color: #d9d9d9;
-}
+} */
 
 /* ==========LANGUAGE DROPDOWN============ */
 
@@ -197,8 +266,8 @@ a {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 17px;
     padding: 20px 26px;
-    right: 5%;
-    top: 30%;
+    right: 100%;
+    top: 20%;
     width: 293px;
 }
 
@@ -694,7 +763,7 @@ a {
     }
 
     .small-sidebar {
-        width: 6%;
+        width: 5%;
         padding-left: 0;
     }
 
@@ -721,7 +790,7 @@ a {
     }
 
     .small-sidebar .shortcut-link p {
-        font-size: 10px;
+        font-size: 9px;
     }
 
     .small-sidebar .shortcut-link img {
@@ -757,6 +826,20 @@ a {
 
 
 @media (max-width: 900px) {
+    .language-list {
+        display: none;
+    }
+
+    /* Отображаем выпадающий список при клике на кнопку на мобильных устройствах */
+    .language-container.active .language-list {
+        display: block;
+    }
+
+    /* Изменяем стили кнопки на мобильных устройствах */
+    .language-button {
+        width: 100%;
+    }
+
     .searchbar {
         display: none;
     }
@@ -840,6 +923,7 @@ a {
 
     .nav-right .user-icon {
         width: 30px;
+        height: 30px;
     }
 
     .menu-icon-background-small {

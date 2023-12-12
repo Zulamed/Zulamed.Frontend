@@ -82,9 +82,26 @@
 	<title>{data.user.login} - ZulaMED</title>
 </svelte:head>
 <div class="container" class:large-container={!$sidebarOpened}>
-	<div class="channel-banner">
-		<img src="." alt="" />
-	</div>
+	{#if data.user.id === $user?.id}
+		<Tooltip placement="bottom">
+			<div use:melt={trigger} slot="button" let:trigger class="channel-banner">
+				<img src="/img/main-background-mobile.png" alt="" />
+				<a href="">
+					<img
+						style="width: 70px; height: 70px"
+						class="camera-icon"
+						src="/img/icons/photo_camera_white_24dp.svg"
+						alt=""
+					/>
+				</a>
+			</div>
+			<p slot="content">Edit channel banner</p>
+		</Tooltip>
+	{:else}
+		<div class="channel-banner">
+			<img src="/img/main-background-mobile.png" alt="" />
+		</div>
+	{/if}
 	<div class="flex-div channel-info">
 		{#if data.user.id === $user?.id}
 			<Tooltip placement="bottom">
@@ -151,7 +168,6 @@
 		</div>
 		{#if data.user.id === $user?.id}
 			<div class="btns-container">
-				<button class="subheader-btn">Customise channel</button>
 				{#if !matches900px}
 					<button use:melt={$triggerDialog} class="subheader-btn">Upload video</button>
 				{/if}

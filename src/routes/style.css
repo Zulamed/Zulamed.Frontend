@@ -33,6 +33,7 @@ img {
 .container {
 	background-color: #ffffff;
 	padding-left: 16.77%;
+	margin-top: 74px;
 }
 
 .large-container {
@@ -117,6 +118,14 @@ input::-moz-focus-inner {
 
 .vid-list {
 	margin-top: 65px;
+	padding-bottom: 14px;
+}
+
+.vid-list:hover {
+	cursor: pointer;
+	background-color: #e9e9e9;
+	border-radius: 16px;
+
 }
 
 .vid-list .thumbnail {
@@ -129,7 +138,7 @@ input::-moz-focus-inner {
 
 .vid-list .flex-div {
 	align-items: flex-start;
-	margin-top: 33px;
+	margin-top: 13px;
 }
 
 .vid-list .flex-div img {
@@ -257,7 +266,7 @@ input::-moz-focus-inner {
 
 	.vid-list .flex-div {
 		align-items: flex-start;
-		margin-top: 23px;
+		margin-top: 13px;
 	}
 
 	.vid-info {
@@ -290,7 +299,7 @@ input::-moz-focus-inner {
 	}
 
 	.large-container {
-		padding-left: 6%;
+		padding-left: 5%;
 	}
 
 	.list-container {

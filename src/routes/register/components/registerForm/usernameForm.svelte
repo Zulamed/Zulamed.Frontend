@@ -3,43 +3,27 @@
 	export let inputPlaceholder = '';
 	export let inputId: string | undefined;
 	let usernameError = false;
-	function preventDeletion(event: KeyboardEvent) {
-		const input = document.getElementById('username') as HTMLInputElement;
-		const inputValue = input.value;
-		const cursorPosition = input.selectionStart;
-		if (event.key === 'Backspace' && cursorPosition === 1 && inputValue.charAt(0) === '@') {
-			event.preventDefault();
-		}
-	}
-	function preventInsertion() {
-		const input = document.getElementById('username') as HTMLInputElement;
-		const inputValue = input.value;
-
-		if (inputValue.charAt(0) !== '@') {
-			input.value = '@';
-		}
-	}
-    export let value = "@";
 </script>
 
 <label class="large-label" for={inputId}>{labelText}</label>
 <div class="group">
-	<input
-		on:keydown={preventDeletion}
-		on:input={preventInsertion}
-        {value}
-		id={inputId}
-		name={inputId}
-        type="text"
-		placeholder={inputPlaceholder}
-		class="input"
-	/>
+	<input id={inputId} name={inputId} type="text" placeholder={inputPlaceholder} class="input" />
+	<p class="input-symbol">@</p>
 </div>
 {#if usernameError == true}
 	<p class="error-message">Error message</p>
 {/if}
 
 <style>
+	.input-symbol {
+		position: absolute;
+		top: 48%;
+		left: 16px;
+		transform: translateY(-50%);
+		color: #000;
+		font-size: 16px;
+		font-weight: 400;
+	}
 	.error-message {
 		margin-top: 6px;
 		color: #ff3e24;
@@ -61,6 +45,7 @@
 		margin-top: 16px;
 	}
 	.input {
+		position: relative;
 		height: 100%;
 		width: 100%;
 		border: none;
@@ -71,7 +56,7 @@
 	.input {
 		height: 60px;
 		outline: none;
-		padding: 0 16px;
+		padding: 0 32px;
 		border: 0.5px solid #d2d0d0;
 		background-color: transparent;
 		font-size: 16px;
@@ -87,7 +72,7 @@
 			font-size: 15px;
 		}
 		.input {
-			padding: 0 5px 0 12px;
+			padding: 0 5px 0 32px;
 			font-size: 15px;
 			height: 50px;
 		}
@@ -101,7 +86,7 @@
 		}
 		.input {
 			height: 45px;
-			padding: 0 0 0 6px;
+			padding: 0 0 0 32px;
 			font-size: 13px;
 		}
 
@@ -114,7 +99,7 @@
 			font-size: 14px;
 		}
 		.input {
-			padding: 0 14px 0 14px;
+			padding: 0 14px 0 32px;
 			font-size: 15px;
 			height: 60px;
 		}

@@ -58,3 +58,7 @@ a {
 }
 
 /* SKELETON */
+
+.container {
+    margin-top: 80px;
+}

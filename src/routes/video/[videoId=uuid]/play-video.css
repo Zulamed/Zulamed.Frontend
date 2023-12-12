@@ -58,7 +58,7 @@
 
 :global(media-player) {
 	height: 100%;
-    z-index: 0;
+	z-index: 0;
 }
 
 :global(media-provider) {
@@ -140,7 +140,7 @@ img {
 /* ============MAIN============ */
 
 .container {
-	margin-top: 38px;
+	margin-top: 90px;
 	padding-left: 5%;
 	padding-right: 5%;
 }

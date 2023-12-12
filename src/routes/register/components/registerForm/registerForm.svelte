@@ -17,10 +17,9 @@
 	import type { FullDataUnion } from '$backend/user/register';
 	import { login } from '$lib/stores/auth';
 
-    type DataUnion =
-    | { type: "individual", data: IndividualData}
-    | { type: "hospital", data: HospitalData}
-
+	type DataUnion =
+		| { type: 'individual'; data: IndividualData }
+		| { type: 'hospital'; data: HospitalData };
 
 	function mapToStore(unionData: DataUnion) {
 		switch (unionData.type) {
@@ -54,31 +53,30 @@
 		}
 		mapToStore(union);
 		if (step == 4 || (step == 5 && radioValue == 'individual')) {
-            let fullUnion: FullDataUnion | undefined = undefined;
-            if (radioValue == 'individual') {
-                fullUnion = { type: 'individual', data: $individualData };
-            } else if (radioValue == 'hospital') {
-                fullUnion = { type: 'hospital', data: $hospitalData };
-            }
+			let fullUnion: FullDataUnion | undefined = undefined;
+			if (radioValue == 'individual') {
+				fullUnion = { type: 'individual', data: $individualData };
+			} else if (radioValue == 'hospital') {
+				fullUnion = { type: 'hospital', data: $hospitalData };
+			}
 
-
-            let response = await fetch("/register/submit", {
-                method: "POST",
-                body: JSON.stringify(fullUnion),
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            });
-            if (response.ok){
-                switch (radioValue) {
-                    case 'individual':
-                        await login($individualData.email, $individualData.password);
-                        break;
-                    case 'hospital':
-                        await login($hospitalData.email, $hospitalData.password);
-                        break;
-                }
-            }
+			let response = await fetch('/register/submit', {
+				method: 'POST',
+				body: JSON.stringify(fullUnion),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+			if (response.ok) {
+				switch (radioValue) {
+					case 'individual':
+						await login($individualData.email, $individualData.password);
+						break;
+					case 'hospital':
+						await login($hospitalData.email, $hospitalData.password);
+						break;
+				}
+			}
 			return;
 		}
 		step += 1;
@@ -274,6 +272,9 @@
 </form>
 
 <style>
+	.radio-label:not(:first-child) {
+		margin-top: 50px;
+	}
 	.radio-label {
 		position: relative;
 		display: flex;
@@ -282,7 +283,6 @@
 		align-items: center;
 		justify-content: space-between;
 		padding: 0 50px;
-		margin-top: 50px;
 		cursor: pointer;
 	}
 	.radio-label p {
@@ -361,8 +361,14 @@
 			height: 52px;
 			font-size: 17px;
 		}
+		.input-container {
+			margin-bottom: 20px;
+			margin-top: 30px;
+		}
+		.radio-label:not(:first-child) {
+			margin-top: 25px;
+		}
 		.radio-label {
-			margin-top: 35px;
 			padding: 0 10px;
 		}
 		.radio-label p {

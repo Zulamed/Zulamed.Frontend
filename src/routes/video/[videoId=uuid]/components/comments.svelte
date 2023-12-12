@@ -142,7 +142,7 @@
 	}}
 >
 	<div id="play-video-comments" class="play-video-comments" bind:this={commentContainer}>
-		<p style="margin-top: 20px ;margin-bottom: 69px;">{totalComments} comment(s)</p>
+		<p class="comments-title">{totalComments} comment(s)</p>
 
 		<div class="write-comment">
 			<img
@@ -446,6 +446,10 @@
 
 <!-- put styles from play-video.css to here --->
 <style>
+	.comments-title {
+		margin-top: 20px;
+		margin-bottom: 69px;
+	}
 	.comment-delete-actions {
 		margin-top: 20px;
 		display: flex;
@@ -816,6 +820,10 @@
 		}
 		.more-comments {
 			display: none;
+		}
+		.comments-title {
+			margin-top: 15px;
+			margin-bottom: 33px;
 		}
 	}
 </style>

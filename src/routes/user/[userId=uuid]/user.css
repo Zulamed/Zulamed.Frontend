@@ -514,6 +514,7 @@ fieldset input {
 }
 
 @media (max-width: 900px) {
+
 	.user-no-videos {
 		justify-content: flex-start;
 		padding: 68px 20px;
@@ -578,9 +579,9 @@ fieldset input {
 		gap: 14px;
 	}
 
-	.channel-info img {
-		width: 122px;
-		height: 122px;
+	.channel-info .user-profile-picture {
+		width: 100px;
+		height: 100px;
 	}
 
 	.channel-info div p {

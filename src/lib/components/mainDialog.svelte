@@ -2,7 +2,8 @@
 	import { createDialog, melt } from '@melt-ui/svelte';
 	import { flyAndScale } from '$lib/animations/flyAndScale';
 	import type { Writable } from 'svelte/store';
-	export let dialogStore: Writable<boolean>;
+	import { createDialogStore } from './mainDialog';
+	export let dialogStore: Writable<boolean> = createDialogStore();
 	const {
 		elements: { trigger, overlay, content, title, description, close },
 		states: { open }
@@ -35,7 +36,6 @@
 		<p style="margin-top: 26px; font-size: 15px; font-style: normal; " use:melt={$description}>
 			{descriptionText}
 		</p>
-
 		<div class="btn-group">
 			<button class="dg-btn" use:melt={$close}>Close</button>
 			<slot name="ok" close={$close} />

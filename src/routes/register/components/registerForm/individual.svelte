@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Combobox from './combobox.svelte';
 	import { individualData } from '../../schemas/individual';
+	import InputPassword from './inputPassword.svelte';
 
 	export let step: number;
 	let eyeIcon = 'img/icons/View.svg';
@@ -149,65 +150,21 @@
 				</div>
 			</div>
 			<div class="field input-field">
-				<label for="password">Password</label>
-				<div class="pass-group">
-					<input
-						id="password"
-						bind:this={inputPassword}
-						name="password"
-						type="password"
-						placeholder="*********"
-						class="password"
-						class:input-error={errorLogin}
-						bind:value={$individualData.password}
-					/>
-					<button
-						type="button"
-						class="showpass-btn"
-						on:click={() => {
-							if (eyeIcon == 'img/icons/View.svg') {
-								eyeIcon = 'img/icons/View_hide.svg';
-								inputPassword.type = 'text';
-							} else {
-								eyeIcon = 'img/icons/View.svg';
-								inputPassword.type = 'password';
-							}
-						}}
-					>
-						<img src={eyeIcon} class="eye-icon" alt="" />
-					</button>
-				</div>
+				<InputPassword
+					labelText="Password"
+					inputPlaceholder="Password"
+					inputId="password"
+					bind:password={$individualData.password}
+				/>
 			</div>
-			<div class="field input-field">
-				<label for="password-repeat">Re-type password</label>
-				<div class="pass-group">
-					<input
-						id="password-repeat"
-						bind:this={repeatPassword}
-						name="confirmPassword"
-						type="password"
-						placeholder="*********"
-						class="password"
-						class:input-error={errorLogin}
-						bind:value={$individualData.confirmPassword}
-					/>
 
-					<button
-						type="button"
-						class="showpass-btn"
-						on:click={() => {
-							if (eyeIconRepeat == 'img/icons/View.svg') {
-								eyeIconRepeat = 'img/icons/View_hide.svg';
-								repeatPassword.type = 'text';
-							} else {
-								eyeIconRepeat = 'img/icons/View.svg';
-								repeatPassword.type = 'password';
-							}
-						}}
-					>
-						<img src={eyeIconRepeat} class="eye-icon" alt="" />
-					</button>
-				</div>
+			<div class="field input-field">
+				<InputPassword
+					labelText="Re-type password"
+					inputPlaceholder="Re-type password"
+					inputId="confirmPassword"
+					bind:password={$individualData.confirmPassword}
+				/>
 			</div>
 		</div>
 	</div>

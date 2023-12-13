@@ -165,6 +165,9 @@
 		}
 	}
 	@media (max-width: 1024px) {
+		.container {
+			margin-top: 0 !important;
+		}
 		.form {
 			max-width: 370px;
 			max-height: 85vh;

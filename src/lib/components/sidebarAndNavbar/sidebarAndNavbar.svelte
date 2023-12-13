@@ -25,7 +25,7 @@
 	const toggleLanguageList = () => {
 		isLanguageListVisible = isLanguageListVisible === 'none' ? 'block' : 'none';
 	};
-	$: subscriptionsSlice = !smotritelSabok && $user ? subscriptions.slice(0, 3) : subscriptions;
+	$: subscriptionsSlice = !smotritelSabok && $user ? subscriptions.slice(0, 5) : subscriptions;
 
 	$: {
 		$sidebarOpened = sidebarOpen;
@@ -188,11 +188,11 @@
 		</div>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		{#if $user}
-			<div style="position: relative; height: fit-content">
+			<div style="position: relative; display: flex; align-items: center;">
 				<img
 					style="border-radius: 50%;"
 					class="user-icon"
-					src={$user?.profilePictureUrl ?? '/img/icons/channel-logo.jpg'}
+					src={$user?.profilePictureUrl ?? '/img/blank-profile-picture.png'}
 					alt=""
 					on:click|stopPropagation={toggleProfileContainer}
 				/>
@@ -203,7 +203,7 @@
 				>
 					<div class="popup-profile flex-div">
 						<a class="shortcut-link" href="/user/{$user.id}"
-							><img src={$user?.profilePictureUrl ?? '/img/icons/channel-logo.jpg'} alt="" /></a
+							><img src={$user?.profilePictureUrl ?? '/img/blank-profile-picture.png'} alt="" /></a
 						>
 						<div>
 							<a href="/user/{$user.id}">{$user.name} {$user.surname}</a>
@@ -217,18 +217,18 @@
 						><img src="/img/profileContainerIcons/account_box_black_24dp.svg" alt="" />
 						<p>Your channel</p>
 					</a>
-					<a class="profile-link" href="."
+					<!-- <a class="profile-link" href="."
 						><img src="/img/profileContainerIcons/groups_black_24dp.svg" alt="" />
 						<p>Switch account</p>
-					</a>
+					</a> -->
 					<a class="profile-link" href="/membership"
 						><img src="/img/profileContainerIcons/wallet_black_24dp.svg" alt="" />
 						<p>Purchases and membership</p>
 					</a>
-					<a class="profile-link" href="."
+					<!-- <a class="profile-link" href="."
 						><img src="/img/profileContainerIcons/translate_black_24dp.svg" alt="" />
 						<p>Language: English</p>
-					</a>
+					</a> -->
 					<a class="profile-link" href="/settings/account"
 						><img src="/img/profileContainerIcons/settings_black_24dp.svg" alt="" />
 						<p>Settings</p>
@@ -303,21 +303,23 @@
 						style:display={sidebarOpen ? 'flex' : 'none'}
 						><img
 							class="subsciption-logo"
-							src={sub.user.profilePictureUrl ?? '/img/icons/user.png'}
+							src={sub.user.profilePictureUrl ?? '/img/icons/profile.png'}
 							alt=""
 						/>
 						<p>{sub.user.login}</p>
 					</a>
 				{/each}
 				{#if !smotritelSabok}
-					<button
-						on:click={() => {
-							smotritelSabok = true;
-						}}
-						class="show-more"
-					>
-						<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
-					</button>
+					{#if subscriptions.length > 5}
+						<button
+							on:click={() => {
+								smotritelSabok = true;
+							}}
+							class="show-more"
+						>
+							<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
+						</button>
+					{/if}
 				{:else}
 					<button
 						on:click={() => {
@@ -331,11 +333,11 @@
 			{/if}
 
 			<hr style:display={sidebarOpen ? 'flex' : 'none'} />
+			<a id="shortcut-link" href="/settings/account" style:display={sidebarOpen ? 'flex' : 'none'}
+				><img src="/img/icons/settings_white_24dp.svg" alt="" />
+				<p>Settings</p>
+			</a>
 		{/if}
-		<a id="shortcut-link" href="/settings/account" style:display={sidebarOpen ? 'flex' : 'none'}
-			><img src="/img/icons/settings_white_24dp.svg" alt="" />
-			<p>Settings</p>
-		</a>
 	</div>
 	<div class="about-container">
 		<a class="about-logo" href=".">

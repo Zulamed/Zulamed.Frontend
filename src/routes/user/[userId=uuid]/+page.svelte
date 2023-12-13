@@ -114,7 +114,7 @@
 				>
 					<img
 						class="user-profile-picture"
-						src={data.user.profilePictureUrl ?? '/img/icons/user-logo160x160.jpg'}
+						src={data.user.profilePictureUrl ?? '/img/blank-profile-picture.png'}
 						alt=""
 					/>
 					<img class="camera-icon" src="/img/icons/photo_camera_white_24dp.svg" alt="" />
@@ -122,17 +122,17 @@
 				<p slot="content">Edit profile picture</p>
 			</Tooltip>
 		{:else}
-			<div>
+			<div style="background-color: #fff;">
 				<img
 					class="user-profile-picture"
-					src={data.user.profilePictureUrl ?? '/img/icons/user-logo160x160.jpg'}
+					src={data.user.profilePictureUrl ?? '/img/icons/profile-black192x192.png'}
 					alt=""
 				/>
 			</div>
 		{/if}
 
 		<div>
-			<h5>{data.user.name} {data.user.surname}</h5>
+			<h5 style="flex-wrap: wrap;">{data.user.name} {data.user.surname}</h5>
 			<div class="main-info">
 				<p>@{data.user.login}</p>
 				<p>{data.numberOfFollowers} followers</p>
@@ -216,9 +216,9 @@
 					{/if}
 				</div>
 			</div>
-		{:else}
+		{:else if $user}
 			<form
-				style="display: flex; align-items: center; justify-content: center;"
+				style="display: flex; align-items: center; justify-content: right; padding: 0 16px;"
 				method="post"
 				action="?/followToggle"
 				use:enhance={() => {
@@ -294,7 +294,7 @@
 			<div style="width: 100%; text-align: center;">There is nothing here yet.</div>
 		{/if}
 	</div>
-	<div use:melt={$content('tab-4')} class="tab-content-container"><UserAbout /></div>
+	<div use:melt={$content('tab-4')} class="tab-content-container"><UserAbout {data} /></div>
 </div>
 
 <style lang="css" src="./user.css"></style>

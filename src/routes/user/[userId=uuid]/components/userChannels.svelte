@@ -18,18 +18,19 @@
 			<a href="/user/{sub.user.id}"
 				><img
 					class="channel-logo"
-					src={sub.user.profilePictureUrl ?? '/img/channels4_profile.jpg'}
+					src={sub.user.profilePictureUrl ?? '/img/blank-profile-picture.png'}
 					alt=""
 				/></a
 			>
 			<a href="/user/{sub.user.id}"><p class="channel-username">{sub.user.login}</p></a>
 			<p class="channel-sub-counter">{sub.numberOfSubscribers} subscribers</p>
-
-			{#if $page.data.user.id !== $user?.id && sub.user.id != $user?.id}
-				{@const subActive = $subs.some((s) => s.user.id == sub.user.id)}
-				<button class:active={subActive} class="channel-subscribe-btn">
-					{#if subActive}Subscribed{:else}Subscribe{/if}</button
-				>
+			{#if $user}
+				{#if $page.data.user.id !== $user?.id && sub.user.id != $user?.id}
+					{@const subActive = $subs.some((s) => s.user.id == sub.user.id)}
+					<button class:active={subActive} class="channel-subscribe-btn">
+						{#if subActive}Subscribed{:else}Subscribe{/if}</button
+					>
+				{/if}
 			{/if}
 		</div>
 	{/each}

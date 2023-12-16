@@ -47,8 +47,8 @@
 		</div>
 	</div>
 </div> -->
-<div class="container">
-	<!-- <ul class="progressbar">
+<!-- <div class="container">
+	<ul class="progressbar">
 		{#each triggers as triggerItem}
 			<li
 				bind:this={uploadTab}
@@ -62,13 +62,13 @@
 				{/if}
 			</li>
 		{/each}
-	</ul> -->
-	<!-- {#if uploadProgress === 'done'}
+	</ul>
+	{#if uploadProgress === 'done'}
 		<div style="margin-top: 15px;">Upload finished! Being processed...</div>
 	{:else}
 		<div style="margin-top: 15px;">Upload progress: {progress}%</div>
-	{/if} -->
-</div>
+	{/if}
+</div> -->
 
 <div use:melt={$content('tab-1')} class="tab-content-container">
 	<VideoInformation {uploadProgress} {videoId} />

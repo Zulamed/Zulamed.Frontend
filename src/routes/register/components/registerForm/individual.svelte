@@ -2,6 +2,7 @@
 	import Combobox from './combobox.svelte';
 	import { individualData } from '../../schemas/individual';
 	import InputPassword from './inputPassword.svelte';
+	import Input from './input.svelte';
 
 	export let step: number;
 	let eyeIcon = 'img/icons/View.svg';
@@ -198,11 +199,17 @@
 				/>
 			</div>
 			<div class="field input-field">
-				<Combobox
+				<!-- <Combobox
 					labelText="My Place(s) of work"
 					inputPlaceholder="Select your place(s) of work"
 					bind:value={$individualData.placeOfWork}
 					name="placeOfWork"
+				/> -->
+				<Input
+					labelText="My Place(s) of work"
+					inputPlaceholder="Write your place of work"
+					inputId="firstName"
+					bind:value={$individualData.placeOfWork}
 				/>
 			</div>
 		</div>

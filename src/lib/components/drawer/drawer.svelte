@@ -339,9 +339,8 @@
 			<img src="/img/logo-green-theme.png" alt="" />
 		</a>
 		<p>
-			At vero eos et accusamus et iusto odio dignissimos ducimus qui bland itiis praesentium
-			voluptatum <br />
-			deleniti atque corrupti quos
+			Medical platform offering an extensive library of surgical procedures and instructional videos
+			tailored for professionals
 		</p>
 		<!-- ====social media==== -->
 		<a target="_blank" class="about-link" href="https://www.linkedin.com/company/zulamed">
@@ -449,9 +448,8 @@
 			<img src="/img/logo-green-theme.png" alt="" />
 		</a>
 		<p>
-			At vero eos et accusamus et iusto odio dignissimos ducimus qui bland itiis praesentium
-			voluptatum <br />
-			deleniti atque corrupti quos
+			Medical platform offering an extensive library of surgical procedures and instructional videos
+			tailored for professionals
 		</p>
 		<!-- ====social media==== -->
 		<a target="_blank" class="about-link" href="https://www.linkedin.com/company/zulamed">

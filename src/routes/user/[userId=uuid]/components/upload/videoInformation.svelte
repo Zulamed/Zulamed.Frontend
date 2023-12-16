@@ -19,8 +19,7 @@
 		description = textarea.value;
 	}
 	export let uploadProgress: number | string = 0;
-    export let videoId: string;
-
+	export let videoId: string;
 </script>
 
 <div class="row">
@@ -108,7 +107,7 @@
 		</div>
 	</form>
 
-	<PreviewPlayer {description} {inputValue} {uploadProgress} {videoId}/>
+	<PreviewPlayer {description} {inputValue} {uploadProgress} {videoId} />
 </div>
 
 <style>
@@ -220,7 +219,7 @@
 		display: flex;
 		flex-direction: row;
 		width: 100%;
-		height: 500px;
+		height: 560px;
 		overflow-y: scroll;
 		scrollbar-color: #00baa2 #eaeae6;
 		scrollbar-width: thin;
@@ -309,5 +308,11 @@
 		font-size: 14px;
 		font-style: normal;
 		font-weight: 500;
+	}
+
+	@media (max-width: 1280px) {
+		.row {
+			height: 500px;
+		}
 	}
 </style>

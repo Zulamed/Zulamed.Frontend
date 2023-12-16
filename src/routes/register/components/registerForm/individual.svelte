@@ -3,6 +3,7 @@
 	import { individualData } from '../../schemas/individual';
 	import InputPassword from './inputPassword.svelte';
 	import Input from './input.svelte';
+	import { profActivities, specialties, stagesInCareer } from '$lib/utils/validateStuff';
 
 	export let step: number;
 	let eyeIcon = 'img/icons/View.svg';
@@ -174,6 +175,8 @@
 		<div class="radio-content">
 			<div class="field input-field">
 				<Combobox
+                    data={stagesInCareer.map((stage) => ({ title: stage }))}
+                    customOption={false}
 					obligatoryField={true}
 					labelText="Stage in career:"
 					inputPlaceholder="Select a stage in career"
@@ -184,6 +187,8 @@
 			<div class="field input-field">
 				<Combobox
 					obligatoryField={true}
+                    customOption={false}
+                    data={profActivities.map((activity) => ({ title: activity }))}
 					labelText="Professional Activity:"
 					inputPlaceholder="Select a Profession"
 					bind:value={$individualData.profession}
@@ -192,6 +197,8 @@
 			</div>
 			<div class="field input-field">
 				<Combobox
+                    customOption={false}
+                    data={specialties.map((speciality) => ({ title: speciality }))}
 					labelText="Please specify"
 					inputPlaceholder="Select a speciality"
 					bind:value={$individualData.speciality}

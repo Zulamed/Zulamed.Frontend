@@ -18,17 +18,17 @@ async function verifyIdToken(token: string | undefined): Promise<DecodedIdToken 
 
 
 function protectRoutes(path: string, isAuthenticated: boolean): boolean {
-    if (path === '/protected' && !isAuthenticated) {
-        return false;
-    }
     // prevent logged in users from accessing login page
     if ((path === '/login' || path === '/register') && isAuthenticated) {
         return false;
     }
 
-    if (path.includes('/settings') && !isAuthenticated){
+    const unauthenticatedRoutes = ["/settings", "/subscriptions", "/history", "/yourVideos", "/liked-videos"]
+
+    if (unauthenticatedRoutes.includes(path) && !isAuthenticated) {
         return false;
     }
+
     return true;
 }
 

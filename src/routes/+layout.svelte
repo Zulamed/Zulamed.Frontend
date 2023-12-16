@@ -6,7 +6,7 @@
 	import { navigating } from '$app/stores';
 	import 'nprogress/nprogress.css';
 	import Drawer from '$lib/components/drawer/drawer.svelte';
-	import { beforeNavigate } from '$app/navigation';
+	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	import type { LayoutServerData } from './$types';
 	import { user } from '$lib/stores/auth';
 	import ErrorToast from '$lib/components/errorToast.svelte';
@@ -17,19 +17,24 @@
 	let searchbarSidebar =
 		$page.url.pathname == '/subscriptions' || $page.url.pathname == '/searchResult';
 	let searchbar = $page.url.pathname != '/login';
-	beforeNavigate((aboba) => {
-		if (aboba.to?.url.pathname == '/login') {
+	beforeNavigate((req) => {
+		if (req.to?.url.pathname == '/login') {
 			searchbar = false;
 		}
-		if (aboba.to?.url.pathname == '/subscriptions' || aboba.to?.url.pathname == '/searchResult') {
+		if (req.to?.url.pathname == '/subscriptions' || req.to?.url.pathname == '/searchResult') {
 			searchbarSidebar = true;
 		} else {
 			searchbarSidebar = false;
 		}
 
-		if (aboba.to?.url.pathname != '/searchResult') {
+		if (req.to?.url.pathname != '/searchResult') {
 			$searchQuery = '';
 		}
+	});
+
+	afterNavigate(() => {
+		$user = data.loggedInUser;
+		$subscriptions = data.subscriptions;
 	});
 
 	NProgress.configure({
@@ -42,8 +47,6 @@
 		} else NProgress.done();
 	}
 	export let data: LayoutServerData;
-	$user = data.loggedInUser;
-	$subscriptions = data.subscriptions;
 </script>
 
 <ErrorToast />

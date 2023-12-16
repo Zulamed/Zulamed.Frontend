@@ -1,0 +1,23 @@
+// i don't care about the quality of this code, will be used client side and server side
+
+
+
+export const stagesInCareer = ["Student", "In training", "Practicing", "Retired"];
+
+export const specialties = ["Cardio-Thoracic Surgery", "Emergency Medicine", "Intensive Care Medicine", "Internal Medicine", "Surgeon"];
+
+export const profActivities = ["Physician", "Nurse", "Allied Professional", "Other"];
+
+
+export function validateStages(stage: string) {
+    return stagesInCareer.includes(stage);
+}
+
+export function validateSpecialties(specialty: string) {
+    return specialties.includes(specialty);
+}
+
+export function validateProfActivities(profActivity: string) {
+    return profActivities.includes(profActivity);
+}
+

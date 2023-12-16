@@ -16,6 +16,7 @@
 	import { match } from 'ts-pattern';
 	import type { FullDataUnion } from '$backend/user/register';
 	import { login } from '$lib/stores/auth';
+	import { removeAllNotifications } from '$lib/components/notification.svelte';
 
 	type DataUnion =
 		| { type: 'individual'; data: IndividualData }
@@ -35,6 +36,12 @@
 	async function increaseStep() {
 		let formData = new FormData(formElement);
 		let data = { ...Object.fromEntries(formData), step: step };
+
+        if (step == 1){
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            data["birthday-date"] = new Date(data["birthday-date"])
+        }
 
 		let union: DataUnion | undefined = undefined;
 

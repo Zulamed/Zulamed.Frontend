@@ -3,6 +3,7 @@ import { PUBLIC_BACKEND_URL } from "$env/static/public"
 import { match } from "ts-pattern"
 import type { HospitalFullData } from "../../routes/register/schemas/hospital"
 import type { IndividualFullData } from "../../routes/register/schemas/individual"
+import { validateProfActivities, validateSpecialties, validateStages } from "$lib/utils/validateStuff"
 
 export type FullDataUnion =
     | { type: "individual", data: IndividualFullData }
@@ -11,6 +12,7 @@ export type FullDataUnion =
 
 export type Response =
     | { status: "success" }
+    | {status: "validationError", error: string}
     | { status: "error", error: string }
 
 function mapToRequest(dataUnion: FullDataUnion) {
@@ -52,6 +54,18 @@ export async function register(fetch: FetchCallbackType = originalFetch, data: F
             .with({ type: "individual" }, () => "personal")
             .with({ type: "hospital" }, () => "hospital")
             .exhaustive();
+
+        if (data.type == "individual" && (validateStages(data.data.stageInCareer))) {
+            return { status: "validationError", error: "Invalid stage in career" }
+        }
+
+        if (data.type == "individual" && (validateSpecialties(data.data.speciality))) {
+            return { status: "validationError", error: "Invalid speciality" }
+        }
+
+        if (data.type == "individual" && validateProfActivities(data.data.profession)) {
+            return { status: "validationError", error: "Invalid professional activity" }
+        }
 
 
         const response = await fetch(`${PUBLIC_BACKEND_URL}/user/${type}`, {

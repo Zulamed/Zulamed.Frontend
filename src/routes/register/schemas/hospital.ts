@@ -3,18 +3,18 @@ import { match } from "ts-pattern";
 import { z } from "zod";
 
 const HospitalFirstStep = z.object({
-    hospitalName: z.string().nonempty(),
-    firstName: z.string().nonempty(),
-    lastName: z.string().nonempty()
+    hospitalName: z.string().nonempty("Hospital name cannot be empty"),
+    firstName: z.string().nonempty("First name cannot be empty"),
+    lastName: z.string().nonempty("Last name cannot be empty")
 });
 
 
 type HospitalFirstStep = z.infer<typeof HospitalFirstStep>;
 
 const HospitalSecondStep = z.object({
-    email: z.string().email(),
-    confirmEmail: z.string().email(),
-    password: z.string().min(8),
+    email: z.string().email("Invalid email"),
+    confirmEmail: z.string().email("Invalid email"),
+    password: z.string().min(8, "Password must be at least 8 characters long"),
     confirmPassword: z.string().min(8)
 }).refine(data => data.email === data.confirmEmail, {
     message: "Emails must match",
@@ -28,11 +28,11 @@ type HospitalSecondStep = z.infer<typeof HospitalSecondStep>;
 
 
 const HospitalThirdStep = z.object({
-    address: z.string().nonempty(),
-    city: z.string().nonempty(),
-    country: z.string().nonempty(),
-    zipCode: z.string().nonempty(),
-    phoneNumber: z.string().nonempty(),
+    address: z.string().nonempty("Address cannot be empty"),
+    city: z.string().nonempty("City cannot be empty"),
+    country: z.string().nonempty("Country cannot be empty"),
+    zipCode: z.string().nonempty("Zip code cannot be empty"),
+    phoneNumber: z.number(),
 });
 
 
@@ -40,7 +40,7 @@ type HospitalThirdStep = z.infer<typeof HospitalThirdStep>;
 
 
 const HospitalFourthStep = z.object({
-    username: z.string().nonempty(),
+    username: z.string().nonempty("Username cannot be empty"),
 });
 
 type HospitalFourthStep = z.infer<typeof HospitalFourthStep>;
@@ -83,7 +83,7 @@ export const hospitalData = writable<HospitalFullData>({
     city: "",
     country: "",
     zipCode: "",
-    phoneNumber: "",
+    phoneNumber: 0,
     username: ""
 });
 

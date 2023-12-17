@@ -5,8 +5,14 @@
 	import type { PageData } from '../$types';
 	export let data: PageData;
 	let isEditing = false;
+	let inputValue = '';
+	let rowscount = 1;
 	function edit() {
-		isEditing = !isEditing;
+		isEditing = true;
+	}
+	function adjustRows() {
+		const lineCount = inputValue.split('\n').length;
+		rowscount = lineCount;
 	}
 </script>
 
@@ -35,16 +41,24 @@
 		<form action="" style="display: flex; flex-direction:column; align-items: end">
 			<div style="position: relative; width: 100%; ">
 				<textarea
-					rows="1"
+					bind:value={inputValue}
+					on:input={adjustRows}
 					placeholder="Write your description here"
 					class="description-input"
 					name="description-input"
+					rows={rowscount}
 				/>
 				<div class="description-input-unfocus" />
 				<div class="description-input-focus" />
 			</div>
 			<div class="write-description-buttons" style:display="flex">
-				<button type="button" class="description-btn cancel-btn">Cancel</button>
+				<button
+					on:click={() => {
+						isEditing = false;
+					}}
+					type="button"
+					class="description-btn cancel-btn">Cancel</button
+				>
 				<button type="submit" class="description-btn description">Save</button>
 			</div>
 		</form>
@@ -119,7 +133,7 @@
 		margin-top: 35px;
 		position: relative;
 		width: 100%;
-		height: 30px;
+		min-height: 30px;
 		resize: none;
 		outline: none;
 		border: none;

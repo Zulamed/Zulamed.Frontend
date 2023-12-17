@@ -835,7 +835,7 @@ a {
     }
 
     /* Отображаем выпадающий список при клике на кнопку на мобильных устройствах */
-    .language-container.active .language-list {
+    .language-container:active .language-list {
         display: block;
     }
 
@@ -965,7 +965,7 @@ a {
     }
 
     .nav-left .logo {
-        width: 130px;
+        width: 120px;
     }
 
     .dropdown-container {

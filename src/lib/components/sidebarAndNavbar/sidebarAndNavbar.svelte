@@ -138,37 +138,6 @@
 			<img src="/img/icons/Search_light.svg" alt="" />
 		</button>
 
-		<!-- <div
-			class="language-container"
-			id="language-container"
-			style:display={displayLanguageContainer}
-		>
-			<div style="padding-left: 8px; height: 40px" class="flex-div">
-				<h5>Choose your language</h5>
-				&nbsp;&nbsp;&nbsp;
-				svelte-ignore a11y-click-events-have-key-events
-				<img
-					id="lang-close-icon"
-					width="18px"
-					src="/img/icons/close_black_24dp.svg"
-					alt=""
-					on:click={closeLanguageContainer}
-				/>
-			</div>
-			<hr />
-			<a class="lang-link" href=".">
-				<p>English (UK)</p>
-			</a>
-			<a class="lang-link active" href=".">
-				<p>Azərbaycan</p>
-			</a>
-			<a class="lang-link" href=".">
-				<p>Deutsch</p>
-			</a>
-			<a class="lang-link" href=".">
-				<p>Russian</p>
-			</a>
-		</div> -->
 		<div class="language-container">
 			<div
 				class="language-button"

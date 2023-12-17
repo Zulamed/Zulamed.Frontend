@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { user } from "$lib/stores/auth";
-
+	import { user } from '$lib/stores/auth';
 </script>
 
 <div class="container">
@@ -21,7 +20,7 @@
 				<p>Your channel</p>
 				<div class="channel-main-info">
 					<a href="/user/{$user?.id}">
-						<img src={$user?.profilePictureUrl ?? "/img/icons/channel-logo.jpg"} alt="" />
+						<img src={$user?.profilePictureUrl ?? '/img/icons/channel-logo.jpg'} alt="" />
 					</a>
 					<p class="username">{$user?.login}</p>
 				</div>
@@ -35,7 +34,7 @@
 				<div>
 					<p>No membership</p>
 					<p>|</p>
-					<a href=".">Get ZulaMED Premium</a>
+					<a href="/membership">Get ZulaMED Premium</a>
 				</div>
 			</div>
 		</div>

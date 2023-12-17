@@ -35,7 +35,7 @@
 		width: 100%;
 		background: #018b7b;
 		display: grid;
-		margin-top: 0 !important;
+		margin-top: 74px;
 	}
 	.container-img {
 		width: 100%;
@@ -134,6 +134,9 @@
 		}
 		h2 {
 			font-size: 22px;
+		}
+		.container {
+			margin-top: 0px;
 		}
 	}
 	@media (max-width: 768px) {

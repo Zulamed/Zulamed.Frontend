@@ -294,7 +294,7 @@
 			<div style="width: 100%; text-align: center;">There is nothing here yet.</div>
 		{/if}
 	</div>
-	<div use:melt={$content('tab-4')} class="tab-content-container"><UserAbout {data} /></div>
+	<div use:melt={$content('tab-4')} class="tab-content-container"><UserAbout description={data.user.description} {data} /></div>
 </div>
 
 <style lang="css" src="./user.css"></style>

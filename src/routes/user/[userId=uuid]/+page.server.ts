@@ -6,6 +6,7 @@ import { getSubscriptions } from "$backend/user/getSubscriptions";
 import { hasSubscribedTo } from '$backend/user/hasSubscribed';
 import { subscribe } from '$backend/user/subscribe';
 import { unsubscribe } from '$backend/user/unsubscribe';
+import { updateUserDescription } from "$backend/user/updateUser";
 
 export const actions = ({
     followToggle: async ({ fetch, request, locals }) => {
@@ -27,6 +28,22 @@ export const actions = ({
         await unsubscribe(userId, fetch);
         return { isSubscribed: !isSubscribed };
     },
+    editDescription: async ({ fetch, request, locals, params}) => {
+        const userId = params.userId;
+        if (locals.user && (locals.user.id !== userId)) {
+            return;
+        }
+        const data = await request.formData();
+        const descriptionValue = data.get("description") as string;
+        const response = await updateUserDescription(userId, descriptionValue, fetch);
+        const description = match(response)
+            .with({ status: "ok" }, () => descriptionValue)
+            .with({ status: "not-found" }, () => { throw error(404, "User not found") })
+            .with({ status: "error" }, ({ message }) => { throw error(500, message) })
+            .exhaustive();
+
+        return { description };
+    }
 }) satisfies Actions;
 
 export const load = (async ({ fetch, params, locals }) => {

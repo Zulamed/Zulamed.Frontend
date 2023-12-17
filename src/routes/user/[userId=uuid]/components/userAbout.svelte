@@ -3,17 +3,27 @@
 	import { melt } from '@melt-ui/svelte';
 	import { user } from '$lib/stores/auth';
 	import type { PageData } from '../$types';
+	import { applyAction, enhance } from '$app/forms';
+	import { addNotification } from '$lib/components/notification.svelte';
 	export let data: PageData;
 	let isEditing = false;
 	let inputValue = '';
 	let rowscount = 1;
+    let editingEnabled = false;
+    export let description: string | null;
 	function edit() {
 		isEditing = true;
 	}
 	function adjustRows() {
+        if (inputValue.length > 0) {
+            editingEnabled = true;
+        } else {
+            editingEnabled = false;
+        }
 		const lineCount = inputValue.split('\n').length;
 		rowscount = lineCount;
 	}
+
 </script>
 
 <div class="header">
@@ -38,14 +48,33 @@
 </div>
 <div class="list-container">
 	{#if isEditing}
-		<form action="" style="display: flex; flex-direction:column; align-items: end">
+		<form
+			style="display: flex; flex-direction:column; align-items: end"
+			method="POST"
+			action="?/editDescription"
+			use:enhance={() => {
+				return async ({ result }) => {
+					if (result.type === 'success') {
+                        isEditing = false;
+                        description = inputValue;
+						addNotification({
+							data: {
+								title: 'Description updated successfully',
+							}
+						});
+					} else {
+						applyAction(result);
+					}
+				};
+			}}
+		>
 			<div style="position: relative; width: 100%; ">
 				<textarea
 					bind:value={inputValue}
 					on:input={adjustRows}
 					placeholder="Write your description here"
 					class="description-input"
-					name="description-input"
+					name="description"
 					rows={rowscount}
 				/>
 				<div class="description-input-unfocus" />
@@ -59,11 +88,11 @@
 					type="button"
 					class="description-btn cancel-btn">Cancel</button
 				>
-				<button type="submit" class="description-btn description">Save</button>
+				<button type="submit" disabled={!editingEnabled} class:active={editingEnabled} class="description-btn description">Save</button>
 			</div>
 		</form>
 	{:else}
-		<p class="no-description">No description yet.</p>
+		<p class="no-description">{description ?? "No description yet."}</p>
 	{/if}
 </div>
 
@@ -89,6 +118,12 @@
 		border-radius: 24px;
 		font-size: 14px;
 	}
+
+    .description-btn.active {
+		color: #FFFFFF;
+		cursor: pointer;
+		background: #54B9A2;
+    }
 	.description {
 		color: #616163;
 		border: 1px solid #616163;

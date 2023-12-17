@@ -23,13 +23,13 @@ function protectRoutes(path: string, isAuthenticated: boolean): boolean {
         return false;
     }
 
-    const unauthenticatedRoutes = ["/settings", "/subscriptions", "/history", "/yourVideos", "/liked-videos"]
-
-    if (unauthenticatedRoutes.includes(path) && !isAuthenticated) {
+    if (path === '/recovery/notVerified') {
         return false;
     }
 
-    return true;
+    const unauthenticatedRoutes = ["/settings", "/subscriptions", "/history", "/yourVideos", "/liked-videos"];
+
+    return !(unauthenticatedRoutes.includes(path) && !isAuthenticated);
 }
 
 
@@ -38,6 +38,9 @@ export const handle = (async ({ event, resolve }) => {
     const token = event.cookies.get('token');
     const path = event.url.pathname;
     const user = await verifyIdToken(token);
+    if (user && !user['email_verified'] && path !== '/recovery/notVerified') {
+        throw redirect(307, '/recovery/notVerified');
+    }
     if (user) {
         const userResponse = await getUser(user['UserId'], event.fetch);
         match(userResponse)

@@ -17,13 +17,13 @@ async function verifyIdToken(token: string | undefined): Promise<DecodedIdToken 
 
 
 
-function protectRoutes(path: string, isAuthenticated: boolean): boolean {
+function protectRoutes(path: string, isAuthenticated: boolean, isVerified: boolean): boolean {
     // prevent logged in users from accessing login page
     if ((path === '/login' || path === '/register') && isAuthenticated) {
         return false;
     }
 
-    if (path === '/recovery/notVerified') {
+    if (path === '/recovery/notVerified' && isVerified) {
         return false;
     }
 
@@ -53,7 +53,8 @@ export const handle = (async ({ event, resolve }) => {
         // if token is invalid, remove it from cookies
         event.cookies.set('token', '', { maxAge: -1, sameSite: true });
     }
-    if (!protectRoutes(path, !!user)) {  // fucking javascript lol
+    const isEmailVerified = user && user["email_verified"] ? true : false;
+    if (!protectRoutes(path, !!user, isEmailVerified)) {  // fucking javascript lol
         throw redirect(307, '/');
     }
 

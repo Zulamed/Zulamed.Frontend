@@ -2,12 +2,18 @@
 	import { auth } from '$lib/firebase/client';
 	import { sendEmailVerification } from 'firebase/auth';
 	import { logout } from '$lib/stores/auth';
+	import { goto } from '$app/navigation';
 
 	function sendVerificationEmail() {
 		if (auth.currentUser) {
 			sendEmailVerification(auth.currentUser, { url: 'http://localhost:5173' });
 		}
 	}
+
+    function logoutAndRedirect() {
+        logout();
+        goto("/login")
+    }
 </script>
 
 <div class="container">
@@ -18,7 +24,7 @@
 	<p>Please verify your email:</p>
 	<div class="btn-group">
 		<button class="verify-btn" on:click={sendVerificationEmail}>Send verification email</button>
-		<button class="logout-btn" on:click={logout}>Logout</button>
+		<button class="logout-btn" on:click={logoutAndRedirect}>Logout</button>
 	</div>
 </div>
 

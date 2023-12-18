@@ -10,7 +10,6 @@
 
 	let isMobileSearchBarOpen = false;
 	let displayProfileContainer = 'none';
-	let displayLanguageContainer = 'none';
 	let sidebarMobileLeft = '-100%';
 	let sidebarOpen = false;
 	let searchbarMobileTop = '0';
@@ -25,13 +24,6 @@
 		displayProfileContainer = displayProfileContainer === 'none' ? 'block' : 'none';
 	};
 
-	const toggleLanguageContainer = () => {
-		displayLanguageContainer = displayLanguageContainer === 'none' ? 'block' : 'none';
-	};
-
-	const closeLanguageContainer = () => {
-		displayLanguageContainer = 'none';
-	};
 	const closeProfileContainer = () => {
 		displayProfileContainer = 'none';
 	};
@@ -81,9 +73,21 @@
 	}
 
 	function bodyOnTouchMove() {
-		displayLanguageContainer = 'none';
 		displayProfileContainer = 'none';
+        langContainerActive = false;
 	}
+
+    let langContainerActive = false;
+    function hoverLangContainer() {
+        langContainerActive = true;
+    }
+    function unhoverLangContainer() {
+        langContainerActive = false;
+    }
+
+    function toggleLangContainer () {
+        langContainerActive = !langContainerActive;
+    }
 </script>
 
 <svelte:body on:click={bodyOnClick} on:touchmove={bodyOnTouchMove} />
@@ -120,7 +124,6 @@
 	{/if}
 
 	<div class="nav-right flex-div">
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
 
 		<button
 			form="search-mobile-form"
@@ -132,37 +135,8 @@
 			<img src="/img/icons/Search_light.svg" alt="" />
 		</button>
 
-		<!-- <div
-			class="language-container"
-			id="language-container"
-			style:display={displayLanguageContainer}
-		>
-			<div style="padding-left: 8px; height: 40px;" class="flex-div">
-				<h5>Choose your language</h5>
-				&nbsp;&nbsp;&nbsp;
-				<img
-					id="lang-close-icon"
-					width="18px"
-					src="/img/icons/close_black_24dp.svg"
-					alt=""
-					on:click={closeLanguageContainer}
-				/>
-			</div>
-			<hr />
-			<a class="lang-link" href=".">
-				<p>English (UK)</p>
-			</a>
-			<a class="lang-link active" href=".">
-				<p>Azərbaycan</p>
-			</a>
-			<a class="lang-link" href=".">
-				<p>Deutsch</p>
-			</a>
-			<a class="lang-link" href=".">
-				<p>Russian</p>
-			</a>
-		</div> -->
-		<div class="language-container">
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+		<div class="language-container" on:mouseenter={hoverLangContainer} on:mouseleave={unhoverLangContainer} on:click={toggleLangContainer}>
 			<div
 				class="language-button"
 				style="display: flex; align-items:center; justify-content:space-between"
@@ -170,11 +144,12 @@
 				<span>EN</span><img
 					class="arrow-down"
 					style="width: 15px; height: 15px;"
+                    class:rotate={langContainerActive}
 					src="/img/icons/down-arrow.png"
 					alt=""
 				/>
 			</div>
-			<div class="language-list">
+			<div class="language-list" class:active={langContainerActive}>
 				<button class="language-item selected-language">EN</button>
 				<button class="language-item">DE</button>
 			</div>

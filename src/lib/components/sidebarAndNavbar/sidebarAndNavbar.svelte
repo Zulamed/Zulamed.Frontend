@@ -70,6 +70,7 @@
 
 	function bodyOnTouchMove() {
 		displayProfileContainer = 'none';
+        langContainerActive = false;
 	}
 
     let langContainerActive = false;

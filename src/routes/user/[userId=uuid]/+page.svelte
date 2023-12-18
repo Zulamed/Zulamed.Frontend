@@ -23,6 +23,7 @@
 	import CreateVideo from './components/upload/createVideo.svelte';
 	import { onMount } from 'svelte';
 	import { subscriptions } from '$lib/stores/subscriptions';
+	import type { ChangeEventHandler } from 'svelte/elements';
 
 	let subActive = false;
 	let confirmationVisible = false;
@@ -76,6 +77,36 @@
 	export let data: PageData;
 
 	let followActive = data.userFollowed;
+
+	async function uploadAvatar(e: Event) {
+		const target = e.target as HTMLInputElement;
+		if (!target || !target.files || target.files.length === 0) {
+			return;
+		}
+
+		const file = target.files[0];
+		const formData = new FormData();
+		formData.append('Photo', file);
+
+
+		const response = await fetch(`${data.user.id}/uploadImage`, {
+			method: 'POST',
+			body: formData
+		});
+		if (response.ok) {
+			addNotification({
+				data: {
+					title: 'Avatar changed.'
+				}
+			});
+		} else {
+			addNotification({
+				data: {
+					title: 'Error occured while changing avatar.'
+				}
+			});
+		}
+	}
 </script>
 
 <svelte:head>
@@ -86,15 +117,14 @@
 		<Tooltip placement="bottom">
 			<div use:melt={trigger} slot="button" let:trigger class="channel-banner">
 				<img src="/img/main-background-mobile.png" alt="" />
-				<form method="POST" action="?/uploadPhoto">
+				<a href="">
 					<img
 						style="width: 70px; height: 70px"
 						class="camera-icon"
 						src="/img/icons/photo_camera_white_24dp.svg"
 						alt=""
 					/>
-					<input type="file" accept="image/*" />
-				</form>
+				</a>
 			</div>
 			<p slot="content">Edit channel banner</p>
 		</Tooltip>
@@ -106,22 +136,20 @@
 	<div class="flex-div channel-info">
 		{#if data.user.id === $user?.id}
 			<Tooltip placement="bottom">
-				<form
+				<button
 					use:melt={trigger}
 					slot="button"
 					let:trigger
 					style="position: relative; margin-right:32px"
-					method="post"
-					action="?/uploadPhoto"
 				>
 					<img
 						class="user-profile-picture"
 						src={data.user.profilePictureUrl ?? '/img/blank-profile-picture.png'}
 						alt=""
 					/>
+					<input type="file" accept="image/*" on:change={uploadAvatar} />
 					<img class="camera-icon" src="/img/icons/photo_camera_white_24dp.svg" alt="" />
-					<input type="file" accept="image/*" name="file" />
-				</form>
+				</button>
 				<p slot="content">Edit profile picture</p>
 			</Tooltip>
 		{:else}

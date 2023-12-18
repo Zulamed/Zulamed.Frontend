@@ -111,8 +111,8 @@
 					slot="button"
 					let:trigger
 					style="position: relative; margin-right:32px"
-                    method="post"
-                    action="?/uploadPhoto"
+					method="post"
+					action="?/uploadPhoto"
 				>
 					<img
 						class="user-profile-picture"

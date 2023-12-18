@@ -32,7 +32,7 @@ const HospitalThirdStep = z.object({
     city: z.string().nonempty("City cannot be empty"),
     country: z.string().nonempty("Country cannot be empty"),
     zipCode: z.string().nonempty("Zip code cannot be empty"),
-    phoneNumber: z.number(),
+    phoneNumber: z.string().nonempty("Phone number cannot be empty"),
 });
 
 
@@ -83,7 +83,7 @@ export const hospitalData = writable<HospitalFullData>({
     city: "",
     country: "",
     zipCode: "",
-    phoneNumber: 0,
+    phoneNumber: "+",
     username: ""
 });
 

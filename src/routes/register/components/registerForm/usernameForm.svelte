@@ -2,12 +2,21 @@
 	export let labelText: string | undefined;
 	export let inputPlaceholder = '';
 	export let inputId: string | undefined;
+	export let value: string | undefined;
+
 	let usernameError = false;
 </script>
 
 <label class="large-label" for={inputId}>{labelText}</label>
 <div class="group">
-	<input id={inputId} name={inputId} type="text" placeholder={inputPlaceholder} class="input" />
+	<input
+		bind:value
+		id={inputId}
+		name={inputId}
+		type="text"
+		placeholder={inputPlaceholder}
+		class="input"
+	/>
 	<p class="input-symbol">@</p>
 </div>
 {#if usernameError == true}

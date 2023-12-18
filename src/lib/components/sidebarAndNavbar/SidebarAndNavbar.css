@@ -77,12 +77,12 @@ nav {
 
 }
 
-.language-container:hover .arrow-down {
+.arrow-down.rotate {
     transform: rotate(-180deg);
 }
 
 /* Показываем список языков при наведении на кнопку */
-.language-container:hover .language-list {
+.language-list.active {
     display: block;
 }
 
@@ -836,9 +836,9 @@ a {
     }
 
     /* Отображаем выпадающий список при клике на кнопку на мобильных устройствах */
-    .language-container:active .language-list {
-        display: block;
-    }
+    /* .language-container:active .language-list { */
+    /*     display: block; */
+    /* } */
 
     /* Изменяем стили кнопки на мобильных устройствах */
     .language-button {

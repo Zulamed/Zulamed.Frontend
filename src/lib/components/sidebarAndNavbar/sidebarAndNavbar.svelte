@@ -11,20 +11,12 @@
 
 	let isMobileSearchBarOpen = false;
 	let displayProfileContainer = 'none';
-	let displayLanguageContainer = 'none';
 	let sidebarMobileLeft = '-100%';
 	let sidebarOpen = true;
 	let searchbarMobileTop = '0';
 	let navigationBoxShadow = '0px 0px 0px #00000040';
 	let overlayLeft = '-100%';
-	let shortcutPadding = '7px';
-	let overflowY = 'hidden';
 	let smotritelSabok = false;
-	let isLanguageListVisible = 'none';
-
-	const toggleLanguageList = () => {
-		isLanguageListVisible = isLanguageListVisible === 'none' ? 'block' : 'none';
-	};
 	$: subscriptionsSlice = !smotritelSabok && $user ? subscriptions.slice(0, 5) : subscriptions;
 
 	$: {
@@ -35,20 +27,12 @@
 		displayProfileContainer = displayProfileContainer === 'none' ? 'block' : 'none';
 	};
 
-	const toggleLanguageContainer = () => {
-		displayLanguageContainer = displayLanguageContainer === 'none' ? 'block' : 'none';
-	};
-	const closeLanguageContainer = () => {
-		displayLanguageContainer = 'none';
-	};
 	const closeProfileContainer = () => {
 		displayProfileContainer = 'none';
 	};
 
 	const toggleSidebar = () => {
 		sidebarOpen = !sidebarOpen;
-		if (sidebarOpen) shortcutPadding = '7px';
-		else shortcutPadding = '0';
 	};
 
 	const openMobileSidebar = () => {
@@ -85,9 +69,20 @@
 	}
 
 	function bodyOnTouchMove() {
-		displayLanguageContainer = 'none';
 		displayProfileContainer = 'none';
 	}
+
+    let langContainerActive = false;
+    function hoverLangContainer() {
+        langContainerActive = true;
+    }
+    function unhoverLangContainer() {
+        langContainerActive = false;
+    }
+
+    function toggleLangContainer () {
+        langContainerActive = !langContainerActive;
+    }
 </script>
 
 <svelte:body on:click={bodyOnClick} on:touchmove={bodyOnTouchMove} />
@@ -126,7 +121,6 @@
 		</div>
 	{/if}
 	<div class="nav-right flex-div">
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
 
 		<button
 			form="search-mobile-form"
@@ -138,7 +132,8 @@
 			<img src="/img/icons/Search_light.svg" alt="" />
 		</button>
 
-		<div class="language-container">
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+		<div class="language-container" on:mouseenter={hoverLangContainer} on:mouseleave={unhoverLangContainer} on:click={toggleLangContainer}>
 			<div
 				class="language-button"
 				style="display: flex; align-items:center; justify-content:space-between"
@@ -146,11 +141,12 @@
 				<span>EN</span><img
 					class="arrow-down"
 					style="width: 15px; height: 15px;"
+                    class:rotate={langContainerActive}
 					src="/img/icons/down-arrow.png"
 					alt=""
 				/>
 			</div>
-			<div class="language-list">
+			<div class="language-list" class:active={langContainerActive}>
 				<button class="language-item selected-language">EN</button>
 				<button class="language-item">DE</button>
 			</div>

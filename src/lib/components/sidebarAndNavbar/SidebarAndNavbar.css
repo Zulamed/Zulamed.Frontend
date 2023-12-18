@@ -476,8 +476,11 @@ a {
 
 .subsciption-logo {
     width: 45px !important;
+    height: 45px !important;
     margin-right: 14px !important;
     border-radius: 50%;
+    object-fit: cover;
+
 }
 
 .sidebar hr {
@@ -495,6 +498,7 @@ a {
 
 .small-sidebar .subsciption-logo {
     width: 30px !important;
+    height: 30px !important;
     margin-right: 0 !important;
 }
 
@@ -627,6 +631,7 @@ a {
 
 .subsciption-logo {
     width: 45px !important;
+    height: 45px !important;
     margin-right: 14px !important;
     border-radius: 50%;
 }
@@ -641,6 +646,7 @@ a {
 
 .small-sidebar .subsciption-logo {
     width: 30px !important;
+    height: 30px !important;
 }
 
 .show-more {

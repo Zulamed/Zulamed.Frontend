@@ -488,6 +488,8 @@ nav {
 
 .subsciption-logo {
 	width: 45px !important;
+	height: 45px !important;
+	object-fit: cover;
 	margin-right: 14px !important;
 	border-radius: 50%;
 }
@@ -628,6 +630,7 @@ nav {
 
 .subsciption-logo {
 	width: 45px !important;
+	height: 45px !important;
 	margin-right: 14px !important;
 	border-radius: 50%;
 }
@@ -650,6 +653,7 @@ nav {
 
 .small-sidebar .subsciption-logo {
 	width: 30px !important;
+	height: 30px !important;
 }
 
 .show-more {

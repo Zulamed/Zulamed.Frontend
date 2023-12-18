@@ -3,7 +3,7 @@
 	export let inputPlaceholder: string | undefined;
 	export let inputId: string | undefined;
 
-	let eyeIcon = 'img/icons/View.svg';
+	let eyeIcon = '/img/icons/View.svg';
 	let inputPassword: HTMLInputElement;
 	export let password = '';
 	let errorLogin = false;
@@ -11,7 +11,7 @@
 
 <label for={inputId}>{labelText}</label>
 <div class="group newpass-group">
-	<img class="lock-icon" src="img/icons/Group 8.svg" alt="" />
+	<img class="lock-icon" src="/img/icons/Group 8.svg" alt="" />
 	<input
 		bind:this={inputPassword}
 		id={inputId}
@@ -26,11 +26,11 @@
 		type="button"
 		class="showpass-btn"
 		on:click={() => {
-			if (eyeIcon == 'img/icons/View.svg') {
-				eyeIcon = 'img/icons/View_hide.svg';
+			if (eyeIcon == '/img/icons/View.svg') {
+				eyeIcon = '/img/icons/View_hide.svg';
 				inputPassword.type = 'text';
 			} else {
-				eyeIcon = 'img/icons/View.svg';
+				eyeIcon = '/img/icons/View.svg';
 				inputPassword.type = 'password';
 			}
 		}}

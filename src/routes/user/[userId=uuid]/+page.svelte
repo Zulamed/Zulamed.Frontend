@@ -86,14 +86,15 @@
 		<Tooltip placement="bottom">
 			<div use:melt={trigger} slot="button" let:trigger class="channel-banner">
 				<img src="/img/main-background-mobile.png" alt="" />
-				<a href="">
+				<form method="POST" action="?/uploadPhoto">
 					<img
 						style="width: 70px; height: 70px"
 						class="camera-icon"
 						src="/img/icons/photo_camera_white_24dp.svg"
 						alt=""
 					/>
-				</a>
+					<input type="file" accept="image/*" />
+				</form>
 			</div>
 			<p slot="content">Edit channel banner</p>
 		</Tooltip>
@@ -105,12 +106,13 @@
 	<div class="flex-div channel-info">
 		{#if data.user.id === $user?.id}
 			<Tooltip placement="bottom">
-				<a
+				<form
 					use:melt={trigger}
 					slot="button"
 					let:trigger
-					href="."
 					style="position: relative; margin-right:32px"
+                    method="post"
+                    action="?/uploadPhoto"
 				>
 					<img
 						class="user-profile-picture"
@@ -118,7 +120,8 @@
 						alt=""
 					/>
 					<img class="camera-icon" src="/img/icons/photo_camera_white_24dp.svg" alt="" />
-				</a>
+					<input type="file" accept="image/*" name="file" />
+				</form>
 				<p slot="content">Edit profile picture</p>
 			</Tooltip>
 		{:else}
@@ -294,7 +297,9 @@
 			<div style="width: 100%; text-align: center;">There is nothing here yet.</div>
 		{/if}
 	</div>
-	<div use:melt={$content('tab-4')} class="tab-content-container"><UserAbout description={data.user.description} {data} /></div>
+	<div use:melt={$content('tab-4')} class="tab-content-container">
+		<UserAbout description={data.user.description} {data} />
+	</div>
 </div>
 
 <style lang="css" src="./user.css"></style>

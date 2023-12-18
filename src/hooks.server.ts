@@ -22,7 +22,7 @@ function protectRoutes(path: string, isAuthenticated: boolean, isVerified: boole
     if ((path === '/login' || path === '/register') && isAuthenticated) {
         return false;
     }
-    if (path === '/recovery/notVerified' && isVerified) {
+    if (path === '/recovery/notVerified' && (isVerified || !isAuthenticated)) {
         return false;
     }
     const unauthenticatedRoutes = ["/settings", "/subscriptions", "/history", "/yourVideos", "/liked-videos"];

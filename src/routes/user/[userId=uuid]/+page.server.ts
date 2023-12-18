@@ -7,6 +7,7 @@ import { hasSubscribedTo } from '$backend/user/hasSubscribed';
 import { subscribe } from '$backend/user/subscribe';
 import { unsubscribe } from '$backend/user/unsubscribe';
 import { updateUserDescription } from "$backend/user/updateUser";
+import { uploadPhoto } from "$backend/user/uploadPhoto";
 
 export const actions = ({
     followToggle: async ({ fetch, request, locals }) => {
@@ -43,6 +44,16 @@ export const actions = ({
             .exhaustive();
 
         return { description };
+    },
+    uploadPhoto: async ({ fetch, request, locals, params}) => {
+        const userId = params.userId;
+        if (locals.user && (locals.user.id !== userId)) {
+            return;
+        }
+        console.log("i was here!")
+        const data = await request.formData();
+        const file = data.get("file") as File;
+        return await uploadPhoto(userId, file, fetch);
     }
 }) satisfies Actions;
 

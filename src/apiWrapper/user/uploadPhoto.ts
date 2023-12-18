@@ -9,7 +9,7 @@ export type Response =
 
 export async function uploadPhoto(userId: string, file: File, fetch: FetchCallbackType): Promise<Response> {
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append("Photo", file);
     const response = await fetch(`${PUBLIC_BACKEND_URL}/user/${userId}/photo`, {
         method: "POST",
         body: formData

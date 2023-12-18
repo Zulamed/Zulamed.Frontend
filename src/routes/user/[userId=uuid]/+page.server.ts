@@ -44,16 +44,6 @@ export const actions = ({
             .exhaustive();
 
         return { description };
-    },
-    uploadPhoto: async ({ fetch, request, locals, params}) => {
-        const userId = params.userId;
-        if (locals.user && (locals.user.id !== userId)) {
-            return;
-        }
-        console.log("i was here!")
-        const data = await request.formData();
-        const file = data.get("file") as File;
-        return await uploadPhoto(userId, file, fetch);
     }
 }) satisfies Actions;
 

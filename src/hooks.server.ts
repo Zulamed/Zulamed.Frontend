@@ -23,9 +23,9 @@ function protectRoutes(path: string, isAuthenticated: boolean): boolean {
         return false;
     }
 
-    if (path === '/recovery/notVerified') {
-        return false;
-    }
+    // if (path === '/recovery/notVerified') {
+    //     return false;
+    // }
 
     const unauthenticatedRoutes = ["/settings", "/subscriptions", "/history", "/yourVideos", "/liked-videos"];
 

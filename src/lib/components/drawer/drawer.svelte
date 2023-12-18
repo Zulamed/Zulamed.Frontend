@@ -175,8 +175,8 @@
 				/>
 			</div>
 			<div class="language-list">
-				<div class="language-item selected-language">EN</div>
-				<div class="language-item">DE</div>
+				<button class="language-item selected-language">EN</button>
+				<button class="language-item">DE</button>
 			</div>
 		</div>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->

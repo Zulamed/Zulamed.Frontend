@@ -5,9 +5,6 @@
 	import { subscriptions as subs } from '$lib/stores/subscriptions';
 
 	export let subscriptions: Subscription[];
-
-	console.log($user?.id);
-	console.log(subscriptions);
 </script>
 
 <h1 class="list-header">Subscriptions</h1>

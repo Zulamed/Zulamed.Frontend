@@ -3,6 +3,17 @@
 	align-items: center;
 }
 
+a .avatar-upload {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	opacity: 0;
+	cursor: pointer;
+}
+
 .container {
 	padding-left: 16.77%;
 }

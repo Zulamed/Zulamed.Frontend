@@ -88,7 +88,6 @@
 		const formData = new FormData();
 		formData.append('Photo', file);
 
-
 		const response = await fetch(`${data.user.id}/uploadImage`, {
 			method: 'POST',
 			body: formData
@@ -136,7 +135,7 @@
 	<div class="flex-div channel-info">
 		{#if data.user.id === $user?.id}
 			<Tooltip placement="bottom">
-				<button
+				<a
 					use:melt={trigger}
 					slot="button"
 					let:trigger
@@ -147,9 +146,9 @@
 						src={data.user.profilePictureUrl ?? '/img/blank-profile-picture.png'}
 						alt=""
 					/>
-					<input type="file" accept="image/*" on:change={uploadAvatar} />
 					<img class="camera-icon" src="/img/icons/photo_camera_white_24dp.svg" alt="" />
-				</button>
+					<input class="avatar-upload" type="file" accept="image/*" on:change={uploadAvatar} />
+				</a>
 				<p slot="content">Edit profile picture</p>
 			</Tooltip>
 		{:else}

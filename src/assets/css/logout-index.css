@@ -734,8 +734,10 @@ input::-moz-focus-inner {
 
 .vid-list .flex-div img {
     width: 48px;
+    height: 48px;
     margin-right: 14px;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .live-list {

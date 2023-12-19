@@ -149,8 +149,10 @@
 
 	.vid-list .flex-div img {
 		width: 48px;
+		height: 48px;
 		margin-right: 14px;
 		border-radius: 50%;
+		object-fit: cover;
 	}
 
 	@media (max-width: 1238px) {

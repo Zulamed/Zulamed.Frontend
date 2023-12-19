@@ -217,6 +217,7 @@
 		width: 48px;
 		margin-right: 14px;
 		border-radius: 50%;
+		object-fit: cover;
 	}
 	@media (max-width: 1440px) {
 		.container {

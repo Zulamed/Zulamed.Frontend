@@ -146,6 +146,7 @@ input::-moz-focus-inner {
 	height: 48px;
 	margin-right: 14px;
 	border-radius: 50%;
+	object-fit: cover;
 }
 
 .live-list {

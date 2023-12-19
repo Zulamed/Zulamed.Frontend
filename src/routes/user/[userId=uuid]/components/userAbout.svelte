@@ -9,21 +9,34 @@
 	let isEditing = false;
 	let inputValue = '';
 	let rowscount = 1;
-    let editingEnabled = false;
-    export let description: string | null;
+	let editingEnabled = false;
+	let charCount = 0;
+	let maxCharacters = 300;
+	let maxCharactersColor = false;
+
+	function handleInput(event: any) {
+		inputValue = event.target.value.slice(0, maxCharacters);
+		charCount = inputValue.length;
+		if (charCount == maxCharacters) {
+			maxCharactersColor = true;
+		} else {
+			maxCharactersColor = false;
+		}
+	}
+
+	export let description: string | null;
 	function edit() {
 		isEditing = true;
 	}
 	function adjustRows() {
-        if (inputValue.length > 0) {
-            editingEnabled = true;
-        } else {
-            editingEnabled = false;
-        }
+		if (inputValue.length > 0) {
+			editingEnabled = true;
+		} else {
+			editingEnabled = false;
+		}
 		const lineCount = inputValue.split('\n').length;
 		rowscount = lineCount;
 	}
-
 </script>
 
 <div class="header">
@@ -55,11 +68,11 @@
 			use:enhance={() => {
 				return async ({ result }) => {
 					if (result.type === 'success') {
-                        isEditing = false;
-                        description = inputValue;
+						isEditing = false;
+						description = inputValue;
 						addNotification({
 							data: {
-								title: 'Description updated successfully',
+								title: 'Description updated successfully'
 							}
 						});
 					} else {
@@ -71,12 +84,16 @@
 			<div style="position: relative; width: 100%; ">
 				<textarea
 					bind:value={inputValue}
-					on:input={adjustRows}
+					on:input={() => {
+						handleInput(event);
+						adjustRows();
+					}}
 					placeholder="Write your description here"
 					class="description-input"
 					name="description"
 					rows={rowscount}
 				/>
+				<span class:maxLengthColor={maxCharactersColor} class="max-length">{charCount}/300</span>
 				<div class="description-input-unfocus" />
 				<div class="description-input-focus" />
 			</div>
@@ -88,15 +105,34 @@
 					type="button"
 					class="description-btn cancel-btn">Cancel</button
 				>
-				<button type="submit" disabled={!editingEnabled} class:active={editingEnabled} class="description-btn description">Save</button>
+				<button
+					type="submit"
+					disabled={!editingEnabled}
+					class:active={editingEnabled}
+					class="description-btn description">Save</button
+				>
 			</div>
 		</form>
 	{:else}
-		<p class="no-description">{description ?? "No description yet."}</p>
+		<p class="description-text">{description ?? 'No description yet.'}</p>
 	{/if}
 </div>
 
 <style>
+	.max-length {
+		user-select: none;
+		position: absolute;
+		right: 24px;
+		bottom: 13px;
+		color: #a1a1a1;
+		font-size: 14px;
+		font-style: normal;
+		font-weight: 500;
+	}
+	.max-length.maxLengthColor {
+		color: #ff0000;
+	}
+
 	.write-description-buttons {
 		display: flex;
 		justify-content: end;
@@ -119,11 +155,12 @@
 		font-size: 14px;
 	}
 
-    .description-btn.active {
-		color: #FFFFFF;
+	.description-btn.active {
+		color: #ffffff;
 		cursor: pointer;
-		background: #54B9A2;
-    }
+		background: #54b9a2;
+		border: 1px solid #54b9a2;
+	}
 	.description {
 		color: #616163;
 		border: 1px solid #616163;
@@ -178,6 +215,8 @@
 		-webkit-box-shadow: none;
 		-moz-box-shadow: none;
 		box-shadow: none;
+		padding-right: 90px;
+		overflow-y: hidden;
 	}
 	form {
 		display: flex;
@@ -201,13 +240,16 @@
 	.header .edit-btn:hover {
 		background-color: rgb(221, 221, 221);
 	}
-	.no-description {
+	.description-text {
 		margin-top: 35px;
 		color: #000;
 		font-size: 20px;
 		font-style: normal;
 		font-weight: 400;
 		line-height: normal;
+		white-space: pre-wrap;
+		word-break: break-all;
+		padding-right: 90px;
 	}
 	.list-header {
 		padding-left: 62px;

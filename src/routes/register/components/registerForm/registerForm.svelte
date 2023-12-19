@@ -16,6 +16,7 @@
 	import { match } from 'ts-pattern';
 	import type { FullDataUnion } from '$backend/user/register';
 	import { login } from '$lib/stores/auth';
+	import { page } from '$app/stores';
 
 	type DataUnion =
 		| { type: 'individual'; data: IndividualData }
@@ -146,6 +147,8 @@
 		} else {
 			prevStep = true;
 		}
+
+        console.log($page.data.countriesAndCities);
 	}
 </script>
 
@@ -262,7 +265,7 @@
 
 	{#if step >= 1 && radioValue}
 		{#if radioValue == 'individual'}
-			<Individual {step} />
+			<Individual {step} citiesAndCountries={$page.data.countriesAndCities}/>
 		{/if}
 		{#if radioValue == 'hospital'}
 			<Hospital {step} />

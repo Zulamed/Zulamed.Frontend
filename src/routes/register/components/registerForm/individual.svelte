@@ -4,16 +4,10 @@
 	import InputPassword from './inputPassword.svelte';
 	import Input from './input.svelte';
 	import { profActivities, specialties, stagesInCareer } from '$lib/utils/validateStuff';
+	import type { Country } from '$lib/types';
+	import { onMount } from 'svelte';
 
 	export let step: number;
-	let eyeIcon = 'img/icons/View.svg';
-	let eyeIconRepeat = 'img/icons/View.svg';
-	let inputPassword: HTMLInputElement;
-	let repeatPassword: HTMLInputElement;
-	let email = '';
-	let password = '';
-	let passwordrepeat = '';
-	let errorLogin = false;
 	let username = '@';
 	$: {
 		$individualData.username = username;
@@ -34,6 +28,14 @@
 			input.value = '@';
 		}
 	}
+
+    export let citiesAndCountries: Country[] = [];
+    let cities: Country["cities"] = [];
+
+    $: {
+        cities = citiesAndCountries.find((country) => country.name === $individualData.country)?.cities ?? [];
+    }
+
 </script>
 
 {#if step == 1}
@@ -216,7 +218,7 @@
 				<Input
 					labelText="My Place(s) of work"
 					inputPlaceholder="Write your place of work"
-					inputId="firstName"
+					inputId="placeOfWork"
 					bind:value={$individualData.placeOfWork}
 				/>
 			</div>
@@ -228,18 +230,22 @@
 			<div class="field input-field country">
 				<Combobox
 					labelText="Country:"
+                    customOption={false}
 					inputPlaceholder="Select a country"
 					bind:value={$individualData.country}
 					name="country"
+                    data={citiesAndCountries.map((country) => ({ title: country.name }))}
 				/>
 				<!-- <p class="error-message">Error message</p> -->
 			</div>
 			<div class="field input-field city">
 				<Combobox
 					labelText="City:"
+                    customOption={false}
 					inputPlaceholder="Select a city"
 					bind:value={$individualData.city}
 					name="city"
+                    data={cities.map((city) => ({ title: city.name }))}
 				/>
 			</div>
 			<div class="field input-field institute">

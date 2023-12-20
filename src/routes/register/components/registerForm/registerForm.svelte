@@ -147,8 +147,6 @@
 		} else {
 			prevStep = true;
 		}
-
-        console.log($page.data.countriesAndCities);
 	}
 </script>
 
@@ -265,7 +263,7 @@
 
 	{#if step >= 1 && radioValue}
 		{#if radioValue == 'individual'}
-			<Individual {step} citiesAndCountries={$page.data.countriesAndCities}/>
+			<Individual {step} citiesAndCountries={$page.data.countriesAndCities} />
 		{/if}
 		{#if radioValue == 'hospital'}
 			<Hospital {step} />

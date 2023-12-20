@@ -21,6 +21,12 @@ a {
     margin-bottom: 50px;
 }
 
+.vid-list:hover {
+    cursor: pointer;
+    background-color: #e9e9e9;
+    border-radius: 16px;
+}
+
 .preview {
     display: flex;
     width: 100%;
@@ -115,7 +121,6 @@ a {
 
     .vid-list .flex-div {
         align-items: flex-start;
-        margin-top: 23px;
     }
 
     .vid-info {

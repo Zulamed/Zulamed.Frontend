@@ -2,7 +2,7 @@
 	import { sidebarOpened } from '$lib/components/sidebarAndNavbar/stores/sidebarOpened';
 	import Tooltip from '$lib/components/tooltip.svelte';
 	import { user } from '$lib/stores/auth';
-    import {searchQuery} from '$lib/stores/search';
+	import { searchQuery } from '$lib/stores/search';
 	import { melt } from '@melt-ui/svelte';
 	import type { PageData } from './$types';
 	export let data: PageData;
@@ -29,7 +29,7 @@
 	<div class="list-container">
 		{#each data.videoResponse as response}
 			{@const title = response.video.videoTitle}
-			<div class="vid-list">
+			<a href="/video/{response.video.id}" class="vid-list">
 				<a class="preview" href="/video/{response.video.id}"
 					><img src={response.video.videoThumbnail} class="thumbnail" alt="" /></a
 				>
@@ -47,7 +47,7 @@
 						<p class="vid-views">{response.video.videoViews} views</p>
 					</div>
 				</div>
-			</div>
+			</a>
 		{/each}
 	</div>
 	<!-- <div class="livelist-container m-b-84px"> -->

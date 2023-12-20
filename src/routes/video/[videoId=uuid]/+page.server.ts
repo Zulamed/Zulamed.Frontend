@@ -1,6 +1,6 @@
 import type { PageServerLoad, Actions } from './$types';
 import { getVideoById } from '$backend/video/getById/endpoint';
-import { error as err } from '@sveltejs/kit';
+import { error as err, fail } from '@sveltejs/kit';
 import { match } from 'ts-pattern';
 import { likeVideo } from '$backend/video/like/like';
 import type { FetchCallbackType } from '$backend/fetchCallbackType';
@@ -51,7 +51,7 @@ export const load = (async ({ params, fetch, locals }) => {
 export const actions = {
     like: async ({ fetch, request, locals }) => {
         if (!locals.user)
-            return;
+            return fail(401, { message: "Unauthorized"});
         const data = await request.formData();
         const videoId = data.get("videoId") as string;
         const userLiked = await hasLiked(videoId, fetch);
@@ -63,7 +63,7 @@ export const actions = {
     },
     dislike: async ({ fetch, request, locals }) => {
         if (!locals.user)
-            return;
+            return fail(401, { message: "Unauthorized"});
         const data = await request.formData();
         const videoId = data.get("videoId") as string;
         const userLiked = await hasLiked(videoId, fetch);
@@ -75,7 +75,7 @@ export const actions = {
     },
     comment: async ({ fetch, request, locals }) => {
         if (!locals.user)
-            return;
+            return fail(401, { message: "Unauthorized"});
         const data = await request.formData();
         const videoId = data.get("videoId") as string;
         const comment = data.get("comment-input") as string;
@@ -83,7 +83,7 @@ export const actions = {
     },
     deleteComment: async ({ fetch, request, locals }) => {
         if (!locals.user)
-            return;
+            return fail(401, { message: "Unauthorized"});
         const data = await request.formData();
         const videoId = data.get("videoId") as string;
         const commentId = data.get("commentId") as string;
@@ -91,7 +91,7 @@ export const actions = {
     },
     followToggle: async ({ fetch, request, locals }) => {
         if (!locals.user) {
-            return;
+            return fail(401, { message: "Unauthorized"});
         }
         const data = await request.formData();
         const userId = data.get("userId") as string;
@@ -110,7 +110,7 @@ export const actions = {
     },
     editComment: async ({ fetch, request, locals }) => {
         if (!locals.user)
-            return;
+            return fail(401, { message: "Unauthorized"});
         const data = await request.formData();
         const videoId = data.get("videoId") as string;
         const commentId = data.get("commentId") as string;

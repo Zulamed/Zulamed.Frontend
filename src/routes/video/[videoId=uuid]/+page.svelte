@@ -124,6 +124,14 @@
 									}
 									data = data; // make svelte aware that the data has changed
 								} else {
+                                    console.log(result);
+                                    if (result.type == "failure" && result.status == 401){
+                                        addNotification({
+                                            data: {
+                                                title: "You must be logged in to subscribe to a channel."
+                                            }
+                                        });
+                                    }
 									applyAction(result);
 								}
 							};
@@ -170,6 +178,13 @@
 										else data.videoInfo.numberOfLikes--;
 										data = data; // make svelte aware that the data has changed
 									} else {
+                                        if (result.type == "failure" && result.status == 401){
+                                            addNotification({
+                                                data: {
+                                                    title: "You must be logged in to like a video."
+                                                }
+                                            });
+                                        }
 										applyAction(result);
 									}
 								};
@@ -208,6 +223,13 @@
 										dislikeActive = !dislikeActive;
 										likeActive = false;
 									} else {
+                                        if (result.type == "failure" && result.status == 401){
+                                            addNotification({
+                                                data: {
+                                                    title: "You must be logged in to dislike a video."
+                                                }
+                                            });
+                                        }
 										applyAction(result);
 									}
 								};

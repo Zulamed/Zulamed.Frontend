@@ -1,10 +1,45 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { applyAction, enhance } from '$app/forms';
 	import type { Subscription } from '$backend/user/getSubscriptions';
+	import { addNotification } from '$lib/components/notification.svelte';
 	import { user } from '$lib/stores/auth';
 	import { subscriptions as subs } from '$lib/stores/subscriptions';
+	import type { SubmitFunction } from '@sveltejs/kit';
 
 	export let subscriptions: Subscription[];
+
+	const enhanceFn = (({ formElement }) => {
+		return async ({ result }) => {
+			if (result.type === 'success') {
+				const userIdInput = formElement.querySelector('input[name="userId"]') as HTMLInputElement;
+				const userId = userIdInput.value;
+				const sub = subscriptions.find((s) => s.user.id == userId);
+				const data = result.data as { isSubscribed: boolean };
+				if (sub && data.isSubscribed) {
+                    sub.numberOfSubscribers += 1;
+                    subscriptions = subscriptions;
+					$subs.push(sub);
+					$subs = $subs;
+					addNotification({
+						data: {
+							title: `Subscribed to ${sub.user.login}`,
+						}
+					});
+				} else if (sub && !data.isSubscribed) {
+                    sub.numberOfSubscribers -= 1;
+                    subscriptions = subscriptions;
+					$subs = $subs.filter((s) => s.user.id != userId);
+                    addNotification({
+                        data: {
+                            title: `Unsubscribed from ${sub.user.login}`,
+                        }
+                    });
+				}
+			} else {
+				applyAction(result);
+			}
+		};
+	}) satisfies SubmitFunction;
 </script>
 
 <h1 class="list-header">Subscriptions</h1>
@@ -21,13 +56,14 @@
 			>
 			<a href="/user/{sub.user.id}"><p class="channel-username">{sub.user.login}</p></a>
 			<p class="channel-sub-counter">{sub.numberOfSubscribers} subscribers</p>
-			{#if $user}
-				{#if $page.data.user.id !== $user?.id && sub.user.id != $user?.id}
-					{@const subActive = $subs.some((s) => s.user.id == sub.user.id)}
+			{#if $user && $user.id != sub.user.id}
+				{@const subActive = $subs.some((s) => s.user.id == sub.user.id)}
+				<form method="post" action="?/followToggle" use:enhance={enhanceFn}>
+					<input type="hidden" name="userId" value={sub.user.id} />
 					<button class:active={subActive} class="channel-subscribe-btn">
 						{#if subActive}Subscribed{:else}Subscribe{/if}</button
 					>
-				{/if}
+				</form>
 			{/if}
 		</div>
 	{/each}

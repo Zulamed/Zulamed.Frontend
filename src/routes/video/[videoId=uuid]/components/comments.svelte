@@ -167,6 +167,13 @@
 								iNeedAutoComplete(result.data);
 							}
 						} else {
+							if (result.type == 'failure' && result.status == 401) {
+								addNotification({
+									data: {
+										title: 'You need to be logged in to comment.'
+									}
+								});
+							}
 							applyAction(result);
 						}
 						currentProps.disabled = false;

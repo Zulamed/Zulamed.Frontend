@@ -10,6 +10,8 @@ export const profActivities = ["Physician", "Nurse", "Allied Professional", "Oth
 
 
 export function validateStages(stage: string) {
+    console.log(stage)
+    console.log(stagesInCareer.includes(stage))
     return stagesInCareer.includes(stage);
 }
 

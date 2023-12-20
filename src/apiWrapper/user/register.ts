@@ -22,7 +22,7 @@ function mapToRequest(dataUnion: FullDataUnion) {
             return {
                 accountBirthDate: dataUnion.data["birthday-date"],
                 accountGender: dataUnion.data.gender == "Male" ? true : false,
-                accountCaeerStage: dataUnion.data.stageInCareer,
+                accountCareerStage: dataUnion.data.stageInCareer,
                 accountTitle: dataUnion.data.title,
                 accountProfessionalActivity: dataUnion.data.profession,
                 accountSpecialty: dataUnion.data.speciality,
@@ -55,15 +55,15 @@ export async function register(fetch: FetchCallbackType = originalFetch, data: F
             .with({ type: "hospital" }, () => "hospital")
             .exhaustive();
 
-        if (data.type == "individual" && (validateStages(data.data.stageInCareer))) {
+        if (!(data.type == "individual" && validateStages(data.data.stageInCareer))) {
             return { status: "validationError", error: "Invalid stage in career" }
         }
 
-        if (data.type == "individual" && (validateSpecialties(data.data.speciality))) {
+        if (!(data.type == "individual" && validateSpecialties(data.data.speciality))) {
             return { status: "validationError", error: "Invalid speciality" }
         }
 
-        if (data.type == "individual" && validateProfActivities(data.data.profession)) {
+        if (!(data.type == "individual" && validateProfActivities(data.data.profession))) {
             return { status: "validationError", error: "Invalid professional activity" }
         }
 

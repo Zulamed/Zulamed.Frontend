@@ -516,10 +516,10 @@
 	.list-container {
 		display: grid;
 		grid-column-gap: 20px;
-		padding: 0 183px;
+		padding: 0 120px;
 	}
 	.preview {
-		max-width: 452px;
+		max-width: 335px;
 		margin-right: 19px;
 	}
 	.vid-list {
@@ -590,15 +590,21 @@
 		font-style: normal;
 		font-weight: 600;
 		text-decoration: underline;
-		padding: 0 183px;
+		padding: 0 120px;
 	}
 	@media (max-width: 1670px) {
+		.preview {
+			max-width: 233px;
+		}
 		.list-header,
 		.list-container {
 			padding: 0 62px;
 		}
 	}
 	@media (max-width: 1440px) {
+		.preview {
+			max-width: 233px;
+		}
 		.container {
 			padding-left: 20%;
 		}
@@ -612,6 +618,15 @@
 			padding-left: 6%;
 		}
 	}
+	@media (max-width: 1291px) {
+		.preview {
+			max-width: 233px;
+		}
+		.list-header,
+		.list-container {
+			padding: 0 30px;
+		}
+	}
 	@media (max-width: 1238px) {
 		.container {
 			padding-left: 27%;
@@ -623,6 +638,16 @@
 		}
 		.vid-list {
 			flex-direction: column;
+			align-items: start;
+		}
+		.preview {
+			max-width: 350px;
+		}
+		.list-vid-info {
+			margin-top: 10px;
+		}
+		.vid-description {
+			margin-top: 4px;
 		}
 		.history-settings {
 			width: 351px;
@@ -634,6 +659,12 @@
 		}
 	}
 	@media (max-width: 900px) {
+		.container {
+			margin-top: 120px !important;
+		}
+		.preview {
+			max-width: 465px;
+		}
 		.settings-dropdown {
 			display: flex;
 			cursor: pointer;
@@ -686,7 +717,10 @@
 		.vid-list .flex-div {
 			justify-content: start;
 			align-items: start;
-			margin-top: 29px;
+			margin-top: 10px;
+		}
+		.list-vid-info {
+			margin-top: 0;
 		}
 		.channel-logo {
 			display: flex;

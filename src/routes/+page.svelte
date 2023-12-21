@@ -34,7 +34,11 @@
 					><img src={response.video.videoThumbnail} class="thumbnail" alt="" /></a
 				>
 				<div class="flex-div">
-					<img class="" src={response.user.profilePictureUrl ?? '/img/icons/user.png'} alt="" />
+					<img
+						src={response.user.profilePictureUrl ?? '/img/icons/user.png'}
+						class="channel-avatar"
+						alt=""
+					/>
 					<div class="vid-info">
 						<Tooltip placement="bottom">
 							<a use:melt={trigger} let:trigger slot="button" href="/video/{response.video.id}"

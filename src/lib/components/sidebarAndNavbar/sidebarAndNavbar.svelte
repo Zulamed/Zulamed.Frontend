@@ -70,20 +70,20 @@
 
 	function bodyOnTouchMove() {
 		displayProfileContainer = 'none';
-        langContainerActive = false;
+		langContainerActive = false;
 	}
 
-    let langContainerActive = false;
-    function hoverLangContainer() {
-        langContainerActive = true;
-    }
-    function unhoverLangContainer() {
-        langContainerActive = false;
-    }
+	let langContainerActive = false;
+	function hoverLangContainer() {
+		langContainerActive = true;
+	}
+	function unhoverLangContainer() {
+		langContainerActive = false;
+	}
 
-    function toggleLangContainer () {
-        langContainerActive = !langContainerActive;
-    }
+	function toggleLangContainer() {
+		langContainerActive = !langContainerActive;
+	}
 </script>
 
 <svelte:body on:click={bodyOnClick} on:touchmove={bodyOnTouchMove} />
@@ -122,7 +122,6 @@
 		</div>
 	{/if}
 	<div class="nav-right flex-div">
-
 		<button
 			form="search-mobile-form"
 			id="search-mobile"
@@ -133,8 +132,13 @@
 			<img src="/img/icons/Search_light.svg" alt="" />
 		</button>
 
-        <!-- svelte-ignore a11y-click-events-have-key-events -->
-		<div class="language-container" on:mouseenter={hoverLangContainer} on:mouseleave={unhoverLangContainer} on:click={toggleLangContainer}>
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<div
+			class="language-container"
+			on:mouseenter={hoverLangContainer}
+			on:mouseleave={unhoverLangContainer}
+			on:click={toggleLangContainer}
+		>
 			<div
 				class="language-button"
 				style="display: flex; align-items:center; justify-content:space-between"
@@ -142,7 +146,7 @@
 				<span>EN</span><img
 					class="arrow-down"
 					style="width: 15px; height: 15px;"
-                    class:rotate={langContainerActive}
+					class:rotate={langContainerActive}
 					src="/img/icons/down-arrow.png"
 					alt=""
 				/>
@@ -328,7 +332,7 @@
 		</a>
 		<!-- ====social media==== -->
 
-		<a class="about-link" href=".">
+		<a class="about-link" href="/about-zulamed">
 			About &nbsp;<span style="font-weight: 700">ZULA</span>MED
 		</a>
 	</div>
@@ -450,7 +454,7 @@
 			<span>Instagram</span>
 		</a>
 		<!-- ====social media==== -->
-		<a class="about-link" href=".">
+		<a class="about-link" href="/about-zulamed">
 			About &nbsp;<span style="font-weight: 700">ZULA</span>MED
 		</a>
 	</div>

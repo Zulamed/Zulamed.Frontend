@@ -8,6 +8,9 @@ export const specialties = ["Cardio-Thoracic Surgery", "Emergency Medicine", "In
 
 export const profActivities = ["Physician", "Nurse", "Allied Professional", "Other"];
 
+export const roles = ["Trainee (Intern/Extern/Fellow/Student/PhD candidate or other)", "Practitioner (Specialist Physician/Resercher/Nurse/Allied Professional/Staff member or other)", "Manager (Head of department/Section/Senior Researcher/Dean/Director or other)"];
+
+
 
 export function validateStages(stage: string) {
     console.log(stage)
@@ -21,5 +24,9 @@ export function validateSpecialties(specialty: string) {
 
 export function validateProfActivities(profActivity: string) {
     return profActivities.includes(profActivity);
+}
+
+export function validateRoles(roles: string) {
+    return profActivities.includes(roles);
 }
 

@@ -3,7 +3,7 @@
 	import { individualData } from '../../schemas/individual';
 	import InputPassword from './inputPassword.svelte';
 	import Input from './input.svelte';
-	import { profActivities, specialties, stagesInCareer } from '$lib/utils/validateStuff';
+	import { profActivities, roles, specialties, stagesInCareer } from '$lib/utils/validateStuff';
 	import type { Country } from '$lib/types';
 	import { onMount } from 'svelte';
 
@@ -29,56 +29,41 @@
 		}
 	}
 
-    export let citiesAndCountries: Country[] = [];
-    let cities: Country["cities"] = [];
+	export let citiesAndCountries: Country[] = [];
+	let cities: Country['cities'] = [];
 
-    $: {
-        cities = citiesAndCountries.find((country) => country.name === $individualData.country)?.cities ?? [];
-    }
-
+	$: {
+		cities =
+			citiesAndCountries.find((country) => country.name === $individualData.country)?.cities ?? [];
+	}
 </script>
 
 {#if step == 1}
 	<div class="input-container">
 		<div class="radio-content">
 			<div class="field input-field">
-				<label for="title">Title</label>
-				<div class="group">
-					<input
-						id="title"
-						name="title"
-						type="text"
-						placeholder="Your title"
-						class="input"
-						bind:value={$individualData.title}
-					/>
-				</div>
+				<Input
+					labelText="Title"
+					inputPlaceholder="Your title"
+					inputId="title"
+					bind:value={$individualData.title}
+				/>
 			</div>
 			<div class="field input-field">
-				<label for="name">First name(s)</label>
-				<div class="group">
-					<input
-						id="name"
-						name="name"
-						type="text"
-						placeholder="Your first name(s)"
-						class="input"
-						bind:value={$individualData.name}
-					/>
-				</div>
+				<Input
+					labelText="First name(s)"
+					inputPlaceholder="Your first name(s)"
+					inputId="name"
+					bind:value={$individualData.name}
+				/>
 			</div>
 			<div class="field input-field">
-				<label for="surname">Family name(s)</label>
-				<div class="group">
-					<input
-						id="surname"
-						name="surname"
-						type="text"
-						placeholder="Your family name(s)"
-						class="input"
-						bind:value={$individualData.surname}
-					/>
-				</div>
+				<Input
+					labelText="Family name(s)"
+					inputPlaceholder="Your family name(s)"
+					inputId="surname"
+					bind:value={$individualData.surname}
+				/>
 			</div>
 			<div class="inputs-group">
 				<div class="field g input-field">
@@ -94,21 +79,6 @@
 				<div class="field bd input-field">
 					<label for="birthday-date">Date of birth</label>
 					<div class="birthday-date">
-						<!-- <div class="date-group"> -->
-						<!-- 	<select class="date-select" name="birthday-date" id="birthday-date"> -->
-						<!-- 		<option value="1">1</option> -->
-						<!-- 	</select> -->
-						<!-- </div> -->
-						<!-- <div class="date-group"> -->
-						<!-- 	<select class="date-select" name="birthday-date"> -->
-						<!-- 		<option value="December">December</option> -->
-						<!-- 	</select> -->
-						<!-- </div> -->
-						<!-- <div class="date-group"> -->
-						<!-- 	<select class="date-select" name="birthday-date"> -->
-						<!-- 		<option value="1990">1990</option> -->
-						<!-- 	</select> -->
-						<!-- </div> -->
 						<div class="date-group">
 							<input
 								lang="en-EN"
@@ -129,30 +99,20 @@
 	<div class="input-container">
 		<div class="radio-content">
 			<div class="field input-field">
-				<label for="email">Email</label>
-				<div class="email-group">
-					<input
-						id="email"
-						name="email"
-						type="email"
-						placeholder="Email"
-						class="input"
-						bind:value={$individualData.email}
-					/>
-				</div>
+				<Input
+					labelText="Email"
+					inputPlaceholder="Email"
+					inputId="email"
+					bind:value={$individualData.email}
+				/>
 			</div>
 			<div class="field input-field">
-				<label for="repeat-email">Repeat email</label>
-				<div class="email-group">
-					<input
-						id="repeat-email"
-						name="confirmEmail"
-						type="email"
-						placeholder="Email"
-						class="input"
-						bind:value={$individualData.confirmEmail}
-					/>
-				</div>
+				<Input
+					labelText="Repeat email"
+					inputPlaceholder="Email"
+					inputId="confirmEmail"
+					bind:value={$individualData.confirmEmail}
+				/>
 			</div>
 			<div class="field input-field">
 				<InputPassword
@@ -209,12 +169,6 @@
 				/>
 			</div>
 			<div class="field input-field">
-				<!-- <Combobox
-					labelText="My Place(s) of work"
-					inputPlaceholder="Select your place(s) of work"
-					bind:value={$individualData.placeOfWork}
-					name="placeOfWork"
-				/> -->
 				<Input
 					labelText="My Place(s) of work"
 					inputPlaceholder="Write your place of work"
@@ -230,31 +184,31 @@
 			<div class="field input-field country">
 				<Combobox
 					labelText="Country:"
-                    customOption={false}
+					customOption={false}
 					inputPlaceholder="Select a country"
 					bind:value={$individualData.country}
 					name="country"
-                    data={citiesAndCountries.map((country) => ({ title: country.name }))}
+					data={citiesAndCountries.map((country) => ({ title: country.name }))}
 				/>
 				<!-- <p class="error-message">Error message</p> -->
 			</div>
 			<div class="field input-field city">
 				<Combobox
 					labelText="City:"
-                    customOption={false}
+					customOption={false}
 					inputPlaceholder="Select a city"
 					bind:value={$individualData.city}
 					name="city"
-                    data={cities.map((city) => ({ title: city.name }))}
+					data={cities.map((city) => ({ title: city.name }))}
 				/>
 			</div>
 			<div class="field input-field institute">
-				<Combobox
-					inputNote="Please select the name of your institute, if it does not exist, simply type a new institute name in English, using only latin characters without special characters or accents."
+				<Input
+					inputNote="Please type the name of your institute name in English, using only latin characters without special characters or accents."
 					labelText="Institute"
-					inputPlaceholder="Select an institute"
+					inputPlaceholder="Enter Institute name"
+					inputId="institution"
 					bind:value={$individualData.institution}
-					name="institution"
 				/>
 			</div>
 			<div class="field input-field department">
@@ -276,10 +230,12 @@
 			</div>
 			<div class="field input-field role">
 				<Combobox
+					data={roles.map((role) => ({ title: role }))}
 					labelText="Role"
 					inputPlaceholder="Select a role"
 					bind:value={$individualData.role}
 					name="role"
+					customOption={false}
 				/>
 			</div>
 		</div>

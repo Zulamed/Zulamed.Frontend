@@ -134,7 +134,7 @@
 		outline: none;
 		align-items: center;
 		justify-content: space-between;
-		padding: 0 15px;
+		padding: 0 45px 0 15px;
 		border: 0.5px solid #d2d0d0;
 		background-color: transparent;
 		font-size: 16px;
@@ -228,7 +228,7 @@
 		.input {
 			height: 50px;
 			font-size: 15px;
-			padding: 0 12px;
+			padding: 0 45px 0 12px;
 		}
 	}
 	@media (max-width: 1024px) {
@@ -241,7 +241,7 @@
 		.input {
 			height: 45px;
 			font-size: 13px;
-			padding: 0 6px;
+			padding: 0 45px 0 12px;
 		}
 	}
 	@media (max-width: 768px) {
@@ -249,7 +249,7 @@
 			font-size: 14px;
 		}
 		.input {
-			padding: 0 14px 0 14px;
+			padding: 0 50px 0 14px;
 			font-size: 15px;
 			height: 60px;
 		}

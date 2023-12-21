@@ -3,7 +3,7 @@ import { PUBLIC_BACKEND_URL } from "$env/static/public"
 import { match } from "ts-pattern"
 import type { HospitalFullData } from "../../routes/register/schemas/hospital"
 import type { IndividualFullData } from "../../routes/register/schemas/individual"
-import { validateProfActivities, validateSpecialties, validateStages } from "$lib/utils/validateStuff"
+import { validateProfActivities, validateRoles, validateSpecialties, validateStages } from "$lib/utils/validateStuff"
 
 export type FullDataUnion =
     | { type: "individual", data: IndividualFullData }
@@ -67,6 +67,9 @@ export async function register(fetch: FetchCallbackType = originalFetch, data: F
             return { status: "validationError", error: "Invalid professional activity" }
         }
 
+        if (!(data.type == 'individual' && validateRoles(data.data.role))){
+            return { status: "validationError", error: "Invalid role" }
+        }
 
         const response = await fetch(`${PUBLIC_BACKEND_URL}/user/${type}`, {
             method: "POST",

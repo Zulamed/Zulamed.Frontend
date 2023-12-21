@@ -32,20 +32,26 @@
 </h1>
 <div class="list-container">
 	{#each videos as video}
-		<a href="/video/{video.id}" class="vid-list">
-			<a class="preview" href="/video/{video.id}"
-				><img src={video.thumbnailUrl ?? '/img/videoPreviews/3.png'} class="thumbnail" alt="" /></a
-			>
-			<div class="flex-div">
-				<div class="list-vid-info">
-					<a href="/video/{video.id}">{video.title}</a>
-					<div style="display: flex; margin-top: 10px;">
-						<p class="vid-views">{video.views} views&nbsp;</p>
-						<p class="vid-views">·&nbsp;{getRelativeTime(video.createdAt)}</p>
+		<div class="vid-list">
+			<a href="/video/{video.id}">
+				<a class="preview" href="/video/{video.id}"
+					><img
+						src={video.thumbnailUrl ?? '/img/videoPreviews/3.png'}
+						class="thumbnail"
+						alt=""
+					/></a
+				>
+				<div class="flex-div">
+					<div class="list-vid-info">
+						<a href="/video/{video.id}">{video.title}</a>
+						<div style="display: flex; margin-top: 10px;">
+							<p class="vid-views">{video.views} views&nbsp;</p>
+							<p class="vid-views">·&nbsp;{getRelativeTime(video.createdAt)}</p>
+						</div>
 					</div>
 				</div>
-			</div>
-		</a>
+			</a>
+		</div>
 	{/each}
 </div>
 

@@ -79,6 +79,7 @@
 				switch (radioValue) {
 					case 'individual':
 						await login($individualData.email, $individualData.password);
+                        console.log($individualData.email, $individualData.password);
 						break;
 					case 'hospital':
 						await login($hospitalData.email, $hospitalData.password);

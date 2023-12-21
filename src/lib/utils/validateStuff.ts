@@ -13,8 +13,6 @@ export const roles = ["Trainee (Intern/Extern/Fellow/Student/PhD candidate or ot
 
 
 export function validateStages(stage: string) {
-    console.log(stage)
-    console.log(stagesInCareer.includes(stage))
     return stagesInCareer.includes(stage);
 }
 
@@ -26,7 +24,7 @@ export function validateProfActivities(profActivity: string) {
     return profActivities.includes(profActivity);
 }
 
-export function validateRoles(roles: string) {
-    return profActivities.includes(roles);
+export function validateRoles(role: string) {
+    return roles.includes(role);
 }
 

@@ -29,29 +29,31 @@
 	<div class="list-container">
 		{#each data.videoResponse as response}
 			{@const title = response.video.videoTitle}
-			<a href="/video/{response.video.id}" class="vid-list">
-				<a class="preview" href="/video/{response.video.id}"
-					><img src={response.video.videoThumbnail} class="thumbnail" alt="" /></a
-				>
-				<div class="flex-div">
-					<img
-						src={response.user.profilePictureUrl ?? '/img/icons/user.png'}
-						class="channel-avatar"
-						alt=""
-					/>
-					<div class="vid-info">
-						<Tooltip placement="bottom">
-							<a use:melt={trigger} let:trigger slot="button" href="/video/{response.video.id}"
-								>{title.length > 70 ? title.slice(0, 70) + '...' : title}</a
-							>
-							<p slot="content">{title}</p>
-						</Tooltip>
+			<div class="vid-list">
+				<a href="/video/{response.video.id}">
+					<a class="preview" href="/video/{response.video.id}">
+						<img src={response.video.videoThumbnail} class="thumbnail" alt="" />
+					</a>
+					<div class="flex-div">
+						<img
+							src={response.user.profilePictureUrl ?? '/img/icons/user.png'}
+							class="channel-avatar"
+							alt=""
+						/>
+						<div class="vid-info">
+							<Tooltip placement="bottom">
+								<a use:melt={trigger} let:trigger slot="button" href="/video/{response.video.id}"
+									>{title.length > 70 ? title.slice(0, 70) + '...' : title}</a
+								>
+								<p slot="content">{title}</p>
+							</Tooltip>
 
-						<a class="channel-name" href="/user/{response.user.id}">{response.user.username}</a>
-						<p class="vid-views">{response.video.videoViews} views</p>
+							<a class="channel-name" href="/user/{response.user.id}">{response.user.username}</a>
+							<p class="vid-views">{response.video.videoViews} views</p>
+						</div>
 					</div>
-				</div>
-			</a>
+				</a>
+			</div>
 		{/each}
 	</div>
 	<!-- <div class="livelist-container m-b-84px"> -->

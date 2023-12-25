@@ -386,35 +386,38 @@
 	<h1 class="list-header">Today</h1>
 	<div class="list-container">
 		{#each data.videoData.viewHistories as videoInfo}
-			<a href="/video/{videoInfo.viewedVideo.id}" class="vid-list">
-				<a class="preview" href="/video/{videoInfo.viewedVideo.id}"
-					><img
-						src={videoInfo.viewedVideo.videoThumbnail ?? '/img/videoPreviews/7.png'}
-						class="thumbnail"
-						alt=""
-					/></a
-				>
-				<div class="flex-div">
-					<img
-						class="channel-logo"
-						src={videoInfo.owner.profilePictureUrl ?? '/img/icons/channel-logo.jpg'}
-						alt=""
-					/>
-					<div class="list-vid-info">
-						<a class="video-title" href="/video/{videoInfo.viewedVideo.id}"
-							>{videoInfo.viewedVideo.videoTitle}</a
-						>
-						<div style="display: flex; margin-top: 12px;">
-							<a href="/user/{videoInfo.owner.id}" class="vid-channel">{videoInfo.owner.username}</a
-							><span class="betweenDot">·&nbsp;</span>
-							<p id="viewsText" class="vid-views">{videoInfo.viewedVideo.videoViews} views</p>
+			<div class="vid-list">
+				<a href="/video/{videoInfo.viewedVideo.id}">
+					<a class="preview" href="/video/{videoInfo.viewedVideo.id}"
+						><img
+							src={videoInfo.viewedVideo.videoThumbnail ?? '/img/videoPreviews/7.png'}
+							class="thumbnail"
+							alt=""
+						/></a
+					>
+					<div class="flex-div">
+						<img
+							class="channel-logo"
+							src={videoInfo.owner.profilePictureUrl ?? '/img/icons/channel-logo.jpg'}
+							alt=""
+						/>
+						<div class="list-vid-info">
+							<a class="video-title" href="/video/{videoInfo.viewedVideo.id}"
+								>{videoInfo.viewedVideo.videoTitle}</a
+							>
+							<div style="display: flex; margin-top: 12px;">
+								<a href="/user/{videoInfo.owner.id}" class="vid-channel"
+									>{videoInfo.owner.username}</a
+								><span class="betweenDot">·&nbsp;</span>
+								<p id="viewsText" class="vid-views">{videoInfo.viewedVideo.videoViews} views</p>
+							</div>
+							<p class="vid-description">
+								{videoInfo.viewedVideo.videoDescription ?? 'No description provided'}
+							</p>
 						</div>
-						<p class="vid-description">
-							{videoInfo.viewedVideo.videoDescription ?? 'No description provided'}
-						</p>
 					</div>
-				</div>
-			</a>
+				</a>
+			</div>
 		{/each}
 	</div>
 </div>
@@ -504,23 +507,18 @@
 		align-items: center;
 	}
 
-	.container {
-		padding-left: 16.77%;
-		padding-right: 430px;
-	}
-
-	.large-container {
-		padding-left: 4%;
-	}
-
 	.list-container {
 		display: grid;
 		grid-column-gap: 20px;
 		padding: 0 120px;
 	}
 	.preview {
-		max-width: 335px;
+		max-width: 430px;
 		margin-right: 19px;
+	}
+	.vid-list a {
+		text-decoration: none;
+		display: flex;
 	}
 	.vid-list {
 		display: flex;
@@ -594,7 +592,7 @@
 	}
 	@media (max-width: 1670px) {
 		.preview {
-			max-width: 233px;
+			max-width: 350px;
 		}
 		.list-header,
 		.list-container {
@@ -603,24 +601,19 @@
 	}
 	@media (max-width: 1440px) {
 		.preview {
-			max-width: 233px;
+			max-width: 350px;
 		}
-		.container {
-			padding-left: 20%;
-		}
+
 		.list-vid-info .video-title {
 			font-size: 20px;
 		}
 		.vid-description {
 			font-size: 12px;
 		}
-		.large-container {
-			padding-left: 6%;
-		}
 	}
 	@media (max-width: 1291px) {
 		.preview {
-			max-width: 233px;
+			max-width: 320px;
 		}
 		.list-header,
 		.list-container {
@@ -628,20 +621,12 @@
 		}
 	}
 	@media (max-width: 1238px) {
-		.container {
-			padding-left: 27%;
-			padding-right: 351px;
-		}
-
-		.large-container {
-			padding-left: 8%;
-		}
 		.vid-list {
 			flex-direction: column;
 			align-items: start;
 		}
 		.preview {
-			max-width: 350px;
+			max-width: 320px;
 		}
 		.list-vid-info {
 			margin-top: 10px;
@@ -658,9 +643,13 @@
 			padding: 0 30px;
 		}
 	}
-	@media (max-width: 900px) {
+	@media (max-width: 1024px) {
+		.vid-list a {
+			text-decoration: none;
+			display: block;
+		}
 		.container {
-			margin-top: 120px !important;
+			margin-top: 50px !important;
 		}
 		.preview {
 			max-width: 465px;

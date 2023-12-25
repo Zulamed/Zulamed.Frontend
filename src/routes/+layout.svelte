@@ -52,7 +52,7 @@
 <ErrorToast />
 <Notification />
 
-{#if $page.url.pathname == '/' || $page.url.pathname.includes('/user') || $page.url.pathname.includes('/subscriptions') || $page.url.pathname.includes('/history') || $page.url.pathname.includes('/liked-videos') || $page.url.pathname.includes('/searchResult') || $page.url.pathname.includes('/yourVideos') || $page.url.pathname.includes('/playlist')}
+{#if $page.url.pathname == '/' || $page.url.pathname.includes('/user') || $page.url.pathname.includes('/subscriptions') || $page.url.pathname.includes('/liked-videos') || $page.url.pathname.includes('/searchResult') || $page.url.pathname.includes('/yourVideos') || $page.url.pathname.includes('/playlist')}
 	<SidebarAndNavbar showSearchbar={searchbarSidebar} subscriptions={$subscriptions} />
 {:else}
 	<Drawer showSearchbar={searchbar} subscriptions={$subscriptions} />

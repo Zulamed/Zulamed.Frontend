@@ -46,5 +46,6 @@
 		color: #fff;
 		font-size: 12px;
 		border-radius: 5px;
+		z-index: 100;
 	}
 </style>

@@ -56,6 +56,9 @@
 </div>
 
 <style>
+	a {
+		text-decoration: none !important;
+	}
 	.last-video {
 		padding: 0 62px;
 	}

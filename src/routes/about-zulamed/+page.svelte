@@ -1,21 +1,4 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { slide } from 'svelte/transition';
-
-	let greetings = ['About', 'Über'];
-	let index = 0;
-	let roller: any;
-
-	onMount(() => {
-		roller = setInterval(() => {
-			if (index === greetings.length - 1) index = 0;
-			else index++;
-		}, 2000);
-	});
-
-	onDestroy(() => {
-		clearInterval(roller);
-	});
 </script>
 
 <svelte:head>
@@ -23,18 +6,16 @@
 </svelte:head>
 
 <div class="container">
-	<h1 class="animated-text-mobile" transition:slide>
+	<h1 class="animated-text-mobile">
+		About <span style="color: #42b398; letter-spacing: 3px">Zula</span><spans
+			style="color: #42b398; font-weight: 200; letter-spacing: 3px">MED</spans
+		>
+	</h1>
+	<h1 class="animated-text">
 		About <span style="color: #42b398; letter-spacing: 3px">Zula</span><span
 			style="color: #42b398; font-weight: 200; letter-spacing: 3px">MED</span
 		>
 	</h1>
-	{#key index}
-		<h1 class="animated-text" transition:slide>
-			{greetings[index]} <span style="color: #42b398; letter-spacing: 3px">Zula</span><span
-				style="color: #42b398; font-weight: 200; letter-spacing: 3px">MED</span
-			>
-		</h1>
-	{/key}
 	<p class="about-text">
 		ZulaMed represents a groundbreaking initiative in the realm of medical education and
 		collaboration. This platform serves as a nexus for healthcare professionals, offering

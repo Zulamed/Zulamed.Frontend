@@ -6,6 +6,8 @@
 	import { page } from '$app/stores';
 	import type { Subscription } from '$backend/user/getSubscriptions';
 	import { searchQuery } from '$lib/stores/search';
+	import Tooltip from '../tooltip.svelte';
+	import { melt } from '@melt-ui/svelte';
 	export let showSearchbar = false;
 	export let subscriptions: Subscription[];
 
@@ -267,6 +269,8 @@
 				<p class="sidebar-title" style:display={sidebarOpen ? 'flex' : 'none'}>SUBSCRIPTIONS</p>
 
 				{#each subscriptionsSlice as sub}
+					{@const subName = sub.user.login}
+
 					<a
 						class="shortcut-link"
 						href="/user/{sub.user.id}"
@@ -276,7 +280,12 @@
 							src={sub.user.profilePictureUrl ?? '/img/icons/profile.png'}
 							alt=""
 						/>
-						<p>{sub.user.login}</p>
+						<Tooltip placement="bottom">
+							<p use:melt={trigger} let:trigger slot="button">
+								{subName.length >= 16 ? subName.slice(0, 13) + '...' : subName}
+							</p>
+							<p slot="content">{subName}</p>
+						</Tooltip>
 					</a>
 				{/each}
 				{#if !smotritelSabok}

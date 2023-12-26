@@ -269,13 +269,14 @@
 			<p class="sidebar-title">SUBSCRIPTIONS</p>
 			{#if subscriptionsSlice.length !== 0}
 				{#each subscriptionsSlice as sub}
+                    {@const subName = sub.user.login}
 					<a class="shortcut-link" href="/user/{sub.user.id}"
 						><img
 							class="subsciption-logo"
 							src={sub.user.profilePictureUrl ?? '/img/icons/profile.png'}
 							alt=""
 						/>
-						<p>{sub.user.login}</p>
+						<p>{subName.length >= 16 ? subName.slice(0, 13) + '...' : subName}</p>
 					</a>
 				{/each}
 				{#if !smotritelSabok}
@@ -382,13 +383,14 @@
 				<hr />
 				<p class="sidebar-title">SUBSCRIPTIONS</p>
 				{#each subscriptionsSlice as sub}
+                    {@const subName = sub.user.login}
 					<a class="shortcut-link" href="/user/{sub.user.id}"
 						><img
 							class="subsciption-logo"
 							src={sub.user.profilePictureUrl ?? '/img/icons/user.png'}
 							alt=""
 						/>
-						<p>{sub.user.login}</p>
+						<p>{subName.length >= 16 ? subName.slice(0, 11) + '...' : subName}</p>
 					</a>
 				{/each}
 				{#if !smotritelSabok}

@@ -56,5 +56,11 @@ if (browser) {
             invalidateAll();
         }
     });
+
+    setInterval(async () => {
+        if (auth.currentUser) {
+            await auth.currentUser.getIdToken(true);
+        }
+    }, 15 * 60 * 1000);
 }
 

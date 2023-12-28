@@ -1,8 +1,12 @@
 import { PUBLIC_BACKEND_URL } from "$env/static/public";
 import type { FetchCallbackType } from "$backend/fetchCallbackType";
 
+export type FileInfo = {
+    photoUrl: string;
+}
+
 export type Response =
-    | { status: "ok" }
+    | { status: "ok", response: FileInfo }
     | { status: "not-found" }
     | { status: "error", message: string };
 
@@ -15,7 +19,7 @@ export async function uploadPhoto(userId: string, file: File, fetch: FetchCallba
         body: formData
     });
     if (response.ok) {
-        return { status: "ok" };
+        return { status: "ok", response: await response.json() };
     }
     if (response.status === 404) {
         return { status: "not-found" };

@@ -24,6 +24,7 @@
 	import { onMount } from 'svelte';
 	import { subscriptions } from '$lib/stores/subscriptions';
 	import type { ChangeEventHandler } from 'svelte/elements';
+	import type { FileInfo } from '$backend/user/uploadPhoto';
 
 	let subActive = false;
 	let confirmationVisible = false;
@@ -98,6 +99,9 @@
 					title: 'Avatar changed.'
 				}
 			});
+            const body = await response.json() as FileInfo;
+            data.user.profilePictureUrl = body.photoUrl;
+            data = data;
 		} else {
 			addNotification({
 				data: {

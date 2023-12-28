@@ -1,6 +1,7 @@
 import { uploadPhoto } from "$backend/user/uploadPhoto";
 import { match } from "ts-pattern";
 import type {RequestHandler} from "./$types"
+import { json } from "@sveltejs/kit";
 
 
 export const POST : RequestHandler = async ({fetch, params, locals, request}) => {
@@ -13,7 +14,7 @@ export const POST : RequestHandler = async ({fetch, params, locals, request}) =>
     const response = await uploadPhoto(locals.user.id, file, fetch);
 
     return match(response)
-        .with({ status: "ok" }, () => new Response("ok", {status: 200}))
+        .with({ status: "ok" }, (res) => json(res.response))
         .with({ status: "not-found" }, () => new Response("not-found", {status: 404}))
         .with({ status: "error" }, ({ message }) => new Response(message, {status: 500}))
         .exhaustive();

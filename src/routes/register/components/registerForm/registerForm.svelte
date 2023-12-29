@@ -60,7 +60,6 @@
 		}
 		mapToStore(union);
 		if ((radioValue != 'individual' && step == 4) || (step == 5 && radioValue == 'individual')) {
-            console.log('submitting', step, radioValue, union)
 			let fullUnion: FullDataUnion | undefined = undefined;
 			if (radioValue == 'individual') {
 				fullUnion = { type: 'individual', data: $individualData };
@@ -265,7 +264,7 @@
 
 	{#if step >= 1 && radioValue}
 		{#if radioValue == 'individual'}
-			<Individual {step} citiesAndCountries={$page.data.countriesAndCities} />
+			<Individual {step} countries={$page.data.countries} />
 		{/if}
 		{#if radioValue == 'hospital'}
 			<Hospital {step} />

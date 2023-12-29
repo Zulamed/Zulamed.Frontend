@@ -1,11 +1,10 @@
 import type {PageServerLoad } from  "./$types"
-import json from "../../short-countries-cities.json"
 import type { Country } from "$lib/types"
 
 
 
 
-export const load = (async () => {
-    const countriesAndCities: Country[] = json as Country[]
-    return {countriesAndCities}
+export const load = (async ({fetch}) => {
+   const countries = await fetch("/api/countries");
+   return {countries : await countries.json() as Country[]}
 }) satisfies PageServerLoad

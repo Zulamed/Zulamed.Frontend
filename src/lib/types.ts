@@ -1,11 +1,8 @@
 export type Country = {
     name: string
-    cities: City[]
 }
 
-type City = {
+export type City = {
     name: string
-    latitude: string
-    longitude: string
 }
 

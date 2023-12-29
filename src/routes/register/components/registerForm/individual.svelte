@@ -4,8 +4,7 @@
 	import InputPassword from './inputPassword.svelte';
 	import Input from './input.svelte';
 	import { profActivities, roles, specialties, stagesInCareer } from '$lib/utils/validateStuff';
-	import type { Country } from '$lib/types';
-	import { onMount } from 'svelte';
+	import type { Country, City } from '$lib/types';
 
 	export let step: number;
 	let username = '@';
@@ -29,13 +28,18 @@
 		}
 	}
 
-	export let citiesAndCountries: Country[] = [];
-	let cities: Country['cities'] = [];
+	export let countries: Country[] = [];
+	let cities: City[] = [];
 
-	$: {
-		cities =
-			citiesAndCountries.find((country) => country.name === $individualData.country)?.cities ?? [];
-	}
+    $: {
+        if (step == 4 && $individualData.country && countries.find((country) => country.name === $individualData.country)) {
+            (async () => {
+                const res = await fetch(`/api/countries/${$individualData.country}/city`);
+                cities = await res.json() as City[];
+            })();
+        }
+    }
+
 </script>
 
 {#if step == 1}
@@ -188,7 +192,7 @@
 					inputPlaceholder="Select a country"
 					bind:value={$individualData.country}
 					name="country"
-					data={citiesAndCountries.map((country) => ({ title: country.name }))}
+					data={countries.map((country) => ({ title: country.name }))}
 				/>
 				<!-- <p class="error-message">Error message</p> -->
 			</div>
@@ -199,7 +203,7 @@
 					inputPlaceholder="Select a city"
 					bind:value={$individualData.city}
 					name="city"
-					data={cities.map((city) => ({ title: city.name }))}
+					data={cities.map((city) => ({title: city.name}))}
 				/>
 			</div>
 			<div class="field input-field institute">

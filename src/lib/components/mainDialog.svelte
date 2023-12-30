@@ -50,7 +50,7 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 		min-width: 400px;
-		height: fit-content;
+		height: fit-content !important;
 		border-radius: 27px;
 		background: #54b9a2;
 		border-radius: 10px;
@@ -76,6 +76,10 @@
 		text-decoration: none;
 		cursor: pointer;
 		font-size: 15px;
+		border-radius: 10px;
+	}
+	.dg-btn:hover {
+		background-color: #30706141;
 	}
 	.btn-group {
 		display: flex;

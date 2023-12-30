@@ -13,6 +13,8 @@
 	<h1 class="list-header">Today</h1>
 	<div class="list-container">
 		{#each data.videoData.videos as videoInfo}
+			{@const descriptionText = videoInfo.video.videoDescription}
+
 			<a href="/video/{videoInfo.video.id}" class="vid-list">
 				<a class="preview" href="/video/{videoInfo.video.id}"
 					><img
@@ -32,12 +34,15 @@
 							>{videoInfo.video.videoTitle}</a
 						>
 						<div style="display: flex; margin-top: 12px;">
-							<a href="/user/{videoInfo.user.id}" class="vid-channel">{videoInfo.user.username}</a
+							<a href="/user/{videoInfo.user.id}" class="vid-channel"
+								>{videoInfo.user.username}&nbsp;</a
 							><span class="betweenDot">·&nbsp;</span>
 							<p id="viewsText" class="vid-views">{videoInfo.video.videoViews} views</p>
 						</div>
 						<p class="vid-description">
-							{videoInfo.video.videoDescription ?? 'No description provided'}
+							{descriptionText.length >= 200
+								? descriptionText.slice(0, 197) + '...'
+								: descriptionText}
 						</p>
 					</div>
 				</div>
@@ -111,7 +116,7 @@
 	.list-container {
 		display: grid;
 		grid-column-gap: 20px;
-		padding: 0 183px;
+		padding: 0 50px;
 	}
 	.preview {
 		max-width: 452px;
@@ -183,20 +188,32 @@
 		font-style: normal;
 		font-weight: 600;
 		text-decoration: underline;
-		padding: 0 183px;
+		padding: 0 50px;
 	}
 	@media (max-width: 1440px) {
 		.list-header,
 		.list-container {
-			padding: 0 62px;
+			padding: 0 50px;
 		}
 		.container {
 			padding-left: 20%;
+		}
+		.large-container {
+			padding-left: 4%;
+		}
+		.preview {
+			max-width: 300px;
 		}
 	}
 	@media (max-width: 1238px) {
 		.container {
 			padding-left: 27%;
+		}
+		.large-container {
+			padding-left: 4%;
+		}
+		.preview {
+			max-width: 270px;
 		}
 	}
 	@media (max-width: 900px) {
@@ -235,6 +252,7 @@
 		}
 		.preview {
 			margin-right: 0px;
+			max-width: 452px;
 		}
 		.list-header {
 			text-decoration: none;

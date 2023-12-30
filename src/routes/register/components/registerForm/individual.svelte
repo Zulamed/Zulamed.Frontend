@@ -1,45 +1,30 @@
 <script lang="ts">
+	import UsernameForm from './usernameForm.svelte';
 	import Combobox from './combobox.svelte';
 	import { individualData } from '../../schemas/individual';
 	import InputPassword from './inputPassword.svelte';
 	import Input from './input.svelte';
 	import { profActivities, roles, specialties, stagesInCareer } from '$lib/utils/validateStuff';
 	import type { Country, City } from '$lib/types';
+	import UsernameAuto from './usernameAuto.svelte';
 
 	export let step: number;
-	let username = '@';
-	$: {
-		$individualData.username = username;
-	}
-	function preventDeletion(event: KeyboardEvent) {
-		const input = document.getElementById('username') as HTMLInputElement;
-		const inputValue = input.value;
-		const cursorPosition = input.selectionStart;
-		if (event.key === 'Backspace' && cursorPosition === 1 && inputValue.charAt(0) === '@') {
-			event.preventDefault();
-		}
-	}
-	function preventInsertion() {
-		const input = document.getElementById('username') as HTMLInputElement;
-		const inputValue = input.value;
-
-		if (inputValue.charAt(0) !== '@') {
-			input.value = '@';
-		}
-	}
 
 	export let countries: Country[] = [];
 	let cities: City[] = [];
 
-    $: {
-        if (step == 4 && $individualData.country && countries.find((country) => country.name === $individualData.country)) {
-            (async () => {
-                const res = await fetch(`/api/countries/${$individualData.country}/city`);
-                cities = await res.json() as City[];
-            })();
-        }
-    }
-
+	$: {
+		if (
+			step == 4 &&
+			$individualData.country &&
+			countries.find((country) => country.name === $individualData.country)
+		) {
+			(async () => {
+				const res = await fetch(`/api/countries/${$individualData.country}/city`);
+				cities = (await res.json()) as City[];
+			})();
+		}
+	}
 </script>
 
 {#if step == 1}
@@ -78,6 +63,12 @@
 							<option value="Female">Female</option>
 							<option value="Other">Other</option>
 						</select>
+						<img
+							class="arrow-down"
+							style="width: 15px; height: 15px;"
+							src="/img/icons/down-arrow.png"
+							alt=""
+						/>
 					</div>
 				</div>
 				<div class="field bd input-field">
@@ -203,7 +194,7 @@
 					inputPlaceholder="Select a city"
 					bind:value={$individualData.city}
 					name="city"
-					data={cities.map((city) => ({title: city.name}))}
+					data={cities.map((city) => ({ title: city.name }))}
 				/>
 			</div>
 			<div class="field input-field institute">
@@ -249,9 +240,8 @@
 		Please note that your username is very important. It helps others find you.
 	</p>
 	<div class="field input-field username-field">
-		<label class="large-label" for="username">Your username</label>
 		<div class="group">
-			<input
+			<!-- <input
 				on:keydown={preventDeletion}
 				on:input={preventInsertion}
 				bind:value={username}
@@ -260,78 +250,28 @@
 				type="text"
 				placeholder=""
 				class="input"
+			/> -->
+			<UsernameForm
+				labelText="Your username"
+				inputId="username"
+				bind:value={$individualData.username}
 			/>
 		</div>
 	</div>
-	<div class="field input-field username-type-field">
-		<label class="large-label" for="username"
-			>Automatically generated username from your first and last name</label
-		>
-		<div class="group username-type-group">
-			<label class="radio-label" for="NameSurname">
-				<input
-					class="radio-all"
-					id="NameSurname"
-					type="radio"
-					name="username-type"
-					value="NameSurname"
-				/>
-				<img class="radio-img" src="" alt="" />
-				<p class="username-type-label">NameSurname</p>
-			</label>
-
-			<label class="radio-label" for="Name_Surname">
-				<input
-					class="radio-all"
-					id="Name_Surname"
-					type="radio"
-					name="username-type"
-					value="Name_Surname"
-				/>
-				<img class="radio-img" src="" alt="" />
-				<p class="username-type-label">Name_Surname</p>
-			</label>
-
-			<label class="radio-label" for="Name-Surname">
-				<input
-					class="radio-all"
-					id="Name-Surname"
-					type="radio"
-					name="username-type"
-					value="Name-Surname"
-				/>
-				<img class="radio-img" src="" alt="" />
-				<p class="username-type-label">Name-Surname</p>
-			</label>
-
-			<label class="radio-label" for="NameSurnameYearofBirth">
-				<input
-					class="radio-all"
-					id="NameSurnameYearofBirth"
-					type="radio"
-					name="username-type"
-					value="NameSurnameYearofBirth"
-				/>
-				<img class="radio-img" src="" alt="" />
-				<p class="username-type-label">NameSurnameYearofBirth</p>
-			</label>
-
-			<label class="radio-label" for="NameSurnameNumber">
-				<input
-					class="radio-all"
-					id="NameSurnameNumber"
-					type="radio"
-					name="username-type"
-					value="NameSurnameNumber"
-				/>
-				<img class="radio-img" src="" alt="" />
-				<p class="username-type-label">NameSurnameNumber</p>
-			</label>
-		</div>
-	</div>
+	<!-- <div class="field input-field username-type-field">
+		<UsernameAuto />
+	</div> -->
 {/if}
 
 <style>
+	.arrow-down {
+		position: absolute;
+		top: 50%;
+		right: 15px;
+		transform: translateY(-50%);
+		transition: all 0.2s ease;
+	}
+
 	.username-type-group {
 		margin-top: 45px !important;
 	}
@@ -410,7 +350,10 @@
 		cursor: pointer;
 		padding: 5px;
 	}
-
+	.field select {
+		appearance: none;
+		width: 115px;
+	}
 	.birthday-date {
 		display: flex;
 		gap: 8px;
@@ -501,7 +444,7 @@
 		background: #ffffff !important;
 		width: 2px !important;
 	}
-	@media (max-width: 1280px) {
+	@media (max-width: 1440px) {
 		.radio-content {
 			padding: 0 10px;
 		}
@@ -521,6 +464,16 @@
 		.date-select {
 			font-size: 11px;
 		}
+		.gender-select {
+			-webkit-appearance: none !important;
+			-moz-appearance: none !important;
+			appearance: none !important;
+			text-indent: 1px !important;
+			text-overflow: '' !important;
+		}
+		.gender-select::-ms-expand {
+			display: none !important;
+		}
 		.date-select {
 			padding: 0 5px !important;
 		}
@@ -535,6 +488,9 @@
 		}
 	}
 	@media (max-width: 1024px) {
+		.group {
+			width: fit-content;
+		}
 		.field input,
 		.field select {
 			height: 45px;

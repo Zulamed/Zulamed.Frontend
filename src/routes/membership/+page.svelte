@@ -3,7 +3,7 @@
 
 <div class="container">
 	<header>
-		<h1>A membership for everyone.</h1>
+		<h1>A membership for everyone</h1>
 	</header>
 
 	<!-- ====cards==== -->
@@ -181,6 +181,9 @@
 		}
 	}
 	@media (max-width: 900px) {
+		.container {
+			margin-top: 0px;
+		}
 		.cards {
 			width: 100%;
 			gap: 20px;

@@ -9,8 +9,7 @@
 	<div class="privacy-settings">
 		<div class="sector-1">
 			<h4 class="title">Privacy</h4>
-			<h1 class="subtitle">Manage what you share on ZulaMED</h1>
-			<h4 class="more-info sec-1">Choose who can see your saved playlists and subscriptions</h4>
+			<h4 class="subtitle">Choose who can see your saved playlists and subscriptions</h4>
 			<hr style="color: #60606049;" />
 		</div>
 		<div class="sector-2">
@@ -136,11 +135,37 @@
 	.more-info.sub-text {
 		margin-bottom: 0;
 	}
-	@media (max-width: 1280px) {
+	@media (max-width: 1440px) {
 		.privacy-settings {
-			width: 100%;
-			padding: 40px 59px 40px 65px;
-			background-color: #fff;
+			padding: 40px 0px 40px 59px;
+		}
+		.title {
+			margin-bottom: 49px;
+		}
+		.subtitle {
+			font-size: 15px;
+			margin-bottom: 0;
+		}
+
+		.more-info {
+			font-size: 14px;
+			font-weight: 500;
+			margin-bottom: 30px;
+		}
+		.sector-1 hr {
+			display: none;
+		}
+		.sector-2 {
+			margin-bottom: 39px;
+		}
+		.playlist-setting {
+			margin-bottom: 39px;
+		}
+	}
+
+	@media (max-width: 1023px) {
+		.container {
+			margin-top: 0;
 		}
 	}
 	@media (max-width: 900px) {

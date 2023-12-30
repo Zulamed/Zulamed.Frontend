@@ -218,7 +218,7 @@
 		color: rgb(255, 255, 255);
 		translate: 0 calc(-50% + 1px);
 	}
-	@media (max-width: 1280px) {
+	@media (max-width: 1440px) {
 		label {
 			font-size: 15px;
 		}

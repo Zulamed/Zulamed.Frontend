@@ -138,9 +138,9 @@
 			bind:value={$hospitalData.username}
 		/>
 	</div>
-	<div class="field input-field username-type-field">
+	<!-- <div class="field input-field username-type-field">
 		<UsernameAuto />
-	</div>
+	</div> -->
 {/if}
 
 <style>

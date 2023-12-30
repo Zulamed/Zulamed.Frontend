@@ -70,6 +70,18 @@
 	.sidebar-buttons .link.active {
 		background: #d9d9d9;
 	}
+	@media (max-width: 1440px) {
+		.sidebar-title {
+			font-size: 28px;
+		}
+		.sidebar-buttons .link {
+			font-size: 15px;
+		}
+		.settings-sidebar {
+			width: 238px;
+		}
+	}
+
 	@media (max-width: 900px) {
 		.settings-sidebar {
 			width: 100%;

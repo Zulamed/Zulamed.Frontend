@@ -95,7 +95,7 @@
 		padding: 5px;
 	}
 
-	@media (max-width: 1280px) {
+	@media (max-width: 1440px) {
 		.lock-icon {
 			width: 22px;
 			height: 24px;

@@ -6,11 +6,6 @@
 </svelte:head>
 
 <div class="container">
-	<h1 class="animated-text-mobile">
-		About <span style="color: #42b398; letter-spacing: 3px">Zula</span><spans
-			style="color: #42b398; font-weight: 200; letter-spacing: 3px">MED</spans
-		>
-	</h1>
 	<h1 class="animated-text">
 		About <span style="color: #42b398; letter-spacing: 3px">Zula</span><span
 			style="color: #42b398; font-weight: 200; letter-spacing: 3px">MED</span
@@ -30,17 +25,24 @@
 		step-by-step instructional resource that is both accessible and highly informative for medical practitioners.
 		<br />
 		<br />
-		The genesis of ZulaMed can be attributed to Dr. Rauf Safarov, an aspiring cardiothoracic surgeon.
-		Dr. Safarov's vision was shaped by his own journey through the complexities of medical training and
-		the quest for readily available, high-quality educational resources. This vision is brought to life
-		by a dedicated team committed to revolutionizing the way medical knowledge is disseminated and consumed
-		within the healthcare community. The project also involves a dedicated team working tirelessly to...
+		The genesis of ZulaMed can be attributed to Rauf Safarov, an aspiring cardiothoracic surgeon. Safarov's
+		vision was shaped by his own journey through the complexities of medical training and the quest for
+		readily available, high-quality educational resources. This vision is brought to life by a dedicated
+		team committed to revolutionizing the way medical knowledge is disseminated and consumed within the
+		healthcare community.
+		<br />
+		<br />
+		The project also involves a dedicated team working tirelessly to: <br /> Rauf Safarov, Founder &
+		CEO <br /> Agnessa Tariverdiyeva-Mardanova, Creative Director & Product Manager <br /> Emil
+		Kashirskiy, Back-End Developer <br />
+		Borodin Daniel, Back-End Developer <br /> Rashid Aliyev, Front-End Developer <br /> Seymur Bagirov,
+		Full-Stack Developer
 	</p>
 </div>
 
 <style>
 	.container {
-		padding: 8% 28%;
+		padding: 6% 28%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -52,10 +54,7 @@
 	.animated-text {
 		font-size: 3rem;
 	}
-	.animated-text-mobile {
-		display: none;
-		font-size: 3rem;
-	}
+
 	.about-text {
 		margin-top: 55px;
 		font-size: 1.2rem;
@@ -64,7 +63,7 @@
 	}
 	@media screen and (max-width: 1440px) {
 		.container {
-			padding: 8% 10%;
+			padding: 6% 10%;
 			margin-top: 0px;
 		}
 		.animated-text {
@@ -82,20 +81,19 @@
 		}
 	}
 	@media screen and (max-width: 900px) {
+		.animated-text span {
+			letter-spacing: 1px !important;
+		}
 		.container {
 			padding: 12% 10%;
 
 			margin-top: -74px;
 		}
 		.animated-text {
-			display: none;
-		}
-		.animated-text-mobile {
-			display: block;
-			font-size: 2rem;
+			font-size: 20px;
 		}
 		.about-text {
-			font-size: 1rem;
+			font-size: 14px;
 			margin-top: 20px;
 		}
 	}

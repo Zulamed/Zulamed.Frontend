@@ -41,6 +41,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>Register - ZulaMED</title>
+</svelte:head>
+
 <section class="container forms">
 	<img class="container-img" src="img/main-background-mobile.png" alt="" />
 	<div class="container-overlay" />
@@ -148,7 +152,7 @@
 		z-index: 1;
 	}
 
-	@media (max-width: 1280px) {
+	@media (max-width: 1440px) {
 		.form {
 			padding: 0 32px 0 32px;
 			max-width: 448px;

@@ -101,10 +101,10 @@
 			<input id="radio-4" class="radio-custom" name="radio-group" type="radio" />
 			<label for="radio-4" class="radio-custom-label">Disable comments</label>
 		</div>
-		<div>
+		<!-- <div>
 			<input id="checkbox-1" class="checkbox-custom" name="checkbox-1" type="checkbox" checked />
 			<label for="checkbox-1" class="checkbox-custom-label">Show the number of likes</label>
-		</div>
+		</div> -->
 	</form>
 
 	<PreviewPlayer {description} {inputValue} {uploadProgress} {videoId} />

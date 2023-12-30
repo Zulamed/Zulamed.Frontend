@@ -48,7 +48,7 @@
 				bind:this={inputPassword}
 				name="password"
 				type="password"
-				placeholder="*********"
+				placeholder="Password"
 				class="password"
 				class:input-error={errorLogin}
 				bind:value={password}

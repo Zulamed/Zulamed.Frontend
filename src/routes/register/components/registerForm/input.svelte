@@ -5,10 +5,10 @@
 	export let inputNote = '';
 	export let inputType = 'text';
 
-	export let value: string = "";
+	export let value: string = '';
 
-	function onChange(e: Event){
-		let target = e.target as HTMLInputElement
+	function onChange(e: Event) {
+		let target = e.target as HTMLInputElement;
 		value = target.value;
 	}
 </script>
@@ -76,7 +76,7 @@
 	.input:focus {
 		border: 0.5px solid #00a790;
 	}
-	@media (max-width: 1280px) {
+	@media (max-width: 1440px) {
 		label {
 			font-size: 15px;
 		}

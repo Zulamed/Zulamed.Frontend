@@ -12,6 +12,7 @@
 	import Spinner from '$lib/components/spinner.svelte';
 	import { playerLoaded } from '../../../lib/components/videoPlayer/playerStore';
 	import { afterNavigate } from '$app/navigation';
+	import ShareDialog from '$lib/components/shareDialog.svelte';
 
 	let showMoreVideosButton = false;
 	let videoVisibility = true;
@@ -124,14 +125,14 @@
 									}
 									data = data; // make svelte aware that the data has changed
 								} else {
-                                    console.log(result);
-                                    if (result.type == "failure" && result.status == 401){
-                                        addNotification({
-                                            data: {
-                                                title: "You must be logged in to subscribe to a channel."
-                                            }
-                                        });
-                                    }
+									console.log(result);
+									if (result.type == 'failure' && result.status == 401) {
+										addNotification({
+											data: {
+												title: 'You must be logged in to subscribe to a channel.'
+											}
+										});
+									}
 									applyAction(result);
 								}
 							};
@@ -142,7 +143,7 @@
 								slot="button"
 								let:trigger
 								id="follow-btn"
-                                use:melt={trigger}
+								use:melt={trigger}
 								class:active={followActive}
 								class="interaction-btn follow-btn">{followActive ? 'FOLLOWED' : 'FOLLOW'}</button
 							>
@@ -178,13 +179,13 @@
 										else data.videoInfo.numberOfLikes--;
 										data = data; // make svelte aware that the data has changed
 									} else {
-                                        if (result.type == "failure" && result.status == 401){
-                                            addNotification({
-                                                data: {
-                                                    title: "You must be logged in to like a video."
-                                                }
-                                            });
-                                        }
+										if (result.type == 'failure' && result.status == 401) {
+											addNotification({
+												data: {
+													title: 'You must be logged in to like a video.'
+												}
+											});
+										}
 										applyAction(result);
 									}
 								};
@@ -195,7 +196,7 @@
 									slot="button"
 									let:trigger
 									id="like-btn"
-                                    use:melt={trigger}
+									use:melt={trigger}
 									class="interaction-btn like-btn"
 									class:active={likeActive}
 									><img src="/img/icons/thumb_up_white_24dp.svg" alt="" />
@@ -223,13 +224,13 @@
 										dislikeActive = !dislikeActive;
 										likeActive = false;
 									} else {
-                                        if (result.type == "failure" && result.status == 401){
-                                            addNotification({
-                                                data: {
-                                                    title: "You must be logged in to dislike a video."
-                                                }
-                                            });
-                                        }
+										if (result.type == 'failure' && result.status == 401) {
+											addNotification({
+												data: {
+													title: 'You must be logged in to dislike a video.'
+												}
+											});
+										}
 										applyAction(result);
 									}
 								};
@@ -240,7 +241,7 @@
 									slot="button"
 									let:trigger
 									id="dislike-btn"
-                                    use:melt={trigger}
+									use:melt={trigger}
 									class="interaction-btn dislike-btn"
 									class:active={dislikeActive}
 									><img src="/img/icons/thumb_down_white_24dp.svg" alt="" /></button
@@ -251,7 +252,10 @@
 							<input name="videoId" type="hidden" value={data.videoInfo.video.id} />
 						</form>
 					</div>
-					<Tooltip placement="bottom">
+					<ShareDialog
+						titleText="Share"
+						inputValue="http://localhost:5173/video/{data.videoInfo.video.id}"
+					>
 						<button
 							use:melt={trigger}
 							slot="button"
@@ -260,8 +264,9 @@
 							class="interaction-btn share-btn"
 							><img src="/img/icons/send_white_24dp.svg" alt="" />SHARE
 						</button>
-						<p slot="content">Share</p>
-					</Tooltip>
+
+						<h1>123</h1>
+					</ShareDialog>
 				</div>
 			</div>
 			<Description
@@ -290,7 +295,10 @@
 			{:then value}
 				{#if value.tag == 'success'}
 					<Chips />
-					<SideVideos videos={value.data.videos.filter(x => x.video.id != data.videoInfo.video.id)} showMore={videoVisibility} />
+					<SideVideos
+						videos={value.data.videos.filter((x) => x.video.id != data.videoInfo.video.id)}
+						showMore={videoVisibility}
+					/>
 				{/if}
 			{/await}
 			{#if showMoreVideosButton}

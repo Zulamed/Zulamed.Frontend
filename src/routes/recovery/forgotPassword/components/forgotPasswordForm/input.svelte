@@ -20,7 +20,7 @@
 		type={inputType}
 		placeholder={inputPlaceholder}
 		class="input"
-        on:input={handleInput}
+		on:input={handleInput}
 	/>
 </div>
 
@@ -75,7 +75,7 @@
 	.input:focus {
 		border: 0.5px solid #00a790;
 	}
-	@media (max-width: 1280px) {
+	@media (max-width: 1440px) {
 		label {
 			font-size: 15px;
 			padding: 0;

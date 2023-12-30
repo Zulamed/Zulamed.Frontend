@@ -84,7 +84,7 @@
 		padding: 5px;
 	}
 
-	@media (max-width: 1280px) {
+	@media (max-width: 1440px) {
 		label {
 			font-size: 15px;
 		}

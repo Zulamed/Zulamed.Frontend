@@ -397,27 +397,29 @@
 			<hr />
 			<p class="sidebar-title">SUBSCRIPTIONS</p>
 
-			{#if subscriptionsSlice.length != 0}
+			{#if subscriptionsSlice.length !== 0}
 				{#each subscriptionsSlice as sub}
-                    {@const subName = sub.user.login}
+					{@const subName = sub.user.login}
 					<a class="shortcut-link" href="/user/{sub.user.id}"
 						><img
 							class="subsciption-logo"
-							src={sub.user.profilePictureUrl ?? '/img/icons/user.png'}
+							src={sub.user.profilePictureUrl ?? '/img/icons/profile.png'}
 							alt=""
 						/>
 						<p>{subName.length >= 16 ? subName.slice(0, 13) + '...' : subName}</p>
 					</a>
 				{/each}
 				{#if !smotritelSabok}
-					<button
-						on:click={() => {
-							smotritelSabok = true;
-						}}
-						class="show-more"
-					>
-						<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
-					</button>
+					{#if subscriptions.length > 5}
+						<button
+							on:click={() => {
+								smotritelSabok = true;
+							}}
+							class="show-more"
+						>
+							<img src="/img/icons/expand_more_white_36dp.svg" alt="" />
+						</button>
+					{/if}
 				{:else}
 					<button
 						on:click={() => {
@@ -431,16 +433,15 @@
 			{:else}
 				<p style="color: #fff; padding: 0 0 0 16px;">You have no subscriptions</p>
 			{/if}
+			<hr />
+			<a
+				id="shortcut-link"
+				href="/settings/account"
+				class:active-shortcut={$page.url.pathname === '/settings'}
+				><img src="/img/icons/settings_white_24dp.svg" alt="" />
+				<p>Settings</p>
+			</a>
 		{/if}
-
-		<hr />
-		<a
-			id="shortcut-link"
-			href="/settings/account"
-			class:active-shortcut={$page.url.pathname === '/settings'}
-			><img src="/img/icons/settings_white_24dp.svg" alt="" />
-			<p>Settings</p>
-		</a>
 	</div>
 	<div class="about-container">
 		<a class="about-logo" href=".">

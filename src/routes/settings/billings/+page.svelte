@@ -1,7 +1,7 @@
 <script lang="ts"></script>
 
 <div class="container">
-	<div class="account-settings">
+	<div class="billings-settings">
 		<div class="sector-1">
 			<h4 class="title">Billing and payments</h4>
 			<h1 class="subtitle">Choose how you make purchases on ZulaMED</h1>
@@ -16,7 +16,7 @@
 	.container {
 		margin-left: 300px;
 	}
-	.account-settings {
+	.billings-settings {
 		width: 100%;
 		padding: 40px 59px 40px 180px;
 		background-color: #fff;
@@ -48,11 +48,26 @@
 	}
 	/* ===== */
 
-	@media (max-width: 1280px) {
-		.account-settings {
-			width: 100%;
-			padding: 40px 59px 40px 65px;
-			background-color: #fff;
+	@media (max-width: 1440px) {
+		.billings-settings {
+			padding: 40px 0px 40px 59px;
+		}
+		.title {
+			margin-bottom: 49px;
+		}
+		.subtitle {
+			font-size: 15px;
+		}
+		.more-info {
+			font-size: 14px;
+			font-weight: 700;
+			margin-bottom: 30px;
+		}
+	}
+
+	@media (max-width: 1023px) {
+		.container {
+			margin-top: 0;
 		}
 	}
 	@media (max-width: 900px) {
@@ -60,7 +75,7 @@
 			margin-left: 0;
 			margin-top: 54px;
 		}
-		.account-settings {
+		.billings-settings {
 			padding: 26px 23px 26px 23px;
 		}
 		.title {

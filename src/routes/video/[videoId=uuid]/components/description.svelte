@@ -25,7 +25,7 @@
 
 	$: text =
 		height === '64px'
-			? textContent?.substring(0, 30) ?? 'No description' + ' ...more'
+			? textContent?.substring(0, 30) + '...' ?? 'No description' + ' ...more'
 			: textContent;
 </script>
 

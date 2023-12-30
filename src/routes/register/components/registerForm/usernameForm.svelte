@@ -52,6 +52,7 @@
 	.group {
 		position: relative;
 		margin-top: 16px;
+		margin-bottom: 46px;
 	}
 	.input {
 		position: relative;
@@ -76,7 +77,7 @@
 		border: 0.5px solid #00a790;
 	}
 
-	@media (max-width: 1280px) {
+	@media (max-width: 1440px) {
 		label {
 			font-size: 15px;
 		}

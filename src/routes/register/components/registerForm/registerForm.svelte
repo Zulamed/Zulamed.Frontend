@@ -78,7 +78,7 @@
 				switch (radioValue) {
 					case 'individual':
 						await login($individualData.email, $individualData.password);
-                        console.log($individualData.email, $individualData.password);
+						console.log($individualData.email, $individualData.password);
 						break;
 					case 'hospital':
 						await login($hospitalData.email, $hospitalData.password);
@@ -363,7 +363,7 @@
 	form {
 		width: 100%;
 	}
-	@media (max-width: 1280px) {
+	@media (max-width: 1440px) {
 		.field .next-step {
 			width: 170px;
 			height: 52px;

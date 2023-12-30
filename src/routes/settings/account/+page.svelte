@@ -17,7 +17,7 @@
 				comment on videos or create playlists.
 			</h4>
 			<div class="your-channel">
-				<p>Your channel</p>
+				<p>My channel</p>
 				<div class="channel-main-info">
 					<a href="/user/{$user?.id}">
 						<img src={$user?.profilePictureUrl ?? '/img/icons/channel-logo.jpg'} alt="" />
@@ -122,14 +122,50 @@
 		display: flex;
 		gap: 5px;
 	}
-	@media (max-width: 1280px) {
+	@media (max-width: 1440px) {
 		.account-settings {
-			width: 100%;
-			padding: 40px 59px 40px 65px;
-			background-color: #fff;
+			padding: 40px 0px 40px 59px;
+		}
+		.title {
+			margin-bottom: 49px;
+		}
+		.subtitle {
+			font-size: 15px;
+		}
+		.subtitle-2 {
+			font-size: 18px;
+		}
+		.more-info {
+			font-size: 14px;
+			font-weight: 700;
+			margin-bottom: 30px;
+		}
+		.your-channel {
+			align-items: center;
+			gap: 27px;
+		}
+		.your-channel p {
+			font-size: 15px;
+		}
+		.channel-main-info a img {
+			width: 71px;
+			height: 71px;
+		}
+		.membership {
+			font-size: 15px;
+			gap: 60px;
+		}
+	}
+
+	@media (max-width: 1023px) {
+		.container {
+			margin-top: 0;
 		}
 	}
 	@media (max-width: 900px) {
+		.your-channel {
+			align-items: start;
+		}
 		.container {
 			margin-left: 0;
 			margin-top: 54px;

@@ -47,6 +47,8 @@
 					</div>
 				</div>
 			</a>
+		{:else}
+			<p>No videos found.</p>
 		{/each}
 	</div>
 	<!-- <h1 class="list-header">Yesterday</h1> -->
@@ -129,6 +131,10 @@
 		border-radius: 5px;
 		border: 1px solid transparent;
 		transition: border 0.2s ease-in-out;
+	}
+	.vid-list:hover {
+		background-color: #f4f4f4;
+		cursor: pointer;
 	}
 	.vid-list:focus {
 		background-color: #dadada;
@@ -226,16 +232,16 @@
 		.list-vid-info {
 			display: flex;
 			flex-direction: column;
-			gap: 9px;
+			gap: 4px;
 		}
 		.list-vid-info div {
 			margin-top: 0 !important;
-			gap: 9px;
+			gap: 4px;
 		}
 		.vid-list .flex-div {
 			justify-content: start;
 			align-items: start;
-			margin-top: 29px;
+			margin-top: 12px;
 		}
 		.channel-logo {
 			display: flex;

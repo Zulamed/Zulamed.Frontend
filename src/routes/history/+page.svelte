@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { sidebarOpened } from '$lib/components/sidebarAndNavbar/stores/sidebarOpened';
-	import type { PageData } from './$types';
-	import { applyAction, enhance } from '$app/forms';
-	import MainDialog from '$lib/components/mainDialog.svelte';
 	import { melt } from '@melt-ui/svelte';
+	import { applyAction, enhance } from '$app/forms';
 	import { createDialogStore } from '$lib/components/mainDialog';
 	import { page } from '$app/stores';
+	import type { PageData } from './$types';
+	import MainDialog from '$lib/components/mainDialog.svelte';
+	import Tooltip from '$lib/components/tooltip.svelte';
+
 	let displaySettingsContainer = 'none';
 
 	const toggleSettingsDropdown = () => {
@@ -412,12 +414,14 @@
 								<p id="viewsText" class="vid-views">{videoInfo.viewedVideo.videoViews} views</p>
 							</div>
 							<p class="vid-description">
-								{videoInfo.viewedVideo.videoDescription ?? 'No description provided'}
+								{videoInfo.viewedVideo.videoDescription}
 							</p>
 						</div>
 					</div>
 				</a>
 			</div>
+		{:else}
+			<p class="no-history">No videos found.</p>
 		{/each}
 	</div>
 </div>
@@ -527,6 +531,10 @@
 		border-radius: 5px;
 		border: 1px solid transparent;
 		transition: border 0.2s ease-in-out;
+	}
+	.vid-list:hover {
+		background-color: #f4f4f4;
+		cursor: pointer;
 	}
 	.vid-list:focus {
 		background-color: #dadada;

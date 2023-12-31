@@ -323,6 +323,10 @@ input::-moz-focus-inner {
 } */
 
 @media (max-width: 1238px) {
+	.vid-info a {
+		font-size: 14px;
+	}
+
 	.container {
 		padding-left: 27%;
 	}
@@ -372,6 +376,7 @@ input::-moz-focus-inner {
 		top: 0;
 		z-index: 2;
 	}
+
 
 	.searchbar-mobile {
 		display: flex;
@@ -493,6 +498,13 @@ input::-moz-focus-inner {
 		grid-column-gap: 20px;
 		padding: 0 23px;
 	}
+}
+
+@media (max-width: 500px) {
+	.vid-info a {
+		font-size: 16px;
+	}
+
 }
 
 /* ------------MEDIAQUERY------------ */

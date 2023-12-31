@@ -99,9 +99,9 @@
 					title: 'Avatar changed.'
 				}
 			});
-            const body = await response.json() as FileInfo;
-            data.user.profilePictureUrl = body.photoUrl;
-            data = data;
+			const body = (await response.json()) as FileInfo;
+			data.user.profilePictureUrl = body.photoUrl;
+			data = data;
 		} else {
 			addNotification({
 				data: {
@@ -120,7 +120,7 @@
 		<Tooltip placement="bottom">
 			<div use:melt={trigger} slot="button" let:trigger class="channel-banner">
 				<img src="/img/main-background-mobile.png" alt="" />
-				<a href="">
+				<a href=".">
 					<img
 						style="width: 70px; height: 70px"
 						class="camera-icon"

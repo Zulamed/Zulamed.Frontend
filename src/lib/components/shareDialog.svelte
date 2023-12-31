@@ -33,6 +33,43 @@
 				});
 		}
 	}
+
+	// =======SHARE ON SOCIAL MEDIA=======
+	let shareGreetings = 'Hey, watch this video! \n';
+	function shareOnLinkedIn() {
+		window.open(
+			'https://www.linkedin.com/shareArticle?url=' +
+				encodeURIComponent(shareGreetings + window.location.href),
+			'_blank'
+		);
+	}
+	function shareOnTwitter() {
+		window.open(
+			'https://twitter.com/intent/tweet?url=' +
+				encodeURIComponent(shareGreetings + window.location.href),
+			'_blank'
+		);
+	}
+	function shareOnTelegram() {
+		window.open(
+			'https://t.me/share/url?url=' + encodeURIComponent(shareGreetings + window.location.href),
+			'_blank'
+		);
+	}
+	function shareOnFacebook() {
+		window.open(
+			'https://www.facebook.com/sharer/sharer.php?u=' +
+				encodeURIComponent(shareGreetings + window.location.href),
+			'_blank'
+		);
+	}
+	function shareOnWhatsApp() {
+		window.open(
+			'https://wa.me/?text=' + encodeURIComponent(shareGreetings + window.location.href),
+			'_blank'
+		);
+	}
+	// =======SHARE ON SOCIAL MEDIA=======
 </script>
 
 <slot trigger={$trigger} name="button" class="trigger">Open Dialog</slot>
@@ -40,14 +77,48 @@
 	<div class="overlay" use:melt={$overlay} />
 	<div class="content" use:melt={$content}>
 		<div style="display: flex; align-items: center;">
-			<div class="close-btn" use:melt={$close}>
+			<button type="button" class="close-btn" use:melt={$close}>
 				<img src="/img/icons/close_white.svg" alt="" />
-			</div>
+			</button>
 
 			<h2 style="font-size: 1.4rem; font-weight: 400; " use:melt={$title}>
 				{titleText}
 			</h2>
 		</div>
+
+		<div class="socialmedia-buttons">
+			<div>
+				<button type="button" class="socialmedia-button" on:click={shareOnLinkedIn}>
+					<img src="/img/socialMediaIcons/linkedin.png" alt="" />
+				</button>
+				<p>LinkedIn</p>
+			</div>
+			<div>
+				<button type="button" class="socialmedia-button" on:click={shareOnFacebook}>
+					<img src="/img/socialMediaIcons/facebook.png" alt="" />
+				</button>
+				<p>Facebook</p>
+			</div>
+			<div>
+				<button type="button" class="socialmedia-button" on:click={shareOnTwitter}>
+					<img src="/img/socialMediaIcons/x-twitter.png" alt="" />
+				</button>
+				<p>X</p>
+			</div>
+			<div>
+				<button type="button" class="socialmedia-button" on:click={shareOnTelegram}>
+					<img src="/img/socialMediaIcons/telegram.png" alt="" />
+				</button>
+				<p>Telegram</p>
+			</div>
+			<div>
+				<button type="button" class="socialmedia-button" on:click={shareOnWhatsApp}>
+					<img src="/img/socialMediaIcons/whatsapp.png" alt="" />
+				</button>
+				<p>WhatsApp</p>
+			</div>
+		</div>
+
 		<div class="input-overlay">
 			<input class="input" type="text" value={inputValue} readonly />
 			<button class="copy-button" on:click={copyToClipboard}>Copy</button>
@@ -57,7 +128,42 @@
 
 <style>
 	*::selection {
-		background-color: transparent !important;
+		background-color: #ffffff49 !important;
+	}
+	.socialmedia-buttons {
+		margin-top: 18px;
+		display: flex;
+		justify-content: center;
+		gap: 30px;
+	}
+	.socialmedia-buttons div {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 5px;
+	}
+	.socialmedia-buttons div p {
+		font-size: 12px;
+		font-weight: 400;
+	}
+	.socialmedia-button {
+		width: 60px;
+		height: 60px;
+		background-color: #ffffff49;
+		color: #b4b4b4;
+		border: none;
+		outline: none;
+		padding: 5px;
+		cursor: pointer;
+		border-radius: 50%;
+	}
+	.socialmedia-button:focus {
+		border: 1px solid #00a790;
+	}
+	.socialmedia-button img {
+		border-radius: 50%;
+		width: 100%;
+		height: 100%;
 	}
 	.copy-button {
 		position: absolute;
@@ -76,6 +182,8 @@
 		background-color: #00a790cc;
 	}
 	.close-btn {
+		border: none;
+		outline: none;
 		width: 40px;
 		height: 40px;
 		position: absolute;
@@ -88,8 +196,11 @@
 		justify-content: center;
 		align-items: center;
 	}
+	.close-btn:focus {
+		background-color: #ffffff49;
+	}
 	.close-btn:hover {
-		background-color: #30706141;
+		background-color: #ffffff49;
 	}
 	.input-overlay {
 		min-width: 470px;
@@ -166,6 +277,16 @@
 		font-size: 15px;
 	}
 	@media (max-width: 900px) {
+		.socialmedia-buttons div p {
+			font-size: 12px;
+		}
+		.socialmedia-buttons {
+			gap: 10px;
+		}
+		.socialmedia-button {
+			width: 32px;
+			height: 32px;
+		}
 		.content {
 			width: 330px;
 		}

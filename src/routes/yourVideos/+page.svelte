@@ -35,7 +35,9 @@
 						<a href="/video/{videoInfo.video.id}">{videoInfo.video.videoTitle}</a>
 						<div style="display: flex; margin-top: 10px;">
 							<p class="vid-views">{videoInfo.video.videoViews} views&nbsp;</p>
-							<p class="vid-views">·&nbsp;{getRelativeTime(videoInfo.video.videoPublishedDate)}</p>
+							<p class="vid-views">
+								·&nbsp;{getRelativeTime(videoInfo.video.videoPublishedDate)}
+							</p>
 						</div>
 					</div>
 					<Dropdown>
@@ -90,6 +92,8 @@
 					</Dropdown>
 				</div>
 			</a>
+		{:else}
+			<p style="margin-top: 25px;">No videos found.</p>
 		{/each}
 	</div>
 </div>

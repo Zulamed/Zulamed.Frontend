@@ -65,6 +65,36 @@
 
 <div class="preview-player">
 	<div class="video-container">
+		<div class="loader loader--style2" title="1">
+			<svg
+				version="1.1"
+				id="loader-1"
+				xmlns="http://www.w3.org/2000/svg"
+				xmlns:xlink="http://www.w3.org/1999/xlink"
+				x="0px"
+				y="0px"
+				width="40px"
+				height="40px"
+				viewBox="0 0 50 50"
+				style="enable-background:new 0 0 50 50;"
+				xml:space="preserve"
+			>
+				<path
+					fill="#54B9A2"
+					d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
+				>
+					<animateTransform
+						attributeType="xml"
+						attributeName="transform"
+						type="rotate"
+						from="0 25 25"
+						to="360 25 25"
+						dur="0.6s"
+						repeatCount="indefinite"
+					/>
+				</path>
+			</svg>
+		</div>
 		<VideoPlayer src="https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU.m3u8" />
 	</div>
 	<p class="video-link">Video link</p>
@@ -86,6 +116,17 @@
 </div>
 
 <style>
+	.loader {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		z-index: 1000;
+		background-color: rgb(65, 65, 65);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
 	.next-btn {
 		all: unset;
 		padding: 14px 62px;

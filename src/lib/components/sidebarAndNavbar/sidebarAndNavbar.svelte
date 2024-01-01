@@ -213,7 +213,7 @@
 							await invalidateAll();
 						}}
 						><img src="/img/profileContainerIcons/logout_black_24dp.svg" alt="" />
-						<p>Sign out</p>
+						<p class="sign-out">Sign out</p>
 					</button>
 				</div>
 			</div>

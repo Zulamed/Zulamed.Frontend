@@ -286,6 +286,14 @@ a {
     margin-bottom: 15px;
 }
 
+.sign-out:hover {
+    color: red;
+}
+
+.profile-container a:hover p {
+    color: var(--primary-color);
+}
+
 .profile-link img {
     margin-right: 17px;
 }

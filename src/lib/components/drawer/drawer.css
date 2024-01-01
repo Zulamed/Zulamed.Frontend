@@ -357,6 +357,14 @@ nav {
 	margin-bottom: 15px;
 }
 
+.profile-container a p:hover {
+	color: var(--primary-color);
+}
+
+.sign-out:hover {
+	color: red;
+}
+
 .profile-link img {
 	margin-right: 17px;
 }

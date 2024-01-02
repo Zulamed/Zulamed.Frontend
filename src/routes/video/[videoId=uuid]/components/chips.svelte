@@ -10,14 +10,6 @@
 			active: false
 		},
 		{
-			name: 'Related content',
-			active: false
-		},
-		{
-			name: 'Recently published',
-			active: false
-		},
-		{
 			name: 'Viewed',
 			active: false
 		}
@@ -28,31 +20,11 @@
 		});
 		chips = chips; // or chips = [...chips];
 	}
-	let prevVisible = false;
-	let nextVisible = true;
-	let maskImagePosition = 'left';
-	let transform = 'translateX(0px)';
-	$: {
-		if (transform == 'translateX(0px)') {
-			prevVisible = false;
-			nextVisible = true;
-			maskImagePosition = 'left';
-		} else if (transform == 'translateX(-368px)') {
-			prevVisible = true;
-			nextVisible = false;
-			maskImagePosition = 'right';
-		}
-	}
 </script>
 
 <div class="scroll-chips">
-	<div
-		id="scroll-chips-overlay"
-		class="scroll-chips-overlay"
-		style:mask-image="linear-gradient(to {maskImagePosition}, transparent 0, transparent 51px, #000
-		77px, #000 100%)"
-	>
-		<div id="chips__choise" class="chips__choice" style:transform>
+	<div id="scroll-chips-overlay" class="scroll-chips-overlay">
+		<div id="chips__choise" class="chips__choice">
 			<!-- <button class="chip chip--active">All videos</button> -->
 			<!-- <button class="chip">Author</button> -->
 			<!-- <button class="chip">Related content</button> -->
@@ -71,28 +43,6 @@
 			{/each}
 		</div>
 	</div>
-	{#if prevVisible}
-		<button
-			id="chips-prev"
-			class="control prev"
-			on:click={() => {
-				transform = 'translateX(0px)';
-			}}
-		>
-			<img src="/img/icons/arrow_back_ios_black_24dp.svg" alt="" />
-		</button>
-	{/if}
-	{#if nextVisible}
-		<button
-			id="chips-next"
-			class="control next"
-			on:click={() => {
-				transform = 'translateX(-368px)';
-			}}
-		>
-			<img src="/img/icons/arrow_forward_ios_black_24dp.svg" alt="" />
-		</button>
-	{/if}
 </div>
 
 <!--can be put inside a css file-->
@@ -152,16 +102,6 @@
 		cursor: pointer;
 	}
 
-	#chips-prev {
-		display: flex;
-		left: 0;
-	}
-
-	#chips-next {
-		display: flex;
-		right: 0;
-	}
-
 	.chips__choice .chip.chip--active {
 		color: rgb(var(--primary-color));
 		background: #d1f3ec;
@@ -170,22 +110,6 @@
 
 	.chips__choice::-webkit-scrollbar {
 		display: none;
-	}
-
-	.control {
-		all: unset;
-		position: absolute;
-		width: 40px;
-		height: 40px;
-		display: flex;
-		align-items: center;
-		border-radius: 50%;
-		justify-content: center;
-		background-color: white;
-	}
-
-	.control:hover {
-		background-color: #5a5a5a36;
 	}
 
 	@media (max-width: 1027px) {
@@ -199,10 +123,6 @@
 			align-items: center;
 			margin-bottom: 24px;
 			position: relative;
-		}
-		#chips-next,
-		#chips-prev {
-			display: none;
 		}
 
 		.scroll-chips-overlay {

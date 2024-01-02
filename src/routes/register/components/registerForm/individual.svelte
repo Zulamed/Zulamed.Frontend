@@ -360,7 +360,8 @@
 	}
 	.inputs-group {
 		display: flex;
-		justify-content: space-between;
+		justify-content: start;
+		gap: 30px;
 	}
 	.input-field {
 		margin-top: 20px;
@@ -523,9 +524,13 @@
 		}
 		.inputs-group {
 			margin-bottom: 19px;
+			display: flex;
+			justify-content: space-between;
+			gap: 0;
 		}
+
 		#birthday-date {
-			min-width: 160px;
+			min-width: 130px;
 		}
 	}
 	@media (max-width: 768px) {

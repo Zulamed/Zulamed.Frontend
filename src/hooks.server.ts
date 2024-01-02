@@ -16,16 +16,18 @@ async function verifyIdToken(token: string | undefined): Promise<DecodedIdToken 
 }
 
 
+const emailVerificationRoutes = ["/recovery/notVerified", "/recovery/verifyEmail", "/api/verifyUser"];
+const unauthenticatedRoutes = ["/settings", "/subscriptions", "/history", "/yourVideos", "/liked-videos"];
 
 function protectRoutes(path: string, isAuthenticated: boolean, isVerified: boolean): boolean {
     // prevent logged in users from accessing login page
     if ((path === '/login' || path === '/register') && isAuthenticated) {
         return false;
     }
+
     if (path === '/recovery/notVerified' && (isVerified || !isAuthenticated)) {
         return false;
     }
-    const unauthenticatedRoutes = ["/settings", "/subscriptions", "/history", "/yourVideos", "/liked-videos"];
 
     return !(unauthenticatedRoutes.includes(path) && !isAuthenticated);
 }
@@ -36,22 +38,29 @@ export const handle = (async ({ event, resolve }) => {
     const token = event.cookies.get('token');
     const path = event.url.pathname;
     const user = await verifyIdToken(token);
-    if (user && !user['email_verified'] && path !== '/recovery/notVerified') {
-        throw redirect(307, '/recovery/notVerified');
-    }
+    let isEmailVerified = false;
     if (user) {
         const userResponse = await getUser(user['UserId'], event.fetch);
-        match(userResponse)
+        const result = match(userResponse)
             .with({ tag: "success" }, ({ user: response }) => {
                 event.locals.user = response.user
+                return response.user;
             })
-            .with({ tag: "not found" }, () => { event.locals.user = undefined })
-            .with({ tag: "error" }, () => { event.locals.user = undefined })
+            .with({ tag: "not found" }, () => { event.locals.user = undefined; return undefined; })
+            .with({ tag: "error" }, () => { event.locals.user = undefined; return undefined; })
+            .exhaustive();
+        if (!result?.isVerified && !emailVerificationRoutes.includes(path)) {
+            throw redirect(307, '/recovery/notVerified');
+        }
+        if (result){
+            isEmailVerified = result?.isVerified;
+        }
+
+
     } else {
         // if token is invalid, remove it from cookies
         event.cookies.set('token', '', { maxAge: -1, sameSite: true });
     }
-    const isEmailVerified = user && user["email_verified"] ? true : false;
     if (!protectRoutes(path, !!user, isEmailVerified)) {  // fucking javascript lol
         throw redirect(307, '/');
     }
@@ -60,6 +69,6 @@ export const handle = (async ({ event, resolve }) => {
 }) satisfies Handle;
 
 export const handleFetch = (async ({ event, request, fetch }) => {
-    request.headers.set('Authorization', `Bearer ${event.cookies.get('token')}`)
+    request.headers.set('Authorization', `Bearer ${event.cookies.get('token')}`);
     return fetch(request);
 }) satisfies HandleFetch;

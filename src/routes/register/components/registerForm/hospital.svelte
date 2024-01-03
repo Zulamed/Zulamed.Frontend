@@ -7,6 +7,24 @@
 	import InputPassword from './inputPassword.svelte';
 	import UsernameForm from './usernameForm.svelte';
 	import UsernameAuto from './usernameAuto.svelte';
+	import type { City, Country } from '$lib/types';
+
+    export let countries: Country[] = [];
+    let cities: City[] = [];
+
+    $: {
+		if (
+			step == 3 &&
+			$hospitalData.country &&
+			countries.find((country) => country.name === $hospitalData.country)
+		) {
+			(async () => {
+				const res = await fetch(`/api/countries/${$hospitalData.country}/city`);
+				cities = (await res.json()) as City[];
+			})();
+		}
+    }
+
 </script>
 
 {#if step == 1}
@@ -105,7 +123,9 @@
 					labelText="Country"
 					inputPlaceholder="Select a country"
 					name="country"
+                    customOption={false}
 					bind:value={$hospitalData.country}
+					data={countries.map((country) => ({ title: country.name }))}
 				/>
 			</div>
 
@@ -115,6 +135,8 @@
 					inputPlaceholder="Select a city"
 					name="city"
 					bind:value={$hospitalData.city}
+                    customOption={false}
+                    data={cities.map((city) => ({ title: city.name }))}
 				/>
 			</div>
 			<div class="field input-field">

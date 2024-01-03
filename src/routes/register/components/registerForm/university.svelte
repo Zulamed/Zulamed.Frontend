@@ -3,29 +3,54 @@
 	import Input from './input.svelte';
 	import InputPassword from './inputPassword.svelte';
 	import UsernameForm from './usernameForm.svelte';
-	import UsernameAuto from './usernameAuto.svelte';
+	import type { City, Country } from '$lib/types';
+	import { universityData } from '../../schemas/university';
+
+	export let countries: Country[] = [];
+	let cities: City[] = [];
 
 	export let step: number;
+
+	$: {
+		if (
+			step == 3 &&
+			$universityData.country &&
+			countries.find((country) => country.name === $universityData.country)
+		) {
+			(async () => {
+				const res = await fetch(`/api/countries/${$universityData.country}/city`);
+				cities = (await res.json()) as City[];
+			})();
+		}
+	}
+
 </script>
 
 {#if step == 1}
 	<div class="input-container">
 		<div class="radio-content">
 			<div class="field input-field">
-				<Combobox obligatoryField={false} labelText="University Name" inputPlaceholder="" />
+				<Input
+					labelText="University Name"
+					inputPlaceholder=""
+                    inputId="universityName"
+					bind:value={$universityData.universityName}
+				/>
 			</div>
 			<div class="field input-field">
 				<Input
 					labelText="First name(s) (Responsible person)"
 					inputPlaceholder=""
-					inputId="first-name"
+					inputId="firstName"
+					bind:value={$universityData.firstName}
 				/>
 			</div>
 			<div class="field input-field">
 				<Input
 					labelText="Family name(s) (Responsible person)"
 					inputPlaceholder=""
-					inputId="last-name"
+					inputId="lastName"
+					bind:value={$universityData.lastName}
 				/>
 			</div>
 		</div>
@@ -34,22 +59,38 @@
 	<div class="input-container">
 		<div class="radio-content">
 			<div class="field input-field">
-				<Input labelText="Email" inputPlaceholder="Email" inputId="email" />
+				<Input
+					labelText="Email"
+					inputPlaceholder="Email"
+					inputId="email"
+					bind:value={$universityData.email}
+				/>
 			</div>
 
 			<div class="field input-field">
-				<Input labelText="Repeat email" inputPlaceholder="Repeat email" inputId="repeat-email" />
+				<Input
+					labelText="Repeat email"
+					inputPlaceholder="Repeat email"
+					inputId="confirmEmail"
+					bind:value={$universityData.confirmEmail}
+				/>
 			</div>
 
 			<div class="field input-field">
-				<InputPassword labelText="Password" inputPlaceholder="Password" inputId="password" />
+				<InputPassword
+					labelText="Password"
+					inputPlaceholder="Password"
+					inputId="password"
+					bind:password={$universityData.password}
+				/>
 			</div>
 
 			<div class="field input-field">
 				<InputPassword
 					labelText="Re-type password"
 					inputPlaceholder="Re-type password"
-					inputId="repeat-password"
+					inputId="confirmPassword"
+					bind:password={$universityData.confirmPassword}
 				/>
 			</div>
 		</div>
@@ -58,22 +99,52 @@
 	<div class="input-container">
 		<div class="radio-content step-3-overflow">
 			<div class="field input-field">
-				<Input labelText="Address" inputPlaceholder="Address" inputId="address" />
+				<Input
+					labelText="Address"
+					inputPlaceholder="Address"
+					inputId="address"
+					bind:value={$universityData.address}
+				/>
 			</div>
 
 			<div class="field input-field">
-				<Input labelText="Post code / Zip" inputPlaceholder="Post code / Zip" inputId="post-code" />
+				<Input
+					labelText="Post code / Zip"
+					inputPlaceholder="Post code / Zip"
+					bind:value={$universityData.zipCode}
+					inputId="zipCode"
+				/>
 			</div>
 
 			<div class="field input-field">
-				<Combobox labelText="Country" inputPlaceholder="Select a country" />
+				<Combobox
+					customOption={false}
+					data={countries.map((country) => ({ title: country.name }))}
+					labelText="Country"
+					inputPlaceholder="Select a country"
+					name="country"
+					bind:value={$universityData.country}
+				/>
 			</div>
 
 			<div class="field input-field">
-				<Combobox labelText="City" inputPlaceholder="Select a city" />
+				<Combobox
+					labelText="City"
+					inputPlaceholder="Select a city"
+					customOption={false}
+					data={cities.map((city) => ({ title: city.name }))}
+					name="city"
+					bind:value={$universityData.city}
+				/>
 			</div>
 			<div class="field input-field">
-				<Input labelText="Phone" inputPlaceholder="Phone" inputId="post-code" inputType="number" />
+				<Input
+					labelText="Phone"
+					inputPlaceholder="Phone"
+					inputId="phoneNumber"
+					inputType="number"
+                    bind:value={$universityData.phoneNumber}
+				/>
 			</div>
 		</div>
 	</div>
@@ -82,10 +153,10 @@
 		Please note that your username is very important. It helps others find you.
 	</p>
 	<div class="field input-field username-field">
-		<UsernameForm labelText="Your username" inputId="username" />
+		<UsernameForm labelText="Your username" inputId="username" bind:value={$universityData.username}/>
 	</div>
 	<div class="field input-field username-type-field">
-		<UsernameAuto />
+		<!-- <UsernameAuto /> -->
 	</div>
 {/if}
 

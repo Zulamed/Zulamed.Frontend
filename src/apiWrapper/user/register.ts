@@ -4,10 +4,12 @@ import { match } from "ts-pattern"
 import type { HospitalFullData } from "../../routes/register/schemas/hospital"
 import type { IndividualFullData } from "../../routes/register/schemas/individual"
 import { validateProfActivities, validateRoles, validateSpecialties, validateStages } from "$lib/utils/validateStuff"
+import type { UniversityFullData } from "../../routes/register/schemas/university"
 
 export type FullDataUnion =
     | { type: "individual", data: IndividualFullData }
     | { type: "hospital", data: HospitalFullData }
+    | { type: "university", data: UniversityFullData }
 
 
 export type Response =
@@ -44,7 +46,22 @@ function mapToRequest(dataUnion: FullDataUnion) {
                 login: dataUnion.data.username,
                 ...dataUnion.data
             }
+        case "university":
+            return {
+                accountUniversity: dataUnion.data.universityName,
+                accountAddress: dataUnion.data.address,
+                accountPostCode: dataUnion.data.zipCode,
+                accountPhone: dataUnion.data.phoneNumber,
+                name: dataUnion.data.firstName,
+                surname: dataUnion.data.lastName,
+                login: dataUnion.data.username,
+                ...dataUnion.data
+            }
     }
+}
+
+function validateIndividual(){
+
 }
 
 
@@ -53,21 +70,22 @@ export async function register(fetch: FetchCallbackType = originalFetch, data: F
         const type = match(data)
             .with({ type: "individual" }, () => "personal")
             .with({ type: "hospital" }, () => "hospital")
+            .with({ type: "university" }, () => "university")
             .exhaustive();
 
-        if (!(data.type == "individual" && validateStages(data.data.stageInCareer))) {
+        if (data.type == "individual" && !(validateStages(data.data.stageInCareer))) {
             return { status: "validationError", error: "Invalid stage in career" }
         }
 
-        if (!(data.type == "individual" && validateSpecialties(data.data.speciality))) {
+        if (data.type == "individual" && !(validateSpecialties(data.data.speciality))) {
             return { status: "validationError", error: "Invalid speciality" }
         }
 
-        if (!(data.type == "individual" && validateProfActivities(data.data.profession))) {
+        if (data.type == "individual" && !(validateProfActivities(data.data.profession))) {
             return { status: "validationError", error: "Invalid professional activity" }
         }
 
-        if (!(data.type == 'individual' && validateRoles(data.data.role))){
+        if (data.type == 'individual' && !(validateRoles(data.data.role))){
             return { status: "validationError", error: "Invalid role" }
         }
 

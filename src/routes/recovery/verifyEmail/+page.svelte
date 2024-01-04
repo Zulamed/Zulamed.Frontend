@@ -1,28 +1,26 @@
 <script lang="ts">
-	import { onMount } from "svelte";
-	import { auth } from "$lib/firebase/client";
-	import { goto } from "$app/navigation";
+	import { onMount } from 'svelte';
+	import { auth } from '$lib/firebase/client';
+	import { goto } from '$app/navigation';
 
-    // export let data: PageData;
+	// export let data: PageData;
 
-    function wait(ms: number) {
-        return new Promise((resolve) => {
-            setTimeout(resolve, ms);
-        });
-    }
+	function wait(ms: number) {
+		return new Promise((resolve) => {
+			setTimeout(resolve, ms);
+		});
+	}
 
-
-    onMount(async () => {
-        await auth.currentUser?.reload();
-        await auth.currentUser?.getIdToken(true);
-        await wait(1000);
-        goto("/");
-    });
-
+	onMount(async () => {
+		await auth.currentUser?.reload();
+		await auth.currentUser?.getIdToken(true);
+		await wait(1000);
+		window.location.href = '/';
+	});
 </script>
 
 <div class="center">
-        <h1>You were successfully been verified. Redirecting...</h1>
+	<h1>You were successfully been verified. Redirecting...</h1>
 </div>
 
 <style>

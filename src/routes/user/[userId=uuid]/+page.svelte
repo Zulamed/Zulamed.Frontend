@@ -17,13 +17,9 @@
 	import type { PageData } from './$types';
 	import { user } from '$lib/stores/auth';
 	import Tooltip from '$lib/components/tooltip.svelte';
-	import { invalidateAll } from '$app/navigation';
-	import Upload from './components/upload/upload.svelte';
-	import Stepper from './components/upload/stepper.svelte';
 	import CreateVideo from './components/upload/createVideo.svelte';
 	import { onMount } from 'svelte';
 	import { subscriptions } from '$lib/stores/subscriptions';
-	import type { ChangeEventHandler } from 'svelte/elements';
 	import type { FileInfo } from '$backend/user/uploadPhoto';
 
 	let subActive = false;
@@ -119,9 +115,9 @@
 
 		const file = target.files[0];
 		const formData = new FormData();
-		formData.append('Photo', file);
+		formData.append('Banner', file);
 
-		const response = await fetch(`${data.user.id}/uploadBanner`, {
+		const response = await fetch(`/api/uploadBanner`, {
 			method: 'POST',
 			body: formData
 		});

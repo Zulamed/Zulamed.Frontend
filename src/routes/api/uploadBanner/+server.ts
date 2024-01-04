@@ -6,7 +6,7 @@ export const POST: RequestHandler = async ({fetch,request, locals}) => {
         return new Response("Unauthorized", {status: 401});
     }
     const formData = await request.formData();
-    const response = await fetch(`${PUBLIC_BACKEND_URL}/user/${locals.user.id}`, {
+    const response = await fetch(`${PUBLIC_BACKEND_URL}/user/${locals.user.id}/banner`, {
         method: "POST",
         body: formData
     });

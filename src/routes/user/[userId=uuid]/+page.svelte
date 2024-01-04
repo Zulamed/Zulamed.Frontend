@@ -111,37 +111,37 @@
 		}
 	}
 
-    async function uploadBanner(e: Event) {
-        const target = e.target as HTMLInputElement;
-        if (!target || !target.files || target.files.length === 0) {
-            return;
-        }
+	async function uploadBanner(e: Event) {
+		const target = e.target as HTMLInputElement;
+		if (!target || !target.files || target.files.length === 0) {
+			return;
+		}
 
-        const file = target.files[0];
-        const formData = new FormData();
-        formData.append('Photo', file);
+		const file = target.files[0];
+		const formData = new FormData();
+		formData.append('Photo', file);
 
-        const response = await fetch(`${data.user.id}/uploadBanner`, {
-            method: 'POST',
-            body: formData
-        });
-        if (response.ok) {
-            addNotification({
-                data: {
-                    title: 'Banner changed.'
-                }
-            });
-            const body = (await response.json()) as FileInfo;
-            data.user.bannerUrl = body.photoUrl;
-            data = data;
-        } else {
-            addNotification({
-                data: {
-                    title: 'Error occured while changing banner.'
-                }
-            });
-        }
-    }
+		const response = await fetch(`${data.user.id}/uploadBanner`, {
+			method: 'POST',
+			body: formData
+		});
+		if (response.ok) {
+			addNotification({
+				data: {
+					title: 'Banner changed.'
+				}
+			});
+			const body = (await response.json()) as FileInfo;
+			data.user.bannerUrl = body.photoUrl;
+			data = data;
+		} else {
+			addNotification({
+				data: {
+					title: 'Error occured while changing banner.'
+				}
+			});
+		}
+	}
 </script>
 
 <svelte:head>
@@ -151,16 +151,16 @@
 	{#if data.user.id === $user?.id}
 		<Tooltip placement="bottom">
 			<div use:melt={trigger} slot="button" let:trigger class="channel-banner">
-				<img src={data.user.bannerUrl ?? "/img/main-background-mobile.png"} alt="" />
-				<a href=".">
+				<img src={data.user.bannerUrl ?? '/img/main-background-mobile.png'} alt="" />
+				<div>
 					<img
 						style="width: 70px; height: 70px"
 						class="camera-icon"
 						src="/img/icons/photo_camera_white_24dp.svg"
 						alt=""
 					/>
-                    <input class="avatar-upload" type="file" accept="image/*" on:change={uploadBanner} />
-				</a>
+					<input class="avatar-upload" type="file" accept="image/*" on:change={uploadBanner} />
+				</div>
 			</div>
 			<p slot="content">Edit channel banner</p>
 		</Tooltip>
@@ -172,8 +172,7 @@
 	<div class="flex-div channel-info">
 		{#if data.user.id === $user?.id}
 			<Tooltip placement="bottom">
-				<a
-                    href="."
+				<div
 					use:melt={trigger}
 					slot="button"
 					let:trigger
@@ -186,7 +185,7 @@
 					/>
 					<img class="camera-icon" src="/img/icons/photo_camera_white_24dp.svg" alt="" />
 					<input class="avatar-upload" type="file" accept="image/*" on:change={uploadAvatar} />
-				</a>
+				</div>
 				<p slot="content">Edit profile picture</p>
 			</Tooltip>
 		{:else}

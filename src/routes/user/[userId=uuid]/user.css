@@ -3,7 +3,7 @@
 	align-items: center;
 }
 
-a .avatar-upload {
+div .avatar-upload {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -470,11 +470,11 @@ fieldset input {
 	opacity: 1;
 }
 
-.channel-info a:hover .camera-icon {
+.channel-info div:hover .camera-icon {
 	opacity: 1;
 }
 
-.channel-info a:hover .user-profile-picture {
+.channel-info div:hover .user-profile-picture {
 	filter: brightness(1);
 }
 

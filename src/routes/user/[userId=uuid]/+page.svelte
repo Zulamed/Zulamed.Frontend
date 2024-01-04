@@ -110,6 +110,38 @@
 			});
 		}
 	}
+
+    async function uploadBanner(e: Event) {
+        const target = e.target as HTMLInputElement;
+        if (!target || !target.files || target.files.length === 0) {
+            return;
+        }
+
+        const file = target.files[0];
+        const formData = new FormData();
+        formData.append('Photo', file);
+
+        const response = await fetch(`${data.user.id}/uploadBanner`, {
+            method: 'POST',
+            body: formData
+        });
+        if (response.ok) {
+            addNotification({
+                data: {
+                    title: 'Banner changed.'
+                }
+            });
+            const body = (await response.json()) as FileInfo;
+            data.user.bannerUrl = body.photoUrl;
+            data = data;
+        } else {
+            addNotification({
+                data: {
+                    title: 'Error occured while changing banner.'
+                }
+            });
+        }
+    }
 </script>
 
 <svelte:head>
@@ -119,7 +151,7 @@
 	{#if data.user.id === $user?.id}
 		<Tooltip placement="bottom">
 			<div use:melt={trigger} slot="button" let:trigger class="channel-banner">
-				<img src="/img/main-background-mobile.png" alt="" />
+				<img src={data.user.bannerUrl ?? "/img/main-background-mobile.png"} alt="" />
 				<a href=".">
 					<img
 						style="width: 70px; height: 70px"
@@ -127,6 +159,7 @@
 						src="/img/icons/photo_camera_white_24dp.svg"
 						alt=""
 					/>
+                    <input class="avatar-upload" type="file" accept="image/*" on:change={uploadBanner} />
 				</a>
 			</div>
 			<p slot="content">Edit channel banner</p>
@@ -140,6 +173,7 @@
 		{#if data.user.id === $user?.id}
 			<Tooltip placement="bottom">
 				<a
+                    href="."
 					use:melt={trigger}
 					slot="button"
 					let:trigger

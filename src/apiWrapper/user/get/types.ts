@@ -28,6 +28,7 @@ export type User = {
     historyPaused: boolean;
     description: string | null;
     isVerified: boolean;
+    bannerUrl: string | null;
 };
 
 

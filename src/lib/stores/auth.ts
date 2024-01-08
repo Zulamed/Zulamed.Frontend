@@ -4,8 +4,6 @@ import { auth } from '$lib/firebase/client';
 import { signInWithEmailAndPassword, type IdTokenResult } from 'firebase/auth';
 import { get, writable } from 'svelte/store';
 import type { User } from '$backend/user/get/types';
-import { getUser } from '$backend/user/get/getUser';
-import { match } from 'ts-pattern';
 import { invalidateAll } from '$app/navigation';
 
 export const user = writable<User | undefined>(undefined);
@@ -14,12 +12,11 @@ async function fetchUser(jwtToken: IdTokenResult) {
     const id = jwtToken?.claims['UserId'] as string | undefined;
     if (!id)
         return;
-    const backendUser = await getUser(id);
-    match(backendUser)
-        .with({ tag: "success" }, ({ user: response }) => {
-            user.set(response.user);
-        });
-
+    const response = await fetch(`/api/user/${id}`);
+    if (response.ok){
+        const { user: responseUser } = await response.json();
+        user.set(responseUser);
+    }
 }
 
 

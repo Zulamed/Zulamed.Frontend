@@ -104,26 +104,10 @@
 		z-index: 1;
 	}
 
-	@media (max-width: 1280px) {
+	@media (max-width: 1440px) {
 		.form {
 			padding: 0 32px 0 32px;
 			max-width: 448px;
-		}
-		.form-link span,
-		.signup-link {
-			font-size: 14px;
-		}
-		.form-link {
-			margin-top: 22px;
-		}
-		h2 {
-			font-size: 28px;
-		}
-	}
-	@media (max-width: 1024px) {
-		.form {
-			max-width: 370px;
-			max-height: 85vh;
 		}
 		.form-link span,
 		.signup-link {
@@ -133,13 +117,18 @@
 			margin-top: 14px;
 		}
 		h2 {
-			font-size: 22px;
+			font-size: 23px;
 		}
 		.container {
-			margin-top: 0px;
+			margin-top: 74px;
 		}
 	}
-	@media (max-width: 768px) {
+
+	@media (max-width: 1024px) {
+		.container {
+			margin-top: 0;
+		}
+
 		.form {
 			padding: 0 28px 20px 28px;
 			max-width: 100%;

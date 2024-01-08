@@ -89,7 +89,7 @@ div .avatar-upload {
 }
 
 .tab-content-container {
-	min-height: 800px;
+	height: fit-content;
 }
 
 .btns-container {
@@ -381,13 +381,13 @@ fieldset input {
 
 .user-no-videos {
 	width: 100%;
-	min-height: 800px;
+	height: fit-content;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: 22px;
-	justify-content: center;
-
+	justify-content: start;
+	padding: 0 0 15px 0;
 }
 
 .user-no-videos img {

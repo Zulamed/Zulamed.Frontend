@@ -205,6 +205,15 @@
 		line-height: normal;
 		margin-top: 12px;
 	}
+	@media (max-width: 1440px) {
+		form {
+			margin-top: 0px;
+			width: 100%;
+		}
+		.button-field {
+			margin-top: 30px;
+		}
+	}
 	@media (max-width: 1280px) {
 		form {
 			margin-top: 0px;

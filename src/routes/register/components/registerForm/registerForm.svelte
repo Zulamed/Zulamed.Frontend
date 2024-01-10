@@ -240,8 +240,7 @@
 <form method="post" bind:this={formElement}>
 	{#if step > 0 && prevStep}
 		<div class="prev" style="width: 100%; display: flex; align-items: start;">
-			<buttonregister/components/registerForm/registerForm
-				class="prev-step"
+			<button				class="prev-step"
 				type="button"
 				on:click={() => {
 					if (step > 0) {

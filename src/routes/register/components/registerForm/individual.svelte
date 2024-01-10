@@ -6,7 +6,6 @@
 	import Input from './input.svelte';
 	import { profActivities, roles, specialties, stagesInCareer } from '$lib/utils/validateStuff';
 	import type { Country, City } from '$lib/types';
-	import UsernameAuto from './usernameAuto.svelte';
 
 	export let step: number;
 
@@ -63,12 +62,9 @@
 							<option value="Female">Female</option>
 							<option value="Other">Other</option>
 						</select>
-						<img
-							class="arrow-down"
-							style="width: 15px; height: 15px;"
-							src="/img/icons/down-arrow.png"
-							alt=""
-						/>
+						<label for="gender">
+							<img class="chevron" src="img/icons/Expand_down.png" alt="" />
+						</label>
 					</div>
 				</div>
 				<div class="field bd input-field">
@@ -264,7 +260,7 @@
 {/if}
 
 <style>
-	.arrow-down {
+	.chevron {
 		position: absolute;
 		top: 50%;
 		right: 15px;
@@ -272,48 +268,46 @@
 		transition: all 0.2s ease;
 	}
 
-	.username-type-group {
+	/* .username-type-group {
 		margin-top: 45px !important;
-	}
-	.username-type-field {
+	} */
+	/* .username-type-field {
 		margin-top: 40px !important;
 		margin-bottom: 55px;
-	}
+	} */
 
-	.radio-label {
+	/* .radio-label {
 		display: flex;
 		align-items: center;
-	}
-	.radio-label:not(:last-child) {
+	} */
+	/* .radio-label:not(:last-child) {
 		margin-bottom: 12px;
-	}
-	.radio-all {
+	} */
+	/* .radio-all {
 		position: absolute;
 		visibility: hidden;
-	}
+	} */
 	div.group > label > img {
-		margin-right: 25px;
 		width: 24px;
 		height: 24px;
-		content: url(../img/icons/Dell2.svg);
 		border: none;
 		pointer-events: none;
 	}
 
-	div.group > label > input:checked + img {
+	/* div.group > label > input:checked + img {
 		content: url(../img/icons/Dell.svg);
-	}
+	} */
 
 	/* ============================ */
 
-	.error-message {
+	/* .error-message {
 		margin-top: 6px;
 		color: #ff3e24;
 		font-family: 'Montserrat';
 		font-size: 12px;
 		font-style: normal;
 		font-weight: 500;
-	}
+	} */
 	.note {
 		color: #585858;
 		text-align: center;
@@ -339,7 +333,7 @@
 	.input-field.role {
 		margin-top: 8px;
 	}
-	.showpass-btn {
+	/* .showpass-btn {
 		all: unset;
 		position: absolute;
 		top: 50%;
@@ -349,10 +343,11 @@
 		color: #8b8b8b;
 		cursor: pointer;
 		padding: 5px;
-	}
+	} */
 	.field select {
 		appearance: none;
 		width: 115px;
+		cursor: pointer;
 	}
 	.birthday-date {
 		display: flex;
@@ -378,9 +373,7 @@
 		margin-top: 10px;
 	}
 	.birthday-date,
-	.group,
-	.email-group,
-	.pass-group {
+	.group {
 		position: relative;
 		margin-top: 16px;
 	}
@@ -416,14 +409,14 @@
 		line-height: normal;
 		cursor: pointer;
 	}
-	.large-label {
+	/* .large-label {
 		color: #000;
 		font-size: 20px;
 		font-style: normal;
 		font-weight: 600;
 		line-height: normal;
 		cursor: pointer;
-	}
+	} */
 	/* ====Step2===== */
 	.field .date-select {
 		padding: 0 26px;
@@ -479,9 +472,7 @@
 			padding: 0 5px !important;
 		}
 		.birthday-date,
-		.group,
-		.email-group,
-		.pass-group {
+		.group {
 			margin-top: 10px;
 		}
 		.input-field {
@@ -508,9 +499,7 @@
 			font-size: 11px;
 		}
 		.birthday-date,
-		.group,
-		.email-group,
-		.pass-group {
+		.group {
 			margin-top: 10px;
 		}
 		.input-field {
@@ -538,12 +527,12 @@
 			overflow-y: hidden;
 			max-height: 100%;
 		}
-		.large-label {
+		/* .large-label {
 			font-size: 14px;
-		}
-		.username-type-group {
+		} */
+		/* .username-type-group {
 			margin-top: 30px !important;
-		}
+		} */
 		.input-container {
 			margin-bottom: 20px;
 			width: 100%;

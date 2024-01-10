@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import MainButton from '$lib/components/mainButton.svelte';
 	import { login } from '$lib/stores/auth';
 	import { FirebaseError } from 'firebase/app';
 	let email = '';
@@ -78,9 +79,7 @@
 		{/if}
 	</div>
 
-	<div class="field button-field">
-		<button class="login-btn">Log In</button>
-	</div>
+	<MainButton buttonInnerText="Login" />
 	<div class="form-link">
 		<a href="/recovery/forgotPassword" class="forgot-pass">Forgot password?</a>
 	</div>
@@ -102,8 +101,7 @@
 		width: 100%;
 	}
 
-	.field input,
-	.field .login-btn {
+	.field input {
 		height: 100%;
 		width: 100%;
 		border: none;
@@ -141,7 +139,7 @@
 		margin-top: 16px;
 	}
 
-	.button-field {
+	/* .button-field {
 		margin-top: 59px;
 		justify-content: center;
 		display: flex;
@@ -164,7 +162,7 @@
 
 	.field .login-btn:hover {
 		background-color: #00a790;
-	}
+	} */
 
 	.form-link {
 		text-align: center;
@@ -184,7 +182,7 @@
 		position: relative;
 		width: 100%;
 		border-radius: 6px;
-		margin-top: 31px;
+		margin-bottom: 31px;
 	}
 	.showpass-btn {
 		all: unset;
@@ -210,9 +208,6 @@
 			margin-top: 0px;
 			width: 100%;
 		}
-		.button-field {
-			margin-top: 30px;
-		}
 	}
 	@media (max-width: 1280px) {
 		form {
@@ -227,7 +222,7 @@
 		.input-field {
 			margin-top: 20px;
 		}
-		.login-btn {
+		/* .login-btn {
 			width: 157px !important;
 			height: 65px !important;
 			color: #273b4a;
@@ -237,7 +232,7 @@
 		.button-field {
 			margin-top: 29px;
 			margin-bottom: 28px !important;
-		}
+		} */
 		.form-link {
 			margin-top: 20px;
 		}

@@ -17,12 +17,17 @@
 	import type { FullDataUnion } from '$backend/user/register';
 	import { login } from '$lib/stores/auth';
 	import { page } from '$app/stores';
-	import { validateUniversity, type UniversityData, universityData } from '../../schemas/university';
+	import {
+		validateUniversity,
+		type UniversityData,
+		universityData
+	} from '../../schemas/university';
+	import MainButton from '$lib/components/mainButton.svelte';
 
 	type DataUnion =
 		| { type: 'individual'; data: IndividualData }
 		| { type: 'hospital'; data: HospitalData }
-        | { type: 'university'; data: UniversityData };
+		| { type: 'university'; data: UniversityData };
 
 	function mapToStore(unionData: DataUnion) {
 		switch (unionData.type) {
@@ -46,18 +51,18 @@
 		}
 
 		let union: DataUnion | undefined = undefined;
-        // if (radioValue == 'university') {
-        //     step += 1;
-        //     return;
-        // }
+		// if (radioValue == 'university') {
+		//     step += 1;
+		//     return;
+		// }
 
 		if (radioValue == 'individual') {
 			union = { type: 'individual', data: data as IndividualData };
 		} else if (radioValue == 'hospital') {
 			union = { type: 'hospital', data: data as HospitalData };
 		} else if (radioValue == 'university') {
-            union = { type: 'university', data: data as UniversityData };
-        }
+			union = { type: 'university', data: data as UniversityData };
+		}
 
 		if (!union) {
 			return;
@@ -74,8 +79,8 @@
 			} else if (radioValue == 'hospital') {
 				fullUnion = { type: 'hospital', data: $hospitalData };
 			} else if (radioValue == 'university') {
-                fullUnion = { type: 'university', data: $universityData};
-            }
+				fullUnion = { type: 'university', data: $universityData };
+			}
 
 			let response = await fetch('/register/submit', {
 				method: 'POST',
@@ -92,9 +97,9 @@
 					case 'hospital':
 						await login($hospitalData.email, $hospitalData.password);
 						break;
-                    case 'university':
-                        await login($universityData.email, $universityData.password);
-                        break;
+					case 'university':
+						await login($universityData.email, $universityData.password);
+						break;
 				}
 			}
 			return;
@@ -111,7 +116,7 @@
 		let result = match(values)
 			.with({ type: 'individual' }, ({ data }) => validateIndividual(data))
 			.with({ type: 'hospital' }, ({ data }) => validateHospital(data))
-            .with({ type: 'university' }, ({ data }) => validateUniversity(data))
+			.with({ type: 'university' }, ({ data }) => validateUniversity(data))
 			.exhaustive();
 
 		if (result.success) return true;
@@ -280,16 +285,17 @@
 			<Individual {step} countries={$page.data.countries} />
 		{/if}
 		{#if radioValue == 'hospital'}
-			<Hospital {step} countries={$page.data.countries}/>
+			<Hospital {step} countries={$page.data.countries} />
 		{/if}
 		{#if radioValue == 'university'}
-			<University {step} countries={$page.data.countries}/>
+			<University {step} countries={$page.data.countries} />
 		{/if}
 	{/if}
 
-	<div class="field button-field">
-		<button type="button" class="next-step" on:click={increaseStep}>{buttonTextValue}</button>
-	</div>
+	<!-- <div class="field button-field">
+		<button type="button" class="next-step" on:click={increaseStep} />
+	</div> -->
+	<MainButton buttonType="button" clickEvent={increaseStep} buttonInnerText={buttonTextValue} />
 </form>
 
 <style>

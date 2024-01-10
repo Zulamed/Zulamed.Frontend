@@ -59,11 +59,14 @@
 <div class="group-less">
 	<input {name} class="input" use:melt={$input} placeholder={inputPlaceholder} />
 	<div class="chevron-wrapper">
-		{#if $open}
-			<img class="chevron" src="img/icons/Expand_up.png" alt="" />
-		{:else}
-			<img class="chevron" src="img/icons/Expand_down.png" alt="" />
-		{/if}
+		<!-- svelte-ignore a11y-label-has-associated-control -->
+		<label use:melt={$label}>
+			{#if $open}
+				<img class="chevron" src="img/icons/Expand_up.png" alt="" />
+			{:else}
+				<img class="chevron" src="img/icons/Expand_down.png" alt="" />
+			{/if}
+		</label>
 	</div>
 </div>
 

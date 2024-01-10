@@ -17,12 +17,16 @@
 	import type { FullDataUnion } from '$backend/user/register';
 	import { login } from '$lib/stores/auth';
 	import { page } from '$app/stores';
-	import { validateUniversity, type UniversityData, universityData } from '../../schemas/university';
+	import {
+		validateUniversity,
+		type UniversityData,
+		universityData
+	} from '../../schemas/university';
 
 	type DataUnion =
 		| { type: 'individual'; data: IndividualData }
 		| { type: 'hospital'; data: HospitalData }
-        | { type: 'university'; data: UniversityData };
+		| { type: 'university'; data: UniversityData };
 
 	function mapToStore(unionData: DataUnion) {
 		switch (unionData.type) {
@@ -46,24 +50,24 @@
 		}
 
 		let union: DataUnion | undefined = undefined;
-        // if (radioValue == 'university') {
-        //     step += 1;
-        //     return;
-        // }
+		// if (radioValue == 'university') {
+		//     step += 1;
+		//     return;
+		// }
 
 		if (radioValue == 'individual') {
 			union = { type: 'individual', data: data as IndividualData };
 		} else if (radioValue == 'hospital') {
 			union = { type: 'hospital', data: data as HospitalData };
 		} else if (radioValue == 'university') {
-            union = { type: 'university', data: data as UniversityData };
-        }
+			union = { type: 'university', data: data as UniversityData };
+		}
 
 		if (!union) {
 			return;
 		}
 
-		if (!validateStep(union)) {
+		if (!(await validateStep(union))) {
 			return;
 		}
 		mapToStore(union);
@@ -74,8 +78,8 @@
 			} else if (radioValue == 'hospital') {
 				fullUnion = { type: 'hospital', data: $hospitalData };
 			} else if (radioValue == 'university') {
-                fullUnion = { type: 'university', data: $universityData};
-            }
+				fullUnion = { type: 'university', data: $universityData };
+			}
 
 			let response = await fetch('/register/submit', {
 				method: 'POST',
@@ -92,9 +96,9 @@
 					case 'hospital':
 						await login($hospitalData.email, $hospitalData.password);
 						break;
-                    case 'university':
-                        await login($universityData.email, $universityData.password);
-                        break;
+					case 'university':
+						await login($universityData.email, $universityData.password);
+						break;
 				}
 			}
 			return;
@@ -103,7 +107,46 @@
 		dispatch('stepChanged', { step, branch: radioValue });
 	}
 
-	function validateStep(values: DataUnion) {
+	async function checkIfEmailExists(values: DataUnion) {
+		if (values.data.step != 2) {
+			return false;
+		}
+		const response = await fetch('/api/exists/email', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				email: values.data.email
+			})
+		});
+		return response.ok;
+	}
+
+	function isUsernamePage(values: DataUnion) {
+		return (
+			(values.data.step == 5 && radioValue == 'individual') ||
+			(values.data.step == 4 && radioValue != 'individual')
+		);
+	}
+
+	async function checkIfUsernameExists(values: DataUnion) {
+		if (!isUsernamePage(values)) {
+			return false;
+		}
+		const response = await fetch('/api/exists/username', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				login: values.data.username
+			})
+		});
+		return response.ok;
+	}
+
+	async function validateStep(values: DataUnion) {
 		if (step <= 0) {
 			return true;
 		}
@@ -111,11 +154,39 @@
 		let result = match(values)
 			.with({ type: 'individual' }, ({ data }) => validateIndividual(data))
 			.with({ type: 'hospital' }, ({ data }) => validateHospital(data))
-            .with({ type: 'university' }, ({ data }) => validateUniversity(data))
+			.with({ type: 'university' }, ({ data }) => validateUniversity(data))
 			.exhaustive();
 
-		if (result.success) return true;
-		else {
+		if (result.success) {
+            console.log(isUsernamePage(values));
+			if (values.data.step == 2) {
+				const emailExists = await checkIfEmailExists(values);
+				if (emailExists) {
+					addToast({
+						data: {
+							fieldName: 'email',
+							error: 'Email already exists'
+						}
+					});
+                    console.log("Username already exists");
+                    return false;
+				}
+                return true;
+			} else if (isUsernamePage(values)) {
+                const usernameExists = await checkIfUsernameExists(values);
+                if (usernameExists) {
+                    console.log("Username already exists");
+                    addToast({
+                        data: {
+                            fieldName: 'username',
+                            error: 'Username already exists'
+                        }
+                    });
+                    return false;
+                }
+			}
+			return true;
+		} else {
 			result.error.errors.forEach((error) => {
 				addToast({
 					data: {
@@ -280,10 +351,10 @@
 			<Individual {step} countries={$page.data.countries} />
 		{/if}
 		{#if radioValue == 'hospital'}
-			<Hospital {step} countries={$page.data.countries}/>
+			<Hospital {step} countries={$page.data.countries} />
 		{/if}
 		{#if radioValue == 'university'}
-			<University {step} countries={$page.data.countries}/>
+			<University {step} countries={$page.data.countries} />
 		{/if}
 	{/if}
 

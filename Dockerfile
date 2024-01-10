@@ -16,5 +16,6 @@ RUN pnpm build
 FROM build as start
 WORKDIR /app
 EXPOSE 3000
+ENV BODY_SIZE_LIMIT=20000000
 CMD node -r dotenv/config build
 

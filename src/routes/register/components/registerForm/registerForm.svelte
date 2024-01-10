@@ -22,6 +22,8 @@
 		type UniversityData,
 		universityData
 	} from '../../schemas/university';
+	import MainButton from '$lib/components/mainButton.svelte';
+
 
 	type DataUnion =
 		| { type: 'individual'; data: IndividualData }
@@ -238,7 +240,7 @@
 <form method="post" bind:this={formElement}>
 	{#if step > 0 && prevStep}
 		<div class="prev" style="width: 100%; display: flex; align-items: start;">
-			<button
+			<buttonregister/components/registerForm/registerForm
 				class="prev-step"
 				type="button"
 				on:click={() => {
@@ -358,9 +360,10 @@
 		{/if}
 	{/if}
 
-	<div class="field button-field">
-		<button type="button" class="next-step" on:click={increaseStep}>{buttonTextValue}</button>
-	</div>
+	<!-- <div class="field button-field">
+		<button type="button" class="next-step" on:click={increaseStep} />
+	</div> -->
+	<MainButton buttonType="button" clickEvent={increaseStep} buttonInnerText={buttonTextValue} />
 </form>
 
 <style>

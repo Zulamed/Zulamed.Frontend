@@ -24,6 +24,7 @@
 	} from '../../schemas/university';
 	import MainButton from '$lib/components/mainButton.svelte';
 
+
 	type DataUnion =
 		| { type: 'individual'; data: IndividualData }
 		| { type: 'hospital'; data: HospitalData }
@@ -68,7 +69,7 @@
 			return;
 		}
 
-		if (!validateStep(union)) {
+		if (!(await validateStep(union))) {
 			return;
 		}
 		mapToStore(union);
@@ -108,7 +109,46 @@
 		dispatch('stepChanged', { step, branch: radioValue });
 	}
 
-	function validateStep(values: DataUnion) {
+	async function checkIfEmailExists(values: DataUnion) {
+		if (values.data.step != 2) {
+			return false;
+		}
+		const response = await fetch('/api/exists/email', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				email: values.data.email
+			})
+		});
+		return response.ok;
+	}
+
+	function isUsernamePage(values: DataUnion) {
+		return (
+			(values.data.step == 5 && radioValue == 'individual') ||
+			(values.data.step == 4 && radioValue != 'individual')
+		);
+	}
+
+	async function checkIfUsernameExists(values: DataUnion) {
+		if (!isUsernamePage(values)) {
+			return false;
+		}
+		const response = await fetch('/api/exists/username', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				login: values.data.username
+			})
+		});
+		return response.ok;
+	}
+
+	async function validateStep(values: DataUnion) {
 		if (step <= 0) {
 			return true;
 		}
@@ -119,8 +159,36 @@
 			.with({ type: 'university' }, ({ data }) => validateUniversity(data))
 			.exhaustive();
 
-		if (result.success) return true;
-		else {
+		if (result.success) {
+            console.log(isUsernamePage(values));
+			if (values.data.step == 2) {
+				const emailExists = await checkIfEmailExists(values);
+				if (emailExists) {
+					addToast({
+						data: {
+							fieldName: 'email',
+							error: 'Email already exists'
+						}
+					});
+                    console.log("Username already exists");
+                    return false;
+				}
+                return true;
+			} else if (isUsernamePage(values)) {
+                const usernameExists = await checkIfUsernameExists(values);
+                if (usernameExists) {
+                    console.log("Username already exists");
+                    addToast({
+                        data: {
+                            fieldName: 'username',
+                            error: 'Username already exists'
+                        }
+                    });
+                    return false;
+                }
+			}
+			return true;
+		} else {
 			result.error.errors.forEach((error) => {
 				addToast({
 					data: {
@@ -172,7 +240,7 @@
 <form method="post" bind:this={formElement}>
 	{#if step > 0 && prevStep}
 		<div class="prev" style="width: 100%; display: flex; align-items: start;">
-			<button
+			<buttonregister/components/registerForm/registerForm
 				class="prev-step"
 				type="button"
 				on:click={() => {

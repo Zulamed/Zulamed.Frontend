@@ -17,7 +17,7 @@ async function verifyIdToken(token: string | undefined): Promise<DecodedIdToken 
 
 
 const emailVerificationRoutes = ["/recovery/notVerified", "/recovery/verifyEmail", "/api/verifyUser"];
-const unauthenticatedRoutes = ["/settings", "/subscriptions", "/history", "/yourVideos", "/liked-videos"];
+const unauthenticatedRoutes = ["/settings", "/subscriptions", "/history", "/yourVideos", "/liked-videos", "/settings/account", "/settings/privacy", "/settings/billings"];
 
 function protectRoutes(path: string, isAuthenticated: boolean, isVerified: boolean): boolean {
     // prevent logged in users from accessing login page
@@ -52,7 +52,7 @@ export const handle = (async ({ event, resolve }) => {
         if (!result?.isVerified && !emailVerificationRoutes.includes(path)) {
             throw redirect(307, '/recovery/notVerified');
         }
-        if (result){
+        if (result) {
             isEmailVerified = result.isVerified;
         }
 

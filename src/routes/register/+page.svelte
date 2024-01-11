@@ -168,9 +168,9 @@
 			font-size: 23px;
 		}
 	}
-	@media (max-width: 1024px) {
+	@media (max-width: 1280px) {
 		.container {
-			margin-top: 0 !important;
+			margin-top: 74px !important;
 		}
 		.form {
 			max-width: 370px;

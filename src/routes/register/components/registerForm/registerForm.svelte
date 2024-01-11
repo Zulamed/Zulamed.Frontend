@@ -24,7 +24,6 @@
 	} from '../../schemas/university';
 	import MainButton from '$lib/components/mainButton.svelte';
 
-
 	type DataUnion =
 		| { type: 'individual'; data: IndividualData }
 		| { type: 'hospital'; data: HospitalData }
@@ -160,7 +159,7 @@
 			.exhaustive();
 
 		if (result.success) {
-            console.log(isUsernamePage(values));
+			console.log(isUsernamePage(values));
 			if (values.data.step == 2) {
 				const emailExists = await checkIfEmailExists(values);
 				if (emailExists) {
@@ -170,22 +169,22 @@
 							error: 'Email already exists'
 						}
 					});
-                    console.log("Username already exists");
-                    return false;
+					console.log('Username already exists');
+					return false;
 				}
-                return true;
+				return true;
 			} else if (isUsernamePage(values)) {
-                const usernameExists = await checkIfUsernameExists(values);
-                if (usernameExists) {
-                    console.log("Username already exists");
-                    addToast({
-                        data: {
-                            fieldName: 'username',
-                            error: 'Username already exists'
-                        }
-                    });
-                    return false;
-                }
+				const usernameExists = await checkIfUsernameExists(values);
+				if (usernameExists) {
+					console.log('Username already exists');
+					addToast({
+						data: {
+							fieldName: 'username',
+							error: 'Username already exists'
+						}
+					});
+					return false;
+				}
 			}
 			return true;
 		} else {
@@ -240,7 +239,8 @@
 <form method="post" bind:this={formElement}>
 	{#if step > 0 && prevStep}
 		<div class="prev" style="width: 100%; display: flex; align-items: start;">
-			<button				class="prev-step"
+			<button
+				class="prev-step"
 				type="button"
 				on:click={() => {
 					if (step > 0) {
@@ -402,8 +402,8 @@
 	}
 	.input-container {
 		width: 100%;
-		margin-bottom: 85px;
-		margin-top: 85px;
+		margin-bottom: 55px;
+		margin-top: 45px;
 	}
 
 	.button-field {
@@ -456,11 +456,11 @@
 			font-size: 17px;
 		}
 		.input-container {
-			margin-bottom: 20px;
-			margin-top: 30px;
+			margin-bottom: 15px;
+			margin-top: 20px;
 		}
 		.radio-label:not(:first-child) {
-			margin-top: 25px;
+			margin-top: 10px;
 		}
 		.radio-label {
 			padding: 0 10px;

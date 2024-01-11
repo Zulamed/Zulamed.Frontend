@@ -23,7 +23,7 @@ function mapToRequest(dataUnion: FullDataUnion) {
         case "individual":
             return {
                 accountBirthDate: dataUnion.data["birthday-date"],
-                accountGender: dataUnion.data.gender == "Male" ? true : false,
+                accountGender: dataUnion.data.gender,
                 accountCareerStage: dataUnion.data.stageInCareer,
                 accountTitle: dataUnion.data.title,
                 accountProfessionalActivity: dataUnion.data.profession,
@@ -89,12 +89,13 @@ export async function register(fetch: FetchCallbackType = originalFetch, data: F
             return { status: "validationError", error: "Invalid role" }
         }
 
+
         const response = await fetch(`${PUBLIC_BACKEND_URL}/user/${type}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(mapToRequest(data))
+            body: JSON.stringify(mapToRequest(data));
         });
 
         if (!response.ok) {

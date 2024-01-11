@@ -13,8 +13,12 @@ ENV PUBLIC_BACKEND_URL=$BACKEND_URL
 COPY . .
 RUN pnpm build
 
-FROM build as start
+# FROM build as start
+FROM node:20-alpine3.18 as start
 WORKDIR /app
+COPY --from=build /app/build build/
+COPY --from=build /app/node_modules node_modules/
+COPY package.json .
 EXPOSE 3000
 ENV BODY_SIZE_LIMIT=20000000
 CMD node -r dotenv/config build

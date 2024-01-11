@@ -60,10 +60,6 @@ function mapToRequest(dataUnion: FullDataUnion) {
     }
 }
 
-function validateIndividual(){
-
-}
-
 
 export async function register(fetch: FetchCallbackType = originalFetch, data: FullDataUnion): Promise<Response> {
     try {
@@ -89,13 +85,12 @@ export async function register(fetch: FetchCallbackType = originalFetch, data: F
             return { status: "validationError", error: "Invalid role" }
         }
 
-
         const response = await fetch(`${PUBLIC_BACKEND_URL}/user/${type}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(mapToRequest(data));
+            body: JSON.stringify(mapToRequest(data))
         });
 
         if (!response.ok) {

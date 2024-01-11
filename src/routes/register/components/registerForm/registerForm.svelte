@@ -23,6 +23,8 @@
 		universityData
 	} from '../../schemas/university';
 	import MainButton from '$lib/components/mainButton.svelte';
+	import { sendEmailVerification } from 'firebase/auth';
+	import { auth } from '$lib/firebase/client';
 
 	type DataUnion =
 		| { type: 'individual'; data: IndividualData }
@@ -101,6 +103,9 @@
 						await login($universityData.email, $universityData.password);
 						break;
 				}
+                if (auth.currentUser) {
+                    await sendEmailVerification(auth.currentUser);
+                }
 			}
 			return;
 		}

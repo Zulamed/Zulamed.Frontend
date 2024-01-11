@@ -80,9 +80,9 @@
 	</div>
 
 	<MainButton buttonInnerText="Login" />
-	<div class="form-link">
+	<!-- <div class="form-link">
 		<a href="/recovery/forgotPassword" class="forgot-pass">Forgot password?</a>
-	</div>
+	</div> -->
 </form>
 
 <!-- can be moved to a css file with <style src="./<your-css-file>.css"></style> -->

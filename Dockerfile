@@ -15,6 +15,7 @@ RUN pnpm build
 
 # FROM build as start
 FROM node:20-alpine3.18 as start
+ENV NODE_ENV=production
 WORKDIR /app
 COPY --from=build /app/build build/
 COPY --from=build /app/node_modules node_modules/

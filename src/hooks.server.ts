@@ -16,7 +16,7 @@ async function verifyIdToken(token: string | undefined): Promise<DecodedIdToken 
 }
 
 
-const emailVerificationRoutes = ["/recovery/notVerified", "/recovery/verifyEmail", "/api/verifyUser"];
+const emailVerificationRoutes = ["/recovery/notVerified", "/recovery/verifyEmail", "/api/verifyUser", "/recovery"];
 const unauthenticatedRoutes = ["/settings", "/subscriptions", "/history", "/yourVideos", "/liked-videos", "/settings/account", "/settings/privacy", "/settings/billings"];
 
 function protectRoutes(path: string, isAuthenticated: boolean, isVerified: boolean): boolean {

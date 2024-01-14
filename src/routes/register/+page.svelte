@@ -13,7 +13,11 @@
 		} else {
 			justify = 'center';
 		}
-		if (e.detail.step >= 0) headerText = 'Create Your <br /> ZulaMed Account';
+		if (e.detail.step == 0)
+            headerText = 'Create Your <br /> ZulaMed Account';
+        else{
+            headerText = undefined;
+        }
 		if (e.detail.step == 5 && e.detail.branch != 'university') headerText = 'Last step';
 		if (e.detail.step == 4) headerNote = true;
 		if (e.detail.branch == 'university') headerNote = false;
@@ -27,7 +31,7 @@
 			headerText;
 		}
 	}
-	let headerText = 'Create Your <br /> ZulaMed Account';
+	let headerText: string | undefined = 'Create Your <br /> ZulaMed Account';
 	onMount(() => {
 		let media = window.matchMedia('(max-width:768px)');
 		const match768px = () => {
@@ -49,12 +53,14 @@
 	<img class="container-img" src="img/main-background-mobile.png" alt="" />
 	<div class="container-overlay" />
 	<div class="form register" style:justify-content={justify}>
+    {#if headerText}
 		<header>
 			<h2>
 				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 				{@html headerText}
 			</h2>
 		</header>
+    {/if}
 		{#if headerNote == true}
 			<p class="note">
 				Please provide the legal name of your hospital, university or research centre. If you work
@@ -187,6 +193,11 @@
 			font-size: 22px;
 		}
 	}
+    @media(max-width: 1024px){
+        .container{
+            margin-top: 0px !important;
+        }
+    }
 	@media (max-width: 768px) {
 		.note {
 			margin-top: 14px;
